@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T16:20:04.700485+00:00",
+  "generated_at": "2026-11-21T16:22:19.491345+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -309,14 +309,14 @@
       "source_url": "https://quote.eastmoney.com/globalfuture/HG00Y.html",
       "quote_note": "东方财富HG00Y期货序列，换月规则由供数方维护、尚未核实；历史失败时仅累积纽约17:00末笔快照，非官方结算；不足21期不判断趋势。",
       "value": 5.465,
-      "change_1": null,
-      "change_20": null,
+      "change_1": -2.2711015736766815,
+      "change_20": -15.890727202770293,
       "as_of": "2026-11-20",
-      "observation_count": 1,
-      "source": "东方财富 / 101.HG00Y / 纽约17:00收盘末笔快照，非官方结算；逐日积累历史",
+      "observation_count": 100,
+      "source": "东方财富 / 101.HG00Y / COMEX铜日线；供数方换月序列",
       "status": "ok",
       "error": null,
-      "interpretation": "近20期数据不足，暂不解读方向"
+      "interpretation": "近20期下跌，关注工业需求变化"
     },
     {
       "id": "btc",
@@ -3636,6 +3636,6 @@
   "update_context": {
     "event": "workflow_dispatch",
     "schedule": null,
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44923968442"
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924184153"
   }
 }
