@@ -59,7 +59,7 @@ node tests/test_ui.cjs
 | 纳斯达克 100 指数 | Nasdaq-100 大型非金融企业的修正市值加权价格指数日收盘，不是纳斯达克综合指数，也不是 ETF。 | [FRED NASDAQ100](https://fred.stlouisfed.org/series/NASDAQ100)；[Nasdaq 指数方法](https://beta.indexes.nasdaq.com/docs/methodology_NDX.pdf)。原始发布：Nasdaq；由 FRED 提供。 | 点；变化用 A |
 | 黄金参考价（合成） | XAU 每金衡盎司美元的多源合成参考价；由 Frankfurter 根据央行等机构的参考报价合成。本项目读取其 XAU/USD，不将其视作 COMEX 期货、LBMA 定盘价或现货日收盘。 | [Frankfurter XAU](https://api.frankfurter.dev/v2/currency/xau)；[方法及使用说明](https://frankfurter.dev/)。已接入免费合成参考历史。各上游可能不同日，来源日期另行保留；数值可能偏离当日现货。 | USD/oz；变化用 A |
 | WTI 库欣现货 | WTI 库欣现货日价 DCOILWTICO，由 EIA 发布、FRED 分发，直接采用 USD/bbl 原值；不是 NYMEX 近月期货，无期货换月拼接。 | [FRED / EIA DCOILWTICO](https://fred.stlouisfed.org/series/DCOILWTICO)；[EIA 使用许可](https://www.eia.gov/about/copyrights_reuse.php)。已接入免费现货历史。发布有滞后，按真实日期显示；超过时效阈值时标为延迟。 | USD/bbl；变化用 A |
-| COMEX 铜（HG00Y） | 东方财富 HG00Y 的 COMEX 铜期货序列；不声称严格近月，供数方换月规则未核实。历史失败时仅保存纽约17:00已收盘末笔快照，非官方结算；不把昨结当昨收。快照整数除以10⁴，历史日线值不二次缩放。 | [东方财富 HG00Y](https://quote.eastmoney.com/globalfuture/HG00Y.html)；[品种及单位元数据](https://futsse-static.eastmoney.com/redis?msgid=101_4_info)。报价可用，日线历史当前连接失败，逐日积累；不足21期不判断趋势。 | USD/lb；变化用 A；不足时 — |
+| COMEX 铜（HG00Y） | 东方财富 HG00Y 的 COMEX 铜期货序列；不声称严格近月，供数方换月规则未核实。历史失败时仅保存纽约17:00已收盘末笔快照，非官方结算；不把昨结当昨收。快照整数除以10⁴，历史日线值不二次缩放。 | [东方财富 HG00Y](https://quote.eastmoney.com/globalfuture/HG00Y.html)；[品种及单位元数据](https://futsse-static.eastmoney.com/redis?msgid=101_4_info)。报价和历史可用；历史接口偶发失败时积累收盘快照，不足21期不判断趋势。 | USD/lb；变化用 A；不足时 — |
 | 比特币 BTC | CoinGecko bitcoin 的美元价格。取 00:00 UTC 的每日样本并标记为前一 UTC 日期，作为该日结束快照；不代表某一家交易所的收盘价。 | [CoinGecko market_chart](https://docs.coingecko.com/reference/coins-id-market-chart)。已接入 CoinGecko；vs_currency=usd，interval=daily。 | USD/BTC；变化用 A |
 | 以太坊 ETH | CoinGecko ethereum 的美元价格。取 00:00 UTC 的每日样本并标记为前一 UTC 日期，作为该日结束快照；不采用 ETH/BTC 交叉盘。 | [CoinGecko market_chart](https://docs.coingecko.com/reference/coins-id-market-chart)。已接入 CoinGecko；vs_currency=usd，interval=daily。 | USD/ETH；变化用 A |
 | 美元 / 日元（参考） | ECB 同日参考交叉汇率：JPY/USD = EURJPY ÷ EURUSD。两条欧元参考汇率须有相同日期；代表日参考价，不是纽约收盘或实时美元兑日元。 | [ECB 参考汇率](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html)；[ECB 转载条件](https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html)。已接入 ECB 官方90日 XML 历史。项目已明确披露交叉换算；注明 ECB 来源。 | JPY/USD；变化用 A |
@@ -80,7 +80,7 @@ FRED 的利差主系列与收益率分项可能不同步。只有同一日期的
 | dxy | 新浪 DINIW 美元指数日线 | 无需Key；未公布官方日/月额度或SLA，每日2请求 | 2026-11-20 | 已接入，120个有效观测；仍保留缺失时的有限宏观模式 |
 | gold | Frankfurter XAU/USD 合成参考价 | 免费，无API Key、无日/月配额；有防滥用限速 | 2026-11-20 | 低：2请求/日，含元数据与历史；已接入；不是现货收盘或COMEX期货。 |
 | wti | EIA 库欣 WTI 现货，经 FRED DCOILWTICO | 免费CSV，无需Key；无可承诺的无限调用额度，每日1次 | 2026-11-17 | 低：复用FRED适配器；已接入，但当前发布滞后，标为延迟。 |
-| copper | 东方财富 101.HG00Y COMEX铜 | 无需Key；未公布官方日/月额度或SLA，每日最多3请求 | 2026-11-20 | 已接入收盘末笔快照；只有1个观测，尚无前期/20期变化；日线历史连接失败 |
+| copper | 东方财富 101.HG00Y COMEX铜 | 无需Key；未公布官方日/月额度或SLA，每日最多3请求 | 2026-11-20 | 已接入100个日线观测，前期/20期变化可计算；历史异常时回退已收盘快照 |
 | usdjpy | ECB 日参考汇率：同日EURJPY÷EURUSD | 免费官方XML，无Key；未公布日/月硬配额，每日1次 | 2026-11-20 | 低：同日两条汇率交叉换算；已接入，注明ECB与换算，非纽约收盘。 |
 | usdcnh | Frankfurter USD/CNH 多源合成参考汇率 | 免费，无API Key、无日/月配额；有防滥用限速 | 2026-11-20 | 低：2请求/日；核实Offshore元数据及准确货币对；已接入；保留来源日期，不能用CNY替代。 |
 
@@ -178,7 +178,7 @@ Barchart 的[官方品种页](https://barchart.websol.barchart.com/?1_show=futur
 
 ### 当前免费接入与原期货口径
 
-WTI 为 EIA 库欣现货，黄金为明确标注的 XAU/USD 合成参考价。2026-11-22按用户内部学习用途接入新浪DXY和东方财富COMEX铜HG00Y，铜不再声称严格近月，收盘末笔快照与官方结算明确区分。原富途权限与 Twelve Data 账户探测作为历史证据保留在 data/source_access.json；当前四项免费接入不依赖这些账户。更换 provider、symbol、unit 或 series_definition 时，更新器清除该项旧历史，防止不同口径拼接计算20期涨跌。
+WTI 为 EIA 库欣现货，黄金为明确标注的 XAU/USD 合成参考价。2026-11-22按用户内部学习用途接入新浪DXY和东方财富COMEX铜HG00Y，铜不再声称严格近月，收盘末笔快照与官方结算明确区分。原富途权限与 Twelve Data 账户探测作为历史证据保留在 data/source_access.json；当前免费接入均不依赖这些账户。更换 provider、symbol、unit 或 series_definition 时，更新器清除该项旧历史，防止不同口径拼接计算20期涨跌。
 
 ### 定时运行的证据与限制
 
@@ -206,6 +206,6 @@ WTI 为 EIA 库欣现货，黄金为明确标注的 XAU/USD 合成参考价。20
 用户明确不以展示授权核实作为本次接入阻塞。仓库与 Pages 仍然公开；此说明记录使用决定，不表示已取得门户授权。未新增付费订阅、注册账户或上传密钥。
 
 - DXY：新浪 `DINIW`，先校验报价代码及“美元指数”名称，再解析固定JSONP包裹内的历史字符串；不执行远程JavaScript。日线字段顺序为日期、开、低、高、收，拒绝无效价格和重复日期。近20期变化恢复完整宏观规则，原有限模式继续保留以应对失败/过期。
-- 铜：东方财富 `101.HG00Y`，校验COMEX铜、HG代码、报价单位及4位整数精度；正常历史返回时使用日线。当前历史连接失败，改为仅接收供数方纽约17:00已收盘报价，绝不接收盘中、未来或休市日时间，不使用昨结生成前一日数据。此快照不是交易所结算；页面显示“快照”，行情日期按纽约交易日。首次只有1条，前期及20期变化留空。每日原日期合并去重，随着真实观测逐日累积后再计算。
+- 铜：东方财富 `101.HG00Y`，校验COMEX铜、HG代码、报价单位及4位整数精度；正常历史返回时使用日线。首次历史连接失败时，仅接收供数方纽约17:00已收盘报价，绝不接收盘中、未来或休市日时间，不使用昨结生成前一日数据。此快照不是交易所结算；页面显示“快照”，行情日期按纽约交易日。本机首次只有1条，前期及20期变化留空；随后云端复测历史接口恢复，已取得100个有效日线，前期及20期变化均已计算。每日原日期合并去重，随着真实观测逐日累积后再计算。
 - 东方财富HG00Y的换月细则尚未核实，因此名称改为“COMEX 铜（HG00Y）”，不声称严格近月或固定交割月份，不将CFD、LME或沪铜混入历史。
-- 本机验证：17/17有数值、16项未标过期；铜只有1个有效观测，不能称17项历史均完整。WTI仍为11月17日且标延迟。66项Python测试及JavaScript/UI检查通过。最终云端运行及浏览器证据以 Actions 链接为准。
+- 本机首次验证17/17有数值、16项未标过期，当时铜只有1个观测；后续云端已取得铜100个有效日线。WTI仍为11月17日且标延迟。66项Python测试及JavaScript/UI检查通过。最终云端运行及浏览器证据以 Actions 链接为准。

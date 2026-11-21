@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-21T16:19:07.283224+00:00",
+  "checked_at": "2026-11-21T16:24:15.514428+00:00",
   "recurring_subscription_cost": 0,
   "coverage": {
     "values": 17,
@@ -9,9 +9,7 @@
     "delayed": [
       "wti"
     ],
-    "incomplete_history": [
-      "copper"
-    ]
+    "incomplete_history": []
   },
   "indicators": [
     {
@@ -49,15 +47,15 @@
     },
     {
       "id": "copper",
-      "recommendation": "东方财富 101.HG00Y COMEX铜期货收盘末笔快照",
+      "recommendation": "东方财富 101.HG00Y COMEX铜期货日线；异常时回退已收盘快照",
       "free_allowance": "无需Key；未公布官方API额度或SLA，每日最多3请求",
       "latest_observed_date": "2026-11-20",
       "connected_as_of": "2026-11-20",
-      "connected_observations": 1,
-      "difficulty": "历史连接失败；报价和单位元数据已核实，逐日积累收盘快照",
-      "status": "已有1条收盘快照，非官方结算；前期/20期变化为空；换月规则尚未核实，不声称严格近月。",
+      "connected_observations": 100,
+      "difficulty": "中：历史接口偶发连接失败；云端复测已返回100个日线",
+      "status": "已接入100个有效日线，前期及20期变化可计算；换月规则尚未核实，不声称严格近月。",
       "displayed_status": "ok",
-      "candidate_timestamp_note": "f86为供数方报价时间，已核实纽约11月20日17:00；按该纽约日期保存，不以抓取日期重标。"
+      "candidate_timestamp_note": "日线使用接口原日期与收盘值；回退快照仅接收纽约17:00时间，不以抓取日期重标。"
     },
     {
       "id": "usdjpy",
@@ -141,7 +139,7 @@
         "price_decimals": 4,
         "as_of": "2026-11-20",
         "unit_metadata_url": "https://futsse-static.eastmoney.com/redis?msgid=101_4_info",
-        "history_status": "连接失败；使用已收盘末笔快照逐日积累，历史不足不计算变化"
+        "history_status": "云端复测已取得100个有效日线；接口偶发失败时回退已收盘快照，保留已积累同口径历史"
       }
     },
     "sina": {
@@ -177,7 +175,8 @@
     "无新增付费订阅或注册账户。",
     "日期仅代表本次实测。DXY／铜候选的日期不等于已接入。",
     "合成参考序列可能偏离即时现货；来源日期不完全相同，组件日期保存于快照。",
-    "2026-11-22按用户内部学习要求接入新浪DXY及东方财富铜；铜有报价不等于历史完整，授权事实未改写为已取得。"
+    "2026-11-22按用户内部学习要求接入新浪DXY及东方财富铜；铜有报价不等于历史完整，授权事实未改写为已取得。",
+    "后续云端复测铜历史接口恢复，已有100个有效日线；保留首次只有1条快照的历史记录和回退路径。"
   ],
   "usage_decision": {
     "date": "2026-11-22",
