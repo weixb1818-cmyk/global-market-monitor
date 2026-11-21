@@ -1,5 +1,10 @@
 {
-  "at": "2026-11-21T06:41:20.506396+00:00",
+  "at": "2026-11-21T07:26:00.072487+00:00",
   "status": "partial",
-  "message": "6 项来源未更新"
+  "message": "6 项来源未更新",
+  "update_context": {
+    "event": "local",
+    "schedule": null,
+    "run_url": null
+  }
 }

@@ -18,10 +18,19 @@ if(!base)throw new Error('DASHBOARD_URL is required');
    if(name==='desktop')assert.ok(dimensions.cardBottom<=900,`desktop cards do not fit first screen: ${dimensions.cardBottom}`);
    const actual=await (await page.request.get(new URL('data/snapshot.json',base).href)).json();assert.equal(actual.indicators.length,17);
    const renderedNames=await page.locator('.card-top>span:first-child').allTextContents();assert.deepEqual(renderedNames,actual.indicators.map(c=>c.name));
+   const expected=await page.evaluate(s=>currentMacro(s),actual);
+   assert.equal(await page.locator('#state').textContent(),expected.state);
+   if(expected.mode==='limited')assert.match(await page.locator('#uncertainty').textContent(),/DXY.*不完整/);
+   for(let i=0;i<actual.indicators.length;i++)if(actual.indicators[i].as_of){
+    assert.ok((await page.locator('.card-bottom>span:first-child').nth(i).textContent()).includes(actual.indicators[i].as_of));
+   }
+   const activeAlerts=await page.evaluate(s=>currentAlerts(s),actual);
+   if(activeAlerts.length){assert.equal(await page.locator('#level-alerts').isVisible(),true);assert.match(await page.locator('#level-alerts').textContent(),/较高水平/);}
+   assert.ok(await page.locator('.access-details').count());
    const missing=actual.indicators.filter(c=>c.value===null).length;
    assert.equal(await page.locator('.card.missing').count(),missing);
    await page.screenshot({path:`verification/${name}.png`,fullPage:true});
-   checks.push({viewport:name,dimensions,cards:17,missing,console_errors:errors,macro:await page.locator('#state').textContent()});
+   checks.push({viewport:name,dimensions,cards:17,missing,console_errors:errors,macro:await page.locator('#state').textContent(),mode:expected.mode,absolute_alerts:activeAlerts,independent_dates_checked:true,update_context:actual.update_context});
    await page.close();
   }
   fs.writeFileSync('verification/browser-report.json',JSON.stringify({url:base,checked_at:new Date().toISOString(),checks},null,2));

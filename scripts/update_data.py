@@ -77,6 +77,30 @@ def twelve(symbol, now):
     return rows, 'Twelve Data / '+symbol+' / '+tz_name+' 日线'
 
 
+
+def barchart_dxy(item, now):
+    # Official paid API only; never scrape a website or substitute DXY futures.
+    if os.getenv('MARKET_DATA_DXY_URL'):
+        return external(item, now)
+    key = os.getenv('BARCHART_API_KEY')
+    if not key:
+        raise ValueError('DXY需ICE或Barchart现货指数授权；未配置BARCHART_API_KEY或DXY授权源')
+    symbol = item['vendor_symbol']
+    quote = request_json('https://ondemand.websol.barchart.com/getQuote.json', {'apikey':key,'symbols':symbol})
+    results = quote.get('results') or []
+    if quote.get('status',{}).get('code') != 200 or len(results) != 1:
+        raise ValueError('Barchart DXY授权或品种元数据不可用')
+    q = results[0]
+    if q.get('symbol') != symbol or 'dollar index cash' not in q.get('name','').lower():
+        raise ValueError('拒绝非DXY现货指数品种；不能使用期货或其他美元指数')
+    body = request_json('https://ondemand.websol.barchart.com/getHistory.json', {'apikey':key,'symbol':symbol,'type':'daily','startDate':(now.date()-timedelta(days=130)).strftime('%Y%m%d'),'maxRecords':100,'order':'asc'})
+    if body.get('status',{}).get('code') != 200 or not body.get('results'):
+        raise ValueError('Barchart DXY日线权限不足或无有效历史')
+    if any(row.get('symbol') != symbol for row in body['results']):
+        raise ValueError('Barchart历史返回了不同品种')
+    return observations([{'date':r['tradingDay'],'value':r['close']} for r in body['results']]), 'Barchart / DXY00 / ICE美元现货指数日线'
+
+
 def external(item, now):
     # An authorized source must explicitly certify exact instrument, units and completed daily closes.
     url = os.getenv('MARKET_DATA_'+item['id'].upper()+'_URL')
@@ -93,6 +117,7 @@ def fetch(item, now):
     if item['provider']=='fred': result = fred(item['symbol'], now)
     elif item['provider']=='coingecko': result = coingecko(item['symbol'], now)
     elif item['provider']=='twelve': result = twelve(item['symbol'], now)
+    elif item['provider']=='barchart': result = barchart_dxy(item, now)
     else: result = external(item, now)
     points, source = result
     # US prices on the current date are usable only after their completed session.
@@ -106,13 +131,22 @@ def fetch(item, now):
     return points[-120:], source
 
 
-def market_sessions(start, end, calendar):
-    if end <= start: return 0
+def session_dates(start, end, calendar):
+    if end < start: return []
+    if calendar == 'forex':
+        return [start+timedelta(days=i) for i in range((end-start).days+1)
+                if (start+timedelta(days=i)).weekday()<5 and (start+timedelta(days=i)).strftime('%m-%d') not in ('01-01','12-25')]
+    name = 'CMES' if calendar == 'cme' else 'XNYS'
+    cal = xcals.get_calendar(name,start=(start-timedelta(days=8)).isoformat(),end=(end+timedelta(days=8)).isoformat())
+    dates = [d.date() for d in cal.sessions_in_range(start.isoformat(),end.isoformat())]
     if calendar == 'bond':
-        us_holidays = holidays.US(years=range(start.year, end.year+1))
-        return sum(1 for i in range(1,(end-start).days+1) if (d:=start+timedelta(days=i)).weekday()<5 and d not in us_holidays)
-    cal=xcals.get_calendar('XNYS',start=(start-timedelta(days=8)).isoformat(),end=(end+timedelta(days=8)).isoformat())
-    return len(cal.sessions_in_range((start+timedelta(days=1)).isoformat(),end.isoformat()))
+        federal = holidays.US(years=range(start.year,end.year+1))
+        dates = [d for d in dates if d not in federal]
+    return dates
+
+
+def market_sessions(start, end, calendar):
+    return len(session_dates(start+timedelta(days=1),end,calendar)) if end>start else 0
 
 
 def is_stale(as_of, calendar, now, t):
@@ -139,6 +173,10 @@ def calculate(item, points, source, error, now, thresholds):
     stale=is_stale(points[-1]['date'],item['calendar'],now,thresholds)
     data={**item,'value':latest*100 if item['kind']=='spread' else latest,'change_1':delta(1),'change_20':delta(20),'as_of':points[-1]['date'],'source':source,'status':'stale' if stale else ('error' if error else 'ok'),'error':error}
     data['interpretation']=interpret(data, thresholds)
+    if not stale and item['id']=='vix' and data['value']>=thresholds['vix_high']:
+        data['interpretation']+='；波动率仍处高位'
+    if not stale and item['id']=='hy' and data['value']>=thresholds['hy_high_bp']:
+        data['interpretation']+='；信用利差仍处高位'
     return data
 
 
@@ -181,12 +219,41 @@ def curve_drivers(cards, histories, t):
         card['interpretation']+='；'+driver
 
 
+def risk_levels(cards, t):
+    alerts=[]
+    for key, threshold, unit, label in [('vix',t['vix_high'],'点','波动率处于较高水平'),('hy',t['hy_high_bp'],'bp','信用利差处于较高水平')]:
+        c=cards.get(key,{})
+        if c.get('value') is not None and c.get('status') not in ('stale','missing') and c['value']>=threshold:
+            alerts.append({'id':key,'as_of':c.get('as_of'),'value':c['value'],'unit':unit,'message':label})
+    return alerts
+
+
 def classify(cards,t):
     required=['dxy','real10y','us2y','hy','vix']
-    missing=[cards[k]['name'] for k in required if cards[k]['change_20'] is None or cards[k]['value'] is None or cards[k]['status'] in ('stale','missing')]
-    if missing: return {'state':'数据不足：暂不判断','reason':'关键数据缺失或过期：'+'、'.join(missing),'uncertainty':'无法可靠判断，等待有效数据','signals':[]}
-    d=cards['dxy']['change_20']; r=cards['real10y']['change_20']; y=cards['us2y']['change_20']; h=cards['hy']['change_20']; v=cards['vix']['change_20']; hn=cards['hy']['value']; vn=cards['vix']['value']
+    def invalid(k):
+        c=cards.get(k,{})
+        return c.get('change_20') is None or c.get('value') is None or c.get('status') in ('stale','missing')
+    missing=[k for k in required if invalid(k)]
+    dates={k:cards[k].get('as_of') for k in required if k in cards and not invalid(k)}
+    alerts=risk_levels(cards,t)
+    base={'complete':not missing,'mode':'full' if not missing else 'insufficient','missing':[cards.get(k,{}).get('name',k) for k in missing],'signal_dates':dates,'risk_alerts':alerts}
+    non_dxy=[k for k in missing if k!='dxy']
+    if non_dxy:
+        return {**base,'state':'数据不足：暂不判断','reason':'关键数据缺失或过期：'+'、'.join(base['missing']),'uncertainty':'无法可靠判断；仅展示仍有效的绝对风险水平','signals':[]}
+    r=cards['real10y']['change_20']; y=cards['us2y']['change_20']; h=cards['hy']['change_20']; v=cards['vix']['change_20']; hn=cards['hy']['value']; vn=cards['vix']['value']
     credit=h>=t['hy_bp']; vol=v>=t['vix_pt']
+    def signal(k,text):
+        return text+(' · '+dates[k] if dates.get(k) else '')
+    signals=[signal('real10y',f'实际利率 {r:+.0f}bp'),signal('hy',f'HY {h:+.0f}bp'),signal('vix',f'VIX {v:+.1f}点')]
+    if missing:  # Only DXY unavailable: four remaining inputs are individually valid.
+        if credit and vol: reason='信用利差与波动率共同上升，关注金融压力信号'
+        elif y<=t['two_year_down_bp'] and (credit or vol): reason='短端利率下降且信用或波动恶化，关注增长担忧信号'
+        elif vol: reason='波动率上升，风险偏好降温；信用尚未共同恶化'
+        elif credit: reason='信用利差扩大，关注信用风险变化'
+        elif r>=t['real_bp']: reason='实际利率上行，估值与融资成本压力增加'
+        else: reason='信用与波动未共同恶化；不能据此确认整体宽松'
+        return {**base,'mode':'limited','state':'有限风险提示','reason':reason,'uncertainty':'DXY缺失或过期，结论不完整；不判断美元相关整体金融条件','signals':signals}
+    d=cards['dxy']['change_20']
     if credit and vol: state='金融压力扩散'; reason='信用利差与波动率共同上升，市场防御需求增强'
     elif y<=t['two_year_down_bp'] and (credit or vol): state='增长担忧定价'; reason='短端利率下行，但信用或波动信号恶化；降息预期未必利好风险资产'
     elif d>=t['dxy_pct'] and r>=t['real_bp']: state='金融条件趋紧'; reason='美元和实际利率同步上行，估值及融资环境压力增加'
@@ -197,9 +264,31 @@ def classify(cards,t):
         real='上行' if r>=t['real_bp'] else '下行' if r<=-t['real_bp'] else '变化有限'
         risk='信用或波动恶化' if credit or vol else '信用和波动未显著恶化'
         reason=f'美元{dollar}、实际利率{real}；{risk}，信号未形成一致方向'
-    uncertainty = '信用或波动风险仍处高位' if hn>=t['hy_high_bp'] or vn>=t['vix_high'] else ('信用利差暂未显著恶化' if not credit else '信用风险溢价仍在扩大')
-    signals=[f'美元近20期 {d:+.2f}%',f'实际利率 {r:+.0f}bp',f'信用利差 {h:+.0f}bp / VIX {v:+.1f}点']
-    return {'state':state,'reason':reason,'uncertainty':uncertainty,'signals':signals}
+    uncertainty='信用或波动风险仍处高位' if alerts else ('信用利差暂未显著恶化' if not credit else '信用风险溢价仍在扩大')
+    ds=[date.fromisoformat(x) for x in dates.values() if x]
+    if ds and (max(ds)-min(ds)).days>t.get('macro_date_gap_days',3): uncertainty+='；信号日期跨度较大，请逐项核对'
+    return {**base,'state':state,'reason':reason,'uncertainty':uncertainty,'signals':[signal('dxy',f'美元 {d:+.2f}%'),signals[0],signal('hy',f'HY {h:+.0f}bp')+' / '+signal('vix',f'VIX {v:+.1f}点')], 'signal_dates':dates}
+
+
+def compare_spreads(cards, series, t):
+    checks=[]
+    for sid,short in [('spread10y2y','us2y'),('spread10y3m','aux3m')]:
+        a={p['date']:p['value'] for p in series.get('us10y',[])}; b={p['date']:p['value'] for p in series.get(short,[])}
+        c=cards[sid]; d=c['as_of']
+        if c['value'] is None or d not in a or d not in b:
+            checks.append({'id':sid,'as_of':d,'status':'not_comparable','reason':'缺少同一日期的长短端收益率，未跨日期相减'})
+            continue
+        computed=(a[d]-b[d])*100; difference=abs(c['value']-computed)
+        status='warning' if difference>t['spread_check_bp'] else 'ok'
+        checks.append({'id':sid,'as_of':d,'status':status,'official_bp':c['value'],'same_date_bp':computed,'difference_bp':difference})
+        if status=='warning':
+            LOG.warning('%s official spread differs from same-date yields',sid)
+            c['warning']='官方利差与同日收益率计算值不一致'
+    return checks
+
+
+def update_context():
+    return {'event':os.getenv('TRIGGER_EVENT','local'),'schedule':os.getenv('TRIGGER_SCHEDULE') or None,'run_url':os.getenv('WORKFLOW_RUN_URL') or None}
 
 
 def atomic(path, obj):
@@ -231,22 +320,21 @@ def run(now=None):
             except Exception as e:
                 errors[k]='数据源网络请求失败' if isinstance(e,requests.RequestException) else str(e)[:160]; LOG.warning('%s: %s',k,errors[k])
     if not success and sp.exists():
-        atomic(out/'last_attempt.json',{'at':now.isoformat(),'status':'failed','message':'所有数据源更新失败，保留上次快照'})
+        atomic(out/'last_attempt.json',{'at':now.isoformat(),'status':'failed','message':'所有数据源更新失败，保留上次快照','update_context':update_context()})
         return False
     cards={item['id']:calculate(item,observations(series.get(item['id'],[])),sources.get(item['id']),errors.get(item['id']),now,CONFIG['thresholds']) for item in CONFIG['indicators']}
     curve_drivers(cards,series,CONFIG['thresholds'])
-    for sid,short in [('spread10y2y','us2y'),('spread10y3m','aux3m')]:
-        a={p['date']:p['value'] for p in series.get('us10y',[])}; b={p['date']:p['value'] for p in series.get(short,[])}
-        c=cards[sid]; d=c['as_of']
-        if d in a and d in b and abs(c['value']-(a[d]-b[d])*100)>CONFIG['thresholds']['spread_check_bp']:
-            LOG.warning('%s official spread differs from same-date yields',sid); c['warning']='官方利差与同日收益率计算值不一致'
+    spread_checks=compare_spreads(cards,series,CONFIG['thresholds'])
     # Prepare a calendar for the client to re-evaluate freshness even when scheduled updates fail.
-    year=now.astimezone(ET).year; nyse=xcals.get_calendar('XNYS',start=f'{year-2}-12-01',end=f'{year+2}-01-31')
-    days=nyse.sessions_in_range(f'{year-1}-01-01',f'{year+1}-12-31')
-    calendar={'nyse':[str(d.date()) for d in days], 'bond_holidays':[d.isoformat() for d in holidays.US(years=[year-1,year,year+1])]}
-    snapshot={'generated_at':now.isoformat(),'timezone':'Asia/Tokyo','indicators':list(cards.values()),'macro':classify(cards,CONFIG['thresholds']),'thresholds':CONFIG['thresholds'],'calendar':calendar,'sources_failed':len(errors)}
+    year=now.astimezone(ET).year
+    first=date(year-1,1,1);last=date(year+1,12,31)
+    calendar={k:[d.isoformat() for d in session_dates(first,last,k)] for k in ('nyse','bond','forex','cme')}
+    # Retain this field for older clients during CDN propagation.
+    calendar['bond_holidays']=[d.isoformat() for d in holidays.US(years=[year-1,year,year+1])]
+    limited_cards={**cards,'dxy':{**cards['dxy'],'value':None,'change_20':None,'status':'missing'}}
+    snapshot={'generated_at':now.isoformat(),'timezone':'Asia/Tokyo','indicators':list(cards.values()),'macro':classify(cards,CONFIG['thresholds']),'limited_macro':classify(limited_cards,CONFIG['thresholds']),'risk_alerts':risk_levels(cards,CONFIG['thresholds']),'spread_checks':spread_checks,'thresholds':CONFIG['thresholds'],'calendar':calendar,'sources_failed':sum(k in errors for k in cards),'update_context':update_context()}
     atomic(hp,{'series':series,'sources':sources}); atomic(sp,snapshot)
-    atomic(out/'last_attempt.json',{'at':now.isoformat(),'status':'partial' if errors else 'ok','message':f'{len(errors)} 项来源未更新' if errors else '更新完成'})
+    atomic(out/'last_attempt.json',{'at':now.isoformat(),'status':'partial' if errors else 'ok','message':f'{sum(k in errors for k in cards)} 项来源未更新' if errors else '更新完成','update_context':update_context()})
     return True
 
 if __name__=='__main__':
@@ -254,6 +342,6 @@ if __name__=='__main__':
     try: sys.exit(0 if run() else 1)
     except Exception:
         LOG.exception('更新失败；快照未被新数据替换')
-        try: atomic(ROOT/'data'/'last_attempt.json',{'at':datetime.now(UTC).isoformat(),'status':'failed','message':'更新失败，保留上次快照'})
+        try: atomic(ROOT/'data'/'last_attempt.json',{'at':datetime.now(UTC).isoformat(),'status':'failed','message':'更新失败，保留上次快照','update_context':update_context()})
         except Exception: pass
         sys.exit(1)

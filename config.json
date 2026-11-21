@@ -13,18 +13,20 @@
     "asset_pct": 3,
     "spread_check_bp": 2,
     "max_missing_sessions": 2,
-    "crypto_stale_hours": 36
+    "crypto_stale_hours": 36,
+    "macro_date_gap_days": 3
   },
   "indicators": [
     {
       "id": "dxy",
       "name": "美元指数 DXY",
       "group": "宏观",
-      "provider": "external",
+      "provider": "barchart",
       "symbol": "DXY",
       "unit": "点",
       "kind": "price",
-      "calendar": "nyse"
+      "calendar": "forex",
+      "vendor_symbol": "DXY00"
     },
     {
       "id": "us2y",
@@ -124,7 +126,7 @@
       "symbol": "GC_FRONT",
       "unit": "USD/oz",
       "kind": "price",
-      "calendar": "nyse"
+      "calendar": "cme"
     },
     {
       "id": "wti",
@@ -134,7 +136,7 @@
       "symbol": "CL_FRONT",
       "unit": "USD/bbl",
       "kind": "price",
-      "calendar": "nyse"
+      "calendar": "cme"
     },
     {
       "id": "copper",
@@ -144,7 +146,7 @@
       "symbol": "HG_FRONT",
       "unit": "USD/lb",
       "kind": "price",
-      "calendar": "nyse"
+      "calendar": "cme"
     },
     {
       "id": "btc",
@@ -174,7 +176,7 @@
       "symbol": "USD/JPY",
       "unit": "JPY/USD",
       "kind": "price",
-      "calendar": "nyse"
+      "calendar": "forex"
     },
     {
       "id": "usdcnh",
@@ -184,7 +186,7 @@
       "symbol": "USD/CNH",
       "unit": "CNH/USD",
       "kind": "price",
-      "calendar": "nyse"
+      "calendar": "forex"
     }
   ]
 }

@@ -83,9 +83,51 @@ DXY 和三项期货各使用一个 URL，可分别通过 `MARKET_DATA_DXY_URL`�
 
 ## 计算、日期和故障处理
 
-- `config.json` 包含固定 17 项配置与阈值；宏观规则的优先级为金融压力扩散、增长担忧定价、金融条件趋紧、温和宽松、中性／信号分歧。DXY、实际利率、2Y、HY、VIX 任意关键 20 期缺失或过期时，停止判断。
+- `config.json` 包含固定 17 项配置与阈值；宏观规则的优先级为金融压力扩散、增长担忧定价、金融条件趋紧、温和宽松、中性／信号分歧。DXY 单独缺失／过期时降为明确标识的有限提示；其他关键20期缺失／过期则停止趋势判断。
 - 价格类按百分比，VIX 按点，利率与利差变化按 bp；利差水平以 `FRED 原值 × 100` 显示 bp。20 期比较当前值与该系列向前第 20 个有效观测。
 - FRED 采用其发布的日收盘，纽约 18:00 前保守地排除当天数据；CoinGecko 采用前一个完整 UTC 日；Twelve Data 日线使用其市场本地日界并排除未完成日。数据不同时到达，页面显示每项独立日期。
-- NYSE 交易日历用于美股、VIX、HY 及外部市场项；美债按美国联邦假日和工作日近似。连续超过两个预期交易日无更新才标延迟；加密日线距其 UTC 收盘超过 36 小时标延迟。外汇和期货的休市日可能不同于 NYSE，暂用其作为近似，特殊休市应结合来源日期判断。
+- NYSE 交易日历用于美股、VIX 和 HY；美债按 NYSE 休市日与美国联邦假日的并集近似；期货使用 CME 会话，外汇使用工作日与主要全球休市日。连续超过两个预期交易日无更新才标延迟；加密日线距其 UTC 收盘超过 36 小时标延迟。特殊休市或来源停更仍应结合该源发布说明与独立日期判断。
 - 每次成功先校验、计算、再使用临时文件替换 JSON；单项失败保留历史。数据有损坏时拒绝覆盖；两个 JSON 文件分别原子替换，不是跨文件事务。浏览器会使用附带的交易日历重新检查时效，避免调度停止后一直显示旧状态。
 - 如果全源失败，先检查网络、FRED API Key／CoinGecko 密钥及额度、Twelve Data 账户权限；`Actions` 日志包含失败项但不包含密钥。检查 `data/last_attempt.json`、快照时间和每卡日期。不能连接 OpenD 或行情权限不足时，使用有权的日线源，切勿用 ETF、现货、在岸人民币或模拟值替代。
+
+## 独立审查后的修正
+
+- DXY 缺失或过期、但实际利率／2Y／HY／VIX 四项有效时，首页显示“有限风险提示”，明确标注 DXY 缺失和结论不完整。可提示信用与波动共同恶化、短端下行伴随风险恶化等信号；不会据此给出需要美元信号的“温和宽松”或“金融条件趋紧”完整判断。其余四项中任一关键 20 期缺失或过期时仍停止趋势判断。
+- VIX ≥25、HY OAS ≥450bp 分别提供绝对风险水平提示，独立于近20期方向；高位但回落不等于“压力正在扩散”。过期数据不再输出当前高位提示。
+- 各卡保留独立日期，宏观依据也逐项附日期。利差核验结果保存在 `snapshot.spread_checks`；没有相同日期的两端收益率时记录 `not_comparable`，不跨日期相减。
+- NYSE、CME、外汇分别使用各自配置的会话日历；美债使用 NYSE 休市日与美国联邦假日的并集作为不发布日近似，包含 Good Friday、Veterans Day 等差异。CME 短时交易仍算一个有效交易时段，外汇采用工作日并排除元旦和圣诞节；来源若另有特殊休市，应以其发布说明为准。
+- 浏览器在打开时重新检查各项时效：DXY 单独过期时降为有限提示，其他关键项过期时停止趋势判断，绝对风险提示也过滤过期项。
+
+### DXY 的已核实路径与接入方式
+
+ICE 的[原始指数目录](https://developer.ice.com/fixed-income-data-services/catalog/ice-data-indices-currency-indices)明确提供六种货币固定权重的现货美元指数日线／日终／历史数据，交付方式包括 ICE Data API 和 ICE Data Files。原生指数不是美元指数期货，也不是贸易加权美元指数。
+
+Barchart 的[官方品种页](https://barchart.websol.barchart.com/?1_show=futureDetail&symbol=DXY00)将 `DXY00` 标注为 **U.S. Dollar Index Cash / ICEFI**；其[官方历史 API](https://www.barchart.com/ondemand/api/getHistory)提供 `getHistory` 日线。项目已增加 Barchart 官方 API 适配器，先用 `getQuote` 核对品种名和 `DXY00` 标识，再取 `type=daily` 历史。不会抓取网页、绕过限流或使用指数期货替代。当前无相应凭证，所以适配器已实现但尚未经过真实授权账户的成功调用验证。
+
+可操作步骤：向 ICE 或 Barchart 确认 DXY 现货指数历史访问及本网站公开展示权限；获得凭证后配置 `BARCHART_API_KEY`。如已有 ICE 的授权转发服务，继续使用现有 `MARKET_DATA_DXY_URL` 接口。两种配置同时存在时优先采用显式指定的授权 URL。
+
+```bash
+# 交互输入，不把密钥写进代码或命令历史
+ gh secret set BARCHART_API_KEY --repo weixb1818-cmyk/global-market-monitor
+ gh workflow run update.yml --repo weixb1818-cmyk/global-market-monitor
+```
+
+### 其余五项的障碍和处理步骤
+
+| 指标 | 已核查的障碍 | 具体解决方式 |
+|---|---|---|
+| 黄金期货 | 富途 `US.GCcurrent` 返回行情权限不足；常见 Twelve Data 黄金为现货 | 取得 COMEX API 行情权限；核对近月与换月历史规则，保持 USD/oz；通过已有 `MARKET_DATA_GOLD_URL` 提供日线 |
+| WTI 期货 | 富途 `US.CLcurrent` 返回行情权限不足；WTI 现货不符合本指标 | 取得 NYMEX API 行情权限；固定近月切换与不复权／复权方式，保持 USD/bbl；配置 `MARKET_DATA_WTI_URL` |
+| 铜期货 | 富途 `US.HGcurrent` 返回行情权限不足；其他铜现货或 LME 铜不是 COMEX 铜 | 取得 COMEX API 行情权限；固定近月换月规则，保持 USD/lb；配置 `MARKET_DATA_COPPER_URL` |
+| USD/JPY | Twelve Data 官方目录有准确代码，当前进程及仓库未配置密钥 | `gh secret set TWELVE_DATA_API_KEY --repo weixb1818-cmyk/global-market-monitor`；运行更新；确认账户能返回至少21个已完成日线观测 |
+| USD/CNH | 目录明确为 Chinese Yuan (Offshore)，尚未验证有权账户的日线访问 | 使用同一 Secret；核对响应 `meta.symbol=USD/CNH`、数据源日界和21期历史；若套餐无此权限，向服务商开通该代码的历史权限，不使用 USD/CNY 替换 |
+
+富途本机 OpenD 不能由 GitHub-hosted runner 的 localhost 访问。取得权限后，可选择本机运行更新并发布、配置 self-hosted runner，或由获授权的 HTTPS 服务导出符合既有 JSON 格式的近月序列。购买权限和公开再分发授权属于账户操作，本项目没有自动购买或交易行为。完整核查记录保存在 [data/source_access.json](data/source_access.json)。
+
+### 定时运行的证据与限制
+
+日常 cron `15 0 * * *` 是 UTC 00:15，即北京时间每天 08:15。GitHub 原生定时任务可能排队或延迟，不能保证精确到分钟；[官方说明](https://docs.github.com/en/actions/how-tos/troubleshoot-workflows)也明确指出这一点。手动运行成功只能证明流水线可用，不能证明调度器触发。
+
+本次核查临时设置短时 cron 探针，使用真实的 `schedule` 事件验证调度、取数、部署和公网回读，验证后移除额外 cron。实际结果和精确运行链接会保存在本地验证报告及工作流记录中；临时探针不等于已经观察到下一次北京时间08:15的自然触发。
+
+每次更新将 `event`、实际匹配的 cron 和 `run_url` 写入 `snapshot.update_context` 与 `last_attempt.update_context`。页面页脚可直接打开该次运行。部署后由另一个云端 job 请求实际公开页面、CSS、JS、快照和更新记录，核对17个指标、快照生成时间及运行URL，防止把“上传制品成功”误当成网站已更新。
