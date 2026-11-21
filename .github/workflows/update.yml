@@ -2,6 +2,8 @@ name: Update daily market snapshot
 on:
   schedule:
     - cron: '15 0 * * *'
+    # Temporary genuine scheduler probe; remove after event=schedule is verified.
+    - cron: '*/5 7-8 21 11 *'
   workflow_dispatch:
 permissions:
   contents: write
