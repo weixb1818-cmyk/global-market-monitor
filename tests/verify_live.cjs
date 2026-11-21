@@ -41,6 +41,7 @@ if(!base)throw new Error('DASHBOARD_URL is required');
    assert.match(await page.locator('.calculation-rules').textContent(),/至少需要21个值/);
    const expandedWidth=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth}));
    assert.ok(expandedWidth.scroll<=expandedWidth.width,`${name}: methodology overflows page`);
+   if(name==='mobile'){const widths=await page.locator('.methodology-table tbody tr:first-child').evaluate(row=>({row:row.getBoundingClientRect().width,heading:row.querySelector('th').getBoundingClientRect().width}));assert.ok(widths.heading>=widths.row-4,'mobile indicator heading must fill its row');}
    await page.screenshot({path:`verification/${name}-methodology.png`,fullPage:true});
    checks.push({viewport:name,dimensions,cards:17,missing,console_errors:errors,macro:await page.locator('#state').textContent(),mode:expected.mode,absolute_alerts:activeAlerts,independent_dates_checked:true,methodology_rows:17,methodology_no_overflow:true,update_context:actual.update_context});
    await page.close();
