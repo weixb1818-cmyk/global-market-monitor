@@ -140,3 +140,5 @@ Barchart 的[官方品种页](https://barchart.websol.barchart.com/?1_show=futur
 每次部署现在额外保存 `publication-evidence` 制品和 GitHub Job Summary，校验真实 GitHub 事件、cron、快照及更新记录属于同一次运行。只有原生 `schedule`、日常 cron 匹配、取数成功且公网回读一致时，`native_daily_schedule_verified` 才为 true；全源失败后发布旧快照不会被判成定时更新成功。更新工作流成功后，`workflow_run` 会自动触发独立的桌面／手机浏览器验收，浏览器还会核对它读取的行情确实来自触发验收的那次运行。
 
 本机 Twelve Data 的只读账户验证已完成（2026-11-21）：两个准确货币对各返回99个已完成日线，技术可接入。服务商的[外部使用规则](https://support.twelvedata.com/en/articles/5332349-commercial-and-personal-usage)要求相应展示／再分发权；本机 API 可读不等于已取得此权利。因当前不能确认账户的授权范围，尚未把密钥上传至 GitHub 或发布该账户行情。确认授权后即可使用现有适配器，无需修改指标。
+
+最新补充验收（2026-11-21）：[47项测试、更新、部署及公网回读](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44882757226)成功，并[自动触发独立浏览器验收](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44882812965)成功。前者仍是 `workflow_dispatch`，后者为 `workflow_run`，均没有被标为原生定时成功；`publication-evidence` 中该标志为 false。
