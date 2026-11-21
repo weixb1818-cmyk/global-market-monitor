@@ -14,9 +14,8 @@ jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      data_outcome: ${{ steps.update.outcome }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -52,12 +51,20 @@ jobs:
           mkdir -p _site/data
           cp index.html styles.css app.js _site/
           cp data/snapshot.json data/last_attempt.json _site/data/
-      - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
       - uses: actions/deploy-pages@v4
         id: deployment
-      - name: Report total failure
-        if: steps.update.outcome == 'failure'
+      - name: Report total data failure after publishing retained snapshot
+        if: needs.update.outputs.data_outcome == 'failure'
         run: exit 1
