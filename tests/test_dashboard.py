@@ -91,6 +91,18 @@ class TestDataSafety(unittest.TestCase):
             self.assertEqual(json.loads((root/'data'/'snapshot.json').read_text()),old)
             self.assertEqual(json.loads((root/'data'/'last_attempt.json').read_text())['status'],'failed')
 
+    def test_auxiliary_success_does_not_hide_total_visible_failure(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);(root/'data').mkdir();old={'indicators':[],'original':'keep'}
+            (root/'data'/'snapshot.json').write_text(json.dumps(old))
+            (root/'data'/'history.json').write_text('{"series": {}}')
+            def only_aux(item, now):
+                if item['id']=='aux3m':return [{'date':'2026-11-19','value':4.0}],'test auxiliary'
+                raise ValueError('visible source unavailable')
+            with patch.object(u,'ROOT',root),patch.object(u,'fetch',side_effect=only_aux):
+                self.assertFalse(u.run(NOW))
+            self.assertEqual(json.loads((root/'data'/'snapshot.json').read_text()),old)
+
     def test_corrupt_existing_file_never_overwritten(self):
         with tempfile.TemporaryDirectory() as d:
             root=Path(d); (root/'data').mkdir(); snap=root/'data'/'snapshot.json'; snap.write_text('corrupt')

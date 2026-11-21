@@ -316,7 +316,7 @@ def run(now=None):
             try:
                 points,source=future.result(); prior=observations(series.get(k,[])); combined=observations(prior+points)
                 # A provider may return an older period; merge without erasing valid history.
-                series[k]=combined[-120:]; sources[k]=source; success+=1
+                series[k]=combined[-120:]; sources[k]=source; success+=int(k!='aux3m')
             except Exception as e:
                 errors[k]='数据源网络请求失败' if isinstance(e,requests.RequestException) else str(e)[:160]; LOG.warning('%s: %s',k,errors[k])
     if not success and sp.exists():
