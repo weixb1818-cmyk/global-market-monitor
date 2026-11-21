@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-21T07:59:58.655989+00:00",
+  "at": "2026-11-21T08:06:43.994454+00:00",
   "status": "partial",
   "message": "6 项来源未更新",
   "update_context": {
     "event": "workflow_dispatch",
     "schedule": null,
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44882757226"
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44883288000"
   }
 }
