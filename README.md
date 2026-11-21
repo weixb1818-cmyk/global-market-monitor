@@ -37,7 +37,7 @@ node tests/test_ui.cjs
 
 这里区分指标本身的定义与本项目的计算。指数、收益率和 OAS 采用供应商发布值；本项目负责筛选已完成日线、单位转换、前期／近20期变化及规则解读。来源链接同时注明原始发布机构、实际接口与尚未接入的目标源；当前实际来源和日期以各卡片为准。
 
-**A · 价格／汇率／价格指数**：变化率 = (最新原值 ÷ 参考原值 − 1) × 100%，包括 DXY、两项股指、三项期货、BTC、ETH 和两个汇率。参考值为 0 时显示“—”。
+**A · 价格／汇率／价格指数**：变化率 = (最新原值 ÷ 参考原值 − 1) × 100%，包括 DXY、两项股指、黄金／WTI／铜、BTC、ETH 和两个汇率。参考值为 0 时显示“—”。
 
 **B · 收益率／利差**：原始单位均为百分数值：变化(bp) = (最新原值 − 参考原值) × 100。收益率水平仍显示 %；两项国债利差及 HY OAS 水平 = 原值 × 100，以 bp 显示。例如 4.00% → 4.25% 为 +25bp；利差 0.30% 为 +30bp。
 
@@ -57,19 +57,45 @@ node tests/test_ui.cjs
 | 高收益债信用利差 | ICE BofA 美国高收益债指数的期权调整利差（OAS）：成分债相对国债即期曲线的期权调整利差按市值加权；原值乘 100 转为 bp。 | [FRED BAMLH0A0HYM2](https://fred.stlouisfed.org/series/BAMLH0A0HYM2)。原始发布：ICE Data Indices；由 FRED 提供。 | bp；变化用 B |
 | 标普 500 指数 | S&P 500 流通市值加权价格指数的日收盘。直接读取指数点位，不含股息再投资，不使用 ETF 价格。 | [FRED SP500](https://fred.stlouisfed.org/series/SP500)；[S&P 指数方法](https://www.spglobal.com/spdji/en/methodology/article/sp-us-indices-methodology/)。原始发布：S&P Dow Jones Indices；由 FRED 提供。 | 点；变化用 A |
 | 纳斯达克 100 指数 | Nasdaq-100 大型非金融企业的修正市值加权价格指数日收盘，不是纳斯达克综合指数，也不是 ETF。 | [FRED NASDAQ100](https://fred.stlouisfed.org/series/NASDAQ100)；[Nasdaq 指数方法](https://beta.indexes.nasdaq.com/docs/methodology_NDX.pdf)。原始发布：Nasdaq；由 FRED 提供。 | 点；变化用 A |
-| COMEX 黄金近月期货 | COMEX 黄金近月期货日收盘，按每金衡盎司美元报价。近月选取、换月日及历史拼接规则必须由接入商明确；目前没有已接入序列。 | [CME 黄金合约定义](https://www.cmegroup.com/markets/metals/precious/gold.contractSpecs.html)。拟用授权期货日线；富途当前无权限。此链接为合约定义，不是已接入行情源。 | USD/oz；变化用 A |
-| NYMEX WTI 近月期货 | NYMEX WTI 轻质低硫原油近月期货日收盘，按每桶美元报价。换月与历史拼接规则待授权源核验；日收盘不能静默改用结算价。 | [CME WTI 合约定义](https://www.cmegroup.com/markets/energy/crude-oil/light-sweet-crude.contractSpecs.html)。拟用授权期货日线；富途当前无权限。未使用 WTI 现货替代。 | USD/bbl；变化用 A |
+| 黄金参考价（合成） | XAU 每金衡盎司美元的多源合成参考价；由 Frankfurter 根据央行等机构的参考报价合成。本项目读取其 XAU/USD，不将其视作 COMEX 期货、LBMA 定盘价或现货日收盘。 | [Frankfurter XAU](https://api.frankfurter.dev/v2/currency/xau)；[方法及使用说明](https://frankfurter.dev/)。已接入免费合成参考历史。各上游可能不同日，来源日期另行保留；数值可能偏离当日现货。 | USD/oz；变化用 A |
+| WTI 库欣现货 | WTI 库欣现货日价 DCOILWTICO，由 EIA 发布、FRED 分发，直接采用 USD/bbl 原值；不是 NYMEX 近月期货，无期货换月拼接。 | [FRED / EIA DCOILWTICO](https://fred.stlouisfed.org/series/DCOILWTICO)；[EIA 使用许可](https://www.eia.gov/about/copyrights_reuse.php)。已接入免费现货历史。发布有滞后，按真实日期显示；超过时效阈值时标为延迟。 | USD/bbl；变化用 A |
 | COMEX 铜近月期货 | COMEX 铜近月期货日收盘，按每磅美元报价；若源按美分报价，供数方须先除以 100 转为美元。换月规则待核验，不使用 LME 铜或现货替代。 | [CME 铜合约定义](https://www.cmegroup.com/markets/metals/base/copper.contractSpecs.html)。拟用授权期货日线；富途当前无权限。 | USD/lb；变化用 A |
 | 比特币 BTC | CoinGecko bitcoin 的美元价格。取 00:00 UTC 的每日样本并标记为前一 UTC 日期，作为该日结束快照；不代表某一家交易所的收盘价。 | [CoinGecko market_chart](https://docs.coingecko.com/reference/coins-id-market-chart)。已接入 CoinGecko；vs_currency=usd，interval=daily。 | USD/BTC；变化用 A |
 | 以太坊 ETH | CoinGecko ethereum 的美元价格。取 00:00 UTC 的每日样本并标记为前一 UTC 日期，作为该日结束快照；不采用 ETH/BTC 交叉盘。 | [CoinGecko market_chart](https://docs.coingecko.com/reference/coins-id-market-chart)。已接入 CoinGecko；vs_currency=usd，interval=daily。 | USD/ETH；变化用 A |
-| 美元 / 日元 | 每 1 美元对应的日元数，直接采用 USD/JPY 已完成日线 close；上升表示美元相对日元升值。 | [Twelve Data time_series](https://twelvedata.com/docs#time-series)。本机准确代码已验证；公开展示授权待确认，线上暂未接入。 | JPY/USD；变化用 A |
-| 美元 / 离岸人民币 | 每 1 美元对应的离岸人民币数，直接采用 USD/CNH 已完成日线 close；上升表示美元相对离岸人民币升值，不以 USD/CNY 替代。 | [Twelve Data time_series](https://twelvedata.com/docs#time-series)。本机准确代码已验证；公开展示授权待确认，线上暂未接入。 | CNH/USD；变化用 A |
+| 美元 / 日元（参考） | ECB 同日参考交叉汇率：JPY/USD = EURJPY ÷ EURUSD。两条欧元参考汇率须有相同日期；代表日参考价，不是纽约收盘或实时美元兑日元。 | [ECB 参考汇率](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html)；[ECB 转载条件](https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html)。已接入 ECB 官方90日 XML 历史。项目已明确披露交叉换算；注明 ECB 来源。 | JPY/USD；变化用 A |
+| 美元 / 离岸人民币（参考） | USD/CNH 多源合成参考汇率，每1美元对应的离岸人民币数。接口目录须明确为 Offshore，响应须为 USD/CNH；不接受 CNY，不标为纽约收盘。 | [Frankfurter CNH](https://frankfurter.dev/currencies/cnh/)；[合成方法及使用说明](https://frankfurter.dev/)。已接入免费历史；保留非异常上游的独立日期，跳过全部来源沿用旧日的行。部分上游日期可能不同。 | CNH/USD；变化用 A |
 
-**更新与日期**：每天北京时间08:15调度一次，可能排队；快照生成时间不等于每项行情日期。美债、股指、VIX、OAS 和 DXY 在纽约18:00前保守排除当日数据；期货适配器在纽约17:00前排除当日数据，且须提供已收盘日期。CoinGecko 仅取已完成 UTC 日。Twelve Data 先按返回的 exchange_timezone（日界缺省 UTC）排除未完成日，再保守排除当前 UTC 日。每张卡保留独立“截至”日期；来源失败保留历史并标识失败／延迟，不把旧值改成今天。
+**更新与日期**：每天北京时间08:15调度一次，可能排队；快照生成时间不等于每项行情日期。美债、股指、VIX、OAS 和 DXY 在纽约18:00前保守排除当日数据；期货适配器在纽约17:00前排除当日数据，且须提供已收盘日期。CoinGecko 仅取已完成 UTC 日。ECB 和 Frankfurter 当前只接收前一 UTC 日及更早的参考观测；合成序列保留各来源日期，不把全部来源均为旧日的沿用行当新观测。Twelve Data 适配器保留但当前未使用。每张卡保留独立“截至”日期；来源失败保留历史并标识失败／延迟，不把旧值改成今天。
 
-**期货口径**：三项期货目前没有生产数据，也尚未确定可验证的近月换月规则。接入时必须公布近月选择、换月日期、是否复权及收盘／结算口径；换月可能产生非市场涨跌的跳变，因此这些信息确认前不会输出该序列的涨跌幅。
+**期货口径**：依据本次允许商品使用现货的要求，WTI 已明确改为 EIA 库欣现货；黄金改为 XAU/USD 合成参考价，明确不是现货收盘或期货。旧期货历史不得拼入新序列。铜仍未接入，保留原 COMEX 铜近月定义；如未来接入期货，须先确认换月和报价单位。
 
 FRED 的利差主系列与收益率分项可能不同步。只有同一日期的两端收益率齐全时才核验利差，核验值不会替换官方主系列。页面的完整说明位于 [计算方法与数据来源](https://weixb1818-cmyk.github.io/global-market-monitor/#methodology)。
+
+## 本轮六项数据源核查（2026-11-21）
+
+已有真实值由11/17提高为15/17，其中14项未过期、WTI一项发布延迟；缺失仍为 DXY 和铜。新增四项无需Key，没有注册或购买订阅。黄金和CNH为参考序列，不能按交易所收盘价理解。
+
+| 指标 | 推荐来源 | 免费额度及限制 | 最新实测日期 | 接入难度／结果 |
+|---|---|---|---|---|
+| dxy | ICE / Barchart DXY00；东方财富 UDI／新浪 DINIW 为待授权候选 | 未核实有免费公开展示授权；网页接口无已公布官方额度 | 2026-11-20 | 较高：需核实ICE原始指数来源和公开展示授权；未接入；不使用其他美元指数。 |
+| gold | Frankfurter XAU/USD 合成参考价 | 免费，无API Key、无日/月配额；有防滥用限速 | 2026-11-20 | 低：2请求/日，含元数据与历史；已接入；不是现货收盘或COMEX期货。 |
+| wti | EIA 库欣 WTI 现货，经 FRED DCOILWTICO | 免费CSV，无需Key；无可承诺的无限调用额度，每日1次 | 2026-11-17 | 低：复用FRED适配器；已接入，但当前发布滞后，标为延迟。 |
+| copper | 优先获授权的COMEX/LME日线；Gold API HG仅为候选 | Gold API现价免费免Key；免费历史10次/小时，需要免费注册Key | 2026-11-20（新浪CFD）；Gold API只有11-21抓取时间 | 中至高：先确认官方报价单位、基准及历史权限；未接入：Gold API铜单位未在官方文档核实；新浪CFD不当期货；门户站外展示需许可。 |
+| usdjpy | ECB 日参考汇率：同日EURJPY÷EURUSD | 免费官方XML，无Key；未公布日/月硬配额，每日1次 | 2026-11-20 | 低：同日两条汇率交叉换算；已接入，注明ECB与换算，非纽约收盘。 |
+| usdcnh | Frankfurter USD/CNH 多源合成参考汇率 | 免费，无API Key、无日/月配额；有防滥用限速 | 2026-11-20 | 低：2请求/日；核实Offshore元数据及准确货币对；已接入；保留来源日期，不能用CNY替代。 |
+
+- **东方财富**：实测美元指数 `100.UDI`、日元 `119.USDJPY`、离岸人民币 `133.USDCNH` 各100条日线，最新11月20日；商品页面也存在，但本机商品历史请求失败。其[法律声明](https://about.eastmoney.com/home/legal)要求站外转载传播取得书面许可，未把无需Key视为可公开再分发。
+- **新浪**：已实测 DXY、USD/JPY、USD/CNH 与 GC／CL／HG 历史，最新11月20日；商品页面存在CFD标注，不能冒充交易所期货。[用户协议第6.1节](https://finance.sina.com.cn/roll/2021-05-12/doc-ikmxzfmm2033220.shtml)限制未获许可的站外展示。
+- **腾讯**：实测到三个商品及日元报价；美元指数返回8月10日旧时间，日线请求返回 `param error`；本次CNH候选代码没有返回有效行情。没有据此断言腾讯完全没有CNH，只是尚未核实准确代码、日线历史及公开转发许可。
+- 这三家网页接口的正式免费日／月配额和SLA未找到，少量测试成功不代表无限额或长期稳定。
+
+**公开使用依据**：[EIA 政府数据重用](https://www.eia.gov/about/copyrights_reuse.php)、[ECB 转载及修改披露条件](https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html)、[Frankfurter 合成汇率商业使用FAQ](https://frankfurter.dev/)。Frankfurter 的[数据条款](https://frankfurter.dev/license/)仍要求注意上游条件；项目采用其明确允许免费使用的合成路由，不以MIT代码许可代替数据授权。
+
+CNH 的元数据明确为 Chinese Renminbi Yuan Offshore；已核查[印尼央行原始目录](https://www.bi.go.id/en/statistik/informasi-kurs/transaksi-bi/default.aspx)单列CNH、CNY，未将CNY映射为CNH。黄金元数据明确为 Gold (Troy Ounce)。合成值保留每个参与来源的日期和被排除异常源的过滤，不补出纯沿用日期。
+
+Gold API 可免费读取XAU及HG现价，官方允许网站使用；历史为免费10次/小时但需要注册Key。其黄金金衡盎司单位有官方说明，铜单位及具体基准未明确，因此未把HG代码当成足够依据。使用贵金属现价或参考价都不能静默覆盖期货历史。
+
+完整、可机读的核查记录：[data/source_research.json](data/source_research.json)。本次最新日期不保证未来每次更新都相同，页面始终显示实际源日期。
 
 ## 数据源、定义与当前限制
 
@@ -78,9 +104,9 @@ FRED 的利差主系列与收益率分项可能不同步。只有同一日期的
 | 2Y、10Y、10Y 实际利率、10Y−2Y、10Y−3M、VIX、HY OAS | FRED | 对应规格中的原始系列；不跨日期相减。可选官方 FRED API Key；无 Key 时尝试 FRED Graph CSV。 |
 | 标普 500、纳斯达克 100 | FRED `SP500`、`NASDAQ100` | 指数本身的日收盘；不是 ETF。FRED 有发布滞后，页面显示各自日期。指数数据受版权约束，发布前应核对相关权利及许可，尤其 SP500 标记了预先批准要求。 |
 | BTC、ETH | CoinGecko 官方 `market_chart` | 取每日 **00:00 UTC** 样本作为前一 UTC 日结束快照；忽略当前未完成日期及日内样本。生产环境建议配置 Demo API Key。 |
-| USD/JPY、USD/CNH | Twelve Data `USD/JPY`、`USD/CNH` | 已在官方目录核实 `USD/CNH` 为 Chinese Yuan (Offshore)。每日线依数据源本地时区，只使用已完成日线；本机账户已验证两项各99个完整日线；公开展示及 JSON 再分发权待确认，线上尚未配置 `TWELVE_DATA_API_KEY`。日线的 `timezone` 参数会被服务商忽略。 |
+| USD/JPY、USD/CNH | ECB 官方参考汇率／Frankfurter 离岸人民币合成参考汇率 | 两者均已免费接入；单位、日期与计算见上表。原 Twelve Data 适配器保留但不启用，不需要上传其账户密钥。 |
 | DXY | Barchart DXY00 官方 API／授权源适配器 | 已实现现货指数品种校验；当前未配置授权凭证，故显示缺失。不用贸易加权美元指数或美元指数期货替代。 |
-| 黄金、WTI、铜 | 外部已授权日线适配器 | 必须分别是 COMEX 黄金近月 USD/oz、NYMEX WTI 近月 USD/bbl、COMEX 铜近月 USD/lb，且数据源须固定、公开说明换月与历史拼接方式。本机富途 OpenD 可连接，但这三项返回“行情权限不足”，因此目前没有安全地接入；获得相应 CME 行情权限后，还须核验近月连续序列和换月口径。Twelve Data 的常见商品数据是现货，不能直接替代期货。 |
+| 黄金、WTI、铜 | Frankfurter XAU/USD 合成参考价／EIA 库欣 WTI 现货／铜仍待授权 | 本次明确改变黄金和 WTI 的定义并重置原序列，避免混用期货历史。铜的品种、单位或公开展示授权尚未同时核实。 |
 
 富途 OpenD 是本机进程，GitHub Actions 不能访问 `127.0.0.1` 上的本机 OpenD；如以后取得权限，应在本机运行更新任务并将结果发布，或使用自托管 Actions runner，同时完成品种、授权与换月验证。当前代码不会尝试买行情卡，也不会发交易请求。
 
@@ -93,7 +119,7 @@ FRED 的 ICE HY OAS 历史自 2026 年 4 月起在 FRED 仅保留最近三年；
 ```bash
 export FRED_API_KEY='你的FRED密钥'             # 可选；不配置则使用CSV
 export COINGECKO_API_KEY='你的CoinGecko Demo密钥'  # 推荐
-export TWELVE_DATA_API_KEY='你的Twelve Data密钥'   # 外汇需要
+export TWELVE_DATA_API_KEY='你的Twelve Data密钥'   # 保留的可选适配器；当前免费方案不需要
 python scripts/update_data.py
 ```
 
@@ -101,7 +127,7 @@ python scripts/update_data.py
 
 ### 自有或获授权数据商的适配器
 
-DXY 和三项期货各使用一个 URL，可分别通过 `MARKET_DATA_DXY_URL`、`MARKET_DATA_GOLD_URL`、`MARKET_DATA_WTI_URL`、`MARKET_DATA_COPPER_URL` 指定。URL 应返回按时间递增或无序均可的 JSON：
+当前 DXY 和铜仍可通过授权适配器接入。原黄金、WTI 期货适配器也保留：只有显式修改 config.json 恢复对应期货定义和 provider=external 后才启用，不会自动替换当前免费序列。接口可分别通过 `MARKET_DATA_DXY_URL`、`MARKET_DATA_GOLD_URL`、`MARKET_DATA_WTI_URL`、`MARKET_DATA_COPPER_URL` 指定。URL 应返回按时间递增或无序均可的 JSON：
 
 ```json
 {"symbol":"DXY","unit":"点","source":"已授权数据源及品种说明","daily_close":true,"complete_through":"YYYY-MM-DD","observations":[{"date":"YYYY-MM-DD","value":123.45}]}
@@ -123,10 +149,10 @@ DXY 和三项期货各使用一个 URL，可分别通过 `MARKET_DATA_DXY_URL`�
 
 - `config.json` 包含固定 17 项配置与阈值；宏观规则的优先级为金融压力扩散、增长担忧定价、金融条件趋紧、温和宽松、中性／信号分歧。DXY 单独缺失／过期时降为明确标识的有限提示；其他关键20期缺失／过期则停止趋势判断。
 - 价格类按百分比，VIX 按点，利率与利差变化按 bp；利差水平以 `FRED 原值 × 100` 显示 bp。20 期比较当前值与该系列向前第 20 个有效观测。
-- FRED 采用其发布的日收盘，纽约 18:00 前保守地排除当天数据；CoinGecko 采用前一个完整 UTC 日；Twelve Data 日线使用其市场本地日界并排除未完成日。数据不同时到达，页面显示每项独立日期。
+- FRED 按每个系列自身定义取日值（WTI 为 EIA 现货价，并非所有系列都是收盘价），纽约18:00前保守排除当天数据；ECB、Frankfurter 和 CoinGecko 只接收前一完整 UTC 日及更早日期。参考序列不标为市场收盘，合成来源可能不同日，逐项保留来源日期。
 - NYSE 交易日历用于美股、VIX 和 HY；美债按 NYSE 休市日与美国联邦假日的并集近似；期货使用 CME 会话，外汇使用工作日与主要全球休市日。连续超过两个预期交易日无更新才标延迟；加密日线距其 UTC 收盘超过 36 小时标延迟。特殊休市或来源停更仍应结合该源发布说明与独立日期判断。
 - 每次成功先校验、计算、再使用临时文件替换 JSON；单项失败保留历史。数据有损坏时拒绝覆盖；两个 JSON 文件分别原子替换，不是跨文件事务。浏览器会使用附带的交易日历重新检查时效，避免调度停止后一直显示旧状态。
-- 如果全源失败，先检查网络、FRED API Key／CoinGecko 密钥及额度、Twelve Data 账户权限；`Actions` 日志包含失败项但不包含密钥。检查 `data/last_attempt.json`、快照时间和每卡日期。不能连接 OpenD 或行情权限不足时，使用有权的日线源，切勿用 ETF、现货、在岸人民币或模拟值替代。
+- 如果全源失败，先检查网络、FRED API Key／CoinGecko 密钥及额度、Twelve Data 账户权限；`Actions` 日志包含失败项但不包含密钥。检查 `data/last_attempt.json`、快照时间和每卡日期。不能连接 OpenD 或行情权限不足时，使用有权的日线源，不得静默替换品种，不得以在岸人民币冒充离岸人民币或使用模拟值。
 
 ## 独立审查后的修正
 
@@ -150,17 +176,9 @@ Barchart 的[官方品种页](https://barchart.websol.barchart.com/?1_show=futur
  gh workflow run update.yml --repo weixb1818-cmyk/global-market-monitor
 ```
 
-### 其余五项的障碍和处理步骤
+### 当前免费接入与原期货口径
 
-| 指标 | 已核查的障碍 | 具体解决方式 |
-|---|---|---|
-| 黄金期货 | 富途 `US.GCcurrent` 返回行情权限不足；常见 Twelve Data 黄金为现货 | 取得 COMEX API 行情权限；核对近月与换月历史规则，保持 USD/oz；通过已有 `MARKET_DATA_GOLD_URL` 提供日线 |
-| WTI 期货 | 富途 `US.CLcurrent` 返回行情权限不足；WTI 现货不符合本指标 | 取得 NYMEX API 行情权限；固定近月切换与不复权／复权方式，保持 USD/bbl；配置 `MARKET_DATA_WTI_URL` |
-| 铜期货 | 富途 `US.HGcurrent` 返回行情权限不足；其他铜现货或 LME 铜不是 COMEX 铜 | 取得 COMEX API 行情权限；固定近月换月规则，保持 USD/lb；配置 `MARKET_DATA_COPPER_URL` |
-| USD/JPY | 已找到本机配置，并成功返回99个已完成日线；公开展示及再分发授权待确认 | 向 Twelve Data 确认网站价格及公开 JSON 的外部使用权；获得授权后安全配置已有 `TWELVE_DATA_API_KEY` Secret 并运行更新 |
-| USD/CNH | 本机账户已通过 `meta.symbol=USD/CNH` 校验并返回99个已完成日线；公开授权待确认 | 确认同一账户覆盖离岸人民币的外部展示及再分发权后配置 Secret；不使用 USD/CNY 替换 |
-
-富途本机 OpenD 不能由 GitHub-hosted runner 的 localhost 访问。取得权限后，可选择本机运行更新并发布、配置 self-hosted runner，或由获授权的 HTTPS 服务导出符合既有 JSON 格式的近月序列。购买权限和公开再分发授权属于账户操作，本项目没有自动购买或交易行为。完整核查记录保存在 [data/source_access.json](data/source_access.json)。
+本次用户允许商品采用现货，因此 WTI 已明确切换为 EIA 库欣现货，黄金为明确标注的 XAU/USD 合成参考价。铜暂保留原期货定义并标缺失。原富途权限与 Twelve Data 账户探测作为历史证据保留在 data/source_access.json；当前四项免费接入不依赖这些账户。更换 provider、symbol、unit 或 series_definition 时，更新器清除该项旧历史，防止不同口径拼接计算20期涨跌。
 
 ### 定时运行的证据与限制
 
@@ -177,6 +195,6 @@ Barchart 的[官方品种页](https://barchart.websol.barchart.com/?1_show=futur
 
 每次部署现在额外保存 `publication-evidence` 制品和 GitHub Job Summary，校验真实 GitHub 事件、cron、快照及更新记录属于同一次运行。只有原生 `schedule`、日常 cron 匹配、取数成功且公网回读一致时，`native_daily_schedule_verified` 才为 true；全源失败后发布旧快照不会被判成定时更新成功。更新工作流成功后，`workflow_run` 会自动触发独立的桌面／手机浏览器验收，浏览器还会核对它读取的行情确实来自触发验收的那次运行。
 
-本机 Twelve Data 的只读账户验证已完成（2026-11-21）：两个准确货币对各返回99个已完成日线，技术可接入。服务商的[外部使用规则](https://support.twelvedata.com/en/articles/5332349-commercial-and-personal-usage)要求相应展示／再分发权；本机 API 可读不等于已取得此权利。因当前不能确认账户的授权范围，尚未把密钥上传至 GitHub 或发布该账户行情。确认授权后即可使用现有适配器，无需修改指标。
+本机 Twelve Data 的只读账户验证已完成（2026-11-21）：两个准确货币对各返回99个已完成日线，技术可接入。服务商的[外部使用规则](https://support.twelvedata.com/en/articles/5332349-commercial-and-personal-usage)要求相应展示／再分发权；本机 API 可读不等于已取得此权利。因当前不能确认账户的授权范围，尚未把密钥上传至 GitHub 或发布该账户行情。此为此前账户核查记录；当前免费方案不依赖该密钥。未来恢复 Twelve Data 时须确认公开授权并显式切换 provider，重置对应历史，不能拼接参考汇率与收盘价。
 
 最新补充验收（2026-11-21）：[47项测试、更新、部署及公网回读](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44882757226)成功，并[自动触发独立浏览器验收](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44882812965)成功。前者仍是 `workflow_dispatch`，后者为 `workflow_run`，均没有被标为原生定时成功；`publication-evidence` 中该标志为 false。

@@ -56,7 +56,7 @@ jobs:
         run: |
           mkdir -p _site/data
           cp index.html styles.css app.js _site/
-          cp data/snapshot.json data/last_attempt.json _site/data/
+          cp data/snapshot.json data/last_attempt.json data/source_research.json _site/data/
           python -c 'import json,os; print("snapshot_at="+json.load(open("data/snapshot.json"))["generated_at"],file=open(os.environ["GITHUB_OUTPUT"],"a"))'
       - uses: actions/upload-pages-artifact@v3
         with:

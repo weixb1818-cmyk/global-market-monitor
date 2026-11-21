@@ -21,6 +21,7 @@ if(!base)throw new Error('DASHBOARD_URL is required');
    if(process.env.EXPECTED_EVENT)assert.equal(actual.update_context.event,process.env.EXPECTED_EVENT,'actual GitHub trigger must survive publication');
    if(process.env.EXPECTED_EVENT==='schedule')assert.equal(actual.update_context.schedule,'15 0 * * *');
    const renderedNames=await page.locator('.card-top>span:first-child').allTextContents();assert.deepEqual(renderedNames,actual.indicators.map(c=>c.name));
+   for(let i=0;i<actual.indicators.length;i++)if(actual.indicators[i].series_definition?.includes('reference'))assert.equal(await page.locator('.card-group').nth(i).textContent(),'参考','reference label must remain visible even when the full title is truncated');
    const expected=await page.evaluate(s=>currentMacro(s),actual);
    assert.equal(await page.locator('#state').textContent(),expected.state);
    if(expected.mode==='limited')assert.match(await page.locator('#uncertainty').textContent(),/DXY.*不完整/);
@@ -28,6 +29,12 @@ if(!base)throw new Error('DASHBOARD_URL is required');
     assert.ok((await page.locator('.card-bottom>span:first-child').nth(i).textContent()).includes(actual.indicators[i].as_of));
    }
    const activeAlerts=await page.evaluate(s=>currentAlerts(s),actual);
+   for(const c of actual.indicators.filter(c=>c.provider==='frankfurter'&&c.value!==null)){
+    assert.ok(c.name.includes('参考'),'blended data must be visibly labelled reference');
+    assert.ok(c.source_components.length>0,'blended dates must be retained');
+    assert.ok(c.source_components.every(p=>p.date<=c.as_of),'no future source dates');
+    assert.ok(c.source_components.some(p=>p.date===c.as_of),'do not redate an entirely old blend');
+   }
    if(activeAlerts.length){assert.equal(await page.locator('#level-alerts').isVisible(),true);assert.match(await page.locator('#level-alerts').textContent(),/较高水平/);}
    assert.ok(await page.locator('.access-details').count());
    const missing=actual.indicators.filter(c=>c.value===null).length;

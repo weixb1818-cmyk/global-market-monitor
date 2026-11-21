@@ -1,0 +1,172 @@
+{
+  "checked_at": "2026-11-21T08:36:49.474253+00:00",
+  "recurring_subscription_cost": 0,
+  "coverage": {
+    "values": 15,
+    "total": 17,
+    "fresh": 14,
+    "missing": [
+      "dxy",
+      "copper"
+    ],
+    "delayed": [
+      "wti"
+    ]
+  },
+  "indicators": [
+    {
+      "id": "dxy",
+      "recommendation": "ICE / Barchart DXY00；东方财富 UDI／新浪 DINIW 为待授权候选",
+      "free_allowance": "未核实有免费公开展示授权；网页接口无已公布官方额度",
+      "latest_observed_date": "2026-11-20",
+      "connected_as_of": null,
+      "connected_observations": 0,
+      "difficulty": "较高：需核实ICE原始指数来源和公开展示授权",
+      "status": "未接入；不使用其他美元指数。",
+      "displayed_status": "missing"
+    },
+    {
+      "id": "gold",
+      "recommendation": "Frankfurter XAU/USD 合成参考价",
+      "free_allowance": "免费，无API Key、无日/月配额；有防滥用限速",
+      "latest_observed_date": "2026-11-20",
+      "connected_as_of": "2026-11-20",
+      "connected_observations": 120,
+      "difficulty": "低：2请求/日，含元数据与历史",
+      "status": "已接入；不是现货收盘或COMEX期货。",
+      "displayed_status": "ok"
+    },
+    {
+      "id": "wti",
+      "recommendation": "EIA 库欣 WTI 现货，经 FRED DCOILWTICO",
+      "free_allowance": "免费CSV，无需Key；无可承诺的无限调用额度，每日1次",
+      "latest_observed_date": "2026-11-17",
+      "connected_as_of": "2026-11-17",
+      "connected_observations": 90,
+      "difficulty": "低：复用FRED适配器",
+      "status": "已接入，但当前发布滞后，标为延迟。",
+      "displayed_status": "stale"
+    },
+    {
+      "id": "copper",
+      "recommendation": "优先获授权的COMEX/LME日线；Gold API HG仅为候选",
+      "free_allowance": "Gold API现价免费免Key；免费历史10次/小时，需要免费注册Key",
+      "latest_observed_date": "2026-11-20（新浪CFD日线）；Gold API仅有11-21抓取时间",
+      "connected_as_of": null,
+      "connected_observations": 0,
+      "difficulty": "中至高：先确认官方报价单位、基准及历史权限",
+      "status": "未接入：Gold API铜单位未在官方文档核实；新浪CFD不当期货；门户站外展示需许可。",
+      "displayed_status": "missing",
+      "candidate_timestamp_note": "Gold API updatedAt为供数方抓取时间，不能当作铜成交或收盘日期。"
+    },
+    {
+      "id": "usdjpy",
+      "recommendation": "ECB 日参考汇率：同日EURJPY÷EURUSD",
+      "free_allowance": "免费官方XML，无Key；未公布日/月硬配额，每日1次",
+      "latest_observed_date": "2026-11-20",
+      "connected_as_of": "2026-11-20",
+      "connected_observations": 65,
+      "difficulty": "低：同日两条汇率交叉换算",
+      "status": "已接入，注明ECB与换算，非纽约收盘。",
+      "displayed_status": "ok"
+    },
+    {
+      "id": "usdcnh",
+      "recommendation": "Frankfurter USD/CNH 多源合成参考汇率",
+      "free_allowance": "免费，无API Key、无日/月配额；有防滥用限速",
+      "latest_observed_date": "2026-11-20",
+      "connected_as_of": "2026-11-20",
+      "connected_observations": 113,
+      "difficulty": "低：2请求/日；核实Offshore元数据及准确货币对",
+      "status": "已接入；保留来源日期，不能用CNY替代。",
+      "displayed_status": "ok"
+    }
+  ],
+  "rights": [
+    {
+      "source": "EIA",
+      "url": "https://www.eia.gov/about/copyrights_reuse.php",
+      "result": "政府数据允许使用／分发，需标来源及日期"
+    },
+    {
+      "source": "ECB",
+      "url": "https://www.ecb.europa.eu/services/using-our-site/disclaimer/html/index.en.html",
+      "result": "可免费使用和转载，准确引用来源并披露修改／交叉换算"
+    },
+    {
+      "source": "Frankfurter blended rates",
+      "url": "https://frankfurter.dev/",
+      "terms": "https://frankfurter.dev/license/",
+      "result": "FAQ明确合成汇率免费商业使用及本地存储；不将MIT软件许可当数据许可。未使用受限的单一提供方端点。"
+    },
+    {
+      "source": "Sina",
+      "url": "https://finance.sina.com.cn/roll/2021-05-12/doc-ikmxzfmm2033220.shtml",
+      "result": "第6.1节站外整理展示需要书面许可。"
+    },
+    {
+      "source": "Eastmoney",
+      "url": "https://about.eastmoney.com/home/legal",
+      "result": "转载传播等要求事先书面许可。"
+    },
+    {
+      "source": "Gold API",
+      "url": "https://gold-api.com/terms",
+      "quota_url": "https://gold-api.com/pricing",
+      "unit_url": "https://gold-api.com/faqs",
+      "result": "允许网站使用；铜的具体单位和基准未在官方文档确认。"
+    }
+  ],
+  "china_portals": {
+    "eastmoney": {
+      "daily_history_verified": [
+        "100.UDI",
+        "119.USDJPY",
+        "133.USDCNH"
+      ],
+      "observations_each": 100,
+      "latest_date": "2026-11-20",
+      "commodity_pages": [
+        "GC00Y",
+        "CL00Y",
+        "HG00Y"
+      ],
+      "commodity_history": "本机请求连接失败；未宣称历史可用",
+      "published_free_quota": "未找到官方公开API日/月额度和SLA",
+      "public_redistribution": "需书面许可"
+    },
+    "sina": {
+      "daily_history_verified": {
+        "DINIW": 10613,
+        "fx_susdjpy": 11469,
+        "fx_susdcnh": 3140,
+        "GC": 2590,
+        "CL": 7690,
+        "HG": 2591
+      },
+      "latest_date": "2026-11-20",
+      "commodity_warning": "商品页面CFD标注，不能直接当交易所期货",
+      "published_free_quota": "未找到官方公开API日/月额度和SLA",
+      "public_redistribution": "需书面许可"
+    },
+    "tencent": {
+      "quotes_verified": [
+        "hf_GC",
+        "hf_CL",
+        "hf_HG",
+        "whUSDJPY",
+        "whDINIW"
+      ],
+      "dxy_returned_timestamp": "2026-08-10 16:06:49",
+      "cnh": "本次候选代码未返回有效行情，未证明腾讯不存在其他代码",
+      "daily_history": "本次日线请求返回param error，未核实可用历史接口",
+      "published_free_quota": "未核实",
+      "public_redistribution": "未核实可用于公开转发的授权"
+    }
+  },
+  "notes": [
+    "无新增付费订阅或注册账户。",
+    "日期仅代表本次实测。DXY／铜候选的日期不等于已接入。",
+    "合成参考序列可能偏离即时现货；来源日期不完全相同，组件日期保存于快照。"
+  ]
+}

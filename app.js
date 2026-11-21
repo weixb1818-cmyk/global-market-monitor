@@ -37,7 +37,8 @@ function cardHTML(c,snap){
   const labels={missing:'数据缺失',stale:'数据延迟',error:'更新失败 · 沿用',ok:''};
   const interpretation=delayed&&c.value!==null?'数据暂未更新，截至'+c.as_of:(c.interpretation||'数据暂不可用，等待有效行情');
   const source=c.source?`来源：${c.source}`:'来源待接入';
-  return `<article class="card ${esc(status)}" title="${esc(source)}${c.error?'；'+esc(c.error):''}${c.warning?'；'+esc(c.warning):''}"><div class="card-top"><span>${esc(c.name)}</span><span class="card-group">${esc(c.group)}</span></div><div class="card-value">${esc(value(c))}<span class="unit">${esc(c.unit)}</span></div><div class="changes"><span><em>前期</em>${esc(change(c,c.change_1))}</span><span><em>近20期</em>${esc(change(c,c.change_20))}</span></div><p class="interpretation">${esc(interpretation)}</p><div class="card-bottom"><span>${esc(c.as_of?'截至 '+c.as_of:'日期未知')}</span><span class="card-status">${esc(labels[status]||'')}</span></div></article>`;
+  const groupLabel=c.series_definition&&c.series_definition.includes('reference')?'参考':c.group;
+  return `<article class="card ${esc(status)}" title="${esc(source)}${c.quote_note?'；'+esc(c.quote_note):''}${c.error?'；'+esc(c.error):''}${c.warning?'；'+esc(c.warning):''}"><div class="card-top"><span>${esc(c.name)}</span><span class="card-group">${esc(groupLabel)}</span></div><div class="card-value">${esc(value(c))}<span class="unit">${esc(c.unit)}</span></div><div class="changes"><span><em>前期</em>${esc(change(c,c.change_1))}</span><span><em>近20期</em>${esc(change(c,c.change_20))}</span></div><p class="interpretation">${esc(interpretation)}</p><div class="card-bottom"><span>${esc(c.as_of?'截至 '+c.as_of:'日期未知')}</span><span class="card-status">${esc(labels[status]||'')}</span></div></article>`;
 }
 async function load(){
  try{

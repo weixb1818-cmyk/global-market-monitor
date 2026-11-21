@@ -120,23 +120,31 @@
     },
     {
       "id": "gold",
-      "name": "COMEX 黄金近月期货",
+      "name": "黄金参考价（合成）",
       "group": "大宗",
-      "provider": "external",
-      "symbol": "GC_FRONT",
+      "provider": "frankfurter",
+      "symbol": "XAU/USD",
       "unit": "USD/oz",
       "kind": "price",
-      "calendar": "cme"
+      "calendar": "forex",
+      "series_definition": "gold-blended-reference-v1",
+      "source_url": "https://frankfurter.dev/",
+      "source_label": null,
+      "quote_note": "多源合成参考价，非现货收盘或COMEX期货；上游可能不同日。"
     },
     {
       "id": "wti",
-      "name": "NYMEX WTI 近月期货",
+      "name": "WTI 库欣现货",
       "group": "大宗",
-      "provider": "external",
-      "symbol": "CL_FRONT",
+      "provider": "fred",
+      "symbol": "DCOILWTICO",
       "unit": "USD/bbl",
       "kind": "price",
-      "calendar": "cme"
+      "calendar": "bond",
+      "series_definition": "eia-cushing-spot-v1",
+      "source_label": "EIA via FRED",
+      "source_url": "https://fred.stlouisfed.org/series/DCOILWTICO",
+      "quote_note": "EIA库欣现货日价，非NYMEX近月期货；发布可能滞后。"
     },
     {
       "id": "copper",
@@ -170,23 +178,29 @@
     },
     {
       "id": "usdjpy",
-      "name": "美元 / 日元",
+      "name": "美元 / 日元（参考）",
       "group": "外汇",
-      "provider": "twelve",
+      "provider": "ecb",
       "symbol": "USD/JPY",
       "unit": "JPY/USD",
       "kind": "price",
-      "calendar": "forex"
+      "calendar": "forex",
+      "series_definition": "ecb-reference-cross-v1",
+      "source_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
+      "quote_note": "ECB同日EURJPY÷EURUSD，日参考汇率，非纽约收盘。"
     },
     {
       "id": "usdcnh",
-      "name": "美元 / 离岸人民币",
+      "name": "美元 / 离岸人民币（参考）",
       "group": "外汇",
-      "provider": "twelve",
+      "provider": "frankfurter",
       "symbol": "USD/CNH",
       "unit": "CNH/USD",
       "kind": "price",
-      "calendar": "forex"
+      "calendar": "forex",
+      "series_definition": "cnh-blended-reference-v1",
+      "source_url": "https://frankfurter.dev/currencies/cnh/",
+      "quote_note": "准确CNH离岸人民币，多源合成参考汇率，非纽约收盘；上游可能不同日。"
     }
   ]
 }

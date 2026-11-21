@@ -5,6 +5,7 @@ import concurrent.futures, csv, io, json, logging, math, os, sys, tempfile
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from xml.etree import ElementTree
 import requests
 import holidays
 import exchange_calendars as xcals
@@ -24,8 +25,9 @@ def observations(rows):
         if raw in (None, '', '.'): continue
         val = float(raw)
         if not math.isfinite(val): raise ValueError('non-finite value')
-        result[d] = val
-    return [{'date': d, 'value': v} for d, v in sorted(result.items())]
+        result[d] = {'date':d,'value':val}
+        if 'components' in row: result[d]['components'] = row['components']
+    return [v for d, v in sorted(result.items())]
 
 
 def request_json(url, params=None, headers=None):
@@ -77,6 +79,70 @@ def twelve(symbol, now):
     return rows, 'Twelve Data / '+symbol+' / '+tz_name+' 日线'
 
 
+def ecb_usdjpy(now):
+    response = requests.get('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml', timeout=18)
+    response.raise_for_status()
+    root = ElementTree.fromstring(response.content)
+    rows = []
+    for day in root.iter():
+        if not day.get('time'): continue
+        rates = {c.get('currency'):float(c.get('rate')) for c in day if c.get('currency') in ('USD','JPY')}
+        if set(rates) != {'USD','JPY'}: continue
+        if any(not math.isfinite(v) or v <= 0 for v in rates.values()):
+            raise ValueError('ECB汇率必须为正有限值')
+        rows.append({'date':day.get('time'),'value':rates['JPY']/rates['USD']})
+    if not rows: raise ValueError('ECB缺少同日USD和JPY参考汇率')
+    return observations(rows), 'ECB / 同日EURJPY÷EURUSD / 日参考汇率，非收盘'
+
+
+def frankfurter(item, now):
+    base, quote = item['symbol'].split('/')
+    if (base,quote) not in (('XAU','USD'),('USD','CNH')):
+        raise ValueError('未核实的参考汇率品种')
+    asset = 'CNH' if quote == 'CNH' else 'XAU'
+    meta = request_json('https://api.frankfurter.dev/v2/currency/'+asset.lower())
+    expected_name = 'offshore' if asset == 'CNH' else 'troy ounce'
+    if meta.get('iso_code') != asset or expected_name not in meta.get('name','').lower():
+        raise ValueError('参考序列品种不符；CNH必须为离岸人民币，XAU必须为金衡盎司')
+    body = request_json('https://api.frankfurter.dev/v2/rates', {
+        'base':base,'quotes':quote,'from':(now.date()-timedelta(days=130)).isoformat(),
+        'to':(now.date()-timedelta(days=1)).isoformat(),'expand':'providers'})
+    if not isinstance(body,list): raise ValueError('参考汇率历史格式无效')
+    rows = []
+    for row in body:
+        if row.get('base') != base or row.get('quote') != quote:
+            raise ValueError('拒绝不同货币对；不使用CNY替代CNH')
+        d = date.fromisoformat(row['date'])
+        if d >= now.date(): continue
+        value = float(row['rate'])
+        if not math.isfinite(value) or value <= 0: raise ValueError('参考汇率必须为正有限值')
+        parts = [{'provider':p['key'],'date':date.fromisoformat(p['date']).isoformat()}
+                 for p in row.get('providers',[]) if not p.get('excluded')]
+        if not parts: raise ValueError('缺少合成序列的来源日期')
+        if any(p['date'] > d.isoformat() for p in parts): raise ValueError('来源日期晚于参考序列日期')
+        # Do not manufacture fresh observations by carrying an entirely older blend forward.
+        if not any(p['date'] == d.isoformat() for p in parts): continue
+        rows.append({'date':d.isoformat(),'value':value,'components':parts})
+    return observations(rows), 'Frankfurter / '+item['symbol']+' / 多源合成参考价，非收盘'
+
+
+def definition_key(item):
+    return '|'.join(str(item.get(k,'')) for k in ('provider','symbol','unit','series_definition'))
+
+
+def prepare_history(history, items, old_snapshot):
+    definitions = history.setdefault('definitions',{})
+    old = {c['id']:c for c in old_snapshot.get('indicators',[])}
+    for item in items:
+        key = item['id']; current = definition_key(item)
+        prior = definitions.get(key) or (definition_key(old[key]) if key in old else None)
+        if prior is not None and prior != current:
+            history['series'].pop(key,None)
+            history.setdefault('sources',{}).pop(key,None)
+            LOG.warning('%s: 指标口径改变，清除旧序列，禁止拼接不同品种或报价口径',key)
+        definitions[key] = current
+
+
 
 def barchart_dxy(item, now):
     # Official paid API only; never scrape a website or substitute DXY futures.
@@ -118,6 +184,8 @@ def fetch(item, now):
     elif item['provider']=='coingecko': result = coingecko(item['symbol'], now)
     elif item['provider']=='twelve': result = twelve(item['symbol'], now)
     elif item['provider']=='barchart': result = barchart_dxy(item, now)
+    elif item['provider']=='ecb': result = ecb_usdjpy(now)
+    elif item['provider']=='frankfurter': result = frankfurter(item, now)
     else: result = external(item, now)
     points, source = result
     # US prices on the current date are usable only after their completed session.
@@ -126,9 +194,10 @@ def fetch(item, now):
     max_date = et.date() if et.hour >= cutoff else et.date()-timedelta(days=1)
     if item['calendar']=='crypto': max_date = now.astimezone(UTC).date()-timedelta(days=1)
     if item['provider']=='twelve': max_date = now.astimezone(UTC).date()-timedelta(days=1)
+    if item['provider'] in ('ecb','frankfurter'): max_date = now.astimezone(UTC).date()-timedelta(days=1)
     points = [p for p in points if date.fromisoformat(p['date']) <= max_date]
     if not points: raise ValueError('无已完成交易时段的有效数据')
-    return points[-120:], source
+    return points[-120:], (item.get('source_label')+' / '+item['symbol']) if item.get('source_label') else source
 
 
 def session_dates(start, end, calendar):
@@ -172,6 +241,8 @@ def calculate(item, points, source, error, now, thresholds):
         return (latest/prev-1)*100 if prev else None
     stale=is_stale(points[-1]['date'],item['calendar'],now,thresholds)
     data={**item,'value':latest*100 if item['kind']=='spread' else latest,'change_1':delta(1),'change_20':delta(20),'as_of':points[-1]['date'],'source':source,'status':'stale' if stale else ('error' if error else 'ok'),'error':error}
+    if points[-1].get('components'):
+        data['source_components'] = points[-1]['components']
     data['interpretation']=interpret(data, thresholds)
     if not stale and item['id']=='vix' and data['value']>=thresholds['vix_high']:
         data['interpretation']+='；波动率仍处高位'
@@ -198,6 +269,8 @@ def interpret(x,t):
         target='日元' if k=='usdjpy' else '离岸人民币'
         return ('美元相对'+target+'升值，关注汇率波动') if c>0 else ('美元相对'+target+'贬值，关注汇率波动') if c<0 else '汇率近20期基本持平，关注后续变化'
     direction='上涨' if c>=t['asset_pct'] else '下跌' if c<=-t['asset_pct'] else '震荡'
+    if k=='gold' and x.get('series_definition')=='gold-blended-reference-v1':
+        return '合成参考近20期'+direction+'，不等同现货收盘'
     notes={'sp500':'关注大盘风险偏好','nasdaq100':'成长及科技权重较高','gold':'需结合实际利率与美元判断','wti':'关注能源供需变化','copper':'关注工业需求变化','btc':'关注价格波动','eth':'关注价格波动'}
     return '近20期'+direction+'，'+notes.get(k,'关注后续走势')
 
@@ -304,11 +377,13 @@ def run(now=None):
     hp=out/'history.json'; sp=out/'snapshot.json'
     history=json.loads(hp.read_text(encoding='utf-8')) if hp.exists() else {'series':{}}
     if not isinstance(history.get('series'),dict): raise ValueError('existing history invalid; refusing to overwrite')
+    old = {}
     if sp.exists():
         old=json.loads(sp.read_text(encoding='utf-8'))
         if not isinstance(old.get('indicators'),list): raise ValueError('existing snapshot invalid; refusing to overwrite')
-    series=history['series']; sources=history.get('sources',{}); errors={}; success=0
     items=CONFIG['indicators']+[{'id':'aux3m','provider':'fred','symbol':'DGS3MO','calendar':'bond'}]
+    prepare_history(history,items,old)
+    series=history['series']; sources=history.setdefault('sources',{}); errors={}; success=0
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
         futures={pool.submit(fetch,item,now):item for item in items}
         for future in concurrent.futures.as_completed(futures):
@@ -333,7 +408,7 @@ def run(now=None):
     calendar['bond_holidays']=[d.isoformat() for d in holidays.US(years=[year-1,year,year+1])]
     limited_cards={**cards,'dxy':{**cards['dxy'],'value':None,'change_20':None,'status':'missing'}}
     snapshot={'generated_at':now.isoformat(),'timezone':'Asia/Tokyo','indicators':list(cards.values()),'macro':classify(cards,CONFIG['thresholds']),'limited_macro':classify(limited_cards,CONFIG['thresholds']),'risk_alerts':risk_levels(cards,CONFIG['thresholds']),'spread_checks':spread_checks,'thresholds':CONFIG['thresholds'],'calendar':calendar,'sources_failed':sum(k in errors for k in cards),'update_context':update_context()}
-    atomic(hp,{'series':series,'sources':sources}); atomic(sp,snapshot)
+    atomic(hp,{'series':series,'sources':sources,'definitions':history['definitions']}); atomic(sp,snapshot)
     atomic(out/'last_attempt.json',{'at':now.isoformat(),'status':'partial' if errors else 'ok','message':f'{sum(k in errors for k in cards)} 项来源未更新' if errors else '更新完成','update_context':update_context()})
     return True
 
