@@ -198,3 +198,5 @@ Barchart 的[官方品种页](https://barchart.websol.barchart.com/?1_show=futur
 本机 Twelve Data 的只读账户验证已完成（2026-11-21）：两个准确货币对各返回99个已完成日线，技术可接入。服务商的[外部使用规则](https://support.twelvedata.com/en/articles/5332349-commercial-and-personal-usage)要求相应展示／再分发权；本机 API 可读不等于已取得此权利。因当前不能确认账户的授权范围，尚未把密钥上传至 GitHub 或发布该账户行情。此为此前账户核查记录；当前免费方案不依赖该密钥。未来恢复 Twelve Data 时须确认公开授权并显式切换 provider，重置对应历史，不能拼接参考汇率与收盘价。
 
 最新补充验收（2026-11-21）：[47项测试、更新、部署及公网回读](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44882757226)成功，并[自动触发独立浏览器验收](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44882812965)成功。前者仍是 `workflow_dispatch`，后者为 `workflow_run`，均没有被标为原生定时成功；`publication-evidence` 中该标志为 false。
+
+本轮免费数据源接入验收：[55项测试、取数、部署及公网回读](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885895078)成功；[独立桌面／手机浏览器验收](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885978426)成功。公开快照实测15项有值，DXY与铜缺失，WTI延迟，宏观状态继续明确为DXY缺失下的有限提示。无新增付费订阅。

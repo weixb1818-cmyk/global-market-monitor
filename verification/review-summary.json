@@ -1,17 +1,16 @@
 {
-  "checked_at": "2026-11-21T08:01:29.344939+00:00",
+  "checked_at": "2026-11-21T08:42:56.443550+00:00",
   "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
   "scope": "Same static HTML/CSS/JS plus Python and GitHub Pages architecture; exactly 17 indicators",
   "data": {
     "indicators": 17,
-    "available": 11,
+    "available": 15,
     "missing": [
       "dxy",
-      "gold",
-      "wti",
-      "copper",
-      "usdjpy",
-      "usdcnh"
+      "copper"
+    ],
+    "delayed": [
+      "wti"
     ]
   },
   "macro": {
@@ -59,10 +58,10 @@
     }
   ],
   "tests": {
-    "python": 47,
+    "python": 55,
     "ui_unit": "passed",
-    "cloud_browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44882812965",
-    "cloud_publication_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44882757226",
+    "cloud_browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885978426",
+    "cloud_publication_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885895078",
     "html_errors": 0,
     "browser_trigger": "workflow_run"
   },
@@ -75,32 +74,32 @@
     "native_schedule_runs_observed": 0,
     "workflow_state": "active",
     "manual_end_to_end": "success",
-    "manual_run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44882757226",
+    "manual_run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885895078",
     "exact_daily_first_natural_execution": "pending: next eligible window 2026-11-22 08:15 Asia/Shanghai; GitHub may delay scheduled jobs",
     "publication_evidence": "Each future update stores actual event/cron/run URL plus public readback in a publication-evidence artifact; an independent browser workflow starts automatically on successful update completion."
   },
   "source_access_evidence": "data/source_access.json",
   "forex_read_access": {
-    "USD/JPY": "verified: 99 completed daily bars",
-    "USD/CNH": "verified: 99 completed daily bars",
-    "public_display_rights": "unconfirmed; no account observations or credential published"
+    "USD/JPY": "connected ECB reference cross",
+    "USD/CNH": "connected Frankfurter exact offshore blended reference",
+    "twelve_data": "previous account probe retained, not used by current free integration"
   },
   "publication": {
-    "generated_at": "2026-11-21T07:59:58.655989+00:00",
+    "generated_at": "2026-11-21T08:39:46.650756+00:00",
     "cards": 17,
     "macro": "有限风险提示",
     "mode": "limited",
     "update_context": {
       "event": "workflow_dispatch",
       "schedule": null,
-      "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44882757226"
+      "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885895078"
     },
     "attempt_status": "partial",
     "data_updated": true,
     "native_daily_schedule_verified": false,
     "result": "public readback verified",
     "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
-    "checked_at": "2026-11-21T08:00:16.446150+00:00"
+    "checked_at": "2026-11-21T08:40:21.803631+00:00"
   },
   "browser": [
     {
@@ -111,6 +110,7 @@
         "cardBottom": 880.109375
       },
       "cards": 17,
+      "methodology_rows": 17,
       "console_errors": []
     },
     {
@@ -118,10 +118,12 @@
       "dimensions": {
         "width": 390,
         "scroll": 390,
-        "cardBottom": 2053.828125
+        "cardBottom": 2110.015625
       },
       "cards": 17,
+      "methodology_rows": 17,
       "console_errors": []
     }
-  ]
+  ],
+  "source_research": "https://weixb1818-cmyk.github.io/global-market-monitor/data/source_research.json"
 }
