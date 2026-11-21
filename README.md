@@ -2,6 +2,14 @@
 
 中文单页静态金融市场仪表盘。页面读取已生成的 JSON；定时 Python 脚本获取行情、计算变化、识别宏观状态。不会用模拟数据填充缺项。首次仓库内快照来自实际 FRED 和 CoinGecko 请求，生成时间及每项行情日期以页面为准。
 
+## 已部署网址与验证
+
+公开访问：<https://weixb1818-cmyk.github.io/global-market-monitor/>，无需登录。
+
+源码仓库：<https://github.com/weixb1818-cmyk/global-market-monitor>。每日自动更新和部署已启用，时间为 UTC 00:15／东京 09:15；可在 Actions 手动触发。
+
+独立验证包括 W3C Nu HTML Checker（检查 HTML 语法）与 GitHub 云端 Chromium（桌面 1440×900、手机 390×844），后者检查 17 张卡片、缺失提示、JavaScript 异常和横向滚动，并上传实际页面截图。可在 **Actions → Independent public browser verification → Run workflow** 重新验证，下载 `public-browser-verification` 附件查看报告和截图。HTML 语法通过不等于行情数值获得第三方审计，尚缺的行情项目仍以页面提示为准。
+
 ## 本地运行
 
 需要 Python 3.10+、联网和 IANA 时区数据库。Windows 请先安装 Python，并在虚拟环境额外安装 `tzdata`。
