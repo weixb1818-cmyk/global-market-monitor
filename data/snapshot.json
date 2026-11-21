@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T08:34:12.314360+00:00",
+  "generated_at": "2026-11-21T08:39:46.650756+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -3612,8 +3612,8 @@
   },
   "sources_failed": 2,
   "update_context": {
-    "event": "local",
+    "event": "workflow_dispatch",
     "schedule": null,
-    "run_url": null
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885895078"
   }
 }
