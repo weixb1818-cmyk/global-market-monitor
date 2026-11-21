@@ -1,0 +1,81 @@
+{
+  "checked_at": "2026-11-21T07:51:13.379526+00:00",
+  "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
+  "scope": "Same static HTML/CSS/JS plus Python and GitHub Pages architecture; exactly 17 indicators",
+  "data": {
+    "indicators": 17,
+    "available": 11,
+    "missing": [
+      "dxy",
+      "gold",
+      "wti",
+      "copper",
+      "usdjpy",
+      "usdcnh"
+    ]
+  },
+  "macro": {
+    "complete": false,
+    "mode": "limited",
+    "missing": [
+      "美元指数 DXY"
+    ],
+    "signal_dates": {
+      "real10y": "2026-11-19",
+      "us2y": "2026-11-19",
+      "hy": "2026-11-19",
+      "vix": "2026-11-19"
+    },
+    "risk_alerts": [
+      {
+        "id": "vix",
+        "as_of": "2026-11-19",
+        "value": 28.44,
+        "unit": "点",
+        "message": "波动率处于较高水平"
+      }
+    ],
+    "state": "有限风险提示",
+    "reason": "波动率上升，风险偏好降温；信用尚未共同恶化",
+    "uncertainty": "DXY缺失或过期，结论不完整；不判断美元相关整体金融条件",
+    "signals": [
+      "实际利率 +12bp · 2026-11-19",
+      "HY +12bp · 2026-11-19",
+      "VIX +9.4点 · 2026-11-19"
+    ]
+  },
+  "spread_checks": [
+    {
+      "id": "spread10y2y",
+      "as_of": "2026-11-20",
+      "status": "not_comparable",
+      "reason": "缺少同一日期的长短端收益率，未跨日期相减"
+    },
+    {
+      "id": "spread10y3m",
+      "as_of": "2026-11-20",
+      "status": "not_comparable",
+      "reason": "缺少同一日期的长短端收益率，未跨日期相减"
+    }
+  ],
+  "tests": {
+    "python": 42,
+    "ui_unit": "passed",
+    "cloud_browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44880770421",
+    "cloud_publication_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44880971573",
+    "html_errors": 0
+  },
+  "schedule": {
+    "daily_utc_cron": "15 0 * * *",
+    "daily_beijing": "08:15",
+    "native_trigger_verification": "NOT VERIFIED: no native event=schedule found after bounded temporary probes and workflow enable refresh",
+    "natural_daily_first_eligible_utc": "2026-11-22T00:15:00Z",
+    "temporary_probe_active": false,
+    "native_schedule_runs_observed": 0,
+    "workflow_state": "active",
+    "manual_end_to_end": "success",
+    "manual_run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44880971573",
+    "exact_daily_first_natural_execution": "pending: next eligible window 2026-11-22 08:15 Asia/Shanghai; GitHub may delay scheduled jobs"
+  },
+  "source_access_evidence": "data/source_access.json"
+}

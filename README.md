@@ -131,3 +131,8 @@ Barchart 的[官方品种页](https://barchart.websol.barchart.com/?1_show=futur
 本次核查临时设置短时 cron 探针，使用真实的 `schedule` 事件验证调度、取数、部署和公网回读，验证后移除额外 cron。实际结果和精确运行链接会保存在本地验证报告及工作流记录中；临时探针不等于已经观察到下一次北京时间08:15的自然触发。
 
 每次更新将 `event`、实际匹配的 cron 和 `run_url` 写入 `snapshot.update_context` 与 `last_attempt.update_context`。页面页脚可直接打开该次运行。部署后由另一个云端 job 请求实际公开页面、CSS、JS、快照和更新记录，核对17个指标、快照生成时间及运行URL，防止把“上传制品成功”误当成网站已更新。
+
+
+本次定时核查结果（2026-11-21）：仓库在当天北京时间08:15之后创建。短时 cron 探针、默认分支／启用状态检查及重新启用工作流后，核查窗口内仍未获得原生 `event=schedule` 记录，因此**尚未验证原生定时实际触发，不能宣布第3项完成**。临时高频 cron 已移除，仅保留日常 `15 0 * * *`。首次自然日常窗口为 **2026-11-22 北京时间08:15**，GitHub 可能排队延迟。
+
+[这次成功的手动全链路运行](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44880971573)已通过42项Python测试、UI单元检查、取数、部署及公网回读；[独立浏览器验证](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44880770421)通过桌面／手机布局、有限风险提示、绝对风险与独立数据日期检查。这两类成功均没有冒充定时成功。详细状态见 [verification/review-summary.json](verification/review-summary.json)。
