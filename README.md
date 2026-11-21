@@ -6,7 +6,7 @@
 
 公开访问：<https://weixb1818-cmyk.github.io/global-market-monitor/>，无需登录。
 
-源码仓库：<https://github.com/weixb1818-cmyk/global-market-monitor>。每日自动更新和部署已启用，时间为 UTC 00:15／东京 09:15；可在 Actions 手动触发。
+源码仓库：<https://github.com/weixb1818-cmyk/global-market-monitor>，可见性为 **Public**，任何人均可查看代码、已提交的数据与工作流记录。每日自动更新和部署已启用，时间为 UTC 00:15／东京 09:15；可在 Actions 手动触发。
 
 独立验证包括 W3C Nu HTML Checker（检查 HTML 语法）与 GitHub 云端 Chromium（桌面 1440×900、手机 390×844），后者检查 17 张卡片、缺失提示、JavaScript 异常和横向滚动，并上传实际页面截图。可在 **Actions → Independent public browser verification → Run workflow** 重新验证，下载 `public-browser-verification` 附件查看报告和截图。HTML 语法通过不等于行情数值获得第三方审计，尚缺的行情项目仍以页面提示为准。
 
@@ -33,6 +33,44 @@ node --check app.js
 node tests/test_ui.cjs
 ```
 
+## 17项指标的计算方法与数据来源
+
+这里区分指标本身的定义与本项目的计算。指数、收益率和 OAS 采用供应商发布值；本项目负责筛选已完成日线、单位转换、前期／近20期变化及规则解读。来源链接同时注明原始发布机构、实际接口与尚未接入的目标源；当前实际来源和日期以各卡片为准。
+
+**A · 价格／汇率／价格指数**：变化率 = (最新原值 ÷ 参考原值 − 1) × 100%，包括 DXY、两项股指、三项期货、BTC、ETH 和两个汇率。参考值为 0 时显示“—”。
+
+**B · 收益率／利差**：原始单位均为百分数值：变化(bp) = (最新原值 − 参考原值) × 100。收益率水平仍显示 %；两项国债利差及 HY OAS 水平 = 原值 × 100，以 bp 显示。例如 4.00% → 4.25% 为 +25bp；利差 0.30% 为 +30bp。
+
+**C · VIX**：变化(点) = 最新指数值 − 参考指数值，例如 20 → 25 为 +5 点。
+
+**前期与近20期**：前期参考上一有效观测；近20期参考向前第20个有效观测，至少需要21个值。20期不是20个自然日，也不保证所有指标比较区间相同。休市／空值不补造观测；不足时显示“—”。计算使用原始精度，页面显示值另行四舍五入。
+
+| 指标 | 定义及本项目处理 | 来源与接入情况 | 单位／变化 |
+|---|---|---|---|
+| 美元指数 DXY | ICE 六种货币固定权重的几何加权现货美元指数。直接采用授权指数日线，不在本项目用汇率篮子重建。 | [ICE 指数定义](https://developer.ice.com/fixed-income-data-services/catalog/ice-data-indices-currency-indices)；[Barchart DXY00 API](https://www.barchart.com/ondemand/api/getHistory)。拟接入 ICE／Barchart DXY00；目前缺授权源。 | 点；变化用 A |
+| 美国 2 年期国债 | 美国国债收益率曲线上的 2 年固定期限名义收益率，采用官方发布值。 | [FRED DGS2](https://fred.stlouisfed.org/series/DGS2)。原始发布：美联储 H.15；由 FRED 提供。 | %；变化用 B |
+| 美国 10 年期国债 | 美国国债收益率曲线上的 10 年固定期限名义收益率，采用官方发布值。 | [FRED DGS10](https://fred.stlouisfed.org/series/DGS10)。原始发布：美联储 H.15；由 FRED 提供。 | %；变化用 B |
+| 美国 10 年期实际利率 | 10 年固定期限通胀保值国债（TIPS）的实际收益率，直接读取 DFII10，不用名义利率减当期通胀估算。 | [FRED DFII10](https://fred.stlouisfed.org/series/DFII10)。原始发布：美联储 H.15；由 FRED 提供。 | %；变化用 B |
+| 10Y − 2Y | 同日 10Y 收益率 − 2Y 收益率。主值采用官方 T10Y2Y，原值乘 100 转成 bp；另以同日 DGS10、DGS2 核验，不跨日期相减。 | [FRED T10Y2Y](https://fred.stlouisfed.org/series/T10Y2Y)。FRED 官方利差；底层来自美国财政部。 | bp；变化用 B |
+| 10Y − 3M | 同日 10Y 收益率 − 3M 收益率。主值采用官方 T10Y3M，原值乘 100 转成 bp；同日 DGS10、DGS3MO 仅辅助核验。 | [FRED T10Y3M](https://fred.stlouisfed.org/series/T10Y3M)；[辅助 DGS3MO](https://fred.stlouisfed.org/series/DGS3MO)。FRED 官方利差；底层来自美国财政部。 | bp；变化用 B |
+| VIX 波动率指数 | Cboe 根据标普 500 指数期权价格计算的未来约 30 天年化隐含波动率指数。读取官方指数日收盘，不由本项目重新计算。 | [FRED VIXCLS](https://fred.stlouisfed.org/series/VIXCLS)；[Cboe 方法说明](https://www.cboe.com/tradable-products/volatility-trading/)。原始发布：Cboe；由 FRED 提供。 | 点；变化用 C |
+| 高收益债信用利差 | ICE BofA 美国高收益债指数的期权调整利差（OAS）：成分债相对国债即期曲线的期权调整利差按市值加权；原值乘 100 转为 bp。 | [FRED BAMLH0A0HYM2](https://fred.stlouisfed.org/series/BAMLH0A0HYM2)。原始发布：ICE Data Indices；由 FRED 提供。 | bp；变化用 B |
+| 标普 500 指数 | S&P 500 流通市值加权价格指数的日收盘。直接读取指数点位，不含股息再投资，不使用 ETF 价格。 | [FRED SP500](https://fred.stlouisfed.org/series/SP500)；[S&P 指数方法](https://www.spglobal.com/spdji/en/methodology/article/sp-us-indices-methodology/)。原始发布：S&P Dow Jones Indices；由 FRED 提供。 | 点；变化用 A |
+| 纳斯达克 100 指数 | Nasdaq-100 大型非金融企业的修正市值加权价格指数日收盘，不是纳斯达克综合指数，也不是 ETF。 | [FRED NASDAQ100](https://fred.stlouisfed.org/series/NASDAQ100)；[Nasdaq 指数方法](https://beta.indexes.nasdaq.com/docs/methodology_NDX.pdf)。原始发布：Nasdaq；由 FRED 提供。 | 点；变化用 A |
+| COMEX 黄金近月期货 | COMEX 黄金近月期货日收盘，按每金衡盎司美元报价。近月选取、换月日及历史拼接规则必须由接入商明确；目前没有已接入序列。 | [CME 黄金合约定义](https://www.cmegroup.com/markets/metals/precious/gold.contractSpecs.html)。拟用授权期货日线；富途当前无权限。此链接为合约定义，不是已接入行情源。 | USD/oz；变化用 A |
+| NYMEX WTI 近月期货 | NYMEX WTI 轻质低硫原油近月期货日收盘，按每桶美元报价。换月与历史拼接规则待授权源核验；日收盘不能静默改用结算价。 | [CME WTI 合约定义](https://www.cmegroup.com/markets/energy/crude-oil/light-sweet-crude.contractSpecs.html)。拟用授权期货日线；富途当前无权限。未使用 WTI 现货替代。 | USD/bbl；变化用 A |
+| COMEX 铜近月期货 | COMEX 铜近月期货日收盘，按每磅美元报价；若源按美分报价，供数方须先除以 100 转为美元。换月规则待核验，不使用 LME 铜或现货替代。 | [CME 铜合约定义](https://www.cmegroup.com/markets/metals/base/copper.contractSpecs.html)。拟用授权期货日线；富途当前无权限。 | USD/lb；变化用 A |
+| 比特币 BTC | CoinGecko bitcoin 的美元价格。取 00:00 UTC 的每日样本并标记为前一 UTC 日期，作为该日结束快照；不代表某一家交易所的收盘价。 | [CoinGecko market_chart](https://docs.coingecko.com/reference/coins-id-market-chart)。已接入 CoinGecko；vs_currency=usd，interval=daily。 | USD/BTC；变化用 A |
+| 以太坊 ETH | CoinGecko ethereum 的美元价格。取 00:00 UTC 的每日样本并标记为前一 UTC 日期，作为该日结束快照；不采用 ETH/BTC 交叉盘。 | [CoinGecko market_chart](https://docs.coingecko.com/reference/coins-id-market-chart)。已接入 CoinGecko；vs_currency=usd，interval=daily。 | USD/ETH；变化用 A |
+| 美元 / 日元 | 每 1 美元对应的日元数，直接采用 USD/JPY 已完成日线 close；上升表示美元相对日元升值。 | [Twelve Data time_series](https://twelvedata.com/docs#time-series)。本机准确代码已验证；公开展示授权待确认，线上暂未接入。 | JPY/USD；变化用 A |
+| 美元 / 离岸人民币 | 每 1 美元对应的离岸人民币数，直接采用 USD/CNH 已完成日线 close；上升表示美元相对离岸人民币升值，不以 USD/CNY 替代。 | [Twelve Data time_series](https://twelvedata.com/docs#time-series)。本机准确代码已验证；公开展示授权待确认，线上暂未接入。 | CNH/USD；变化用 A |
+
+**更新与日期**：每天北京时间08:15调度一次，可能排队；快照生成时间不等于每项行情日期。美债、股指、VIX、OAS 和 DXY 在纽约18:00前保守排除当日数据；期货适配器在纽约17:00前排除当日数据，且须提供已收盘日期。CoinGecko 仅取已完成 UTC 日。Twelve Data 先按返回的 exchange_timezone（日界缺省 UTC）排除未完成日，再保守排除当前 UTC 日。每张卡保留独立“截至”日期；来源失败保留历史并标识失败／延迟，不把旧值改成今天。
+
+**期货口径**：三项期货目前没有生产数据，也尚未确定可验证的近月换月规则。接入时必须公布近月选择、换月日期、是否复权及收盘／结算口径；换月可能产生非市场涨跌的跳变，因此这些信息确认前不会输出该序列的涨跌幅。
+
+FRED 的利差主系列与收益率分项可能不同步。只有同一日期的两端收益率齐全时才核验利差，核验值不会替换官方主系列。页面的完整说明位于 [计算方法与数据来源](https://weixb1818-cmyk.github.io/global-market-monitor/#methodology)。
+
 ## 数据源、定义与当前限制
 
 | 指标 | 实现 | 接入情况 / 口径 |
@@ -41,7 +79,7 @@ node tests/test_ui.cjs
 | 标普 500、纳斯达克 100 | FRED `SP500`、`NASDAQ100` | 指数本身的日收盘；不是 ETF。FRED 有发布滞后，页面显示各自日期。指数数据受版权约束，发布前应核对相关权利及许可，尤其 SP500 标记了预先批准要求。 |
 | BTC、ETH | CoinGecko 官方 `market_chart` | 取每日 **00:00 UTC** 样本作为前一 UTC 日结束快照；忽略当前未完成日期及日内样本。生产环境建议配置 Demo API Key。 |
 | USD/JPY、USD/CNH | Twelve Data `USD/JPY`、`USD/CNH` | 已在官方目录核实 `USD/CNH` 为 Chinese Yuan (Offshore)。每日线依数据源本地时区，只使用已完成日线；本机账户已验证两项各99个完整日线；公开展示及 JSON 再分发权待确认，线上尚未配置 `TWELVE_DATA_API_KEY`。日线的 `timezone` 参数会被服务商忽略。 |
-| DXY | 外部已授权日线适配器 | 不用贸易加权美元指数替代。当前无已验证且可用的 DXY 日线授权源，故显示缺失。 |
+| DXY | Barchart DXY00 官方 API／授权源适配器 | 已实现现货指数品种校验；当前未配置授权凭证，故显示缺失。不用贸易加权美元指数或美元指数期货替代。 |
 | 黄金、WTI、铜 | 外部已授权日线适配器 | 必须分别是 COMEX 黄金近月 USD/oz、NYMEX WTI 近月 USD/bbl、COMEX 铜近月 USD/lb，且数据源须固定、公开说明换月与历史拼接方式。本机富途 OpenD 可连接，但这三项返回“行情权限不足”，因此目前没有安全地接入；获得相应 CME 行情权限后，还须核验近月连续序列和换月口径。Twelve Data 的常见商品数据是现货，不能直接替代期货。 |
 
 富途 OpenD 是本机进程，GitHub Actions 不能访问 `127.0.0.1` 上的本机 OpenD；如以后取得权限，应在本机运行更新任务并将结果发布，或使用自托管 Actions runner，同时完成品种、授权与换月验证。当前代码不会尝试买行情卡，也不会发交易请求。
@@ -59,7 +97,7 @@ export TWELVE_DATA_API_KEY='你的Twelve Data密钥'   # 外汇需要
 python scripts/update_data.py
 ```
 
-请勿将密钥加入 Git 仓库或填入页面。Twelve Data 在此机器的现有进程环境中未发现密钥，使用前请自行通过环境变量或 GitHub Secrets 提供。API 返回的错误、网络限制或无权限会显示为缺失／延迟／更新失败，保留已有有效数据。脚本日志不会输出 API Key 或请求 URL。
+请勿将密钥加入 Git 仓库或填入页面。已找到本机 Twelve Data 配置并验证两个货币对的日线读取；公开展示授权未确认，因此尚未配置线上 Secret。API 返回的错误、网络限制或无权限会显示为缺失／延迟／更新失败，保留已有有效数据。脚本日志不会输出 API Key 或请求 URL。
 
 ### 自有或获授权数据商的适配器
 

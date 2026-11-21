@@ -33,7 +33,16 @@ if(!base)throw new Error('DASHBOARD_URL is required');
    const missing=actual.indicators.filter(c=>c.value===null).length;
    assert.equal(await page.locator('.card.missing').count(),missing);
    await page.screenshot({path:`verification/${name}.png`,fullPage:true});
-   checks.push({viewport:name,dimensions,cards:17,missing,console_errors:errors,macro:await page.locator('#state').textContent(),mode:expected.mode,absolute_alerts:activeAlerts,independent_dates_checked:true,update_context:actual.update_context});
+   assert.equal(await page.locator('#methodology').getAttribute('open'),null,'methodology should start collapsed');
+   await page.locator('#methodology>summary').click();
+   assert.equal(await page.locator('.methodology-table tbody tr').count(),17);
+   assert.deepEqual(await page.locator('.methodology-table tbody tr').evaluateAll(rows=>rows.map(r=>r.dataset.indicator)),actual.indicators.map(c=>c.id));
+   assert.ok(await page.locator('.methodology-table a').count()>=17,'every indicator needs an official source link');
+   assert.match(await page.locator('.calculation-rules').textContent(),/至少需要21个值/);
+   const expandedWidth=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth}));
+   assert.ok(expandedWidth.scroll<=expandedWidth.width,`${name}: methodology overflows page`);
+   await page.screenshot({path:`verification/${name}-methodology.png`,fullPage:true});
+   checks.push({viewport:name,dimensions,cards:17,missing,console_errors:errors,macro:await page.locator('#state').textContent(),mode:expected.mode,absolute_alerts:activeAlerts,independent_dates_checked:true,methodology_rows:17,methodology_no_overflow:true,update_context:actual.update_context});
    await page.close();
   }
   fs.writeFileSync('verification/browser-report.json',JSON.stringify({url:base,checked_at:new Date().toISOString(),checks},null,2));
