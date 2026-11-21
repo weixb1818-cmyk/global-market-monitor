@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T16:16:43.235575+00:00",
+  "generated_at": "2026-11-21T16:20:04.700485+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -19,11 +19,11 @@
       "change_1": -0.09803515989159628,
       "change_20": 2.052441229656421,
       "as_of": "2026-11-20",
+      "observation_count": 120,
       "source": "新浪财经 / DINIW / 美元指数日线，非DX期货",
       "status": "ok",
       "error": null,
-      "interpretation": "美元走强，关注全球风险资产压力",
-      "observation_count": 120
+      "interpretation": "美元走强，关注全球风险资产压力"
     },
     {
       "id": "us2y",
@@ -38,11 +38,11 @@
       "change_1": -4.0000000000000036,
       "change_20": -4.999999999999982,
       "as_of": "2026-11-19",
+      "observation_count": 91,
       "source": "FRED / DGS2",
       "status": "ok",
       "error": null,
-      "interpretation": "短端利率变化有限，关注政策预期",
-      "observation_count": 91
+      "interpretation": "短端利率变化有限，关注政策预期"
     },
     {
       "id": "us10y",
@@ -57,11 +57,11 @@
       "change_1": -3.000000000000025,
       "change_20": -8.999999999999986,
       "as_of": "2026-11-19",
+      "observation_count": 91,
       "source": "FRED / DGS10",
       "status": "ok",
       "error": null,
-      "interpretation": "长端利率基本稳定，关注后续变化",
-      "observation_count": 91
+      "interpretation": "长端利率基本稳定，关注后续变化"
     },
     {
       "id": "real10y",
@@ -76,11 +76,11 @@
       "change_1": 0.0,
       "change_20": 12.00000000000001,
       "as_of": "2026-11-19",
+      "observation_count": 91,
       "source": "FRED / DFII10",
       "status": "ok",
       "error": null,
-      "interpretation": "实际利率上行，黄金及高估值资产或承压",
-      "observation_count": 91
+      "interpretation": "实际利率上行，黄金及高估值资产或承压"
     },
     {
       "id": "spread10y2y",
@@ -95,11 +95,11 @@
       "change_1": 0.9999999999999953,
       "change_20": -2.0000000000000018,
       "as_of": "2026-11-20",
+      "observation_count": 92,
       "source": "FRED / T10Y2Y",
       "status": "ok",
       "error": null,
-      "interpretation": "当前为正利差，曲线变化有限",
-      "observation_count": 92
+      "interpretation": "当前为正利差，曲线变化有限"
     },
     {
       "id": "spread10y3m",
@@ -114,11 +114,11 @@
       "change_1": -9.999999999999998,
       "change_20": -14.000000000000002,
       "as_of": "2026-11-20",
+      "observation_count": 92,
       "source": "FRED / T10Y3M",
       "status": "ok",
       "error": null,
-      "interpretation": "当前为正利差，曲线变化有限；正斜率不等于衰退风险消失",
-      "observation_count": 92
+      "interpretation": "当前为正利差，曲线变化有限；正斜率不等于衰退风险消失"
     },
     {
       "id": "vix",
@@ -133,11 +133,11 @@
       "change_1": 3.8800000000000026,
       "change_20": 9.41,
       "as_of": "2026-11-19",
+      "observation_count": 94,
       "source": "FRED / VIXCLS",
       "status": "ok",
       "error": null,
-      "interpretation": "波动率预期上升，风险偏好降温；波动率仍处高位",
-      "observation_count": 94
+      "interpretation": "波动率预期上升，风险偏好降温；波动率仍处高位"
     },
     {
       "id": "hy",
@@ -152,11 +152,11 @@
       "change_1": 4.999999999999982,
       "change_20": 12.00000000000001,
       "as_of": "2026-11-19",
+      "observation_count": 94,
       "source": "FRED / BAMLH0A0HYM2",
       "status": "ok",
       "error": null,
-      "interpretation": "信用市场相对稳定，关注利差变化",
-      "observation_count": 94
+      "interpretation": "信用市场相对稳定，关注利差变化"
     },
     {
       "id": "sp500",
@@ -171,11 +171,11 @@
       "change_1": -2.018124891617956,
       "change_20": -6.362686160113684,
       "as_of": "2026-11-19",
+      "observation_count": 93,
       "source": "FRED / SP500",
       "status": "ok",
       "error": null,
-      "interpretation": "近20期下跌，关注大盘风险偏好",
-      "observation_count": 93
+      "interpretation": "近20期下跌，关注大盘风险偏好"
     },
     {
       "id": "nasdaq100",
@@ -190,11 +190,11 @@
       "change_1": -2.2097811423846814,
       "change_20": -8.431458743472165,
       "as_of": "2026-11-19",
+      "observation_count": 93,
       "source": "FRED / NASDAQ100",
       "status": "ok",
       "error": null,
-      "interpretation": "近20期下跌，成长及科技权重较高",
-      "observation_count": 93
+      "interpretation": "近20期下跌，成长及科技权重较高"
     },
     {
       "id": "gold",
@@ -213,6 +213,7 @@
       "change_1": -2.198270807347469,
       "change_20": -8.446167625976464,
       "as_of": "2026-11-20",
+      "observation_count": 120,
       "source": "Frankfurter / XAU/USD / 多源合成参考价，非收盘",
       "status": "ok",
       "error": null,
@@ -270,8 +271,7 @@
           "date": "2026-11-18"
         }
       ],
-      "interpretation": "合成参考近20期下跌，不等同现货收盘",
-      "observation_count": 120
+      "interpretation": "合成参考近20期下跌，不等同现货收盘"
     },
     {
       "id": "wti",
@@ -290,11 +290,11 @@
       "change_1": 0.3249663827879834,
       "change_20": -17.017332468254697,
       "as_of": "2026-11-17",
+      "observation_count": 90,
       "source": "EIA via FRED / DCOILWTICO",
       "status": "stale",
       "error": null,
-      "interpretation": "数据暂未更新，截至2026-11-17",
-      "observation_count": 90
+      "interpretation": "数据暂未更新，截至2026-11-17"
     },
     {
       "id": "copper",
@@ -312,11 +312,11 @@
       "change_1": null,
       "change_20": null,
       "as_of": "2026-11-20",
+      "observation_count": 1,
       "source": "东方财富 / 101.HG00Y / 纽约17:00收盘末笔快照，非官方结算；逐日积累历史",
       "status": "ok",
       "error": null,
-      "interpretation": "近20期数据不足，暂不解读方向",
-      "observation_count": 1
+      "interpretation": "近20期数据不足，暂不解读方向"
     },
     {
       "id": "btc",
@@ -331,11 +331,11 @@
       "change_1": -5.0118991755448095,
       "change_20": -24.12635048112349,
       "as_of": "2026-11-20",
+      "observation_count": 91,
       "source": "CoinGecko / UTC 00:00",
       "status": "ok",
       "error": null,
-      "interpretation": "近20期下跌，关注价格波动",
-      "observation_count": 91
+      "interpretation": "近20期下跌，关注价格波动"
     },
     {
       "id": "eth",
@@ -350,11 +350,11 @@
       "change_1": -7.751257433747794,
       "change_20": -28.153592469423007,
       "as_of": "2026-11-20",
+      "observation_count": 91,
       "source": "CoinGecko / UTC 00:00",
       "status": "ok",
       "error": null,
-      "interpretation": "近20期下跌，关注价格波动",
-      "observation_count": 91
+      "interpretation": "近20期下跌，关注价格波动"
     },
     {
       "id": "usdjpy",
@@ -372,11 +372,11 @@
       "change_1": -0.8293170812079143,
       "change_20": 1.1739944772413802,
       "as_of": "2026-11-20",
+      "observation_count": 65,
       "source": "ECB / 同日EURJPY÷EURUSD / 日参考汇率，非收盘",
       "status": "ok",
       "error": null,
-      "interpretation": "美元相对日元升值，关注汇率波动",
-      "observation_count": 65
+      "interpretation": "美元相对日元升值，关注汇率波动"
     },
     {
       "id": "usdcnh",
@@ -394,6 +394,7 @@
       "change_1": 0.052501312532804434,
       "change_20": 0.13511484762047665,
       "as_of": "2026-11-20",
+      "observation_count": 113,
       "source": "Frankfurter / USD/CNH / 多源合成参考价，非收盘",
       "status": "ok",
       "error": null,
@@ -431,8 +432,7 @@
           "date": "2026-11-20"
         }
       ],
-      "interpretation": "美元相对离岸人民币升值，关注汇率波动",
-      "observation_count": 113
+      "interpretation": "美元相对离岸人民币升值，关注汇率波动"
     }
   ],
   "macro": {
@@ -3634,8 +3634,8 @@
   },
   "sources_failed": 0,
   "update_context": {
-    "event": "local",
+    "event": "workflow_dispatch",
     "schedule": null,
-    "run_url": null
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44923968442"
   }
 }
