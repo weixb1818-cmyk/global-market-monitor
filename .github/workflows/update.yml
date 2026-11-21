@@ -79,6 +79,15 @@ jobs:
           DASHBOARD_URL: ${{ steps.deployment.outputs.page_url }}
           EXPECTED_GENERATED_AT: ${{ needs.update.outputs.snapshot_at }}
           EXPECTED_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          EXPECTED_EVENT: ${{ github.event_name }}
+          EXPECTED_SCHEDULE: ${{ github.event.schedule }}
+          EXPECTED_DATA_OUTCOME: ${{ needs.update.outputs.data_outcome }}
+      - name: Retain publication and trigger evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: publication-evidence
+          path: verification/publication.json
+          if-no-files-found: error
       - name: Report total data failure after publishing retained snapshot
         if: needs.update.outputs.data_outcome == 'failure'
         run: exit 1

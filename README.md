@@ -40,7 +40,7 @@ node tests/test_ui.cjs
 | 2Y、10Y、10Y 实际利率、10Y−2Y、10Y−3M、VIX、HY OAS | FRED | 对应规格中的原始系列；不跨日期相减。可选官方 FRED API Key；无 Key 时尝试 FRED Graph CSV。 |
 | 标普 500、纳斯达克 100 | FRED `SP500`、`NASDAQ100` | 指数本身的日收盘；不是 ETF。FRED 有发布滞后，页面显示各自日期。指数数据受版权约束，发布前应核对相关权利及许可，尤其 SP500 标记了预先批准要求。 |
 | BTC、ETH | CoinGecko 官方 `market_chart` | 取每日 **00:00 UTC** 样本作为前一 UTC 日结束快照；忽略当前未完成日期及日内样本。生产环境建议配置 Demo API Key。 |
-| USD/JPY、USD/CNH | Twelve Data `USD/JPY`、`USD/CNH` | 已在官方目录核实 `USD/CNH` 为 Chinese Yuan (Offshore)。每日线依数据源本地时区，只使用已完成日线；需 `TWELVE_DATA_API_KEY`，品种与历史数据是否可用取决于账户权限。日线的 `timezone` 参数会被服务商忽略。 |
+| USD/JPY、USD/CNH | Twelve Data `USD/JPY`、`USD/CNH` | 已在官方目录核实 `USD/CNH` 为 Chinese Yuan (Offshore)。每日线依数据源本地时区，只使用已完成日线；本机账户已验证两项各99个完整日线；公开展示及 JSON 再分发权待确认，线上尚未配置 `TWELVE_DATA_API_KEY`。日线的 `timezone` 参数会被服务商忽略。 |
 | DXY | 外部已授权日线适配器 | 不用贸易加权美元指数替代。当前无已验证且可用的 DXY 日线授权源，故显示缺失。 |
 | 黄金、WTI、铜 | 外部已授权日线适配器 | 必须分别是 COMEX 黄金近月 USD/oz、NYMEX WTI 近月 USD/bbl、COMEX 铜近月 USD/lb，且数据源须固定、公开说明换月与历史拼接方式。本机富途 OpenD 可连接，但这三项返回“行情权限不足”，因此目前没有安全地接入；获得相应 CME 行情权限后，还须核验近月连续序列和换月口径。Twelve Data 的常见商品数据是现货，不能直接替代期货。 |
 
@@ -77,7 +77,7 @@ DXY 和三项期货各使用一个 URL，可分别通过 `MARKET_DATA_DXY_URL`�
 2. 在仓库 **Settings → Secrets and variables → Actions** 设置需要的 `FRED_API_KEY`、`COINGECKO_API_KEY`、`TWELVE_DATA_API_KEY` 以及授权行情适配器 URL。缺少可选密钥时相关卡片标记缺失；不得向仓库提交秘密。
 3. 在 **Settings → Actions → General → Workflow permissions** 允许 workflow 读写仓库内容；如果分支保护不允许推送，请调整为允许该自动化或使用其他发布流程。
 4. 在 **Settings → Pages → Build and deployment** 将 Source 设为 **GitHub Actions**。本项目工作流会在更新 JSON 后显式上传并部署静态页面。公开站点及行情数据的再分发必须先符合各数据源许可。
-5. Actions 中手动运行 **Update daily market snapshot** 验证。此后工作流每天 UTC 00:15（东京 09:15）自动运行并提交 JSON；GitHub 定时任务可能排队延迟。页面地址通常为 `https://<用户名>.github.io/<仓库名>/`，具体地址以 Pages 设置显示为准。
+5. Actions 中手动运行 **Update daily market snapshot** 验证。此后工作流按每天 UTC 00:15（北京时间 08:15、东京 09:15）调度并提交 JSON；GitHub 定时任务可能排队延迟。页面地址通常为 `https://<用户名>.github.io/<仓库名>/`，具体地址以 Pages 设置显示为准。
 
 自动提交只有真正有修改时才产生。全源失败时保留上次 `snapshot.json`，更新 `last_attempt.json` 并使任务失败；部分来源失败时保留对应历史，页面标识失败或延迟。手动刷新：在 Actions 选择 workflow → **Run workflow**，或本地执行更新脚本。
 
@@ -119,8 +119,8 @@ Barchart 的[官方品种页](https://barchart.websol.barchart.com/?1_show=futur
 | 黄金期货 | 富途 `US.GCcurrent` 返回行情权限不足；常见 Twelve Data 黄金为现货 | 取得 COMEX API 行情权限；核对近月与换月历史规则，保持 USD/oz；通过已有 `MARKET_DATA_GOLD_URL` 提供日线 |
 | WTI 期货 | 富途 `US.CLcurrent` 返回行情权限不足；WTI 现货不符合本指标 | 取得 NYMEX API 行情权限；固定近月切换与不复权／复权方式，保持 USD/bbl；配置 `MARKET_DATA_WTI_URL` |
 | 铜期货 | 富途 `US.HGcurrent` 返回行情权限不足；其他铜现货或 LME 铜不是 COMEX 铜 | 取得 COMEX API 行情权限；固定近月换月规则，保持 USD/lb；配置 `MARKET_DATA_COPPER_URL` |
-| USD/JPY | Twelve Data 官方目录有准确代码，当前进程及仓库未配置密钥 | `gh secret set TWELVE_DATA_API_KEY --repo weixb1818-cmyk/global-market-monitor`；运行更新；确认账户能返回至少21个已完成日线观测 |
-| USD/CNH | 目录明确为 Chinese Yuan (Offshore)，尚未验证有权账户的日线访问 | 使用同一 Secret；核对响应 `meta.symbol=USD/CNH`、数据源日界和21期历史；若套餐无此权限，向服务商开通该代码的历史权限，不使用 USD/CNY 替换 |
+| USD/JPY | 已找到本机配置，并成功返回99个已完成日线；公开展示及再分发授权待确认 | 向 Twelve Data 确认网站价格及公开 JSON 的外部使用权；获得授权后安全配置已有 `TWELVE_DATA_API_KEY` Secret 并运行更新 |
+| USD/CNH | 本机账户已通过 `meta.symbol=USD/CNH` 校验并返回99个已完成日线；公开授权待确认 | 确认同一账户覆盖离岸人民币的外部展示及再分发权后配置 Secret；不使用 USD/CNY 替换 |
 
 富途本机 OpenD 不能由 GitHub-hosted runner 的 localhost 访问。取得权限后，可选择本机运行更新并发布、配置 self-hosted runner，或由获授权的 HTTPS 服务导出符合既有 JSON 格式的近月序列。购买权限和公开再分发授权属于账户操作，本项目没有自动购买或交易行为。完整核查记录保存在 [data/source_access.json](data/source_access.json)。
 
@@ -128,7 +128,7 @@ Barchart 的[官方品种页](https://barchart.websol.barchart.com/?1_show=futur
 
 日常 cron `15 0 * * *` 是 UTC 00:15，即北京时间每天 08:15。GitHub 原生定时任务可能排队或延迟，不能保证精确到分钟；[官方说明](https://docs.github.com/en/actions/how-tos/troubleshoot-workflows)也明确指出这一点。手动运行成功只能证明流水线可用，不能证明调度器触发。
 
-本次核查临时设置短时 cron 探针，使用真实的 `schedule` 事件验证调度、取数、部署和公网回读，验证后移除额外 cron。实际结果和精确运行链接会保存在本地验证报告及工作流记录中；临时探针不等于已经观察到下一次北京时间08:15的自然触发。
+本次曾临时设置短时 cron 探针，尝试观察真实的 `schedule` 事件，但核查窗口内没有观察到原生触发，额外 cron 已移除。未将手动事件改写成定时事件，也没有把探针当作北京时间08:15的自然触发。
 
 每次更新将 `event`、实际匹配的 cron 和 `run_url` 写入 `snapshot.update_context` 与 `last_attempt.update_context`。页面页脚可直接打开该次运行。部署后由另一个云端 job 请求实际公开页面、CSS、JS、快照和更新记录，核对17个指标、快照生成时间及运行URL，防止把“上传制品成功”误当成网站已更新。
 
@@ -136,3 +136,7 @@ Barchart 的[官方品种页](https://barchart.websol.barchart.com/?1_show=futur
 本次定时核查结果（2026-11-21）：仓库在当天北京时间08:15之后创建。短时 cron 探针、默认分支／启用状态检查及重新启用工作流后，核查窗口内仍未获得原生 `event=schedule` 记录，因此**尚未验证原生定时实际触发，不能宣布第3项完成**。临时高频 cron 已移除，仅保留日常 `15 0 * * *`。首次自然日常窗口为 **2026-11-22 北京时间08:15**，GitHub 可能排队延迟。
 
 [这次成功的手动全链路运行](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44880971573)已通过42项Python测试、UI单元检查、取数、部署及公网回读；[独立浏览器验证](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44880770421)通过桌面／手机布局、有限风险提示、绝对风险与独立数据日期检查。这两类成功均没有冒充定时成功。详细状态见 [verification/review-summary.json](verification/review-summary.json)。
+
+每次部署现在额外保存 `publication-evidence` 制品和 GitHub Job Summary，校验真实 GitHub 事件、cron、快照及更新记录属于同一次运行。只有原生 `schedule`、日常 cron 匹配、取数成功且公网回读一致时，`native_daily_schedule_verified` 才为 true；全源失败后发布旧快照不会被判成定时更新成功。更新工作流成功后，`workflow_run` 会自动触发独立的桌面／手机浏览器验收，浏览器还会核对它读取的行情确实来自触发验收的那次运行。
+
+本机 Twelve Data 的只读账户验证已完成（2026-11-21）：两个准确货币对各返回99个已完成日线，技术可接入。服务商的[外部使用规则](https://support.twelvedata.com/en/articles/5332349-commercial-and-personal-usage)要求相应展示／再分发权；本机 API 可读不等于已取得此权利。因当前不能确认账户的授权范围，尚未把密钥上传至 GitHub 或发布该账户行情。确认授权后即可使用现有适配器，无需修改指标。

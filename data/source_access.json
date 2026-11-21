@@ -1,28 +1,73 @@
 {
-  "checked_at": "2026-11-21T07:28:44Z",
+  "checked_at": "2026-11-21T07:56:11.376713+00:00",
   "dxy": {
     "status": "missing_credentials",
     "definition": "ICE U.S. Dollar Index cash index, not a futures contract or trade-weighted proxy",
     "verified_routes": [
-      {"provider":"ICE Data Indices","delivery":"Daily / End-of-day via ICE Data API or ICE Data Files","url":"https://developer.ice.com/fixed-income-data-services/catalog/ice-data-indices-currency-indices"},
-      {"provider":"Barchart OnDemand","symbol":"DXY00","name":"U.S. Dollar Index Cash","exchange":"ICEFI","history_api":"https://www.barchart.com/ondemand/api/getHistory"}
+      {
+        "provider": "ICE Data Indices",
+        "delivery": "Daily / End-of-day via ICE Data API or ICE Data Files",
+        "url": "https://developer.ice.com/fixed-income-data-services/catalog/ice-data-indices-currency-indices"
+      },
+      {
+        "provider": "Barchart OnDemand",
+        "symbol": "DXY00",
+        "name": "U.S. Dollar Index Cash",
+        "exchange": "ICEFI",
+        "history_api": "https://www.barchart.com/ondemand/api/getHistory"
+      }
     ],
-    "blocker":"No licensed ICE or Barchart credentials/feed configured. Public website availability does not grant a redistribution license.",
-    "action":"Obtain index history and public-display rights, then configure BARCHART_API_KEY or MARKET_DATA_DXY_URL. The adapter validates cash-index metadata and symbol."
+    "blocker": "No licensed ICE or Barchart credentials/feed configured. Public website availability does not grant a redistribution license.",
+    "action": "Obtain index history and public-display rights, then configure BARCHART_API_KEY or MARKET_DATA_DXY_URL. The adapter validates cash-index metadata and symbol."
   },
   "futures": {
-    "status":"permission_denied",
-    "probed_codes":["US.GCcurrent","US.CLcurrent","US.HGcurrent"],
-    "observed_response":"行情权限不足，请前往行情商城购买行情卡",
-    "action":"Obtain COMEX/NYMEX API entitlements; verify the same near-month rollover rule for every history point; supply authorized daily closes via MARKET_DATA_GOLD_URL / MARKET_DATA_WTI_URL / MARKET_DATA_COPPER_URL. A local OpenD needs a local scheduler/self-hosted runner or an authorized HTTPS export; GitHub-hosted runners cannot reach this machine's localhost.",
-    "units":{"gold":"USD/oz","wti":"USD/bbl","copper":"USD/lb"},
-    "no_substitution":"Twelve Data commodity spot prices are not the specified futures."
+    "status": "permission_denied",
+    "probed_codes": [
+      "US.GCcurrent",
+      "US.CLcurrent",
+      "US.HGcurrent"
+    ],
+    "observed_response": "行情权限不足，请前往行情商城购买行情卡",
+    "action": "Obtain COMEX/NYMEX API entitlements; verify the same near-month rollover rule for every history point; supply authorized daily closes via MARKET_DATA_GOLD_URL / MARKET_DATA_WTI_URL / MARKET_DATA_COPPER_URL. A local OpenD needs a local scheduler/self-hosted runner or an authorized HTTPS export; GitHub-hosted runners cannot reach this machine's localhost.",
+    "units": {
+      "gold": "USD/oz",
+      "wti": "USD/bbl",
+      "copper": "USD/lb"
+    },
+    "no_substitution": "Twelve Data commodity spot prices are not the specified futures."
   },
   "forex": {
-    "status":"missing_credentials",
-    "verified_catalog":[{"symbol":"USD/JPY","currency_quote":"Japanese Yen"},{"symbol":"USD/CNH","currency_quote":"Chinese Yuan (Offshore)"}],
-    "catalog_url":"https://api.twelvedata.com/forex_pairs",
-    "action":"Set TWELVE_DATA_API_KEY in GitHub Actions Secrets, run Update daily market snapshot, and verify that the account can retrieve 21 or more completed daily observations for both exact pairs. No USD/CNY fallback is permitted.",
-    "limitations":"Code membership is verified, but entitled time-series access cannot be verified without an account credential."
+    "status": "api_access_verified_public_display_rights_unconfirmed",
+    "verified_catalog": [
+      {
+        "symbol": "USD/JPY",
+        "currency_quote": "Japanese Yen"
+      },
+      {
+        "symbol": "USD/CNH",
+        "currency_quote": "Chinese Yuan (Offshore)"
+      }
+    ],
+    "catalog_url": "https://api.twelvedata.com/forex_pairs",
+    "action": "Both exact pairs returned 99 completed daily bars using the local account. Confirm public price display and JSON redistribution rights with Twelve Data, then securely configure the existing GitHub Secret and run the update workflow. No key or licensed observations are included in this evidence.",
+    "limitations": "Read access is verified. External-display and redistribution rights are unconfirmed; a working API key alone does not establish these rights.",
+    "account_probe": {
+      "checked_at": "2026-11-21T07:56:11.376713+00:00",
+      "results": [
+        {
+          "symbol": "USD/JPY",
+          "status": "ok",
+          "completed_observations": 99,
+          "as_of": "2026-11-20"
+        },
+        {
+          "symbol": "USD/CNH",
+          "status": "ok",
+          "completed_observations": 99,
+          "as_of": "2026-11-20"
+        }
+      ]
+    },
+    "licensing_url": "https://support.twelvedata.com/en/articles/5332349-commercial-and-personal-usage"
   }
 }

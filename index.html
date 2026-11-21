@@ -18,7 +18,7 @@
   <details class="access-details"><summary>缺失行情的接入障碍与解决方式</summary><div class="access-table">
 <p><strong>DXY：</strong>需 ICE 原始指数日线授权或 Barchart DXY00 现货指数历史权限。已实现 Barchart API 适配器，配置 BARCHART_API_KEY 或现有授权源后可接入；凭证和公开展示权尚未确认。缺失时仅提供有限风险提示。</p>
 <p><strong>黄金 / WTI / 铜：</strong>本机富途期货请求返回行情权限不足。可先取得 CME Group 或相应 COMEX/NYMEX 行情权限，再核实近月选取、换月规则及 USD/oz、USD/bbl、USD/lb 单位；云端需自托管 runner 或可访问的授权数据接口。</p>
-<p><strong>USD/JPY / USD/CNH：</strong>Twelve Data 代码已核实，USD/CNH 明确为离岸人民币；当前未配置 TWELVE_DATA_API_KEY。将有权账户的密钥写入 GitHub Actions Secret 后手动运行更新并检查日线权限。未使用 USD/CNY 替代。</p>
+<p><strong>USD/JPY / USD/CNH：</strong>本机 Twelve Data 账户已验证两个准确货币对各99个已完成日线，USD/CNH 为离岸人民币。公开展示与再分发授权尚待确认，线上密钥暂未配置；确认授权后即可通过 GitHub Actions Secret 接入。未使用 USD/CNY 替代。</p>
 <p>具体配置、数据源文档和权限说明见 <a href="https://github.com/weixb1818-cmyk/global-market-monitor#readme" target="_blank" rel="noopener noreferrer">项目 README</a>。</p></div></details>
 <footer><span>GLOBAL MARKET MONITOR <b> / </b> DAILY SNAPSHOT</span><span><a id="workflow-link" href="https://github.com/weixb1818-cmyk/global-market-monitor/actions/workflows/update.yml" hidden target="_blank" rel="noopener noreferrer">更新记录</a> · 市场数据仅供观察，不构成投资建议</span></footer>
 </main>

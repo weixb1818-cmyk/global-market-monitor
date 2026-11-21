@@ -1,10 +1,14 @@
 name: Independent public browser verification
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ['Update daily market snapshot']
+    types: [completed]
 permissions:
   contents: read
 jobs:
   browser:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -21,6 +25,8 @@ jobs:
         env:
           NODE_PATH: /tmp/market-browser-qa/node_modules
           DASHBOARD_URL: https://weixb1818-cmyk.github.io/global-market-monitor/
+          EXPECTED_RUN_URL: ${{ github.event.workflow_run.html_url }}
+          EXPECTED_EVENT: ${{ github.event.workflow_run.event }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
