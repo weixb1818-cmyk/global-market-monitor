@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10294d"><title>全球市场每日观察</title>
+  <link rel="stylesheet" href="styles.css"><script defer src="app.js"></script>
+</head>
+<body>
+<header class="topbar"><div class="brand"><span class="brand-icon" aria-hidden="true">▥</span><div><strong>全球市场每日观察</strong><small>GLOBAL MARKET MONITOR</small></div></div><div class="header-right"><span class="pulse" aria-hidden="true"></span><span>每日收盘观察</span><span class="divider"></span><span id="timestamp">正在读取快照…</span></div></header>
+<main>
+  <section class="overview" aria-labelledby="overview-label">
+    <div class="overview-main"><div class="eyebrow" id="overview-label"><span class="eyebrow-dot"></span> MACRO REGIME <span class="eyebrow-zh">宏观状态</span></div><div class="state-line"><h1 id="state">等待数据</h1><span id="state-tag" class="state-tag">数据检查中</span></div><p id="reason">正在读取市场数据…</p><p id="uncertainty" class="uncertainty"></p></div>
+    <div class="overview-side"><div class="side-title">状态依据 <span>20 PERIODS</span></div><div id="signals" class="signals"><span>等待有效行情</span></div><div class="side-foot">价格信号分类 · 非经济预测</div></div>
+  </section>
+  <div class="notice"><span id="notice">本页数据截至各卡标注日期</span><span>近20期 = 各指标自身20个有效观测间隔</span></div>
+  <section aria-labelledby="macro-title"><div class="section-head"><div><span class="section-index">01</span><h2 id="macro-title">宏观与金融条件</h2><span class="section-sub">MACRO &amp; FINANCIAL CONDITIONS</span></div><span class="count">8 INDICATORS</span></div><div id="macro-cards" class="grid macro-grid"></div></section>
+  <section aria-labelledby="assets-title"><div class="section-head"><div><span class="section-index">02</span><h2 id="assets-title">跨资产表现</h2><span class="section-sub">CROSS-ASSET PERFORMANCE</span></div><span class="count">9 INDICATORS</span></div><div id="asset-cards" class="grid asset-grid"></div></section>
+  <footer><span>GLOBAL MARKET MONITOR <b> / </b> DAILY SNAPSHOT</span><span>市场数据仅供观察，不构成投资建议</span></footer>
+</main>
+</body></html>

@@ -1,0 +1,190 @@
+{
+  "thresholds": {
+    "dxy_pct": 1.0,
+    "real_bp": 15,
+    "two_year_down_bp": -25,
+    "two_year_up_bp": 25,
+    "hy_bp": 25,
+    "hy_high_bp": 450,
+    "vix_pt": 3,
+    "vix_high": 25,
+    "curve_bp": 15,
+    "long_bp": 15,
+    "asset_pct": 3,
+    "spread_check_bp": 2,
+    "max_missing_sessions": 2,
+    "crypto_stale_hours": 36
+  },
+  "indicators": [
+    {
+      "id": "dxy",
+      "name": "美元指数 DXY",
+      "group": "宏观",
+      "provider": "external",
+      "symbol": "DXY",
+      "unit": "点",
+      "kind": "price",
+      "calendar": "nyse"
+    },
+    {
+      "id": "us2y",
+      "name": "美国 2 年期国债",
+      "group": "宏观",
+      "provider": "fred",
+      "symbol": "DGS2",
+      "unit": "%",
+      "kind": "yield",
+      "calendar": "bond"
+    },
+    {
+      "id": "us10y",
+      "name": "美国 10 年期国债",
+      "group": "宏观",
+      "provider": "fred",
+      "symbol": "DGS10",
+      "unit": "%",
+      "kind": "yield",
+      "calendar": "bond"
+    },
+    {
+      "id": "real10y",
+      "name": "美国 10 年期实际利率",
+      "group": "宏观",
+      "provider": "fred",
+      "symbol": "DFII10",
+      "unit": "%",
+      "kind": "yield",
+      "calendar": "bond"
+    },
+    {
+      "id": "spread10y2y",
+      "name": "10Y − 2Y",
+      "group": "宏观",
+      "provider": "fred",
+      "symbol": "T10Y2Y",
+      "unit": "bp",
+      "kind": "spread",
+      "calendar": "bond"
+    },
+    {
+      "id": "spread10y3m",
+      "name": "10Y − 3M",
+      "group": "宏观",
+      "provider": "fred",
+      "symbol": "T10Y3M",
+      "unit": "bp",
+      "kind": "spread",
+      "calendar": "bond"
+    },
+    {
+      "id": "vix",
+      "name": "VIX 波动率指数",
+      "group": "宏观",
+      "provider": "fred",
+      "symbol": "VIXCLS",
+      "unit": "点",
+      "kind": "points",
+      "calendar": "nyse"
+    },
+    {
+      "id": "hy",
+      "name": "高收益债信用利差",
+      "group": "宏观",
+      "provider": "fred",
+      "symbol": "BAMLH0A0HYM2",
+      "unit": "bp",
+      "kind": "spread",
+      "calendar": "nyse"
+    },
+    {
+      "id": "sp500",
+      "name": "标普 500 指数",
+      "group": "美股",
+      "provider": "fred",
+      "symbol": "SP500",
+      "unit": "点",
+      "kind": "price",
+      "calendar": "nyse"
+    },
+    {
+      "id": "nasdaq100",
+      "name": "纳斯达克 100 指数",
+      "group": "美股",
+      "provider": "fred",
+      "symbol": "NASDAQ100",
+      "unit": "点",
+      "kind": "price",
+      "calendar": "nyse"
+    },
+    {
+      "id": "gold",
+      "name": "COMEX 黄金近月期货",
+      "group": "大宗",
+      "provider": "external",
+      "symbol": "GC_FRONT",
+      "unit": "USD/oz",
+      "kind": "price",
+      "calendar": "nyse"
+    },
+    {
+      "id": "wti",
+      "name": "NYMEX WTI 近月期货",
+      "group": "大宗",
+      "provider": "external",
+      "symbol": "CL_FRONT",
+      "unit": "USD/bbl",
+      "kind": "price",
+      "calendar": "nyse"
+    },
+    {
+      "id": "copper",
+      "name": "COMEX 铜近月期货",
+      "group": "大宗",
+      "provider": "external",
+      "symbol": "HG_FRONT",
+      "unit": "USD/lb",
+      "kind": "price",
+      "calendar": "nyse"
+    },
+    {
+      "id": "btc",
+      "name": "比特币 BTC",
+      "group": "加密",
+      "provider": "coingecko",
+      "symbol": "bitcoin",
+      "unit": "USD",
+      "kind": "price",
+      "calendar": "crypto"
+    },
+    {
+      "id": "eth",
+      "name": "以太坊 ETH",
+      "group": "加密",
+      "provider": "coingecko",
+      "symbol": "ethereum",
+      "unit": "USD",
+      "kind": "price",
+      "calendar": "crypto"
+    },
+    {
+      "id": "usdjpy",
+      "name": "美元 / 日元",
+      "group": "外汇",
+      "provider": "twelve",
+      "symbol": "USD/JPY",
+      "unit": "JPY/USD",
+      "kind": "price",
+      "calendar": "nyse"
+    },
+    {
+      "id": "usdcnh",
+      "name": "美元 / 离岸人民币",
+      "group": "外汇",
+      "provider": "twelve",
+      "symbol": "USD/CNH",
+      "unit": "CNH/USD",
+      "kind": "price",
+      "calendar": "nyse"
+    }
+  ]
+}
