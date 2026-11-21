@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fetch and validate daily close observations; never invent a quote."""
 from __future__ import annotations
-import concurrent.futures, csv, io, json, logging, math, os, sys, tempfile
+import concurrent.futures, csv, io, json, logging, math, os, re, sys, tempfile
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -143,6 +143,76 @@ def prepare_history(history, items, old_snapshot):
         definitions[key] = current
 
 
+def sina_dxy(item, now):
+    if item['symbol'] != 'DXY' or item.get('vendor_symbol') != 'DINIW':
+        raise ValueError('只接受DINIW美元指数，不使用美元期货或其他美元指数')
+    headers = {'Referer':'https://finance.sina.com.cn/'}
+    quote = requests.get('https://hq.sinajs.cn/list=DINIW', headers=headers, timeout=18)
+    quote.raise_for_status(); quote.encoding = 'gb18030'
+    if not re.fullmatch(r'\s*var hq_str_DINIW="[^"\r\n]*,美元指数,[^"\r\n]*";\s*',quote.text):
+        raise ValueError('新浪DINIW品种元数据不符')
+    response = requests.get('https://vip.stock.finance.sina.com.cn/forex/api/jsonp.php/var%20_DATA=/NewForexService.getDayKLine',
+                            params={'symbol':'DINIW'},headers=headers,timeout=18)
+    response.raise_for_status()
+    # Parse a JSON string inside a fixed JSONP envelope; never execute downloaded JavaScript.
+    match = re.fullmatch(r'\s*(?:/\*.*?\*/\s*)?var _DATA=\(("(?:[^"\\]|\\.)*")\);?\s*',response.text,re.S)
+    if not match: raise ValueError('新浪DXY历史格式已变化')
+    rows = []
+    seen = set()
+    for record in json.loads(match.group(1)).split('|'):
+        fields = record.split(',')
+        if len(fields) < 5: raise ValueError('新浪DXY日线字段不足')
+        day = date.fromisoformat(fields[0]).isoformat()
+        op,low,high,close = map(float,fields[1:5])
+        if day in seen or not all(math.isfinite(v) and v > 0 for v in (op,low,high,close)) or not low <= min(op,close) <= max(op,close) <= high:
+            raise ValueError('新浪DXY日线重复或价格异常')
+        seen.add(day); rows.append({'date':day,'value':close})
+    return observations(rows), '新浪财经 / DINIW / 美元指数日线，非DX期货'
+
+
+def eastmoney_copper(item, now):
+    if item['symbol'] != 'HG00Y' or item['unit'] != 'USD/lb':
+        raise ValueError('只接受COMEX铜HG00Y，单位USD/lb')
+    info = request_json('https://futsse-static.eastmoney.com/redis',{'msgid':'101_4_info'})
+    if info.get('vcode') != 'HG' or info.get('vname') != 'COMEX铜' or '美元/磅' not in info.get('zxbddw',''):
+        raise ValueError('东方财富铜品种或报价单位不符')
+    # Historical service may fail independently of the quote service. Never fill
+    # history using previous settlement, CFDs, or prices from another contract.
+    try:
+        body = request_json('https://push2his.eastmoney.com/api/qt/stock/kline/get',{
+            'secid':'101.HG00Y','klt':101,'fqt':0,'lmt':100,'end':'20500101',
+            'fields1':'f1,f2,f3,f4,f5,f6','fields2':'f51,f52,f53,f54,f55,f56'})
+        data = body.get('data') or {}
+        if data.get('code') != 'HG00Y' or data.get('name') != 'COMEX铜' or data.get('market') != 101:
+            raise ValueError('东方财富铜日线品种不符')
+        rows = []
+        for record in data.get('klines',[]):
+            fields = record.split(',')
+            day = date.fromisoformat(fields[0])
+            op,close,high,low = map(float,fields[1:5])
+            if not all(math.isfinite(v) and v>0 for v in (op,close,high,low)) or not low <= min(op,close) <= max(op,close) <= high:
+                raise ValueError('东方财富铜日线价格异常')
+            # The daily service carries an intraday row too. Use only days before
+            # today in New York; today's completed observation comes next run.
+            if day < now.astimezone(ET).date(): rows.append({'date':day.isoformat(),'value':close})
+        if rows: return observations(rows), '东方财富 / 101.HG00Y / COMEX铜日线；供数方换月序列'
+    except (requests.RequestException,ValueError,KeyError,TypeError,IndexError):
+        LOG.warning('copper: 历史接口不可用，尝试已收盘末笔快照；不伪造历史')
+    body = request_json('https://push2.eastmoney.com/api/qt/stock/get',{
+        'secid':'101.HG00Y','fields':'f43,f57,f58,f59,f86,f107'})
+    q = body.get('data') or {}
+    if q.get('f57') != 'HG00Y' or q.get('f58') != 'COMEX铜' or q.get('f107') != 101 or q.get('f59') != 4:
+        raise ValueError('东方财富铜快照品种或精度不符')
+    stamp = datetime.fromtimestamp(float(q['f86']),UTC); et = stamp.astimezone(ET)
+    # Accept only the supplier's 17:00 New York end-of-session timestamp.
+    # This is a closing snapshot, not the exchange's official settlement.
+    if stamp > now or (et.hour,et.minute) != (17,0) or not session_dates(et.date(),et.date(),'cme'):
+        raise ValueError('铜快照不是已完成交易时段，拒绝把盘中价格当收盘')
+    value = float(q['f43'])/10**q['f59']
+    if not math.isfinite(value) or value <= 0: raise ValueError('铜快照价格无效')
+    return [{'date':et.date().isoformat(),'value':value}], '东方财富 / 101.HG00Y / 纽约17:00收盘末笔快照，非官方结算；逐日积累历史'
+
+
 
 def barchart_dxy(item, now):
     # Official paid API only; never scrape a website or substitute DXY futures.
@@ -186,6 +256,8 @@ def fetch(item, now):
     elif item['provider']=='barchart': result = barchart_dxy(item, now)
     elif item['provider']=='ecb': result = ecb_usdjpy(now)
     elif item['provider']=='frankfurter': result = frankfurter(item, now)
+    elif item['provider']=='sina': result = sina_dxy(item, now)
+    elif item['provider']=='eastmoney': result = eastmoney_copper(item, now)
     else: result = external(item, now)
     points, source = result
     # US prices on the current date are usable only after their completed session.
@@ -195,6 +267,10 @@ def fetch(item, now):
     if item['calendar']=='crypto': max_date = now.astimezone(UTC).date()-timedelta(days=1)
     if item['provider']=='twelve': max_date = now.astimezone(UTC).date()-timedelta(days=1)
     if item['provider'] in ('ecb','frankfurter'): max_date = now.astimezone(UTC).date()-timedelta(days=1)
+    if item['provider']=='sina':
+        # Conservative one-day lag avoids accepting a still-forming DXY daily bar.
+        # Friday's ICE session ends at 17:00 ET, Mon-Thu at 19:15 ET.
+        max_date = et.date()-timedelta(days=1)
     points = [p for p in points if date.fromisoformat(p['date']) <= max_date]
     if not points: raise ValueError('无已完成交易时段的有效数据')
     return points[-120:], (item.get('source_label')+' / '+item['symbol']) if item.get('source_label') else source
@@ -240,7 +316,7 @@ def calculate(item, points, source, error, now, thresholds):
         if item['kind']=='points': return latest-prev
         return (latest/prev-1)*100 if prev else None
     stale=is_stale(points[-1]['date'],item['calendar'],now,thresholds)
-    data={**item,'value':latest*100 if item['kind']=='spread' else latest,'change_1':delta(1),'change_20':delta(20),'as_of':points[-1]['date'],'source':source,'status':'stale' if stale else ('error' if error else 'ok'),'error':error}
+    data={**item,'value':latest*100 if item['kind']=='spread' else latest,'change_1':delta(1),'change_20':delta(20),'as_of':points[-1]['date'],'observation_count':len(points),'source':source,'status':'stale' if stale else ('error' if error else 'ok'),'error':error}
     if points[-1].get('components'):
         data['source_components'] = points[-1]['components']
     data['interpretation']=interpret(data, thresholds)

@@ -1,29 +1,29 @@
 {
-  "checked_at": "2026-11-21T08:36:49.474253+00:00",
+  "checked_at": "2026-11-21T16:19:07.283224+00:00",
   "recurring_subscription_cost": 0,
   "coverage": {
-    "values": 15,
+    "values": 17,
     "total": 17,
-    "fresh": 14,
-    "missing": [
-      "dxy",
-      "copper"
-    ],
+    "fresh": 16,
+    "missing": [],
     "delayed": [
       "wti"
+    ],
+    "incomplete_history": [
+      "copper"
     ]
   },
   "indicators": [
     {
       "id": "dxy",
-      "recommendation": "ICE / Barchart DXY00；东方财富 UDI／新浪 DINIW 为待授权候选",
-      "free_allowance": "未核实有免费公开展示授权；网页接口无已公布官方额度",
+      "recommendation": "新浪 DINIW 美元指数日线",
+      "free_allowance": "无需Key；未公布官方API额度或SLA，每日2请求",
       "latest_observed_date": "2026-11-20",
-      "connected_as_of": null,
-      "connected_observations": 0,
-      "difficulty": "较高：需核实ICE原始指数来源和公开展示授权",
-      "status": "未接入；不使用其他美元指数。",
-      "displayed_status": "missing"
+      "connected_as_of": "2026-11-20",
+      "connected_observations": 120,
+      "difficulty": "低：元数据校验及安全JSONP解析；排除纽约当日日线",
+      "status": "已接入120个有效观测，恢复完整宏观规则；非ICE直连，不使用其他美元指数或期货。",
+      "displayed_status": "ok"
     },
     {
       "id": "gold",
@@ -49,15 +49,15 @@
     },
     {
       "id": "copper",
-      "recommendation": "优先获授权的COMEX/LME日线；Gold API HG仅为候选",
-      "free_allowance": "Gold API现价免费免Key；免费历史10次/小时，需要免费注册Key",
-      "latest_observed_date": "2026-11-20（新浪CFD日线）；Gold API仅有11-21抓取时间",
-      "connected_as_of": null,
-      "connected_observations": 0,
-      "difficulty": "中至高：先确认官方报价单位、基准及历史权限",
-      "status": "未接入：Gold API铜单位未在官方文档核实；新浪CFD不当期货；门户站外展示需许可。",
-      "displayed_status": "missing",
-      "candidate_timestamp_note": "Gold API updatedAt为供数方抓取时间，不能当作铜成交或收盘日期。"
+      "recommendation": "东方财富 101.HG00Y COMEX铜期货收盘末笔快照",
+      "free_allowance": "无需Key；未公布官方API额度或SLA，每日最多3请求",
+      "latest_observed_date": "2026-11-20",
+      "connected_as_of": "2026-11-20",
+      "connected_observations": 1,
+      "difficulty": "历史连接失败；报价和单位元数据已核实，逐日积累收盘快照",
+      "status": "已有1条收盘快照，非官方结算；前期/20期变化为空；换月规则尚未核实，不声称严格近月。",
+      "displayed_status": "ok",
+      "candidate_timestamp_note": "f86为供数方报价时间，已核实纽约11月20日17:00；按该纽约日期保存，不以抓取日期重标。"
     },
     {
       "id": "usdjpy",
@@ -133,7 +133,16 @@
       ],
       "commodity_history": "本机请求连接失败；未宣称历史可用",
       "published_free_quota": "未找到官方公开API日/月额度和SLA",
-      "public_redistribution": "需书面许可"
+      "public_redistribution": "需书面许可",
+      "commodity_quote": {
+        "code": "101.HG00Y",
+        "name": "COMEX铜",
+        "unit": "USD/lb",
+        "price_decimals": 4,
+        "as_of": "2026-11-20",
+        "unit_metadata_url": "https://futsse-static.eastmoney.com/redis?msgid=101_4_info",
+        "history_status": "连接失败；使用已收盘末笔快照逐日积累，历史不足不计算变化"
+      }
     },
     "sina": {
       "daily_history_verified": {
@@ -167,6 +176,14 @@
   "notes": [
     "无新增付费订阅或注册账户。",
     "日期仅代表本次实测。DXY／铜候选的日期不等于已接入。",
-    "合成参考序列可能偏离即时现货；来源日期不完全相同，组件日期保存于快照。"
-  ]
+    "合成参考序列可能偏离即时现货；来源日期不完全相同，组件日期保存于快照。",
+    "2026-11-22按用户内部学习要求接入新浪DXY及东方财富铜；铜有报价不等于历史完整，授权事实未改写为已取得。"
+  ],
+  "usage_decision": {
+    "date": "2026-11-22",
+    "purpose": "内部学习研究",
+    "rights_review_blocks_connection": false,
+    "public_repository_and_pages_unchanged": true,
+    "note": "用户明确要求不以展示授权核实作为接入阻塞；未声称已取得门户授权。"
+  }
 }

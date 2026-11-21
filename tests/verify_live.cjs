@@ -39,6 +39,12 @@ if(!base)throw new Error('DASHBOARD_URL is required');
    assert.ok(await page.locator('.access-details').count());
    const missing=actual.indicators.filter(c=>c.value===null).length;
    assert.equal(await page.locator('.card.missing').count(),missing);
+   const copperIndex=actual.indicators.findIndex(c=>c.id==='copper');const copper=actual.indicators[copperIndex];
+   if(copper.value!==null&&copper.source?.includes('末笔快照')){
+    assert.equal(await page.locator('.card-group').nth(copperIndex).textContent(),'快照');
+    assert.match(copper.source,/非官方结算/);
+    if(copper.observation_count<21){assert.equal(copper.change_20,null);assert.match(await page.locator('.interpretation').nth(copperIndex).textContent(),/不足|未更新/);}
+   }
    await page.screenshot({path:`verification/${name}.png`,fullPage:true});
    assert.equal(await page.locator('#methodology').getAttribute('open'),null,'methodology should start collapsed');
    await page.locator('#methodology>summary').click();

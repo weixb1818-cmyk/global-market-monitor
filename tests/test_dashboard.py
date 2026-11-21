@@ -212,16 +212,16 @@ class TestDatesAndSpreadAlignment(unittest.TestCase):
 class TestLicensedDxyAdapter(unittest.TestCase):
     def test_no_key_is_not_a_free_price(self):
         with patch.dict('os.environ',{},clear=True):
-            with self.assertRaisesRegex(ValueError,'授权'):u.barchart_dxy(ITEMS['dxy'],NOW)
+            with self.assertRaisesRegex(ValueError,'授权'):u.barchart_dxy({**ITEMS['dxy'],'provider':'barchart','vendor_symbol':'DXY00'},NOW)
     def test_reject_futures_instead_of_cash(self):
         payload={'status':{'code':200},'results':[{'symbol':'DXZ26','name':'U.S. Dollar Index Futures'}]}
         with patch.dict('os.environ',{'BARCHART_API_KEY':'fixture'}),patch.object(u,'request_json',return_value=payload):
-            with self.assertRaisesRegex(ValueError,'非DXY现货'):u.barchart_dxy(ITEMS['dxy'],NOW)
+            with self.assertRaisesRegex(ValueError,'非DXY现货'):u.barchart_dxy({**ITEMS['dxy'],'provider':'barchart','vendor_symbol':'DXY00'},NOW)
     def test_exact_cash_metadata_and_daily_history(self):
         q={'status':{'code':200},'results':[{'symbol':'DXY00','name':'U.S. Dollar Index Cash'}]}
         h={'status':{'code':200},'results':[{'symbol':'DXY00','tradingDay':'2026-11-19','close':103.0}]}
         with patch.dict('os.environ',{'BARCHART_API_KEY':'fixture'}),patch.object(u,'request_json',side_effect=[q,h]):
-            rows,source=u.barchart_dxy(ITEMS['dxy'],NOW)
+            rows,source=u.barchart_dxy({**ITEMS['dxy'],'provider':'barchart','vendor_symbol':'DXY00'},NOW)
         self.assertEqual(rows,[{'date':'2026-11-19','value':103.0}]);self.assertIn('DXY00',source)
     def test_preserve_real_schedule_event_context(self):
         with patch.dict('os.environ',{'TRIGGER_EVENT':'schedule','TRIGGER_SCHEDULE':'15 0 * * *','WORKFLOW_RUN_URL':'https://github.com/example/actions/runs/1'}):

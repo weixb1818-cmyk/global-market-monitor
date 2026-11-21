@@ -1,25 +1,25 @@
 {
-  "checked_at": "2026-11-21T08:42:56.443550+00:00",
+  "checked_at": "2026-11-21T16:16:43.235575+00:00",
   "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
   "scope": "Same static HTML/CSS/JS plus Python and GitHub Pages architecture; exactly 17 indicators",
   "data": {
     "indicators": 17,
-    "available": 15,
-    "missing": [
-      "dxy",
-      "copper"
-    ],
+    "available": 17,
+    "missing": [],
     "delayed": [
       "wti"
-    ]
+    ],
+    "incomplete_history": [
+      "copper"
+    ],
+    "copper_observations": 1
   },
   "macro": {
-    "complete": false,
-    "mode": "limited",
-    "missing": [
-      "美元指数 DXY"
-    ],
+    "complete": true,
+    "mode": "full",
+    "missing": [],
     "signal_dates": {
+      "dxy": "2026-11-20",
       "real10y": "2026-11-19",
       "us2y": "2026-11-19",
       "hy": "2026-11-19",
@@ -34,13 +34,13 @@
         "message": "波动率处于较高水平"
       }
     ],
-    "state": "有限风险提示",
-    "reason": "波动率上升，风险偏好降温；信用尚未共同恶化",
-    "uncertainty": "DXY缺失或过期，结论不完整；不判断美元相关整体金融条件",
+    "state": "中性/信号分歧",
+    "reason": "美元走强、实际利率变化有限；信用或波动恶化，信号未形成一致方向",
+    "uncertainty": "信用或波动风险仍处高位",
     "signals": [
+      "美元 +2.05% · 2026-11-20",
       "实际利率 +12bp · 2026-11-19",
-      "HY +12bp · 2026-11-19",
-      "VIX +9.4点 · 2026-11-19"
+      "HY +12bp · 2026-11-19 / VIX +9.4点 · 2026-11-19"
     ]
   },
   "spread_checks": [
@@ -125,5 +125,12 @@
       "console_errors": []
     }
   ],
-  "source_research": "https://weixb1818-cmyk.github.io/global-market-monitor/data/source_research.json"
+  "source_research": "https://weixb1818-cmyk.github.io/global-market-monitor/data/source_research.json",
+  "portal_integration": {
+    "purpose": "内部学习研究",
+    "test_count": 66,
+    "dxy_source": "新浪DINIW",
+    "copper_source": "东方财富101.HG00Y，收盘末笔快照非官方结算",
+    "copper_history_connected": false
+  }
 }

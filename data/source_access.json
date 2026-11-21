@@ -87,5 +87,12 @@
       },
       "licensing_url": "https://support.twelvedata.com/en/articles/5332349-commercial-and-personal-usage"
     }
+  },
+  "current_portal_integration": {
+    "purpose": "内部学习研究",
+    "dxy": "新浪DINIW日线，120个观测",
+    "copper": "东方财富101.HG00Y，1条纽约17:00收盘快照；历史接口连接失败",
+    "credentials_required": false,
+    "new_subscription_cost": 0
   }
 }

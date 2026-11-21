@@ -21,12 +21,15 @@
       "id": "dxy",
       "name": "美元指数 DXY",
       "group": "宏观",
-      "provider": "barchart",
+      "provider": "sina",
       "symbol": "DXY",
       "unit": "点",
       "kind": "price",
       "calendar": "forex",
-      "vendor_symbol": "DXY00"
+      "vendor_symbol": "DINIW",
+      "series_definition": "sina-diniw-dxy-daily-v1",
+      "source_url": "https://finance.sina.com.cn/money/forex/hq/DINIW.shtml",
+      "quote_note": "新浪DINIW美元指数日线；非DX期货、非其他美元指数。保守排除纽约当日未确认日线。"
     },
     {
       "id": "us2y",
@@ -148,13 +151,16 @@
     },
     {
       "id": "copper",
-      "name": "COMEX 铜近月期货",
+      "name": "COMEX 铜（HG00Y）",
       "group": "大宗",
-      "provider": "external",
-      "symbol": "HG_FRONT",
+      "provider": "eastmoney",
+      "symbol": "HG00Y",
       "unit": "USD/lb",
       "kind": "price",
-      "calendar": "cme"
+      "calendar": "cme",
+      "series_definition": "em-hg00y-completed-session-v1",
+      "source_url": "https://quote.eastmoney.com/globalfuture/HG00Y.html",
+      "quote_note": "东方财富HG00Y期货序列，换月规则由供数方维护、尚未核实；历史失败时仅累积纽约17:00末笔快照，非官方结算；不足21期不判断趋势。"
     },
     {
       "id": "btc",
