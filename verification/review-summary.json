@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-21T16:16:43.235575+00:00",
+  "checked_at": "2026-11-21T16:27:30.050942+00:00",
   "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
   "scope": "Same static HTML/CSS/JS plus Python and GitHub Pages architecture; exactly 17 indicators",
   "data": {
@@ -9,10 +9,11 @@
     "delayed": [
       "wti"
     ],
-    "incomplete_history": [
+    "update_failed_retained": [
       "copper"
     ],
-    "copper_observations": 1
+    "incomplete_history": [],
+    "copper_observations": 100
   },
   "macro": {
     "complete": true,
@@ -58,10 +59,10 @@
     }
   ],
   "tests": {
-    "python": 55,
+    "python": 66,
     "ui_unit": "passed",
-    "cloud_browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885978426",
-    "cloud_publication_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885895078",
+    "cloud_browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924496332",
+    "cloud_publication_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924393205",
     "html_errors": 0,
     "browser_trigger": "workflow_run"
   },
@@ -85,21 +86,21 @@
     "twelve_data": "previous account probe retained, not used by current free integration"
   },
   "publication": {
-    "generated_at": "2026-11-21T08:39:46.650756+00:00",
+    "generated_at": "2026-11-21T16:24:46.459054+00:00",
     "cards": 17,
-    "macro": "有限风险提示",
-    "mode": "limited",
+    "macro": "中性/信号分歧",
+    "mode": "full",
     "update_context": {
       "event": "workflow_dispatch",
       "schedule": null,
-      "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885895078"
+      "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924393205"
     },
     "attempt_status": "partial",
     "data_updated": true,
     "native_daily_schedule_verified": false,
     "result": "public readback verified",
     "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
-    "checked_at": "2026-11-21T08:40:21.803631+00:00"
+    "checked_at": "2026-11-21T16:25:19.645712+00:00"
   },
   "browser": [
     {
@@ -107,22 +108,60 @@
       "dimensions": {
         "width": 1440,
         "scroll": 1440,
-        "cardBottom": 880.109375
+        "cardBottom": 890.109375
       },
       "cards": 17,
+      "missing": 0,
+      "console_errors": [],
+      "macro": "中性/信号分歧",
+      "mode": "full",
+      "absolute_alerts": [
+        {
+          "id": "vix",
+          "as_of": "2026-11-19",
+          "value": 28.44,
+          "unit": "点",
+          "message": "波动率处于较高水平"
+        }
+      ],
+      "independent_dates_checked": true,
       "methodology_rows": 17,
-      "console_errors": []
+      "methodology_no_overflow": true,
+      "update_context": {
+        "event": "workflow_dispatch",
+        "schedule": null,
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924393205"
+      }
     },
     {
       "viewport": "mobile",
       "dimensions": {
         "width": 390,
         "scroll": 390,
-        "cardBottom": 2110.015625
+        "cardBottom": 2197.203125
       },
       "cards": 17,
+      "missing": 0,
+      "console_errors": [],
+      "macro": "中性/信号分歧",
+      "mode": "full",
+      "absolute_alerts": [
+        {
+          "id": "vix",
+          "as_of": "2026-11-19",
+          "value": 28.44,
+          "unit": "点",
+          "message": "波动率处于较高水平"
+        }
+      ],
+      "independent_dates_checked": true,
       "methodology_rows": 17,
-      "console_errors": []
+      "methodology_no_overflow": true,
+      "update_context": {
+        "event": "workflow_dispatch",
+        "schedule": null,
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924393205"
+      }
     }
   ],
   "source_research": "https://weixb1818-cmyk.github.io/global-market-monitor/data/source_research.json",
@@ -131,6 +170,9 @@
     "test_count": 66,
     "dxy_source": "新浪DINIW",
     "copper_source": "东方财富101.HG00Y，收盘末笔快照非官方结算",
-    "copper_history_connected": false
+    "copper_history_connected": true,
+    "copper_observations": 100,
+    "latest_copper_update_failed_retained": true,
+    "note": "历史接口曾返回100条并入库；最后一轮铜历史及快照网络失败，保留真实历史且卡片标识更新失败，不把部署成功等同所有来源更新成功。"
   }
 }
