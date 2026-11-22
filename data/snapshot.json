@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T16:24:46.459054+00:00",
+  "generated_at": "2026-11-22T06:55:10.313626+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -209,10 +209,10 @@
       "source_url": "https://frankfurter.dev/",
       "source_label": null,
       "quote_note": "多源合成参考价，非现货收盘或COMEX期货；上游可能不同日。",
-      "value": 3669.56,
-      "change_1": -2.198270807347469,
-      "change_20": -8.446167625976464,
-      "as_of": "2026-11-20",
+      "value": 3653.45,
+      "change_1": 0.0,
+      "change_20": -8.282894720326151,
+      "as_of": "2026-11-21",
       "observation_count": 120,
       "source": "Frankfurter / XAU/USD / 多源合成参考价，非收盘",
       "status": "ok",
@@ -232,7 +232,7 @@
         },
         {
           "provider": "BOM",
-          "date": "2026-11-19"
+          "date": "2026-11-21"
         },
         {
           "provider": "CBA",
@@ -268,7 +268,7 @@
         },
         {
           "provider": "PMA",
-          "date": "2026-11-18"
+          "date": "2026-11-19"
         }
       ],
       "interpretation": "合成参考近20期下跌，不等同现货收盘"
@@ -314,8 +314,8 @@
       "as_of": "2026-11-20",
       "observation_count": 100,
       "source": "东方财富 / 101.HG00Y / COMEX铜日线；供数方换月序列",
-      "status": "error",
-      "error": "数据源网络请求失败",
+      "status": "ok",
+      "error": null,
       "interpretation": "近20期下跌，关注工业需求变化"
     },
     {
@@ -327,11 +327,11 @@
       "unit": "USD",
       "kind": "price",
       "calendar": "crypto",
-      "value": 58817.925597578746,
-      "change_1": -5.0118991755448095,
-      "change_20": -24.12635048112349,
-      "as_of": "2026-11-20",
-      "observation_count": 91,
+      "value": 60121.30168956966,
+      "change_1": 2.2159504585530065,
+      "change_20": -23.210686329064078,
+      "as_of": "2026-11-21",
+      "observation_count": 92,
       "source": "CoinGecko / UTC 00:00",
       "status": "ok",
       "error": null,
@@ -346,11 +346,11 @@
       "unit": "USD",
       "kind": "price",
       "calendar": "crypto",
-      "value": 1619.5095309045366,
-      "change_1": -7.751257433747794,
-      "change_20": -28.153592469423007,
-      "as_of": "2026-11-20",
-      "observation_count": 91,
+      "value": 1682.8520025853304,
+      "change_1": 3.911213269946945,
+      "change_20": -25.99348378127855,
+      "as_of": "2026-11-21",
+      "observation_count": 92,
       "source": "CoinGecko / UTC 00:00",
       "status": "ok",
       "error": null,
@@ -390,9 +390,9 @@
       "series_definition": "cnh-blended-reference-v1",
       "source_url": "https://frankfurter.dev/currencies/cnh/",
       "quote_note": "准确CNH离岸人民币，多源合成参考汇率，非纽约收盘；上游可能不同日。",
-      "value": 6.67,
-      "change_1": 0.052501312532804434,
-      "change_20": 0.13511484762047665,
+      "value": 6.6724,
+      "change_1": 0.088502212555297,
+      "change_20": 0.1711454736526008,
       "as_of": "2026-11-20",
       "observation_count": 113,
       "source": "Frankfurter / USD/CNH / 多源合成参考价，非收盘",
@@ -409,7 +409,7 @@
         },
         {
           "provider": "BCRA",
-          "date": "2026-11-19"
+          "date": "2026-11-20"
         },
         {
           "provider": "BI",
@@ -417,11 +417,11 @@
         },
         {
           "provider": "BM",
-          "date": "2026-11-19"
+          "date": "2026-11-20"
         },
         {
           "provider": "CBS",
-          "date": "2026-11-19"
+          "date": "2026-11-20"
         },
         {
           "provider": "CBSL",
@@ -3632,10 +3632,10 @@
       "2027-11-11"
     ]
   },
-  "sources_failed": 1,
+  "sources_failed": 0,
   "update_context": {
-    "event": "workflow_dispatch",
-    "schedule": null,
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924393205"
+    "event": "schedule",
+    "schedule": "15 0 * * *",
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44995841393"
   }
 }
