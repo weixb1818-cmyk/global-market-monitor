@@ -1,0 +1,20 @@
+{
+  "gold_fred": {
+    "requested_at": "2026-11-23T13:33:10.579576+00:00",
+    "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GOLDAMGBD228NLBM&cosd=2026-10-01",
+    "status": 404,
+    "sha256": "d6faca46f314b9f3016f0c56d25b5cec744bc4784d68a817e6791c98225e81d2"
+  },
+  "gold_cnbc": {
+    "requested_at": "2026-11-23T13:33:10.348228+00:00",
+    "url": "https://ts-api.cnbc.com/harmony/app/charts/1Y.json?symbol=%40GC.1",
+    "status": 403,
+    "sha256": "4b53757db5b9a2b5596af0519384f0b3b9f981720056e5d7c99ec6e0d3c71831"
+  },
+  "fred_all": {
+    "requested_at": "2026-11-23T13:33:13.470990+00:00",
+    "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10%2CDGS2%2CDGS3MO%2CT10Y2Y%2CT10Y3M&cosd=2026-10-01",
+    "status": 200,
+    "sha256": "679a459580121166f5fdcae655c279577869648ac92da4cc0f1e85c9c347b887"
+  }
+}

@@ -7,6 +7,27 @@ if(!base)throw new Error('DASHBOARD_URL is required');
  const browser=await chromium.launch({headless:true});
  const checks=[];fs.mkdirSync('verification',{recursive:true});
  try{
+  // Real Chromium negative-path tests: retained fresh values must never create
+  // normal macro/level conclusions after a failed or unknown current fetch.
+  const seedPage=await browser.newPage();
+  const seed=await (await seedPage.request.get(new URL('data/snapshot.json',base).href)).json();await seedPage.close();
+  const negative=[];
+  for(const test of [{key:'hy',status:'error',expected:'insufficient'},{key:'dxy',status:'error',expected:'limited'},{key:'vix',status:'unknown',expected:'insufficient'},{total:true,expected:'insufficient'}]){
+   const snap=structuredClone(seed);for(const c of snap.indicators){c.status='ok';c.error=null;}
+   snap.macro={state:'金融条件趋紧',mode:'full',reason:'fixture',uncertainty:'fixture',signals:['fixture']};
+   snap.limited_macro={state:'有限风险提示',mode:'limited',reason:'fixture',uncertainty:'DXY异常，结论不完整',signals:[]};
+   snap.risk_alerts=[{id:'hy',value:500,unit:'bp',message:'信用利差处于较高水平',as_of:snap.indicators.find(c=>c.id==='hy').as_of}];
+   if(test.key){const c=snap.indicators.find(c=>c.id===test.key);c.status=test.status;c.error=test.status==='error'?'fixture source failure':null;}
+   const page=await browser.newPage();
+   await page.route('**/data/snapshot.json',route=>route.fulfill({json:snap}));
+   await page.route('**/data/last_attempt.json',route=>route.fulfill({json:{status:test.total?'failed':'partial',at:new Date().toISOString(),update_context:seed.update_context}}));
+   await page.goto(base,{waitUntil:'networkidle'});await page.waitForSelector('.card');
+   assert.equal(await page.locator('#state').textContent(),test.expected==='limited'?'有限风险提示':'数据不足：暂不判断');
+   if(test.key==='hy'||test.total)assert.equal(await page.locator('#level-alerts').isVisible(),false);
+   if(test.key){const i=snap.indicators.findIndex(c=>c.id===test.key);const card=page.locator('.card').nth(i);assert.match(await card.locator('.interpretation').textContent(),/仅保留历史|数据暂未更新/);assert.ok((await card.locator('.card-value').textContent()).length>1);}
+   negative.push({...test,passed:true});await page.close();
+  }
+  fs.writeFileSync('verification/status-boundary-browser.json',JSON.stringify(negative,null,2));
   for(const [name,size] of [['desktop',{width:1440,height:900}],['mobile',{width:390,height:844}]]){
    const page=await browser.newPage({viewport:size});const errors=[];page.on('pageerror',e=>errors.push(e.message));
    const response=await page.goto(base,{waitUntil:'networkidle',timeout:60000});assert.equal(response.status(),200);
@@ -19,7 +40,7 @@ if(!base)throw new Error('DASHBOARD_URL is required');
    const actual=await (await page.request.get(new URL('data/snapshot.json',base).href)).json();assert.equal(actual.indicators.length,17);
    if(process.env.EXPECTED_RUN_URL)assert.equal(actual.update_context.run_url,process.env.EXPECTED_RUN_URL,'snapshot must belong to the workflow that triggered verification');
    if(process.env.EXPECTED_EVENT)assert.equal(actual.update_context.event,process.env.EXPECTED_EVENT,'actual GitHub trigger must survive publication');
-   if(process.env.EXPECTED_EVENT==='schedule')assert.equal(actual.update_context.schedule,'15 0 * * *');
+   if(process.env.EXPECTED_EVENT==='schedule')assert.ok(['15 0 * * *','45 0 * * *','15 2 * * *'].includes(actual.update_context.schedule));
    const renderedNames=await page.locator('.card-top>span:first-child').allTextContents();assert.deepEqual(renderedNames,actual.indicators.map(c=>c.name));
    for(let i=0;i<actual.indicators.length;i++)if(actual.indicators[i].series_definition?.includes('reference'))assert.equal(await page.locator('.card-group').nth(i).textContent(),'参考','reference label must remain visible even when the full title is truncated');
    const expected=await page.evaluate(s=>currentMacro(s),actual);

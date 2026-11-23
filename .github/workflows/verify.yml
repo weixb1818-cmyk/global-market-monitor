@@ -6,6 +6,7 @@ on:
     types: [completed]
 permissions:
   contents: read
+  actions: read
 jobs:
   browser:
     if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
@@ -13,14 +14,29 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - name: Check that the triggering run actually deployed
+        id: marker
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PARENT_RUN: ${{ github.event.workflow_run.id }}
+        run: |
+          if [ -z "$PARENT_RUN" ]; then
+            echo 'deployed=true' >> "$GITHUB_OUTPUT"
+          else
+            count=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PARENT_RUN/artifacts" --jq '[.artifacts[] | select(.name == "deployment-marker")] | length')
+            if [ "$count" -gt 0 ]; then echo 'deployed=true' >> "$GITHUB_OUTPUT"; else echo 'deployed=false' >> "$GITHUB_OUTPUT"; fi
+          fi
       - uses: actions/setup-node@v4
+        if: steps.marker.outputs.deployed == 'true'
         with:
           node-version: '22'
       - name: Install cloud browser
+        if: steps.marker.outputs.deployed == 'true'
         run: |
-          npm install --prefix /tmp/market-browser-qa playwright
+          npm install --prefix /tmp/market-browser-qa playwright@1.58.2
           /tmp/market-browser-qa/node_modules/.bin/playwright install --with-deps chromium
       - name: Check the actual public site on desktop and mobile
+        if: steps.marker.outputs.deployed == 'true'
         run: node tests/verify_live.cjs
         env:
           NODE_PATH: /tmp/market-browser-qa/node_modules

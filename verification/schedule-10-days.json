@@ -1,0 +1,96 @@
+{
+  "checked_at": "2026-11-23T13:40:43.567881+00:00",
+  "planned_beijing": "08:15",
+  "window_days": 10,
+  "observed_days": 2,
+  "ten_days_observed": false,
+  "records": [
+    {
+      "date": "2026-11-14",
+      "planned_at": "2026-11-14T08:15:00+08:00",
+      "status": "not_in_operation",
+      "runs": []
+    },
+    {
+      "date": "2026-11-15",
+      "planned_at": "2026-11-15T08:15:00+08:00",
+      "status": "not_in_operation",
+      "runs": []
+    },
+    {
+      "date": "2026-11-16",
+      "planned_at": "2026-11-16T08:15:00+08:00",
+      "status": "not_in_operation",
+      "runs": []
+    },
+    {
+      "date": "2026-11-17",
+      "planned_at": "2026-11-17T08:15:00+08:00",
+      "status": "not_in_operation",
+      "runs": []
+    },
+    {
+      "date": "2026-11-18",
+      "planned_at": "2026-11-18T08:15:00+08:00",
+      "status": "not_in_operation",
+      "runs": []
+    },
+    {
+      "date": "2026-11-19",
+      "planned_at": "2026-11-19T08:15:00+08:00",
+      "status": "not_in_operation",
+      "runs": []
+    },
+    {
+      "date": "2026-11-20",
+      "planned_at": "2026-11-20T08:15:00+08:00",
+      "status": "not_in_operation",
+      "runs": []
+    },
+    {
+      "date": "2026-11-21",
+      "planned_at": "2026-11-21T08:15:00+08:00",
+      "status": "not_in_operation",
+      "runs": []
+    },
+    {
+      "date": "2026-11-22",
+      "planned_at": "2026-11-22T08:15:00+08:00",
+      "status": "observed",
+      "runs": [
+        {
+          "run_id": 44995841393,
+          "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44995841393",
+          "event": "schedule",
+          "head_sha": "d7451710f696983da5c5e1212f3a5cee27b8c975",
+          "created_at": "2026-11-22T06:54:51Z",
+          "started_at": "2026-11-22T06:54:51Z",
+          "completed_at": "2026-11-22T06:55:47Z",
+          "conclusion": "success",
+          "delay_seconds": 23991.0,
+          "timing_note": "created_at measures arrival; started_at includes queue; completed_at from last job, never inferred from updated_at"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-23",
+      "planned_at": "2026-11-23T08:15:00+08:00",
+      "status": "observed",
+      "runs": [
+        {
+          "run_id": 45133283595,
+          "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595",
+          "event": "schedule",
+          "head_sha": "d30aba1043ac155f91386b779a0c1260a2f5e302",
+          "created_at": "2026-11-23T07:44:21Z",
+          "started_at": "2026-11-23T07:44:21Z",
+          "completed_at": "2026-11-23T07:45:27Z",
+          "conclusion": "success",
+          "delay_seconds": 26961.0,
+          "timing_note": "created_at measures arrival; started_at includes queue; completed_at from last job, never inferred from updated_at"
+        }
+      ]
+    }
+  ],
+  "limitation": "GitHub schedule has no punctuality SLA; pre-operation/missing/pending days are not successful runs."
+}

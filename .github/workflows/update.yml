@@ -2,16 +2,33 @@ name: Update daily market snapshot
 on:
   schedule:
     - cron: '15 0 * * *'
+    - cron: '45 0 * * *'
+    - cron: '15 2 * * *'
   workflow_dispatch:
 permissions:
   contents: write
+  actions: read
   pages: write
   id-token: write
 concurrency:
   group: market-snapshot
   cancel-in-progress: false
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.gate.outputs.run }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skip backup after a healthy current-day update
+        id: gate
+        run: python3 scripts/schedule_audit.py --gate
+        env:
+          TRIGGER_EVENT: ${{ github.event_name }}
+          TRIGGER_SCHEDULE: ${{ github.event.schedule }}
   update:
+    needs: gate
+    if: needs.gate.outputs.run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     outputs:
@@ -19,6 +36,9 @@ jobs:
       snapshot_at: ${{ steps.package.outputs.snapshot_at }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -45,11 +65,35 @@ jobs:
           MARKET_DATA_GOLD_URL: ${{ secrets.MARKET_DATA_GOLD_URL }}
           MARKET_DATA_WTI_URL: ${{ secrets.MARKET_DATA_WTI_URL }}
           MARKET_DATA_COPPER_URL: ${{ secrets.MARKET_DATA_COPPER_URL }}
+      - name: Audit actual schedule arrival and completion times
+        continue-on-error: true
+        run: python scripts/schedule_audit.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Review fixed-rule historical evidence
+        continue-on-error: true
+        run: |
+          python scripts/analyze_macro.py
+          python scripts/build_quality_report.py
+      - name: Retain source and generation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-and-generation-evidence
+          path: |
+            data/source_evidence.json
+            data/raw/
+            verification/schedule-10-days.json
+            verification/macro-analysis.json
       - name: Publish updated data and failure status
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/snapshot.json data/history.json data/last_attempt.json
+          git add data/snapshot.json data/history.json data/last_attempt.json data/source_evidence.json
+          if [ -d data/raw ]; then git add data/raw; fi
+          if [ -f verification/schedule-10-days.json ]; then git add verification/schedule-10-days.json; fi
+          if [ -f verification/macro-analysis.json ]; then git add verification/macro-analysis.json; fi
+          if [ -f docs/DATA_QUALITY_REPORT.md ]; then git add docs/DATA_QUALITY_REPORT.md; fi
           git diff --cached --quiet || (git commit -m 'Update market data' && git push)
       - name: Prepare static site
         id: package
@@ -57,6 +101,7 @@ jobs:
           mkdir -p _site/data
           cp index.html styles.css app.js _site/
           cp data/snapshot.json data/last_attempt.json data/source_research.json _site/data/
+          if [ -f data/source_evidence.json ]; then cp data/source_evidence.json _site/data/; fi
           python -c 'import json,os; print("snapshot_at="+json.load(open("data/snapshot.json"))["generated_at"],file=open(os.environ["GITHUB_OUTPUT"],"a"))'
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -73,6 +118,12 @@ jobs:
       - uses: actions/configure-pages@v5
       - uses: actions/deploy-pages@v4
         id: deployment
+      - name: Mark an actual deployment for downstream browser checks
+        run: echo 'deployed' > deployed.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deployment-marker
+          path: deployed.txt
       - name: Verify actual public publication and update trigger
         run: python scripts/verify_public.py
         env:

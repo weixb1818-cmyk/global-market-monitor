@@ -1,0 +1,331 @@
+{
+  "checked_at": "2026-11-23T13:39:56.866389+00:00",
+  "scope": "Research only; no production instrument or source replacement",
+  "requests": [
+    {
+      "endpoint": "https://api.frankfurter.dev/v2/currency/xau",
+      "params": null,
+      "requested_at": "2026-11-23T13:39:56.866410+00:00",
+      "completed_at": "2026-11-23T13:39:56.933400+00:00",
+      "status": 200,
+      "response_sha256": "786265a0dd57b5310c71a3e64e2468f9afec6a50b2e4c2d8c9118b7e4137b465"
+    },
+    {
+      "endpoint": "https://api.frankfurter.dev/v2/providers",
+      "params": null,
+      "requested_at": "2026-11-23T13:39:56.934205+00:00",
+      "completed_at": "2026-11-23T13:39:58.561300+00:00",
+      "status": 200,
+      "response_sha256": "db5feb9f00ed74d8e902461ca5e96594a5774061a310a38673d8b9388facdf70"
+    },
+    {
+      "endpoint": "https://api.frankfurter.dev/v2/rates",
+      "params": {
+        "base": "XAU",
+        "quotes": "USD",
+        "from": "2026-11-09",
+        "to": "2026-11-22",
+        "expand": "providers"
+      },
+      "requested_at": "2026-11-23T13:39:58.564936+00:00",
+      "completed_at": "2026-11-23T13:40:01.015425+00:00",
+      "status": 200,
+      "response_sha256": "2fa3e7cd10eb3df3900c5a4292ec19b913699dfc951decb167f6aa7a56759436"
+    },
+    {
+      "endpoint": "https://api.nbp.pl/api/cenyzlota/2026-11-09/2026-11-22/",
+      "params": {
+        "format": "json"
+      },
+      "requested_at": "2026-11-23T13:40:01.016557+00:00",
+      "completed_at": "2026-11-23T13:40:03.422911+00:00",
+      "status": 200,
+      "response_sha256": "3150dfbbdfac525bfd8810cfcb4b26a3f2a7cac433990a6c29932104b3a5edd7"
+    },
+    {
+      "endpoint": "https://api.nbp.pl/api/exchangerates/rates/a/usd/2026-11-09/2026-11-22/",
+      "params": {
+        "format": "json"
+      },
+      "requested_at": "2026-11-23T13:40:03.423773+00:00",
+      "completed_at": "2026-11-23T13:40:04.205587+00:00",
+      "status": 200,
+      "response_sha256": "ac292e1924f0fb5099fdafffebf6433be386a1fdfc6c6fde1a1d60701f411605"
+    },
+    {
+      "endpoint": "https://futsse-static.eastmoney.com/redis",
+      "params": {
+        "msgid": "101_4_info"
+      },
+      "requested_at": "2026-11-23T13:40:04.208379+00:00",
+      "completed_at": "2026-11-23T13:40:05.865431+00:00",
+      "status": 200,
+      "response_sha256": "ff7e3cfbb92e31769f029d17bd709c657d289deb593d094cdd633e84ed9563a6"
+    }
+  ],
+  "failures": {},
+  "gold": {
+    "metadata": {
+      "iso_code": "XAU",
+      "iso_numeric": "959",
+      "name": "Gold (Troy Ounce)",
+      "symbol": "oz t",
+      "type": "metal",
+      "start_date": "1999-01-05",
+      "end_date": "2026-11-23",
+      "providers": [
+        "BCBO",
+        "BCP",
+        "BNA",
+        "BNR",
+        "BOM",
+        "CBA",
+        "CBAR",
+        "CBI",
+        "CBO",
+        "CBR",
+        "CBSL",
+        "NBM",
+        "NBP",
+        "NBU",
+        "PMA"
+      ]
+    },
+    "providers": [
+      {
+        "key": "BCBO",
+        "name": "Banco Central de Bolivia",
+        "data_url": "https://www.bcb.gob.bo/?q=cotizaciones_tc",
+        "terms_url": null
+      },
+      {
+        "key": "BCP",
+        "name": "Banco Central del Paraguay",
+        "data_url": "https://www.bcp.gov.py/webapps/web/cotizacion/monedas",
+        "terms_url": null
+      },
+      {
+        "key": "BNA",
+        "name": "Banco Nacional de Angola",
+        "data_url": "https://www.bna.ao/Conteudos/Mercados/listaTaxasCambioReferencia.aspx",
+        "terms_url": null
+      },
+      {
+        "key": "BNR",
+        "name": "Banca Națională a României",
+        "data_url": "https://www.bnr.ro/en/561-exchange-rates",
+        "terms_url": null
+      },
+      {
+        "key": "BOM",
+        "name": "Bank of Mongolia",
+        "data_url": "https://www.mongolbank.mn/en/currency-rate-movement",
+        "terms_url": null
+      },
+      {
+        "key": "CBA",
+        "name": "Central Bank of Armenia",
+        "data_url": "https://www.cba.am/en/SitePage/ExchangeArchive.aspx",
+        "terms_url": null
+      },
+      {
+        "key": "CBAR",
+        "name": "Central Bank of the Republic of Azerbaijan",
+        "data_url": "https://www.cbar.az/currency/rates",
+        "terms_url": null
+      },
+      {
+        "key": "CBI",
+        "name": "Central Bank of Iraq",
+        "data_url": "https://cbi.iq/page/144",
+        "terms_url": null
+      },
+      {
+        "key": "CBO",
+        "name": "Central Bank of Oman",
+        "data_url": "https://cbo.gov.om/Pages/DFESearch.aspx",
+        "terms_url": "https://cbo.gov.om/Pages/Disclaimer.aspx"
+      },
+      {
+        "key": "CBR",
+        "name": "Central Bank of Russia",
+        "data_url": "https://www.cbr.ru/eng/currency_base/daily/",
+        "terms_url": "https://www.cbr.ru/eng/user_agreement/"
+      },
+      {
+        "key": "CBSL",
+        "name": "Central Bank of Sri Lanka",
+        "data_url": "https://www.cbsl.gov.lk/en/rates-and-indicators/exchange-rates/daily-indicative-exchange-rates",
+        "terms_url": null
+      },
+      {
+        "key": "NBM",
+        "name": "National Bank of Moldova",
+        "data_url": "https://www.bnm.md/en/official_exchange_rates",
+        "terms_url": null
+      },
+      {
+        "key": "NBP",
+        "name": "Narodowy Bank Polski",
+        "data_url": "https://nbp.pl/en/statistic-and-financial-reporting/rates/",
+        "terms_url": null
+      },
+      {
+        "key": "NBU",
+        "name": "Natsionalnyi Bank Ukrainy",
+        "data_url": "https://bank.gov.ua/en/markets/exchangerates",
+        "terms_url": "https://bank.gov.ua/en/useterms"
+      },
+      {
+        "key": "PMA",
+        "name": "Palestine Monetary Authority",
+        "data_url": "https://www.pma.ps/currency-exchange-rates",
+        "terms_url": "https://www.pma.ps/terms-of-use"
+      }
+    ],
+    "comparison": "NBP official PLN/gram gold reference * 31.1034768 / same-date USDPLN table A. It is an official reference cross, not COMEX/LBMA executable close. NBP is also a blend constituent, so not fully independent.",
+    "comparisons": [
+      {
+        "date": "2026-11-09",
+        "blend_usd_per_troy_oz": 4082.89,
+        "nbp_gold_pln_per_gram": 514.79,
+        "nbp_usd_pln": 3.9199,
+        "nbp_cross_usd_per_troy_oz": 4084.7365549815045,
+        "difference_pct": -0.045206219707183415,
+        "component_dates": [
+          "2026-11-06",
+          "2026-11-09"
+        ],
+        "mixed_dates": true
+      },
+      {
+        "date": "2026-11-10",
+        "blend_usd_per_troy_oz": 4097.74,
+        "nbp_gold_pln_per_gram": 516.29,
+        "nbp_usd_pln": 3.9099,
+        "nbp_cross_usd_per_troy_oz": 4107.116304015959,
+        "difference_pct": -0.22829409546525348,
+        "component_dates": [
+          "2026-11-06",
+          "2026-11-10"
+        ],
+        "mixed_dates": true
+      },
+      {
+        "date": "2026-11-12",
+        "blend_usd_per_troy_oz": 3989.71,
+        "nbp_gold_pln_per_gram": 513.76,
+        "nbp_usd_pln": 3.9676,
+        "nbp_cross_usd_per_troy_oz": 4027.5537455307995,
+        "difference_pct": -0.9396211179749758,
+        "component_dates": [
+          "2026-11-12"
+        ],
+        "mixed_dates": false
+      },
+      {
+        "date": "2026-11-13",
+        "blend_usd_per_troy_oz": 3924.12,
+        "nbp_gold_pln_per_gram": 503.01,
+        "nbp_usd_pln": 3.9852,
+        "nbp_cross_usd_per_troy_oz": 3925.8656692682925,
+        "difference_pct": -0.0444658430867273,
+        "component_dates": [
+          "2026-11-12",
+          "2026-11-13"
+        ],
+        "mixed_dates": true
+      },
+      {
+        "date": "2026-11-16",
+        "blend_usd_per_troy_oz": 3887.11,
+        "nbp_gold_pln_per_gram": 499.82,
+        "nbp_usd_pln": 4.0007,
+        "nbp_cross_usd_per_troy_oz": 3885.8549189331866,
+        "difference_pct": 0.032298711428935256,
+        "component_dates": [
+          "2026-11-13",
+          "2026-11-16"
+        ],
+        "mixed_dates": true
+      },
+      {
+        "date": "2026-11-17",
+        "blend_usd_per_troy_oz": 3867.55,
+        "nbp_gold_pln_per_gram": 496.13,
+        "nbp_usd_pln": 4.0022,
+        "nbp_cross_usd_per_troy_oz": 3855.721339459297,
+        "difference_pct": 0.30678203893133027,
+        "component_dates": [
+          "2026-11-17"
+        ],
+        "mixed_dates": false
+      },
+      {
+        "date": "2026-11-18",
+        "blend_usd_per_troy_oz": 3817.32,
+        "nbp_gold_pln_per_gram": 497.35,
+        "nbp_usd_pln": 4.017,
+        "nbp_cross_usd_per_troy_oz": 3850.9619582972364,
+        "difference_pct": -0.8735988218411705,
+        "component_dates": [
+          "2026-11-18"
+        ],
+        "mixed_dates": false
+      },
+      {
+        "date": "2026-11-19",
+        "blend_usd_per_troy_oz": 3748.8,
+        "nbp_gold_pln_per_gram": 487.99,
+        "nbp_usd_pln": 4.0176,
+        "nbp_cross_usd_per_troy_oz": 3777.9235472998807,
+        "difference_pct": -0.7708876830155975,
+        "component_dates": [
+          "2026-11-19"
+        ],
+        "mixed_dates": false
+      },
+      {
+        "date": "2026-11-20",
+        "blend_usd_per_troy_oz": 3653.45,
+        "nbp_gold_pln_per_gram": 481.23,
+        "nbp_usd_pln": 4.0613,
+        "nbp_cross_usd_per_troy_oz": 3685.5012287848717,
+        "difference_pct": -0.8696572540674352,
+        "component_dates": [
+          "2026-11-19",
+          "2026-11-20"
+        ],
+        "mixed_dates": true
+      }
+    ],
+    "n": 9,
+    "median_abs_difference_pct": 0.30678203893133027,
+    "max_abs_difference_pct": 0.9396211179749758,
+    "blend_rows_with_mixed_dates": 10,
+    "revision_policy": "Frankfurter says blended historical rates can shift when new data arrives. Per-run normalized revisions are logged by updater.",
+    "documentation": [
+      "https://frankfurter.dev/methodology/",
+      "https://frankfurter.dev/python/",
+      "https://api.nbp.pl/en.html"
+    ]
+  },
+  "copper": {
+    "unit": "美元和美分/磅",
+    "tick": "0.0005美元/磅",
+    "published_contract_fields": {
+      "hyjgyf": "1,2,3,4,5,6,7,8,9,10,11,12",
+      "jydw": "25000磅",
+      "jysj": "CME Globex电子交易:周日至周五,下午6:00至下午5:00(下午5:00至下午4:00,芝加哥/中部时间),每天从下午5:00(下午4:00,中部时间)开始有60分钟短暂休市时间。CME ClearPort:周日至周五,下午6:00至下午5:00(下午5:00至下午4:00,芝加哥/中部时间),每天从下午5:00(下午4:00,中部时间)开始有60分钟短暂休市时间",
+      "vcode": "HG",
+      "vname": "COMEX铜",
+      "zhjyr": "交易于交割月份最后第3个营业日终止。"
+    },
+    "rollover_rule_verified": false,
+    "research_result": "Public product page and contract metadata do not establish HG00Y selection, roll date or adjustment formula. Contract delivery months are not a continuous roll algorithm.",
+    "checked_pages": [
+      "https://quote.eastmoney.com/globalfuture/HG00Y.html",
+      "https://futsse-static.eastmoney.com/redis?msgid=101_4_info"
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T10:20:52.801426+00:00",
+  "generated_at": "2026-11-23T13:39:54.848642+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -209,9 +209,9 @@
       "source_url": "https://frankfurter.dev/",
       "source_label": null,
       "quote_note": "多源合成参考价，非现货收盘或COMEX期货；上游可能不同日。",
-      "value": 3638.52,
-      "change_1": -0.4086548331029505,
-      "change_20": -7.461297238732511,
+      "value": 3623.25,
+      "change_1": -0.8266159383596317,
+      "change_20": -7.849660087133669,
       "as_of": "2026-11-22",
       "observation_count": 120,
       "source": "Frankfurter / XAU/USD / 多源合成参考价，非收盘",
@@ -268,10 +268,16 @@
         },
         {
           "provider": "PMA",
-          "date": "2026-11-19"
+          "date": "2026-11-22"
         }
       ],
-      "interpretation": "合成参考近20期下跌，不等同现货收盘"
+      "component_dates": [
+        "2026-11-20",
+        "2026-11-22"
+      ],
+      "mixed_component_dates": true,
+      "warning": "合成参考价混合不同来源日期：2026-11-20,2026-11-22；历史可能修订",
+      "interpretation": "合成参考近20期下跌；成分日期混合，历史可能修订"
     },
     {
       "id": "wti",
@@ -315,8 +321,9 @@
       "observation_count": 100,
       "source": "东方财富 / 101.HG00Y / COMEX铜日线；供数方换月序列",
       "status": "error",
-      "error": "铜快照不是已完成交易时段，拒绝把盘中价格当收盘",
-      "interpretation": "近20期下跌，关注工业需求变化"
+      "error": "数据源网络请求失败",
+      "warning": "换月口径未完全核实；跨换月历史变化谨慎解读",
+      "interpretation": "本轮获取失败或状态未核实；仅保留历史，截至2026-11-20"
     },
     {
       "id": "btc",
@@ -432,6 +439,12 @@
           "date": "2026-11-20"
         }
       ],
+      "component_dates": [
+        "2026-11-20",
+        "2026-11-22"
+      ],
+      "mixed_component_dates": true,
+      "warning": "合成参考价混合不同来源日期：2026-11-20,2026-11-22；历史可能修订",
       "interpretation": "美元相对离岸人民币升值，关注汇率波动"
     }
   ],
@@ -487,7 +500,7 @@
     ],
     "state": "有限风险提示",
     "reason": "波动率上升，风险偏好降温；信用尚未共同恶化",
-    "uncertainty": "DXY缺失或过期，结论不完整；不判断美元相关整体金融条件",
+    "uncertainty": "DXY异常、缺失或过期，结论不完整；不判断美元相关整体金融条件",
     "signals": [
       "实际利率 +12bp · 2026-11-19",
       "HY +12bp · 2026-11-19",
@@ -508,13 +521,1891 @@
       "id": "spread10y2y",
       "as_of": "2026-11-20",
       "status": "not_comparable",
-      "reason": "尚未完成同日底层交叉核验：缺少同一日期的长短端收益率，未跨日期相减"
+      "reason": "尚未完成同日底层交叉核验：缺少同一日期的有效长短端收益率，未跨日期相减",
+      "latest_common": {
+        "as_of": "2026-11-19",
+        "official_bp": 28.000000000000004,
+        "long_yield_pct": 5.04,
+        "short_yield_pct": 4.76,
+        "same_date_bp": 28.000000000000025,
+        "signed_difference_bp": -2.1316282072803006e-14,
+        "difference_bp": 2.1316282072803006e-14,
+        "status": "ok"
+      }
     },
     {
       "id": "spread10y3m",
       "as_of": "2026-11-20",
       "status": "not_comparable",
-      "reason": "尚未完成同日底层交叉核验：缺少同一日期的长短端收益率，未跨日期相减"
+      "reason": "尚未完成同日底层交叉核验：缺少同一日期的有效长短端收益率，未跨日期相减",
+      "latest_common": {
+        "as_of": "2026-11-19",
+        "official_bp": 70.0,
+        "long_yield_pct": 5.04,
+        "short_yield_pct": 4.34,
+        "same_date_bp": 70.00000000000001,
+        "signed_difference_bp": -1.4210854715202004e-14,
+        "difference_bp": 1.4210854715202004e-14,
+        "status": "ok"
+      }
+    }
+  ],
+  "spread_history_checks": [
+    {
+      "id": "spread10y2y",
+      "tolerance_bp": 2,
+      "observations": 91,
+      "warnings": 0,
+      "latest_common": {
+        "as_of": "2026-11-19",
+        "official_bp": 28.000000000000004,
+        "long_yield_pct": 5.04,
+        "short_yield_pct": 4.76,
+        "same_date_bp": 28.000000000000025,
+        "signed_difference_bp": -2.1316282072803006e-14,
+        "difference_bp": 2.1316282072803006e-14,
+        "status": "ok"
+      },
+      "comparisons": [
+        {
+          "as_of": "2026-07-13",
+          "official_bp": 36.0,
+          "long_yield_pct": 4.62,
+          "short_yield_pct": 4.26,
+          "same_date_bp": 36.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-14",
+          "official_bp": 40.0,
+          "long_yield_pct": 4.58,
+          "short_yield_pct": 4.18,
+          "same_date_bp": 40.000000000000036,
+          "signed_difference_bp": -3.552713678800501e-14,
+          "difference_bp": 3.552713678800501e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-15",
+          "official_bp": 42.0,
+          "long_yield_pct": 4.55,
+          "short_yield_pct": 4.13,
+          "same_date_bp": 41.99999999999999,
+          "signed_difference_bp": 7.105427357601002e-15,
+          "difference_bp": 7.105427357601002e-15,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-16",
+          "official_bp": 41.0,
+          "long_yield_pct": 4.57,
+          "short_yield_pct": 4.16,
+          "same_date_bp": 41.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-17",
+          "official_bp": 37.0,
+          "long_yield_pct": 4.55,
+          "short_yield_pct": 4.18,
+          "same_date_bp": 37.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-20",
+          "official_bp": 39.0,
+          "long_yield_pct": 4.6,
+          "short_yield_pct": 4.21,
+          "same_date_bp": 38.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-21",
+          "official_bp": 37.0,
+          "long_yield_pct": 4.63,
+          "short_yield_pct": 4.26,
+          "same_date_bp": 37.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-22",
+          "official_bp": 36.0,
+          "long_yield_pct": 4.67,
+          "short_yield_pct": 4.31,
+          "same_date_bp": 36.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-23",
+          "official_bp": 34.0,
+          "long_yield_pct": 4.71,
+          "short_yield_pct": 4.37,
+          "same_date_bp": 33.999999999999986,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-24",
+          "official_bp": 36.0,
+          "long_yield_pct": 4.69,
+          "short_yield_pct": 4.33,
+          "same_date_bp": 36.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-27",
+          "official_bp": 34.0,
+          "long_yield_pct": 4.65,
+          "short_yield_pct": 4.31,
+          "same_date_bp": 34.00000000000007,
+          "signed_difference_bp": -7.105427357601002e-14,
+          "difference_bp": 7.105427357601002e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-28",
+          "official_bp": 35.0,
+          "long_yield_pct": 4.61,
+          "short_yield_pct": 4.26,
+          "same_date_bp": 35.00000000000006,
+          "signed_difference_bp": -5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-29",
+          "official_bp": 45.0,
+          "long_yield_pct": 4.67,
+          "short_yield_pct": 4.22,
+          "same_date_bp": 45.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-30",
+          "official_bp": 45.0,
+          "long_yield_pct": 4.68,
+          "short_yield_pct": 4.23,
+          "same_date_bp": 44.99999999999993,
+          "signed_difference_bp": 7.105427357601002e-14,
+          "difference_bp": 7.105427357601002e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-31",
+          "official_bp": 47.0,
+          "long_yield_pct": 4.75,
+          "short_yield_pct": 4.28,
+          "same_date_bp": 46.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-03",
+          "official_bp": 45.0,
+          "long_yield_pct": 4.7,
+          "short_yield_pct": 4.25,
+          "same_date_bp": 45.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-04",
+          "official_bp": 43.0,
+          "long_yield_pct": 4.63,
+          "short_yield_pct": 4.2,
+          "same_date_bp": 42.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-05",
+          "official_bp": 45.0,
+          "long_yield_pct": 4.63,
+          "short_yield_pct": 4.18,
+          "same_date_bp": 45.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-06",
+          "official_bp": 44.0,
+          "long_yield_pct": 4.69,
+          "short_yield_pct": 4.25,
+          "same_date_bp": 44.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-07",
+          "official_bp": 46.0,
+          "long_yield_pct": 4.65,
+          "short_yield_pct": 4.19,
+          "same_date_bp": 46.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-10",
+          "official_bp": 47.0,
+          "long_yield_pct": 4.72,
+          "short_yield_pct": 4.25,
+          "same_date_bp": 46.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-11",
+          "official_bp": 48.0,
+          "long_yield_pct": 4.7,
+          "short_yield_pct": 4.22,
+          "same_date_bp": 48.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-12",
+          "official_bp": 48.0,
+          "long_yield_pct": 4.68,
+          "short_yield_pct": 4.2,
+          "same_date_bp": 47.99999999999996,
+          "signed_difference_bp": 4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-13",
+          "official_bp": 48.0,
+          "long_yield_pct": 4.63,
+          "short_yield_pct": 4.15,
+          "same_date_bp": 47.99999999999996,
+          "signed_difference_bp": 4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-14",
+          "official_bp": 51.0,
+          "long_yield_pct": 4.68,
+          "short_yield_pct": 4.17,
+          "same_date_bp": 50.99999999999998,
+          "signed_difference_bp": 2.1316282072803006e-14,
+          "difference_bp": 2.1316282072803006e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-17",
+          "official_bp": 53.0,
+          "long_yield_pct": 4.72,
+          "short_yield_pct": 4.19,
+          "same_date_bp": 52.999999999999936,
+          "signed_difference_bp": 6.394884621840902e-14,
+          "difference_bp": 6.394884621840902e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-18",
+          "official_bp": 52.0,
+          "long_yield_pct": 4.71,
+          "short_yield_pct": 4.19,
+          "same_date_bp": 51.99999999999996,
+          "signed_difference_bp": 4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-19",
+          "official_bp": 46.0,
+          "long_yield_pct": 4.65,
+          "short_yield_pct": 4.19,
+          "same_date_bp": 46.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-20",
+          "official_bp": 50.0,
+          "long_yield_pct": 4.69,
+          "short_yield_pct": 4.19,
+          "same_date_bp": 50.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-21",
+          "official_bp": 50.0,
+          "long_yield_pct": 4.74,
+          "short_yield_pct": 4.24,
+          "same_date_bp": 50.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-24",
+          "official_bp": 46.0,
+          "long_yield_pct": 4.7,
+          "short_yield_pct": 4.24,
+          "same_date_bp": 46.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-25",
+          "official_bp": 47.0,
+          "long_yield_pct": 4.64,
+          "short_yield_pct": 4.17,
+          "same_date_bp": 46.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-26",
+          "official_bp": 47.0,
+          "long_yield_pct": 4.66,
+          "short_yield_pct": 4.19,
+          "same_date_bp": 46.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-27",
+          "official_bp": 47.0,
+          "long_yield_pct": 4.67,
+          "short_yield_pct": 4.2,
+          "same_date_bp": 46.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-28",
+          "official_bp": 39.0,
+          "long_yield_pct": 4.73,
+          "short_yield_pct": 4.34,
+          "same_date_bp": 39.00000000000006,
+          "signed_difference_bp": -5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-31",
+          "official_bp": 41.0,
+          "long_yield_pct": 4.75,
+          "short_yield_pct": 4.34,
+          "same_date_bp": 41.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-01",
+          "official_bp": 40.0,
+          "long_yield_pct": 4.79,
+          "short_yield_pct": 4.39,
+          "same_date_bp": 40.000000000000036,
+          "signed_difference_bp": -3.552713678800501e-14,
+          "difference_bp": 3.552713678800501e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-02",
+          "official_bp": 40.0,
+          "long_yield_pct": 4.79,
+          "short_yield_pct": 4.39,
+          "same_date_bp": 40.000000000000036,
+          "signed_difference_bp": -3.552713678800501e-14,
+          "difference_bp": 3.552713678800501e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-03",
+          "official_bp": 43.0,
+          "long_yield_pct": 4.77,
+          "short_yield_pct": 4.34,
+          "same_date_bp": 42.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-04",
+          "official_bp": 41.0,
+          "long_yield_pct": 4.78,
+          "short_yield_pct": 4.37,
+          "same_date_bp": 41.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-08",
+          "official_bp": 41.0,
+          "long_yield_pct": 4.8,
+          "short_yield_pct": 4.39,
+          "same_date_bp": 41.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-09",
+          "official_bp": 40.0,
+          "long_yield_pct": 4.83,
+          "short_yield_pct": 4.43,
+          "same_date_bp": 40.000000000000036,
+          "signed_difference_bp": -3.552713678800501e-14,
+          "difference_bp": 3.552713678800501e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-10",
+          "official_bp": 39.0,
+          "long_yield_pct": 4.95,
+          "short_yield_pct": 4.56,
+          "same_date_bp": 39.00000000000006,
+          "signed_difference_bp": -5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-11",
+          "official_bp": 33.0,
+          "long_yield_pct": 4.96,
+          "short_yield_pct": 4.63,
+          "same_date_bp": 33.00000000000001,
+          "signed_difference_bp": -7.105427357601002e-15,
+          "difference_bp": 7.105427357601002e-15,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-14",
+          "official_bp": 32.0,
+          "long_yield_pct": 4.97,
+          "short_yield_pct": 4.65,
+          "same_date_bp": 31.99999999999994,
+          "signed_difference_bp": 6.039613253960852e-14,
+          "difference_bp": 6.039613253960852e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-15",
+          "official_bp": 33.0,
+          "long_yield_pct": 5.0,
+          "short_yield_pct": 4.67,
+          "same_date_bp": 33.00000000000001,
+          "signed_difference_bp": -7.105427357601002e-15,
+          "difference_bp": 7.105427357601002e-15,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-16",
+          "official_bp": 27.0,
+          "long_yield_pct": 5.01,
+          "short_yield_pct": 4.74,
+          "same_date_bp": 26.999999999999957,
+          "signed_difference_bp": 4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-17",
+          "official_bp": 27.0,
+          "long_yield_pct": 4.94,
+          "short_yield_pct": 4.67,
+          "same_date_bp": 27.000000000000046,
+          "signed_difference_bp": -4.618527782440651e-14,
+          "difference_bp": 4.618527782440651e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-18",
+          "official_bp": 25.0,
+          "long_yield_pct": 5.01,
+          "short_yield_pct": 4.76,
+          "same_date_bp": 25.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-21",
+          "official_bp": 20.0,
+          "long_yield_pct": 4.96,
+          "short_yield_pct": 4.76,
+          "same_date_bp": 20.000000000000018,
+          "signed_difference_bp": -1.7763568394002505e-14,
+          "difference_bp": 1.7763568394002505e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-22",
+          "official_bp": 25.0,
+          "long_yield_pct": 4.96,
+          "short_yield_pct": 4.71,
+          "same_date_bp": 25.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-23",
+          "official_bp": 26.0,
+          "long_yield_pct": 5.11,
+          "short_yield_pct": 4.85,
+          "same_date_bp": 26.000000000000068,
+          "signed_difference_bp": -6.750155989720952e-14,
+          "difference_bp": 6.750155989720952e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-24",
+          "official_bp": 31.0,
+          "long_yield_pct": 5.18,
+          "short_yield_pct": 4.87,
+          "same_date_bp": 30.99999999999996,
+          "signed_difference_bp": 3.907985046680551e-14,
+          "difference_bp": 3.907985046680551e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-25",
+          "official_bp": 36.0,
+          "long_yield_pct": 5.17,
+          "short_yield_pct": 4.81,
+          "same_date_bp": 36.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-28",
+          "official_bp": 32.0,
+          "long_yield_pct": 5.24,
+          "short_yield_pct": 4.92,
+          "same_date_bp": 32.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-29",
+          "official_bp": 37.0,
+          "long_yield_pct": 5.26,
+          "short_yield_pct": 4.89,
+          "same_date_bp": 37.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-30",
+          "official_bp": 41.0,
+          "long_yield_pct": 5.29,
+          "short_yield_pct": 4.88,
+          "same_date_bp": 41.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-01",
+          "official_bp": 46.0,
+          "long_yield_pct": 5.24,
+          "short_yield_pct": 4.78,
+          "same_date_bp": 46.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-02",
+          "official_bp": 45.0,
+          "long_yield_pct": 5.28,
+          "short_yield_pct": 4.83,
+          "same_date_bp": 45.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-05",
+          "official_bp": 47.0,
+          "long_yield_pct": 5.31,
+          "short_yield_pct": 4.84,
+          "same_date_bp": 46.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-06",
+          "official_bp": 48.0,
+          "long_yield_pct": 5.27,
+          "short_yield_pct": 4.79,
+          "same_date_bp": 47.99999999999996,
+          "signed_difference_bp": 4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-07",
+          "official_bp": 51.0,
+          "long_yield_pct": 5.28,
+          "short_yield_pct": 4.77,
+          "same_date_bp": 51.00000000000007,
+          "signed_difference_bp": -7.105427357601002e-14,
+          "difference_bp": 7.105427357601002e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-08",
+          "official_bp": 47.0,
+          "long_yield_pct": 5.22,
+          "short_yield_pct": 4.75,
+          "same_date_bp": 46.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-09",
+          "official_bp": 44.0,
+          "long_yield_pct": 5.24,
+          "short_yield_pct": 4.8,
+          "same_date_bp": 44.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-13",
+          "official_bp": 42.0,
+          "long_yield_pct": 5.21,
+          "short_yield_pct": 4.79,
+          "same_date_bp": 41.99999999999999,
+          "signed_difference_bp": 7.105427357601002e-15,
+          "difference_bp": 7.105427357601002e-15,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-14",
+          "official_bp": 37.0,
+          "long_yield_pct": 5.19,
+          "short_yield_pct": 4.82,
+          "same_date_bp": 37.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-15",
+          "official_bp": 33.0,
+          "long_yield_pct": 5.1,
+          "short_yield_pct": 4.77,
+          "same_date_bp": 33.00000000000001,
+          "signed_difference_bp": -7.105427357601002e-15,
+          "difference_bp": 7.105427357601002e-15,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-16",
+          "official_bp": 35.0,
+          "long_yield_pct": 5.09,
+          "short_yield_pct": 4.74,
+          "same_date_bp": 34.999999999999964,
+          "signed_difference_bp": 3.552713678800501e-14,
+          "difference_bp": 3.552713678800501e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-19",
+          "official_bp": 38.0,
+          "long_yield_pct": 5.15,
+          "short_yield_pct": 4.77,
+          "same_date_bp": 38.00000000000008,
+          "signed_difference_bp": -7.815970093361102e-14,
+          "difference_bp": 7.815970093361102e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-20",
+          "official_bp": 33.0,
+          "long_yield_pct": 5.12,
+          "short_yield_pct": 4.79,
+          "same_date_bp": 33.00000000000001,
+          "signed_difference_bp": -7.105427357601002e-15,
+          "difference_bp": 7.105427357601002e-15,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-21",
+          "official_bp": 32.0,
+          "long_yield_pct": 5.13,
+          "short_yield_pct": 4.81,
+          "same_date_bp": 32.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-22",
+          "official_bp": 31.0,
+          "long_yield_pct": 4.96,
+          "short_yield_pct": 4.65,
+          "same_date_bp": 30.99999999999996,
+          "signed_difference_bp": 3.907985046680551e-14,
+          "difference_bp": 3.907985046680551e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-23",
+          "official_bp": 31.0,
+          "long_yield_pct": 5.0,
+          "short_yield_pct": 4.69,
+          "same_date_bp": 30.99999999999996,
+          "signed_difference_bp": 3.907985046680551e-14,
+          "difference_bp": 3.907985046680551e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-26",
+          "official_bp": 32.0,
+          "long_yield_pct": 5.0,
+          "short_yield_pct": 4.68,
+          "same_date_bp": 32.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-27",
+          "official_bp": 28.999999999999996,
+          "long_yield_pct": 4.99,
+          "short_yield_pct": 4.7,
+          "same_date_bp": 29.000000000000004,
+          "signed_difference_bp": -7.105427357601002e-15,
+          "difference_bp": 7.105427357601002e-15,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-28",
+          "official_bp": 38.0,
+          "long_yield_pct": 5.05,
+          "short_yield_pct": 4.67,
+          "same_date_bp": 37.999999999999986,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-29",
+          "official_bp": 37.0,
+          "long_yield_pct": 4.98,
+          "short_yield_pct": 4.61,
+          "same_date_bp": 37.000000000000014,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-30",
+          "official_bp": 38.0,
+          "long_yield_pct": 4.94,
+          "short_yield_pct": 4.56,
+          "same_date_bp": 38.00000000000008,
+          "signed_difference_bp": -7.815970093361102e-14,
+          "difference_bp": 7.815970093361102e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-02",
+          "official_bp": 32.0,
+          "long_yield_pct": 4.91,
+          "short_yield_pct": 4.59,
+          "same_date_bp": 32.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-03",
+          "official_bp": 34.0,
+          "long_yield_pct": 4.95,
+          "short_yield_pct": 4.61,
+          "same_date_bp": 33.999999999999986,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-04",
+          "official_bp": 32.0,
+          "long_yield_pct": 4.9,
+          "short_yield_pct": 4.58,
+          "same_date_bp": 32.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-05",
+          "official_bp": 38.0,
+          "long_yield_pct": 4.84,
+          "short_yield_pct": 4.46,
+          "same_date_bp": 37.999999999999986,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-06",
+          "official_bp": 35.0,
+          "long_yield_pct": 4.86,
+          "short_yield_pct": 4.51,
+          "same_date_bp": 35.00000000000006,
+          "signed_difference_bp": -5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-09",
+          "official_bp": 32.0,
+          "long_yield_pct": 4.88,
+          "short_yield_pct": 4.56,
+          "same_date_bp": 32.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-10",
+          "official_bp": 25.0,
+          "long_yield_pct": 4.98,
+          "short_yield_pct": 4.73,
+          "same_date_bp": 25.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-12",
+          "official_bp": 24.0,
+          "long_yield_pct": 5.1,
+          "short_yield_pct": 4.86,
+          "same_date_bp": 23.999999999999932,
+          "signed_difference_bp": 6.750155989720952e-14,
+          "difference_bp": 6.750155989720952e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-13",
+          "official_bp": 27.0,
+          "long_yield_pct": 5.15,
+          "short_yield_pct": 4.88,
+          "same_date_bp": 27.000000000000046,
+          "signed_difference_bp": -4.618527782440651e-14,
+          "difference_bp": 4.618527782440651e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-16",
+          "official_bp": 28.999999999999996,
+          "long_yield_pct": 5.12,
+          "short_yield_pct": 4.83,
+          "same_date_bp": 29.000000000000004,
+          "signed_difference_bp": -7.105427357601002e-15,
+          "difference_bp": 7.105427357601002e-15,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-17",
+          "official_bp": 30.0,
+          "long_yield_pct": 5.1,
+          "short_yield_pct": 4.8,
+          "same_date_bp": 29.999999999999982,
+          "signed_difference_bp": 1.7763568394002505e-14,
+          "difference_bp": 1.7763568394002505e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-18",
+          "official_bp": 27.0,
+          "long_yield_pct": 5.07,
+          "short_yield_pct": 4.8,
+          "same_date_bp": 27.000000000000046,
+          "signed_difference_bp": -4.618527782440651e-14,
+          "difference_bp": 4.618527782440651e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-19",
+          "official_bp": 28.000000000000004,
+          "long_yield_pct": 5.04,
+          "short_yield_pct": 4.76,
+          "same_date_bp": 28.000000000000025,
+          "signed_difference_bp": -2.1316282072803006e-14,
+          "difference_bp": 2.1316282072803006e-14,
+          "status": "ok"
+        }
+      ]
+    },
+    {
+      "id": "spread10y3m",
+      "tolerance_bp": 2,
+      "observations": 91,
+      "warnings": 0,
+      "latest_common": {
+        "as_of": "2026-11-19",
+        "official_bp": 70.0,
+        "long_yield_pct": 5.04,
+        "short_yield_pct": 4.34,
+        "same_date_bp": 70.00000000000001,
+        "signed_difference_bp": -1.4210854715202004e-14,
+        "difference_bp": 1.4210854715202004e-14,
+        "status": "ok"
+      },
+      "comparisons": [
+        {
+          "as_of": "2026-07-13",
+          "official_bp": 73.0,
+          "long_yield_pct": 4.62,
+          "short_yield_pct": 3.89,
+          "same_date_bp": 73.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-14",
+          "official_bp": 74.0,
+          "long_yield_pct": 4.58,
+          "short_yield_pct": 3.84,
+          "same_date_bp": 74.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-15",
+          "official_bp": 72.0,
+          "long_yield_pct": 4.55,
+          "short_yield_pct": 3.83,
+          "same_date_bp": 71.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-16",
+          "official_bp": 73.0,
+          "long_yield_pct": 4.57,
+          "short_yield_pct": 3.84,
+          "same_date_bp": 73.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-17",
+          "official_bp": 70.0,
+          "long_yield_pct": 4.55,
+          "short_yield_pct": 3.85,
+          "same_date_bp": 69.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-20",
+          "official_bp": 74.0,
+          "long_yield_pct": 4.6,
+          "short_yield_pct": 3.86,
+          "same_date_bp": 73.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-21",
+          "official_bp": 76.0,
+          "long_yield_pct": 4.63,
+          "short_yield_pct": 3.87,
+          "same_date_bp": 75.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-22",
+          "official_bp": 78.0,
+          "long_yield_pct": 4.67,
+          "short_yield_pct": 3.89,
+          "same_date_bp": 77.99999999999999,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-23",
+          "official_bp": 76.0,
+          "long_yield_pct": 4.71,
+          "short_yield_pct": 3.95,
+          "same_date_bp": 75.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-24",
+          "official_bp": 73.0,
+          "long_yield_pct": 4.69,
+          "short_yield_pct": 3.96,
+          "same_date_bp": 73.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-27",
+          "official_bp": 69.0,
+          "long_yield_pct": 4.65,
+          "short_yield_pct": 3.96,
+          "same_date_bp": 69.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-28",
+          "official_bp": 71.0,
+          "long_yield_pct": 4.61,
+          "short_yield_pct": 3.9,
+          "same_date_bp": 71.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-29",
+          "official_bp": 84.0,
+          "long_yield_pct": 4.67,
+          "short_yield_pct": 3.83,
+          "same_date_bp": 83.99999999999999,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-30",
+          "official_bp": 86.0,
+          "long_yield_pct": 4.68,
+          "short_yield_pct": 3.82,
+          "same_date_bp": 85.99999999999999,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-07-31",
+          "official_bp": 92.0,
+          "long_yield_pct": 4.75,
+          "short_yield_pct": 3.83,
+          "same_date_bp": 92.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-03",
+          "official_bp": 79.0,
+          "long_yield_pct": 4.7,
+          "short_yield_pct": 3.91,
+          "same_date_bp": 79.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-04",
+          "official_bp": 74.0,
+          "long_yield_pct": 4.63,
+          "short_yield_pct": 3.89,
+          "same_date_bp": 73.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-05",
+          "official_bp": 74.0,
+          "long_yield_pct": 4.63,
+          "short_yield_pct": 3.89,
+          "same_date_bp": 73.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-06",
+          "official_bp": 79.0,
+          "long_yield_pct": 4.69,
+          "short_yield_pct": 3.9,
+          "same_date_bp": 79.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-07",
+          "official_bp": 78.0,
+          "long_yield_pct": 4.65,
+          "short_yield_pct": 3.87,
+          "same_date_bp": 78.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-10",
+          "official_bp": 83.0,
+          "long_yield_pct": 4.72,
+          "short_yield_pct": 3.89,
+          "same_date_bp": 82.99999999999996,
+          "signed_difference_bp": 4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-11",
+          "official_bp": 81.0,
+          "long_yield_pct": 4.7,
+          "short_yield_pct": 3.89,
+          "same_date_bp": 81.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-12",
+          "official_bp": 81.0,
+          "long_yield_pct": 4.68,
+          "short_yield_pct": 3.87,
+          "same_date_bp": 80.99999999999996,
+          "signed_difference_bp": 4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-13",
+          "official_bp": 76.0,
+          "long_yield_pct": 4.63,
+          "short_yield_pct": 3.87,
+          "same_date_bp": 75.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-14",
+          "official_bp": 82.0,
+          "long_yield_pct": 4.68,
+          "short_yield_pct": 3.86,
+          "same_date_bp": 81.99999999999999,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-17",
+          "official_bp": 85.0,
+          "long_yield_pct": 4.72,
+          "short_yield_pct": 3.87,
+          "same_date_bp": 84.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-18",
+          "official_bp": 85.0,
+          "long_yield_pct": 4.71,
+          "short_yield_pct": 3.86,
+          "same_date_bp": 85.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-19",
+          "official_bp": 79.0,
+          "long_yield_pct": 4.65,
+          "short_yield_pct": 3.86,
+          "same_date_bp": 79.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-20",
+          "official_bp": 82.0,
+          "long_yield_pct": 4.69,
+          "short_yield_pct": 3.87,
+          "same_date_bp": 82.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-21",
+          "official_bp": 86.0,
+          "long_yield_pct": 4.74,
+          "short_yield_pct": 3.88,
+          "same_date_bp": 86.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-24",
+          "official_bp": 83.0,
+          "long_yield_pct": 4.7,
+          "short_yield_pct": 3.87,
+          "same_date_bp": 83.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-25",
+          "official_bp": 78.0,
+          "long_yield_pct": 4.64,
+          "short_yield_pct": 3.86,
+          "same_date_bp": 77.99999999999999,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-26",
+          "official_bp": 81.0,
+          "long_yield_pct": 4.66,
+          "short_yield_pct": 3.85,
+          "same_date_bp": 81.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-27",
+          "official_bp": 83.0,
+          "long_yield_pct": 4.67,
+          "short_yield_pct": 3.84,
+          "same_date_bp": 83.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-28",
+          "official_bp": 83.0,
+          "long_yield_pct": 4.73,
+          "short_yield_pct": 3.9,
+          "same_date_bp": 83.00000000000006,
+          "signed_difference_bp": -5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-08-31",
+          "official_bp": 84.0,
+          "long_yield_pct": 4.75,
+          "short_yield_pct": 3.91,
+          "same_date_bp": 83.99999999999999,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-01",
+          "official_bp": 87.0,
+          "long_yield_pct": 4.79,
+          "short_yield_pct": 3.92,
+          "same_date_bp": 87.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-02",
+          "official_bp": 87.0,
+          "long_yield_pct": 4.79,
+          "short_yield_pct": 3.92,
+          "same_date_bp": 87.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-03",
+          "official_bp": 88.0,
+          "long_yield_pct": 4.77,
+          "short_yield_pct": 3.89,
+          "same_date_bp": 87.99999999999994,
+          "signed_difference_bp": 5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-04",
+          "official_bp": 87.0,
+          "long_yield_pct": 4.78,
+          "short_yield_pct": 3.91,
+          "same_date_bp": 87.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-08",
+          "official_bp": 86.0,
+          "long_yield_pct": 4.8,
+          "short_yield_pct": 3.94,
+          "same_date_bp": 85.99999999999999,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-09",
+          "official_bp": 88.0,
+          "long_yield_pct": 4.83,
+          "short_yield_pct": 3.95,
+          "same_date_bp": 87.99999999999999,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-10",
+          "official_bp": 95.0,
+          "long_yield_pct": 4.95,
+          "short_yield_pct": 4.0,
+          "same_date_bp": 95.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-11",
+          "official_bp": 89.0,
+          "long_yield_pct": 4.96,
+          "short_yield_pct": 4.07,
+          "same_date_bp": 88.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-14",
+          "official_bp": 86.0,
+          "long_yield_pct": 4.97,
+          "short_yield_pct": 4.11,
+          "same_date_bp": 85.99999999999994,
+          "signed_difference_bp": 5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-15",
+          "official_bp": 89.0,
+          "long_yield_pct": 5.0,
+          "short_yield_pct": 4.11,
+          "same_date_bp": 88.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-16",
+          "official_bp": 87.0,
+          "long_yield_pct": 5.01,
+          "short_yield_pct": 4.14,
+          "same_date_bp": 87.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-17",
+          "official_bp": 82.0,
+          "long_yield_pct": 4.94,
+          "short_yield_pct": 4.12,
+          "same_date_bp": 82.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-18",
+          "official_bp": 87.0,
+          "long_yield_pct": 5.01,
+          "short_yield_pct": 4.14,
+          "same_date_bp": 87.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-21",
+          "official_bp": 79.0,
+          "long_yield_pct": 4.96,
+          "short_yield_pct": 4.17,
+          "same_date_bp": 79.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-22",
+          "official_bp": 80.0,
+          "long_yield_pct": 4.96,
+          "short_yield_pct": 4.16,
+          "same_date_bp": 79.99999999999999,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-23",
+          "official_bp": 92.0,
+          "long_yield_pct": 5.11,
+          "short_yield_pct": 4.19,
+          "same_date_bp": 92.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-24",
+          "official_bp": 94.0,
+          "long_yield_pct": 5.18,
+          "short_yield_pct": 4.24,
+          "same_date_bp": 93.99999999999994,
+          "signed_difference_bp": 5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-25",
+          "official_bp": 93.0,
+          "long_yield_pct": 5.17,
+          "short_yield_pct": 4.24,
+          "same_date_bp": 92.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-28",
+          "official_bp": 96.0,
+          "long_yield_pct": 5.24,
+          "short_yield_pct": 4.28,
+          "same_date_bp": 96.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-29",
+          "official_bp": 101.0,
+          "long_yield_pct": 5.26,
+          "short_yield_pct": 4.25,
+          "same_date_bp": 100.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-09-30",
+          "official_bp": 109.00000000000001,
+          "long_yield_pct": 5.29,
+          "short_yield_pct": 4.2,
+          "same_date_bp": 108.99999999999999,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-01",
+          "official_bp": 107.0,
+          "long_yield_pct": 5.24,
+          "short_yield_pct": 4.17,
+          "same_date_bp": 107.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-02",
+          "official_bp": 109.00000000000001,
+          "long_yield_pct": 5.28,
+          "short_yield_pct": 4.19,
+          "same_date_bp": 108.99999999999999,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-05",
+          "official_bp": 109.00000000000001,
+          "long_yield_pct": 5.31,
+          "short_yield_pct": 4.22,
+          "same_date_bp": 108.99999999999999,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-06",
+          "official_bp": 106.0,
+          "long_yield_pct": 5.27,
+          "short_yield_pct": 4.21,
+          "same_date_bp": 105.99999999999996,
+          "signed_difference_bp": 4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-07",
+          "official_bp": 106.0,
+          "long_yield_pct": 5.28,
+          "short_yield_pct": 4.22,
+          "same_date_bp": 106.00000000000006,
+          "signed_difference_bp": -5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-08",
+          "official_bp": 99.0,
+          "long_yield_pct": 5.22,
+          "short_yield_pct": 4.23,
+          "same_date_bp": 98.99999999999993,
+          "signed_difference_bp": 7.105427357601002e-14,
+          "difference_bp": 7.105427357601002e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-09",
+          "official_bp": 99.0,
+          "long_yield_pct": 5.24,
+          "short_yield_pct": 4.25,
+          "same_date_bp": 99.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-13",
+          "official_bp": 95.0,
+          "long_yield_pct": 5.21,
+          "short_yield_pct": 4.26,
+          "same_date_bp": 95.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-14",
+          "official_bp": 91.0,
+          "long_yield_pct": 5.19,
+          "short_yield_pct": 4.28,
+          "same_date_bp": 91.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-15",
+          "official_bp": 82.0,
+          "long_yield_pct": 5.1,
+          "short_yield_pct": 4.28,
+          "same_date_bp": 81.99999999999994,
+          "signed_difference_bp": 5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-16",
+          "official_bp": 83.0,
+          "long_yield_pct": 5.09,
+          "short_yield_pct": 4.26,
+          "same_date_bp": 83.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-19",
+          "official_bp": 88.0,
+          "long_yield_pct": 5.15,
+          "short_yield_pct": 4.27,
+          "same_date_bp": 88.00000000000009,
+          "signed_difference_bp": -8.526512829121202e-14,
+          "difference_bp": 8.526512829121202e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-20",
+          "official_bp": 86.0,
+          "long_yield_pct": 5.12,
+          "short_yield_pct": 4.26,
+          "same_date_bp": 86.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-21",
+          "official_bp": 88.0,
+          "long_yield_pct": 5.13,
+          "short_yield_pct": 4.25,
+          "same_date_bp": 87.99999999999999,
+          "signed_difference_bp": 1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-22",
+          "official_bp": 74.0,
+          "long_yield_pct": 4.96,
+          "short_yield_pct": 4.22,
+          "same_date_bp": 74.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-23",
+          "official_bp": 78.0,
+          "long_yield_pct": 5.0,
+          "short_yield_pct": 4.22,
+          "same_date_bp": 78.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-26",
+          "official_bp": 78.0,
+          "long_yield_pct": 5.0,
+          "short_yield_pct": 4.22,
+          "same_date_bp": 78.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-27",
+          "official_bp": 77.0,
+          "long_yield_pct": 4.99,
+          "short_yield_pct": 4.22,
+          "same_date_bp": 77.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-28",
+          "official_bp": 87.0,
+          "long_yield_pct": 5.05,
+          "short_yield_pct": 4.18,
+          "same_date_bp": 87.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-29",
+          "official_bp": 80.0,
+          "long_yield_pct": 4.98,
+          "short_yield_pct": 4.18,
+          "same_date_bp": 80.00000000000007,
+          "signed_difference_bp": -7.105427357601002e-14,
+          "difference_bp": 7.105427357601002e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-10-30",
+          "official_bp": 78.0,
+          "long_yield_pct": 4.94,
+          "short_yield_pct": 4.16,
+          "same_date_bp": 78.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-02",
+          "official_bp": 70.0,
+          "long_yield_pct": 4.91,
+          "short_yield_pct": 4.21,
+          "same_date_bp": 70.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-03",
+          "official_bp": 74.0,
+          "long_yield_pct": 4.95,
+          "short_yield_pct": 4.21,
+          "same_date_bp": 74.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-04",
+          "official_bp": 69.0,
+          "long_yield_pct": 4.9,
+          "short_yield_pct": 4.21,
+          "same_date_bp": 69.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-05",
+          "official_bp": 67.0,
+          "long_yield_pct": 4.84,
+          "short_yield_pct": 4.17,
+          "same_date_bp": 67.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-06",
+          "official_bp": 67.0,
+          "long_yield_pct": 4.86,
+          "short_yield_pct": 4.19,
+          "same_date_bp": 67.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-09",
+          "official_bp": 64.0,
+          "long_yield_pct": 4.88,
+          "short_yield_pct": 4.24,
+          "same_date_bp": 63.99999999999997,
+          "signed_difference_bp": 2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-10",
+          "official_bp": 68.0,
+          "long_yield_pct": 4.98,
+          "short_yield_pct": 4.3,
+          "same_date_bp": 68.00000000000006,
+          "signed_difference_bp": -5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-12",
+          "official_bp": 78.0,
+          "long_yield_pct": 5.1,
+          "short_yield_pct": 4.32,
+          "same_date_bp": 77.99999999999994,
+          "signed_difference_bp": 5.684341886080802e-14,
+          "difference_bp": 5.684341886080802e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-13",
+          "official_bp": 83.0,
+          "long_yield_pct": 5.15,
+          "short_yield_pct": 4.32,
+          "same_date_bp": 83.0,
+          "signed_difference_bp": 0.0,
+          "difference_bp": 0.0,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-16",
+          "official_bp": 78.0,
+          "long_yield_pct": 5.12,
+          "short_yield_pct": 4.34,
+          "same_date_bp": 78.00000000000003,
+          "signed_difference_bp": -2.842170943040401e-14,
+          "difference_bp": 2.842170943040401e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-17",
+          "official_bp": 77.0,
+          "long_yield_pct": 5.1,
+          "short_yield_pct": 4.33,
+          "same_date_bp": 76.99999999999996,
+          "signed_difference_bp": 4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-18",
+          "official_bp": 73.0,
+          "long_yield_pct": 5.07,
+          "short_yield_pct": 4.34,
+          "same_date_bp": 73.00000000000004,
+          "signed_difference_bp": -4.263256414560601e-14,
+          "difference_bp": 4.263256414560601e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-19",
+          "official_bp": 70.0,
+          "long_yield_pct": 5.04,
+          "short_yield_pct": 4.34,
+          "same_date_bp": 70.00000000000001,
+          "signed_difference_bp": -1.4210854715202004e-14,
+          "difference_bp": 1.4210854715202004e-14,
+          "status": "ok"
+        }
+      ]
     }
   ],
   "history_checks": [
@@ -3649,8 +5540,8 @@
   },
   "sources_failed": 1,
   "update_context": {
-    "event": "workflow_dispatch",
+    "event": "local",
     "schedule": null,
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607"
+    "run_url": null
   }
 }

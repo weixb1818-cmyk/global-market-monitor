@@ -3,7 +3,7 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const snap=JSON.parse(fs.readFileSync('data/snapshot.json','utf8'));
 // Unit fixtures, kept independent of live data and not written to the snapshot.
-for(const c of snap.indicators)Object.assign(c,{as_of:'2026-11-19',status:'ok',value:100,change_1:0,change_20:0});
+for(const c of snap.indicators)Object.assign(c,{as_of:'2026-11-19',status:'ok',value:100,change_1:0,change_20:0,error:null});
 Object.assign(snap.indicators.find(c=>c.id==='dxy'),{value:null,change_20:null,status:'missing'});
 Object.assign(snap.indicators.find(c=>c.id==='vix'),{value:28});
 snap.macro={state:'有限风险提示',mode:'limited',reason:'波动率上升',uncertainty:'DXY缺失，结论不完整',signals:['VIX · 2026-11-19']};
@@ -36,5 +36,14 @@ setTimeout(()=>{
  assert.doesNotMatch(delayed,/更新失败/);
  const failed=vm.runInContext("cardHTML({...input.indicators[1],status:'error',error:'network'},input)",context);
  assert.match(failed,/更新失败 · 沿用/);
+ for(const status of ['error','stale','missing','unknown',undefined]){
+  const altered=structuredClone(snap);altered.indicators.find(c=>c.id==='hy').status=status;context.altered=altered;
+  assert.equal(vm.runInContext('currentMacro(altered).mode',context),'insufficient');
+ }
+ const errorAlert=structuredClone(snap);errorAlert.indicators.find(c=>c.id==='vix').status='error';context.errorAlert=errorAlert;
+ assert.equal(vm.runInContext('currentAlerts(errorAlert).length',context),0);
+ assert.match(failed,/仅保留历史/);
+ assert.equal(vm.runInContext("updateOverdue({at:'2026-11-21T00:20:00Z'},new Date('2026-11-21T03:00:00Z'))",context),false);
+ assert.equal(vm.runInContext("updateOverdue({at:'2026-11-20T00:20:00Z'},new Date('2026-11-21T03:00:00Z'))",context),true);
  console.log('UI: 17卡、宏观提示、日期/bp、曲线核验状态及延迟与失败组合提示通过');
 },30);

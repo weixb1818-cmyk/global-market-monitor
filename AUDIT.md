@@ -119,3 +119,11 @@
 收益率曲线继续保留FRED直接发布值；方法说明动态显示 `not_comparable` 对应的“尚未完成同日底层交叉核验”，不存在跨日期相减。数据同时延迟且失败时，卡片并列显示两个状态并注明沿用历史。
 
 本轮修正验收：[实现提交 0f789b0](https://github.com/weixb1818-cmyk/global-market-monitor/commit/0f789b0)；[77项测试、更新、部署及公网回读](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607)成功；[桌面及手机浏览器验收](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155370843)成功；HTML校验0错误。[完整验收记录](verification/audit-fixes-2026-11-23/acceptance.json)与[证据目录](verification/audit-fixes-2026-11-23/)已归档。现有铜100条历史逐值未变、100个唯一升序日期、预期CME交易日100个、缺口0；本轮源端更新失败时回退报价处于盘中而被拒绝，保留历史并提示失败。两项曲线仍明确标为尚未完成同日底层交叉核验，FRED官方主值保留。宏观函数与阈值、17项配置、页面布局保持不变。
+
+## 下一阶段：免费数据质量与分析能力
+
+本阶段收紧error/stale/missing/未知状态的方向解读、宏观与VIX/HY高位边界，并用新鲜历史保留但抓取失败的脚本到JSON到前端测试及Chromium负面用例复核。保留原17项、单页结构、数据品种和全部宏观阈值。
+
+免费商品研究、17项来源与状态、同日利差实际结果、固定阈值历史分析、原始响应留存边界和十日调度进度见[阶段报告](docs/DATA_QUALITY_REPORT.md)。严格可用性样本只有3日且无成熟后续窗口；当前版本长历史的描述性成功/失败对照不能标成无前视偏差回测。原生调度只有2日记录，十日验收和08:15准点均未完成。
+
+Python直接与传递依赖已固定；请求/源日期/状态/哈希/修订和生成记录已加入，免费补偿检查仍依赖GitHub调度，不宣称有商业SLA。

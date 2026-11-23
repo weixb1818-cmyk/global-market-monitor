@@ -1,0 +1,641 @@
+{
+  "started_at": "2026-11-23T13:39:54.848623+00:00",
+  "completed_at": "2026-11-23T13:40:11.440167+00:00",
+  "update_context": {
+    "event": "local",
+    "schedule": null,
+    "run_url": null
+  },
+  "requests": [
+    {
+      "indicator": "dxy",
+      "requested_at": "2026-11-23T13:39:54.854230+00:00",
+      "completed_at": "2026-11-23T13:39:55.185228+00:00",
+      "endpoint": "https://hq.sinajs.cn/list=DINIW",
+      "params": {},
+      "status": 200,
+      "response_sha256": "27f77424a988c73b58619e48ea6f6eddba92116bfb73b2cede23f3389b7d13f3",
+      "error_type": null,
+      "bytes": 117,
+      "server_date": null,
+      "content_type": "application/javascript; charset=GB18030"
+    },
+    {
+      "indicator": "real10y",
+      "requested_at": "2026-11-23T13:39:54.855590+00:00",
+      "completed_at": "2026-11-23T13:39:55.350753+00:00",
+      "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "params": {
+        "id": "DFII10",
+        "cosd": "2026-07-16"
+      },
+      "status": 200,
+      "response_sha256": "3a5c8450f4290601a8a393aa13196523fffd40c84904576ed2cccffd4513589d",
+      "error_type": null,
+      "bytes": 1468,
+      "server_date": "Mon, 23 Nov 2026 13:39:55 GMT",
+      "content_type": "application/csv"
+    },
+    {
+      "indicator": "spread10y2y",
+      "requested_at": "2026-11-23T13:39:54.855861+00:00",
+      "completed_at": "2026-11-23T13:39:55.456171+00:00",
+      "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "params": {
+        "id": "T10Y2Y",
+        "cosd": "2026-07-16"
+      },
+      "status": 200,
+      "response_sha256": "78d226c0751dced735b03a12b754a15fabc8641c0442e0b1e0c5136579eb7783",
+      "error_type": null,
+      "bytes": 1484,
+      "server_date": "Mon, 23 Nov 2026 13:39:55 GMT",
+      "content_type": "application/csv"
+    },
+    {
+      "indicator": "spread10y3m",
+      "requested_at": "2026-11-23T13:39:54.856169+00:00",
+      "completed_at": "2026-11-23T13:39:55.476387+00:00",
+      "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "params": {
+        "id": "T10Y3M",
+        "cosd": "2026-07-16"
+      },
+      "status": 200,
+      "response_sha256": "dc8575c486b8e3e971260f86ef6b4534d58f35edaa7895fac9ff047086033361",
+      "error_type": null,
+      "bytes": 1484,
+      "server_date": "Mon, 23 Nov 2026 13:39:55 GMT",
+      "content_type": "application/csv"
+    },
+    {
+      "indicator": "us10y",
+      "requested_at": "2026-11-23T13:39:54.855264+00:00",
+      "completed_at": "2026-11-23T13:39:55.479498+00:00",
+      "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "params": {
+        "id": "DGS10",
+        "cosd": "2026-07-16"
+      },
+      "status": 200,
+      "response_sha256": "ce46f5396c01403b3524012306b923728170737bea995029253264546566d394",
+      "error_type": null,
+      "bytes": 1467,
+      "server_date": "Mon, 23 Nov 2026 13:39:55 GMT",
+      "content_type": "application/csv"
+    },
+    {
+      "indicator": "us2y",
+      "requested_at": "2026-11-23T13:39:54.854680+00:00",
+      "completed_at": "2026-11-23T13:39:55.548588+00:00",
+      "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "params": {
+        "id": "DGS2",
+        "cosd": "2026-07-16"
+      },
+      "status": 200,
+      "response_sha256": "39bcc25a8c8ae8112daefa84e0eff181fcd98d04e6f5d3fd6c7ee9d532a25351",
+      "error_type": null,
+      "bytes": 1466,
+      "server_date": "Mon, 23 Nov 2026 13:39:55 GMT",
+      "content_type": "application/csv"
+    },
+    {
+      "indicator": "gold",
+      "requested_at": "2026-11-23T13:39:55.552935+00:00",
+      "completed_at": "2026-11-23T13:39:55.613706+00:00",
+      "endpoint": "https://api.frankfurter.dev/v2/currency/xau",
+      "params": {},
+      "status": 200,
+      "response_sha256": "786265a0dd57b5310c71a3e64e2468f9afec6a50b2e4c2d8c9118b7e4137b465",
+      "error_type": null,
+      "bytes": 253,
+      "server_date": "Mon, 23 Nov 2026 13:39:55 GMT",
+      "content_type": "application/json; charset=utf-8"
+    },
+    {
+      "indicator": "dxy",
+      "requested_at": "2026-11-23T13:39:55.186467+00:00",
+      "completed_at": "2026-11-23T13:39:55.621666+00:00",
+      "endpoint": "https://vip.stock.finance.sina.com.cn/forex/api/jsonp.php/var%20_DATA=/NewForexService.getDayKLine",
+      "params": {
+        "symbol": "DINIW"
+      },
+      "status": 200,
+      "response_sha256": "5d6d5a3a4d6561034a1b30dc995d7bc18b3f6fbbe6f8e7972b038515d57e7848",
+      "error_type": null,
+      "bytes": 477040,
+      "server_date": "Mon, 23 Nov 2026 13:39:55 GMT",
+      "content_type": "application/javascript; charset=gbk"
+    },
+    {
+      "indicator": "vix",
+      "requested_at": "2026-11-23T13:39:55.352681+00:00",
+      "completed_at": "2026-11-23T13:39:55.709966+00:00",
+      "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "params": {
+        "id": "VIXCLS",
+        "cosd": "2026-07-16"
+      },
+      "status": 200,
+      "response_sha256": "b3576f50fd242f7df1b21776ae7eed251f6392d9c1329f1a56566ea401382155",
+      "error_type": null,
+      "bytes": 1571,
+      "server_date": "Mon, 23 Nov 2026 13:39:55 GMT",
+      "content_type": "application/csv"
+    },
+    {
+      "indicator": "hy",
+      "requested_at": "2026-11-23T13:39:55.457521+00:00",
+      "completed_at": "2026-11-23T13:39:55.940510+00:00",
+      "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "params": {
+        "id": "BAMLH0A0HYM2",
+        "cosd": "2026-07-16"
+      },
+      "status": 200,
+      "response_sha256": "159c25f3fdafd7adf905bf645879c2daeb239bf3af64778e561ace5658169005",
+      "error_type": null,
+      "bytes": 1486,
+      "server_date": "Mon, 23 Nov 2026 13:39:55 GMT",
+      "content_type": "application/csv"
+    },
+    {
+      "indicator": "copper",
+      "requested_at": "2026-11-23T13:39:55.821275+00:00",
+      "completed_at": "2026-11-23T13:39:55.982933+00:00",
+      "endpoint": "https://futsse-static.eastmoney.com/redis",
+      "params": {
+        "msgid": "101_4_info"
+      },
+      "status": 200,
+      "response_sha256": "ff7e3cfbb92e31769f029d17bd709c657d289deb593d094cdd633e84ed9563a6",
+      "error_type": null,
+      "bytes": 705,
+      "server_date": "Mon, 23 Nov 2026 13:39:55 GMT",
+      "content_type": "text/plain;charset=utf-8"
+    },
+    {
+      "indicator": "nasdaq100",
+      "requested_at": "2026-11-23T13:39:55.480842+00:00",
+      "completed_at": "2026-11-23T13:39:56.045037+00:00",
+      "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "params": {
+        "id": "NASDAQ100",
+        "cosd": "2026-07-16"
+      },
+      "status": 200,
+      "response_sha256": "cb9d6bfc4a3428f1d18e102f0002aa77d41856f64de04855a2ecfe8958dba0ea",
+      "error_type": null,
+      "bytes": 1917,
+      "server_date": "Mon, 23 Nov 2026 13:39:56 GMT",
+      "content_type": "application/csv"
+    },
+    {
+      "indicator": "sp500",
+      "requested_at": "2026-11-23T13:39:55.477819+00:00",
+      "completed_at": "2026-11-23T13:39:56.056146+00:00",
+      "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "params": {
+        "id": "SP500",
+        "cosd": "2026-07-16"
+      },
+      "status": 200,
+      "response_sha256": "e5b64cfedfd5620d107d9cc8e63b24ed18d6c93b0d32e7e9ea3996e5273f4a70",
+      "error_type": null,
+      "bytes": 1745,
+      "server_date": "Mon, 23 Nov 2026 13:39:56 GMT",
+      "content_type": "application/csv"
+    },
+    {
+      "indicator": "wti",
+      "requested_at": "2026-11-23T13:39:55.711991+00:00",
+      "completed_at": "2026-11-23T13:39:56.064662+00:00",
+      "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "params": {
+        "id": "DCOILWTICO",
+        "cosd": "2026-07-16"
+      },
+      "status": 200,
+      "response_sha256": "3935cd87f26c060bdcd8a93f1e81f140bbf95620c11d416d0da59318933e2037",
+      "error_type": null,
+      "bytes": 1556,
+      "server_date": "Mon, 23 Nov 2026 13:39:56 GMT",
+      "content_type": "application/csv"
+    },
+    {
+      "indicator": "btc",
+      "requested_at": "2026-11-23T13:39:55.941875+00:00",
+      "completed_at": "2026-11-23T13:39:56.154403+00:00",
+      "endpoint": "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart",
+      "params": {
+        "vs_currency": "usd",
+        "days": 90,
+        "interval": "daily"
+      },
+      "status": 200,
+      "response_sha256": "0067e0e8c39d811418eadace8c11c9bb54863161239e9ff468cbb71822e84d15",
+      "error_type": null,
+      "bytes": 9428,
+      "server_date": "Mon, 23 Nov 2026 13:39:56 GMT",
+      "content_type": "application/json; charset=utf-8"
+    },
+    {
+      "indicator": "eth",
+      "requested_at": "2026-11-23T13:39:56.046636+00:00",
+      "completed_at": "2026-11-23T13:39:56.292888+00:00",
+      "endpoint": "https://api.coingecko.com/api/v3/coins/ethereum/market_chart",
+      "params": {
+        "vs_currency": "usd",
+        "days": 90,
+        "interval": "daily"
+      },
+      "status": 200,
+      "response_sha256": "621c8ea63d8a98e39cc13666601346464bf97ccad50aa9e6481db88114100d4c",
+      "error_type": null,
+      "bytes": 9476,
+      "server_date": "Mon, 23 Nov 2026 13:39:56 GMT",
+      "content_type": "application/json; charset=utf-8"
+    },
+    {
+      "indicator": "copper",
+      "requested_at": "2026-11-23T13:39:55.984320+00:00",
+      "completed_at": "2026-11-23T13:39:56.551012+00:00",
+      "endpoint": "https://push2his.eastmoney.com/api/qt/stock/kline/get",
+      "params": {
+        "secid": "101.HG00Y",
+        "klt": 101,
+        "fqt": 0,
+        "lmt": 100,
+        "end": "20500101"
+      },
+      "status": null,
+      "response_sha256": null,
+      "error_type": "ConnectionError"
+    },
+    {
+      "indicator": "usdcnh",
+      "requested_at": "2026-11-23T13:39:56.066890+00:00",
+      "completed_at": "2026-11-23T13:39:56.672154+00:00",
+      "endpoint": "https://api.frankfurter.dev/v2/currency/cnh",
+      "params": {},
+      "status": 200,
+      "response_sha256": "75d1e9ba0e0e07f9835cc4162ca5ea0e0321ee3df998cf56c7fa26264d854a09",
+      "error_type": null,
+      "bytes": 221,
+      "server_date": "Mon, 23 Nov 2026 13:39:56 GMT",
+      "content_type": "application/json; charset=utf-8"
+    },
+    {
+      "indicator": "aux3m",
+      "requested_at": "2026-11-23T13:39:56.156279+00:00",
+      "completed_at": "2026-11-23T13:39:56.690286+00:00",
+      "endpoint": "https://fred.stlouisfed.org/graph/fredgraph.csv",
+      "params": {
+        "id": "DGS3MO",
+        "cosd": "2026-07-16"
+      },
+      "status": 200,
+      "response_sha256": "e84de42044b55d15d2252d0dce1151fbdc46c0e2a9795ee8a001c7b5119a12a6",
+      "error_type": null,
+      "bytes": 1468,
+      "server_date": "Mon, 23 Nov 2026 13:39:56 GMT",
+      "content_type": "application/csv"
+    },
+    {
+      "indicator": "copper",
+      "requested_at": "2026-11-23T13:39:56.551246+00:00",
+      "completed_at": "2026-11-23T13:39:57.004291+00:00",
+      "endpoint": "https://push2.eastmoney.com/api/qt/stock/get",
+      "params": {
+        "secid": "101.HG00Y"
+      },
+      "status": 502,
+      "response_sha256": "24fe03fdb26088bfff8b1363911c29c79a19614bca42cdcdb9fefdf52917aeb1",
+      "error_type": "HTTPError",
+      "bytes": 157,
+      "server_date": "Mon, 23 Nov 2026 13:39:56 GMT",
+      "content_type": "text/html"
+    },
+    {
+      "indicator": "usdjpy",
+      "requested_at": "2026-11-23T13:39:56.059497+00:00",
+      "completed_at": "2026-11-23T13:39:58.070426+00:00",
+      "endpoint": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml",
+      "params": {},
+      "status": 200,
+      "response_sha256": "9fdd74ca9b9a59d3851e86046befa6a4ebc18684909361713fb8bdc5bcce873d",
+      "error_type": null,
+      "bytes": 70578,
+      "server_date": "Mon, 23 Nov 2026 13:39:57 GMT",
+      "content_type": "text/xml",
+      "raw_path": "data/raw/ecb-9fdd74ca9b9a59d3851e86046befa6a4ebc18684909361713fb8bdc5bcce873d.xml",
+      "raw_reuse_basis": "https://www.ecb.europa.eu/services/disclaimer/html/index.en.html"
+    },
+    {
+      "indicator": "gold",
+      "requested_at": "2026-11-23T13:39:55.614665+00:00",
+      "completed_at": "2026-11-23T13:40:07.724278+00:00",
+      "endpoint": "https://api.frankfurter.dev/v2/rates",
+      "params": {
+        "base": "XAU",
+        "quotes": "USD",
+        "from": "2026-07-16",
+        "to": "2026-11-22",
+        "expand": "providers"
+      },
+      "status": 200,
+      "response_sha256": "9cc0506e9d4fb4720fd62c9a1287e96ea648877c29281245ebcfe116e17af6f9",
+      "error_type": null,
+      "bytes": 101373,
+      "server_date": "Mon, 23 Nov 2026 13:40:00 GMT",
+      "content_type": "application/json; charset=utf-8"
+    },
+    {
+      "indicator": "usdcnh",
+      "requested_at": "2026-11-23T13:39:56.673606+00:00",
+      "completed_at": "2026-11-23T13:40:08.561984+00:00",
+      "endpoint": "https://api.frankfurter.dev/v2/rates",
+      "params": {
+        "base": "USD",
+        "quotes": "CNH",
+        "from": "2026-07-16",
+        "to": "2026-11-22",
+        "expand": "providers"
+      },
+      "status": 200,
+      "response_sha256": "e13454c584ae78e986b74489122cf678f5efa7c45558fdb2fe2971a27f39ff84",
+      "error_type": null,
+      "bytes": 51531,
+      "server_date": "Mon, 23 Nov 2026 13:40:01 GMT",
+      "content_type": "application/json; charset=utf-8"
+    }
+  ],
+  "outcomes": [
+    {
+      "id": "real10y",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-19",
+      "observations": 88
+    },
+    {
+      "id": "spread10y2y",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-20",
+      "observations": 89
+    },
+    {
+      "id": "spread10y3m",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-20",
+      "observations": 89
+    },
+    {
+      "id": "us10y",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-19",
+      "observations": 88
+    },
+    {
+      "id": "us2y",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-19",
+      "observations": 88
+    },
+    {
+      "id": "vix",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-19",
+      "observations": 91
+    },
+    {
+      "id": "dxy",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-06-08",
+      "source_last_date": "2026-11-20",
+      "observations": 120
+    },
+    {
+      "id": "hy",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-19",
+      "observations": 91
+    },
+    {
+      "id": "nasdaq100",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-19",
+      "observations": 90
+    },
+    {
+      "id": "sp500",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-19",
+      "observations": 90
+    },
+    {
+      "id": "wti",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-17",
+      "observations": 88
+    },
+    {
+      "id": "btc",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-08-25",
+      "source_last_date": "2026-11-22",
+      "observations": 90
+    },
+    {
+      "id": "eth",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-08-25",
+      "source_last_date": "2026-11-22",
+      "observations": 90
+    },
+    {
+      "id": "aux3m",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-19",
+      "observations": 88
+    },
+    {
+      "id": "copper",
+      "status": "error",
+      "error": "HTTPError",
+      "source_first_date": null,
+      "source_last_date": null,
+      "observations": 0
+    },
+    {
+      "id": "usdjpy",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-08-24",
+      "source_last_date": "2026-11-20",
+      "observations": 65
+    },
+    {
+      "id": "gold",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-26",
+      "source_last_date": "2026-11-22",
+      "observations": 120
+    },
+    {
+      "id": "usdcnh",
+      "status": "ok",
+      "error": null,
+      "source_first_date": "2026-07-16",
+      "source_last_date": "2026-11-22",
+      "observations": 112
+    }
+  ],
+  "revisions": [
+    {
+      "id": "gold",
+      "date": "2026-11-22",
+      "old_value": 3638.52,
+      "new_value": 3623.25,
+      "old_components": [
+        {
+          "provider": "BCBO",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BCP",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BNR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BOM",
+          "date": "2026-11-22"
+        },
+        {
+          "provider": "CBA",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBAR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBO",
+          "date": "2026-11-22"
+        },
+        {
+          "provider": "CBR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBSL",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBM",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBP",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBU",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "PMA",
+          "date": "2026-11-19"
+        }
+      ],
+      "new_components": [
+        {
+          "provider": "BCBO",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BCP",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BNR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BOM",
+          "date": "2026-11-22"
+        },
+        {
+          "provider": "CBA",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBAR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBO",
+          "date": "2026-11-22"
+        },
+        {
+          "provider": "CBR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBSL",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBM",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBP",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBU",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "PMA",
+          "date": "2026-11-22"
+        }
+      ]
+    }
+  ],
+  "generated_files": {
+    "data/snapshot.json": "e787d63283e90da3f239ccc704617bb5ed7851dd55462504eb5915ebb8bb5388",
+    "data/history.json": "c67b464e5a21c0b9da00c4839687e911824f45e0b88251801b8d1cbcef701387"
+  },
+  "raw_policy": "Only bounded public ECB statistical XML retained; other responses have metadata/hash only, not an implied redistribution permission."
+}

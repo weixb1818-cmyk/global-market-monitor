@@ -2,6 +2,10 @@
 """Fetch and validate daily close observations; never invent a quote."""
 from __future__ import annotations
 import concurrent.futures, csv, io, json, logging, math, os, re, sys, tempfile
+try:
+    from scripts.source_evidence import Evidence, revisions
+except ModuleNotFoundError:
+    from source_evidence import Evidence, revisions
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -15,6 +19,22 @@ CONFIG = json.loads((ROOT / 'config.json').read_text(encoding='utf-8'))
 ET = ZoneInfo('America/New_York')
 UTC = timezone.utc
 LOG = logging.getLogger('update')
+EVIDENCE = None
+
+
+def get_response(url, params=None, headers=None, timeout=18):
+    started=datetime.now(UTC).isoformat(); response=None
+    try:
+        response=requests.get(url,params=params,headers=headers,timeout=timeout)
+        response.raise_for_status()
+        return response
+    except Exception as exc:
+        if EVIDENCE: EVIDENCE.record(url,params,response,started,exc)
+        raise
+    finally:
+        if EVIDENCE and response is not None and 200 <= response.status_code < 400:
+            EVIDENCE.record(url,params,response,started)
+
 
 
 def observations(rows):
@@ -31,7 +51,7 @@ def observations(rows):
 
 
 def request_json(url, params=None, headers=None):
-    response = requests.get(url, params=params, headers=headers, timeout=18)
+    response = get_response(url, params=params, headers=headers, timeout=18)
     response.raise_for_status()
     return response.json()
 
@@ -43,7 +63,7 @@ def fred(symbol, now):
         if 'observations' not in body: raise ValueError('FRED response missing observations')
         rows = body['observations']
     else:
-        response = requests.get('https://fred.stlouisfed.org/graph/fredgraph.csv', params={'id':symbol,'cosd':(now.date()-timedelta(days=130)).isoformat()}, timeout=18)
+        response = get_response('https://fred.stlouisfed.org/graph/fredgraph.csv', params={'id':symbol,'cosd':(now.date()-timedelta(days=130)).isoformat()}, timeout=18)
         response.raise_for_status()
         reader = csv.DictReader(io.StringIO(response.text))
         if not reader.fieldnames or symbol not in reader.fieldnames: raise ValueError('invalid FRED CSV')
@@ -80,7 +100,7 @@ def twelve(symbol, now):
 
 
 def ecb_usdjpy(now):
-    response = requests.get('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml', timeout=18)
+    response = get_response('https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml', timeout=18)
     response.raise_for_status()
     root = ElementTree.fromstring(response.content)
     rows = []
@@ -147,11 +167,11 @@ def sina_dxy(item, now):
     if item['symbol'] != 'DXY' or item.get('vendor_symbol') != 'DINIW':
         raise ValueError('只接受DINIW美元指数，不使用美元期货或其他美元指数')
     headers = {'Referer':'https://finance.sina.com.cn/'}
-    quote = requests.get('https://hq.sinajs.cn/list=DINIW', headers=headers, timeout=18)
+    quote = get_response('https://hq.sinajs.cn/list=DINIW', headers=headers, timeout=18)
     quote.raise_for_status(); quote.encoding = 'gb18030'
     if not re.fullmatch(r'\s*var hq_str_DINIW="[^"\r\n]*,美元指数,[^"\r\n]*";\s*',quote.text):
         raise ValueError('新浪DINIW品种元数据不符')
-    response = requests.get('https://vip.stock.finance.sina.com.cn/forex/api/jsonp.php/var%20_DATA=/NewForexService.getDayKLine',
+    response = get_response('https://vip.stock.finance.sina.com.cn/forex/api/jsonp.php/var%20_DATA=/NewForexService.getDayKLine',
                             params={'symbol':'DINIW'},headers=headers,timeout=18)
     response.raise_for_status()
     # Parse a JSON string inside a fixed JSONP envelope; never execute downloaded JavaScript.
@@ -291,6 +311,7 @@ def external(item, now):
 
 
 def fetch(item, now):
+    if EVIDENCE: EVIDENCE.set_item(item)
     if item['provider']=='fred': result = fred(item['symbol'], now)
     elif item['provider']=='coingecko': result = coingecko(item['symbol'], now)
     elif item['provider']=='twelve': result = twelve(item['symbol'], now)
@@ -360,10 +381,16 @@ def calculate(item, points, source, error, now, thresholds):
     data={**item,'value':latest*100 if item['kind']=='spread' else latest,'change_1':delta(1),'change_20':delta(20),'as_of':points[-1]['date'],'observation_count':len(points),'source':source,'status':'stale' if stale else ('error' if error else 'ok'),'error':error}
     if points[-1].get('components'):
         data['source_components'] = points[-1]['components']
+    if points[-1].get('components'):
+        dates=sorted({p['date'] for p in points[-1]['components']})
+        data['component_dates']=dates
+        data['mixed_component_dates']=len(dates)>1
+        if len(dates)>1: data['warning']='合成参考价混合不同来源日期：'+','.join(dates)+'；历史可能修订'
+    if item['id']=='copper': data['warning']='换月口径未完全核实；跨换月历史变化谨慎解读'
     data['interpretation']=interpret(data, thresholds)
-    if not stale and item['id']=='vix' and data['value']>=thresholds['vix_high']:
+    if valid_card(data) and item['id']=='vix' and data['value']>=thresholds['vix_high']:
         data['interpretation']+='；波动率仍处高位'
-    if not stale and item['id']=='hy' and data['value']>=thresholds['hy_high_bp']:
+    if valid_card(data) and item['id']=='hy' and data['value']>=thresholds['hy_high_bp']:
         data['interpretation']+='；信用利差仍处高位'
     return data
 
@@ -371,6 +398,7 @@ def calculate(item, points, source, error, now, thresholds):
 def interpret(x,t):
     v=x['value']; c=x['change_20']; k=x['id']
     if x['status'] in ('stale','missing'): return '数据暂未更新，截至'+(x['as_of'] or '未知')
+    if not valid_card(x): return '本轮获取失败或状态未核实；仅保留历史，截至'+(x.get('as_of') or '未知')
     if c is None: return '近20期数据不足，暂不解读方向'
     if k=='dxy': return '美元走强，关注全球风险资产压力' if c>=t['dxy_pct'] else '美元走弱，外部美元压力可能缓解' if c<=-t['dxy_pct'] else '美元阶段性震荡，方向尚不明显'
     if k=='us2y': return '短端利率下行，市场可能增加降息定价' if c<=t['two_year_down_bp'] else '短端利率上行，政策利率预期偏紧' if c>=t['two_year_up_bp'] else '短端利率变化有限，关注政策预期'
@@ -387,16 +415,17 @@ def interpret(x,t):
         return ('美元相对'+target+'升值，关注汇率波动') if c>0 else ('美元相对'+target+'贬值，关注汇率波动') if c<0 else '汇率近20期基本持平，关注后续变化'
     direction='上涨' if c>=t['asset_pct'] else '下跌' if c<=-t['asset_pct'] else '震荡'
     if k=='gold' and x.get('series_definition')=='gold-blended-reference-v1':
-        return '合成参考近20期'+direction+'，不等同现货收盘'
-    notes={'sp500':'关注大盘风险偏好','nasdaq100':'成长及科技权重较高','gold':'需结合实际利率与美元判断','wti':'关注能源供需变化','copper':'关注工业需求变化','btc':'关注价格波动','eth':'关注价格波动'}
+        return '合成参考近20期'+direction+('；成分日期混合，历史可能修订' if x.get('mixed_component_dates') else '，非COMEX可成交价格')
+    notes={'sp500':'关注大盘风险偏好','nasdaq100':'成长及科技权重较高','gold':'需结合实际利率与美元判断','wti':'库欣现货历史趋势，非当日期货信号','copper':'换月口径未完全核实，跨期变化谨慎解读','btc':'关注价格波动','eth':'关注价格波动'}
     return '近20期'+direction+'，'+notes.get(k,'关注后续走势')
 
 
-def curve_drivers(cards, histories, t):
+def curve_drivers(cards, histories, t, invalid_ids=()):
     # Drivers must use endpoints common to the published curve and both yields.
     for sid, short in [('spread10y2y','us2y'),('spread10y3m','aux3m')]:
         card=cards[sid]
-        if card['status'] in ('missing','stale') or card['change_20'] is None or card['change_20']<t['curve_bp']: continue
+        if any(k in invalid_ids for k in (sid,'us10y',short)): continue
+        if not valid_card(card) or card['change_20'] is None or card['change_20']<t['curve_bp']: continue
         curve=histories.get(sid,[])
         if len(curve)<21: continue
         a,b=curve[-21]['date'],curve[-1]['date']
@@ -409,11 +438,18 @@ def curve_drivers(cards, histories, t):
         card['interpretation']+='；'+driver
 
 
+def valid_card(card, trend=False):
+    """A retained number is not evidence of a successful current fetch."""
+    def finite(v): return isinstance(v,(int,float)) and not isinstance(v,bool) and math.isfinite(v)
+    return (card.get('status') == 'ok' and not card.get('error') and finite(card.get('value'))
+            and (not trend or finite(card.get('change_20'))))
+
+
 def risk_levels(cards, t):
     alerts=[]
     for key, threshold, unit, label in [('vix',t['vix_high'],'点','波动率处于较高水平'),('hy',t['hy_high_bp'],'bp','信用利差处于较高水平')]:
         c=cards.get(key,{})
-        if c.get('value') is not None and c.get('status') not in ('stale','missing') and c['value']>=threshold:
+        if valid_card(c) and c['value']>=threshold:
             alerts.append({'id':key,'as_of':c.get('as_of'),'value':c['value'],'unit':unit,'message':label})
     return alerts
 
@@ -422,14 +458,14 @@ def classify(cards,t):
     required=['dxy','real10y','us2y','hy','vix']
     def invalid(k):
         c=cards.get(k,{})
-        return c.get('change_20') is None or c.get('value') is None or c.get('status') in ('stale','missing')
+        return not valid_card(c, trend=True)
     missing=[k for k in required if invalid(k)]
     dates={k:cards[k].get('as_of') for k in required if k in cards and not invalid(k)}
     alerts=risk_levels(cards,t)
     base={'complete':not missing,'mode':'full' if not missing else 'insufficient','missing':[cards.get(k,{}).get('name',k) for k in missing],'signal_dates':dates,'risk_alerts':alerts}
     non_dxy=[k for k in missing if k!='dxy']
     if non_dxy:
-        return {**base,'state':'数据不足：暂不判断','reason':'关键数据缺失或过期：'+'、'.join(base['missing']),'uncertainty':'无法可靠判断；仅展示仍有效的绝对风险水平','signals':[]}
+        return {**base,'state':'数据不足：暂不判断','reason':'关键数据异常、缺失或过期：'+'、'.join(base['missing']),'uncertainty':'无法可靠判断；仅展示本轮获取成功且仍有效的绝对风险水平','signals':[]}
     r=cards['real10y']['change_20']; y=cards['us2y']['change_20']; h=cards['hy']['change_20']; v=cards['vix']['change_20']; hn=cards['hy']['value']; vn=cards['vix']['value']
     credit=h>=t['hy_bp']; vol=v>=t['vix_pt']
     def signal(k,text):
@@ -442,7 +478,7 @@ def classify(cards,t):
         elif credit: reason='信用利差扩大，关注信用风险变化'
         elif r>=t['real_bp']: reason='实际利率上行，估值与融资成本压力增加'
         else: reason='信用与波动未共同恶化；不能据此确认整体宽松'
-        return {**base,'mode':'limited','state':'有限风险提示','reason':reason,'uncertainty':'DXY缺失或过期，结论不完整；不判断美元相关整体金融条件','signals':signals}
+        return {**base,'mode':'limited','state':'有限风险提示','reason':reason,'uncertainty':'DXY异常、缺失或过期，结论不完整；不判断美元相关整体金融条件','signals':signals}
     d=cards['dxy']['change_20']
     if credit and vol: state='金融压力扩散'; reason='信用利差与波动率共同上升，市场防御需求增强'
     elif y<=t['two_year_down_bp'] and (credit or vol): state='增长担忧定价'; reason='短端利率下行，但信用或波动信号恶化；降息预期未必利好风险资产'
@@ -460,20 +496,40 @@ def classify(cards,t):
     return {**base,'state':state,'reason':reason,'uncertainty':uncertainty,'signals':[signal('dxy',f'美元 {d:+.2f}%'),signals[0],signal('hy',f'HY {h:+.0f}bp')+' / '+signal('vix',f'VIX {v:+.1f}点')], 'signal_dates':dates}
 
 
-def compare_spreads(cards, series, t):
+def compare_spreads(cards, series, t, invalid_ids=()):
     checks=[]
+    common={c['id']:c['latest_common'] for c in spread_history_checks(series,t)}
     for sid,short in [('spread10y2y','us2y'),('spread10y3m','aux3m')]:
         a={p['date']:p['value'] for p in series.get('us10y',[])}; b={p['date']:p['value'] for p in series.get(short,[])}
         c=cards[sid]; d=c['as_of']
-        if c['value'] is None or d not in a or d not in b:
-            checks.append({'id':sid,'as_of':d,'status':'not_comparable','reason':'尚未完成同日底层交叉核验：缺少同一日期的长短端收益率，未跨日期相减'})
+        if any(k in invalid_ids for k in (sid,'us10y',short)) or c.get('error') or c.get('status','ok')!='ok' or c['value'] is None or d not in a or d not in b or not all(isinstance(v,(int,float)) and math.isfinite(v) for v in (c['value'],a.get(d),b.get(d))):
+            checks.append({'id':sid,'as_of':d,'status':'not_comparable','reason':'尚未完成同日底层交叉核验：缺少同一日期的有效长短端收益率，未跨日期相减','latest_common':common[sid]})
             continue
         computed=(a[d]-b[d])*100; difference=abs(c['value']-computed)
-        status='warning' if difference>t['spread_check_bp'] else 'ok'
-        checks.append({'id':sid,'as_of':d,'status':status,'official_bp':c['value'],'same_date_bp':computed,'difference_bp':difference})
+        status='warning' if difference>t['spread_check_bp']+1e-9 else 'ok'
+        checks.append({'id':sid,'as_of':d,'status':status,'official_bp':c['value'],'long_yield_pct':a[d],'short_yield_pct':b[d],'same_date_bp':computed,'signed_difference_bp':c['value']-computed,'difference_bp':difference,'tolerance_bp':t['spread_check_bp']})
+        # A later official date can be unavailable while older common dates can
+        # still be verified. Never present an older check as today's verification.
         if status=='warning':
             LOG.warning('%s official spread differs from same-date yields',sid)
             c['warning']='官方利差与同日收益率计算值不一致'
+    return checks
+
+
+def spread_history_checks(series, t):
+    checks=[]
+    for sid,short in [('spread10y2y','us2y'),('spread10y3m','aux3m')]:
+        maps=[{p['date']:p['value'] for p in series.get(k,[])} for k in (sid,'us10y',short)]
+        rows=[]
+        for d in sorted(set(maps[0]) & set(maps[1]) & set(maps[2])):
+            official,long,sh=(m[d] for m in maps)
+            if not all(isinstance(v,(int,float)) and math.isfinite(v) for v in (official,long,sh)): continue
+            computed=(long-sh)*100; difference=official*100-computed
+            rows.append({'as_of':d,'official_bp':official*100,'long_yield_pct':long,'short_yield_pct':sh,
+                         'same_date_bp':computed,'signed_difference_bp':difference,'difference_bp':abs(difference),
+                         'status':'warning' if abs(difference)>t['spread_check_bp']+1e-9 else 'ok'})
+        checks.append({'id':sid,'tolerance_bp':t['spread_check_bp'],'observations':len(rows),
+                       'warnings':sum(r['status']=='warning' for r in rows),'latest_common':rows[-1] if rows else None,'comparisons':rows})
     return checks
 
 
@@ -489,6 +545,25 @@ def atomic(path, obj):
 
 
 def run(now=None):
+    global EVIDENCE
+    try:
+        return _run(now)
+    except Exception as exc:
+        if EVIDENCE and (ROOT/'data').exists():
+            try:
+                EVIDENCE.outcome('run',error=type(exc).__name__)
+                atomic(ROOT/'data/source_evidence.json',EVIDENCE.finish(ROOT/'data/snapshot.json',ROOT/'data/history.json',[]))
+            except Exception:
+                LOG.warning('无法写入失败请求证据')
+        raise
+    finally:
+        EVIDENCE=None
+
+
+def _run(now=None):
+    global EVIDENCE
+    EVIDENCE=Evidence(ROOT, update_context())
+    revision_log=[]
     now=now or datetime.now(UTC)
     out=ROOT/'data'; out.mkdir(exist_ok=True)
     hp=out/'history.json'; sp=out/'snapshot.json'
@@ -509,15 +584,19 @@ def run(now=None):
                 points,source=future.result(); prior=observations(series.get(k,[])); combined=observations(prior+points)
                 if k=='copper': validate_copper_history(combined[-120:])
                 # A provider may return an older period; merge without erasing valid history.
+                revision_log.extend({'id':k,**r} for r in revisions(prior,points))
                 series[k]=combined[-120:]; sources[k]=source; success+=int(k!='aux3m')
+                EVIDENCE.outcome(k,points)
             except Exception as e:
+                EVIDENCE.outcome(k,error=type(e).__name__)
                 errors[k]='数据源网络请求失败' if isinstance(e,requests.RequestException) else str(e)[:160]; LOG.warning('%s: %s',k,errors[k])
     if not success and sp.exists():
         atomic(out/'last_attempt.json',{'at':now.isoformat(),'status':'failed','message':'所有数据源更新失败，保留上次快照','update_context':update_context()})
+        atomic(out/'source_evidence.json',EVIDENCE.finish(sp,hp,revision_log)); EVIDENCE=None
         return False
     cards={item['id']:calculate(item,observations(series.get(item['id'],[])),sources.get(item['id']),errors.get(item['id']),now,CONFIG['thresholds']) for item in CONFIG['indicators']}
-    curve_drivers(cards,series,CONFIG['thresholds'])
-    spread_checks=compare_spreads(cards,series,CONFIG['thresholds'])
+    curve_drivers(cards,series,CONFIG['thresholds'], invalid_ids=errors)
+    spread_checks=compare_spreads(cards,series,CONFIG['thresholds'], invalid_ids=errors)
     # Prepare a calendar for the client to re-evaluate freshness even when scheduled updates fail.
     year=now.astimezone(ET).year
     first=date(year-1,1,1);last=date(year+1,12,31)
@@ -525,9 +604,10 @@ def run(now=None):
     # Retain this field for older clients during CDN propagation.
     calendar['bond_holidays']=[d.isoformat() for d in holidays.US(years=[year-1,year,year+1])]
     limited_cards={**cards,'dxy':{**cards['dxy'],'value':None,'change_20':None,'status':'missing'}}
-    snapshot={'generated_at':now.isoformat(),'timezone':'Asia/Tokyo','indicators':list(cards.values()),'macro':classify(cards,CONFIG['thresholds']),'limited_macro':classify(limited_cards,CONFIG['thresholds']),'risk_alerts':risk_levels(cards,CONFIG['thresholds']),'spread_checks':spread_checks,'history_checks':[copper_history_check(series.get('copper',[]))],'thresholds':CONFIG['thresholds'],'calendar':calendar,'sources_failed':sum(k in errors for k in cards),'update_context':update_context()}
+    snapshot={'generated_at':now.isoformat(),'timezone':'Asia/Tokyo','indicators':list(cards.values()),'macro':classify(cards,CONFIG['thresholds']),'limited_macro':classify(limited_cards,CONFIG['thresholds']),'risk_alerts':risk_levels(cards,CONFIG['thresholds']),'spread_checks':spread_checks,'spread_history_checks':spread_history_checks(series,CONFIG['thresholds']),'history_checks':[copper_history_check(series.get('copper',[]))],'thresholds':CONFIG['thresholds'],'calendar':calendar,'sources_failed':sum(k in errors for k in cards),'update_context':update_context()}
     atomic(hp,{'series':series,'sources':sources,'definitions':history['definitions']}); atomic(sp,snapshot)
     atomic(out/'last_attempt.json',{'at':now.isoformat(),'status':'partial' if errors else 'ok','message':f'{sum(k in errors for k in cards)} 项来源未更新' if errors else '更新完成','update_context':update_context()})
+    atomic(out/'source_evidence.json',EVIDENCE.finish(sp,hp,revision_log)); EVIDENCE=None
     return True
 
 if __name__=='__main__':
