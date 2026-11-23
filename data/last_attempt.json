@@ -1,10 +1,10 @@
 {
-  "at": "2026-11-22T06:55:10.313626+00:00",
+  "at": "2026-11-23T07:44:43.513085+00:00",
   "status": "ok",
   "message": "更新完成",
   "update_context": {
     "event": "schedule",
     "schedule": "15 0 * * *",
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44995841393"
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-22T06:55:10.313626+00:00",
+  "generated_at": "2026-11-23T07:44:43.513085+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -209,10 +209,10 @@
       "source_url": "https://frankfurter.dev/",
       "source_label": null,
       "quote_note": "多源合成参考价，非现货收盘或COMEX期货；上游可能不同日。",
-      "value": 3653.45,
-      "change_1": 0.0,
-      "change_20": -8.282894720326151,
-      "as_of": "2026-11-21",
+      "value": 3638.52,
+      "change_1": -0.4086548331029505,
+      "change_20": -7.461297238732511,
+      "as_of": "2026-11-22",
       "observation_count": 120,
       "source": "Frankfurter / XAU/USD / 多源合成参考价，非收盘",
       "status": "ok",
@@ -232,7 +232,7 @@
         },
         {
           "provider": "BOM",
-          "date": "2026-11-21"
+          "date": "2026-11-22"
         },
         {
           "provider": "CBA",
@@ -244,7 +244,7 @@
         },
         {
           "provider": "CBO",
-          "date": "2026-11-19"
+          "date": "2026-11-22"
         },
         {
           "provider": "CBR",
@@ -327,11 +327,11 @@
       "unit": "USD",
       "kind": "price",
       "calendar": "crypto",
-      "value": 60121.30168956966,
-      "change_1": 2.2159504585530065,
-      "change_20": -23.210686329064078,
-      "as_of": "2026-11-21",
-      "observation_count": 92,
+      "value": 61172.01580644091,
+      "change_1": 1.7476569657398855,
+      "change_20": -20.2548689657013,
+      "as_of": "2026-11-22",
+      "observation_count": 93,
       "source": "CoinGecko / UTC 00:00",
       "status": "ok",
       "error": null,
@@ -346,11 +346,11 @@
       "unit": "USD",
       "kind": "price",
       "calendar": "crypto",
-      "value": 1682.8520025853304,
-      "change_1": 3.911213269946945,
-      "change_20": -25.99348378127855,
-      "as_of": "2026-11-21",
-      "observation_count": 92,
+      "value": 1721.6166685470128,
+      "change_1": 2.3035101067787833,
+      "change_20": -23.49118886033508,
+      "as_of": "2026-11-22",
+      "observation_count": 93,
       "source": "CoinGecko / UTC 00:00",
       "status": "ok",
       "error": null,
@@ -390,18 +390,18 @@
       "series_definition": "cnh-blended-reference-v1",
       "source_url": "https://frankfurter.dev/currencies/cnh/",
       "quote_note": "准确CNH离岸人民币，多源合成参考汇率，非纽约收盘；上游可能不同日。",
-      "value": 6.6724,
-      "change_1": 0.088502212555297,
-      "change_20": 0.1711454736526008,
-      "as_of": "2026-11-20",
-      "observation_count": 113,
+      "value": 6.6736,
+      "change_1": 0.01798453330137395,
+      "change_20": 0.23129374305368433,
+      "as_of": "2026-11-22",
+      "observation_count": 114,
       "source": "Frankfurter / USD/CNH / 多源合成参考价，非收盘",
       "status": "ok",
       "error": null,
       "source_components": [
         {
           "provider": "BB",
-          "date": "2026-11-19"
+          "date": "2026-11-22"
         },
         {
           "provider": "BCBO",
@@ -3636,6 +3636,6 @@
   "update_context": {
     "event": "schedule",
     "schedule": "15 0 * * *",
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44995841393"
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595"
   }
 }

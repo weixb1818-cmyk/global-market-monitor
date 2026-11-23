@@ -4076,6 +4076,10 @@
       {
         "date": "2026-11-21",
         "value": 1682.8520025853304
+      },
+      {
+        "date": "2026-11-22",
+        "value": 1721.6166685470128
       }
     ],
     "btc": [
@@ -4446,6 +4450,10 @@
       {
         "date": "2026-11-21",
         "value": 60121.30168956966
+      },
+      {
+        "date": "2026-11-22",
+        "value": 61172.01580644091
       }
     ],
     "wti": [
@@ -5073,64 +5081,6 @@
       }
     ],
     "gold": [
-      {
-        "date": "2026-07-25",
-        "value": 4077.45,
-        "components": [
-          {
-            "provider": "BCBO",
-            "date": "2026-07-24"
-          },
-          {
-            "provider": "BCP",
-            "date": "2026-07-24"
-          },
-          {
-            "provider": "BNR",
-            "date": "2026-07-24"
-          },
-          {
-            "provider": "BOM",
-            "date": "2026-07-25"
-          },
-          {
-            "provider": "CBA",
-            "date": "2026-07-24"
-          },
-          {
-            "provider": "CBAR",
-            "date": "2026-07-24"
-          },
-          {
-            "provider": "CBO",
-            "date": "2026-07-23"
-          },
-          {
-            "provider": "CBR",
-            "date": "2026-07-24"
-          },
-          {
-            "provider": "CBSL",
-            "date": "2026-07-24"
-          },
-          {
-            "provider": "NBM",
-            "date": "2026-07-24"
-          },
-          {
-            "provider": "NBP",
-            "date": "2026-07-24"
-          },
-          {
-            "provider": "NBU",
-            "date": "2026-07-24"
-          },
-          {
-            "provider": "PMA",
-            "date": "2026-07-23"
-          }
-        ]
-      },
       {
         "date": "2026-07-26",
         "value": 4066.09,
@@ -12032,6 +11982,64 @@
             "date": "2026-11-19"
           }
         ]
+      },
+      {
+        "date": "2026-11-22",
+        "value": 3638.52,
+        "components": [
+          {
+            "provider": "BCBO",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "BCP",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "BNR",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "BOM",
+            "date": "2026-11-22"
+          },
+          {
+            "provider": "CBA",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "CBAR",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "CBO",
+            "date": "2026-11-22"
+          },
+          {
+            "provider": "CBR",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "CBSL",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "NBM",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "NBP",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "NBU",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "PMA",
+            "date": "2026-11-19"
+          }
+        ]
       }
     ],
     "usdcnh": [
@@ -16298,6 +16306,44 @@
           {
             "provider": "BB",
             "date": "2026-11-19"
+          },
+          {
+            "provider": "BCBO",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "BCRA",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "BI",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "BM",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "CBS",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "CBSL",
+            "date": "2026-11-20"
+          },
+          {
+            "provider": "NBC",
+            "date": "2026-11-20"
+          }
+        ]
+      },
+      {
+        "date": "2026-11-22",
+        "value": 6.6736,
+        "components": [
+          {
+            "provider": "BB",
+            "date": "2026-11-22"
           },
           {
             "provider": "BCBO",
