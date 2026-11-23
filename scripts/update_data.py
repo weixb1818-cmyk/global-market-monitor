@@ -170,12 +170,47 @@ def sina_dxy(item, now):
     return observations(rows), '新浪财经 / DINIW / 美元指数日线，非DX期货'
 
 
+class CopperHistoryError(ValueError):
+    pass
+
+
+def copper_history_check(rows):
+    dates = [date.fromisoformat(p['date']) for p in rows]
+    unique = set(dates)
+    expected = set(session_dates(min(dates),max(dates),'cme')) if dates else set()
+    missing = sorted(d.isoformat() for d in expected-unique)
+    unexpected = sorted(d.isoformat() for d in unique-expected)
+    ordered = dates == sorted(dates)
+    valid = len(dates) == len(unique) and ordered and not missing and not unexpected
+    return {'id':'copper','status':('ok' if valid else 'warning') if dates else 'missing',
+            'observations':len(dates),'unique_dates':len(unique),'ascending':ordered,
+            'first_date':min(dates).isoformat() if dates else None,
+            'last_date':max(dates).isoformat() if dates else None,
+            'expected_cme_sessions':len(expected),'missing_sessions':missing,
+            'unexpected_dates':unexpected,'rollover_rule_verified':False}
+
+
+def validate_copper_history(rows):
+    check = copper_history_check(rows)
+    problems = []
+    if check['observations'] != check['unique_dates']: problems.append('日期重复')
+    if not check['ascending']: problems.append('日期未升序排列')
+    if check['missing_sessions']: problems.append('缺少CME交易日：'+','.join(check['missing_sessions'][:5]))
+    if check['unexpected_dates']: problems.append('非CME交易日：'+','.join(check['unexpected_dates'][:5]))
+    if problems: raise CopperHistoryError('铜历史完整性异常：'+'；'.join(problems))
+    return check
+
+
 def eastmoney_copper(item, now):
     if item['symbol'] != 'HG00Y' or item['unit'] != 'USD/lb':
         raise ValueError('只接受COMEX铜HG00Y，单位USD/lb')
     info = request_json('https://futsse-static.eastmoney.com/redis',{'msgid':'101_4_info'})
-    if info.get('vcode') != 'HG' or info.get('vname') != 'COMEX铜' or '美元/磅' not in info.get('zxbddw',''):
+    quote_unit = re.sub(r'\s+','',info.get('bjdw',''))
+    if info.get('vcode') != 'HG' or info.get('vname') != 'COMEX铜' or quote_unit not in ('美元/磅','美元和美分/磅'):
         raise ValueError('东方财富铜品种或报价单位不符')
+    tick = re.fullmatch(r'\s*([0-9]+(?:\.[0-9]+)?)\s*美元\s*/\s*磅\s*',info.get('zxbddw',''))
+    if not tick or float(tick.group(1)) != 0.0005:
+        raise ValueError('东方财富铜最小变动价位不符，应为0.0005美元/磅')
     # Historical service may fail independently of the quote service. Never fill
     # history using previous settlement, CFDs, or prices from another contract.
     try:
@@ -195,7 +230,13 @@ def eastmoney_copper(item, now):
             # The daily service carries an intraday row too. Use only days before
             # today in New York; today's completed observation comes next run.
             if day < now.astimezone(ET).date(): rows.append({'date':day.isoformat(),'value':close})
-        if rows: return observations(rows), '东方财富 / 101.HG00Y / COMEX铜日线；供数方换月序列'
+        if rows:
+            # Check the supplier's ordering and duplicates before observations()
+            # could normalize them. A gap is an error, never a synthetic price.
+            validate_copper_history(rows)
+            return observations(rows), '东方财富 / 101.HG00Y / COMEX铜日线；供数方换月序列'
+    except CopperHistoryError:
+        raise  # Preserve the previous valid history and expose the source error.
     except (requests.RequestException,ValueError,KeyError,TypeError,IndexError):
         LOG.warning('copper: 历史接口不可用，尝试已收盘末笔快照；不伪造历史')
     body = request_json('https://push2.eastmoney.com/api/qt/stock/get',{
@@ -425,7 +466,7 @@ def compare_spreads(cards, series, t):
         a={p['date']:p['value'] for p in series.get('us10y',[])}; b={p['date']:p['value'] for p in series.get(short,[])}
         c=cards[sid]; d=c['as_of']
         if c['value'] is None or d not in a or d not in b:
-            checks.append({'id':sid,'as_of':d,'status':'not_comparable','reason':'缺少同一日期的长短端收益率，未跨日期相减'})
+            checks.append({'id':sid,'as_of':d,'status':'not_comparable','reason':'尚未完成同日底层交叉核验：缺少同一日期的长短端收益率，未跨日期相减'})
             continue
         computed=(a[d]-b[d])*100; difference=abs(c['value']-computed)
         status='warning' if difference>t['spread_check_bp'] else 'ok'
@@ -466,6 +507,7 @@ def run(now=None):
             item=futures[future]; k=item['id']
             try:
                 points,source=future.result(); prior=observations(series.get(k,[])); combined=observations(prior+points)
+                if k=='copper': validate_copper_history(combined[-120:])
                 # A provider may return an older period; merge without erasing valid history.
                 series[k]=combined[-120:]; sources[k]=source; success+=int(k!='aux3m')
             except Exception as e:
@@ -483,7 +525,7 @@ def run(now=None):
     # Retain this field for older clients during CDN propagation.
     calendar['bond_holidays']=[d.isoformat() for d in holidays.US(years=[year-1,year,year+1])]
     limited_cards={**cards,'dxy':{**cards['dxy'],'value':None,'change_20':None,'status':'missing'}}
-    snapshot={'generated_at':now.isoformat(),'timezone':'Asia/Tokyo','indicators':list(cards.values()),'macro':classify(cards,CONFIG['thresholds']),'limited_macro':classify(limited_cards,CONFIG['thresholds']),'risk_alerts':risk_levels(cards,CONFIG['thresholds']),'spread_checks':spread_checks,'thresholds':CONFIG['thresholds'],'calendar':calendar,'sources_failed':sum(k in errors for k in cards),'update_context':update_context()}
+    snapshot={'generated_at':now.isoformat(),'timezone':'Asia/Tokyo','indicators':list(cards.values()),'macro':classify(cards,CONFIG['thresholds']),'limited_macro':classify(limited_cards,CONFIG['thresholds']),'risk_alerts':risk_levels(cards,CONFIG['thresholds']),'spread_checks':spread_checks,'history_checks':[copper_history_check(series.get('copper',[]))],'thresholds':CONFIG['thresholds'],'calendar':calendar,'sources_failed':sum(k in errors for k in cards),'update_context':update_context()}
     atomic(hp,{'series':series,'sources':sources,'definitions':history['definitions']}); atomic(sp,snapshot)
     atomic(out/'last_attempt.json',{'at':now.isoformat(),'status':'partial' if errors else 'ok','message':f'{sum(k in errors for k in cards)} 项来源未更新' if errors else '更新完成','update_context':update_context()})
     return True

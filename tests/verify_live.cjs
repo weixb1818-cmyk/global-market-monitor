@@ -52,6 +52,18 @@ if(!base)throw new Error('DASHBOARD_URL is required');
    assert.deepEqual(await page.locator('.methodology-table tbody tr').evaluateAll(rows=>rows.map(r=>r.dataset.indicator)),actual.indicators.map(c=>c.id));
    assert.ok(await page.locator('.methodology-table a').count()>=17,'every indicator needs an official source link');
    assert.match(await page.locator('.calculation-rules').textContent(),/至少需要21个值/);
+   for(const id of ['spread10y2y','spread10y3m']){
+    const check=actual.spread_checks.find(c=>c.id===id);
+    const text=await page.locator('#'+id+'-check').textContent();
+    assert.match(text,check.status==='ok'?/已完成同日底层交叉核验/:check.status==='warning'?/存在差异/:/尚未完成同日底层交叉核验/);
+   }
+   for(let i=0;i<actual.indicators.length;i++){
+    const c=actual.indicators[i];
+    if(c.value!==null&&(c.error||c.status==='error')&&await page.evaluate(({c,s})=>stale(c,s),{c,s:actual}))
+     assert.match(await page.locator('.card-status').nth(i).textContent(),/数据延迟.*更新失败.*沿用历史/);
+   }
+   const history=actual.history_checks.find(c=>c.id==='copper');
+   if(history.status==='ok'){assert.equal(history.observations,history.unique_dates);assert.equal(history.ascending,true);assert.deepEqual(history.missing_sessions,[]);}
    const expandedWidth=await page.evaluate(()=>({width:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth}));
    assert.ok(expandedWidth.scroll<=expandedWidth.width,`${name}: methodology overflows page`);
    if(name==='mobile'){const widths=await page.locator('.methodology-table tbody tr:first-child').evaluate(row=>({row:row.getBoundingClientRect().width,heading:row.querySelector('th').getBoundingClientRect().width}));assert.ok(widths.heading>=widths.row-4,'mobile indicator heading must fill its row');}

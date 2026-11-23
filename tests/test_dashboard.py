@@ -193,6 +193,15 @@ class TestDatesAndSpreadAlignment(unittest.TestCase):
         c=self.spread_cards();series={'us10y':[{'date':'2026-11-19','value':4.3}],'us2y':[{'date':'2026-11-18','value':4.0}]}
         checks=u.compare_spreads(c,series,T)
         self.assertEqual(checks[0]['status'],'not_comparable');self.assertNotIn('warning',c['spread10y2y'])
+        self.assertIn('尚未完成同日底层交叉核验',checks[0]['reason'])
+        self.assertEqual(c['spread10y2y']['value'],30)
+    def test_both_official_curves_retained_when_underlying_dates_differ(self):
+        c={'spread10y2y':{'as_of':'2026-11-20','value':29},'spread10y3m':{'as_of':'2026-11-20','value':60}}
+        original=copy.deepcopy(c)
+        series={key:[{'date':'2026-11-19','value':value}] for key,value in [('us10y',5.04),('us2y',4.76),('aux3m',4.44)]}
+        checks=u.compare_spreads(c,series,T)
+        self.assertTrue(all(x['status']=='not_comparable' for x in checks))
+        self.assertEqual(c,original)
     def test_same_date_positive_and_negative_spread(self):
         for long,short,expected in [(4.3,4.0,30),(4.0,4.5,-50)]:
             c=self.spread_cards(expected);series={'us10y':[{'date':'2026-11-19','value':long}],'us2y':[{'date':'2026-11-19','value':short}]}

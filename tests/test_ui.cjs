@@ -22,5 +22,19 @@ setTimeout(()=>{
  assert.equal(vm.runInContext("currentMacro(input,new Date('2026-11-25T23:00:00Z')).mode",context),'insufficient');
  assert.equal(vm.runInContext("currentAlerts(input,new Date('2026-11-25T23:00:00Z')).length",context),0);
  assert.equal(vm.runInContext("currentMacro(input).mode",context),'limited');
- console.log('UI: 17卡、DXY有限提示、绝对风险、独立日期、过期抑制和bp单位通过');
+ assert.match(vm.runInContext("spreadCheckText({status:'not_comparable'})",context),/尚未完成同日底层交叉核验/);
+ assert.match(vm.runInContext("spreadCheckText(undefined)",context),/尚未完成/);
+ assert.match(vm.runInContext("spreadCheckText({status:'ok',as_of:'2026-11-19'})",context),/已完成.*2026-11-19/);
+ assert.match(vm.runInContext("spreadCheckText({status:'warning',as_of:'2026-11-19'})",context),/存在差异/);
+ assert.match(elements['spread10y2y-check'].textContent,/尚未完成/);
+ for(const status of ['stale','error']){
+  const html=vm.runInContext(`cardHTML({...input.indicators[0],value:100,as_of:'2026-11-01',status:'${status}',error:'network'},input)`,context);
+  assert.match(html,/数据延迟 · 更新失败，沿用历史/);assert.match(html,/截至 2026-11-01/);
+ }
+ const delayed=vm.runInContext("cardHTML({...input.indicators[0],value:100,as_of:'2026-11-01',status:'stale',error:null},input)",context);
+ assert.match(delayed,/class="card-status">数据延迟<\/span>/);
+ assert.doesNotMatch(delayed,/更新失败/);
+ const failed=vm.runInContext("cardHTML({...input.indicators[1],status:'error',error:'network'},input)",context);
+ assert.match(failed,/更新失败 · 沿用/);
+ console.log('UI: 17卡、宏观提示、日期/bp、曲线核验状态及延迟与失败组合提示通过');
 },30);

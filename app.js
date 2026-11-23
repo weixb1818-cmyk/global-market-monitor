@@ -32,13 +32,20 @@ function currentAlerts(data,now=new Date()) {
 function signed(n,digits=2){ if(n===null||n===undefined||!Number.isFinite(n))return '—'; return (n>0?'+':'')+n.toFixed(digits); }
 function value(c){if(c.value===null||c.value===undefined||!Number.isFinite(c.value))return '—'; const n=c.value; if(c.kind==='spread')return (n>0?'+':'')+n.toFixed(0); return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:c.id==='usdjpy'||c.id==='usdcnh'||c.id==='copper'?4:2});}
 function change(c,n){if(n===null||n===undefined||!Number.isFinite(n))return '—'; if(c.kind==='yield'||c.kind==='spread')return signed(n,0)+' bp'; if(c.kind==='points')return signed(n,2)+' 点'; return signed(n,2)+'%';}
+function spreadCheckText(check){
+ if(check?.status==='ok')return '已完成同日底层交叉核验 · '+check.as_of;
+ if(check?.status==='warning')return '同日底层交叉核验存在差异 · '+check.as_of;
+ return '尚未完成同日底层交叉核验；保留FRED直接发布利差，不跨日期相减';
+}
 function cardHTML(c,snap){
   const delayed=stale(c,snap); const status=c.value===null?'missing':delayed?'stale':c.status;
   const labels={missing:'数据缺失',stale:'数据延迟',error:'更新失败 · 沿用',ok:''};
+  const failed=Boolean(c.error)||c.status==='error';
+  const statusLabel=c.value!==null&&delayed&&failed?'数据延迟 · 更新失败，沿用历史':labels[status]||'';
   const interpretation=delayed&&c.value!==null?'数据暂未更新，截至'+c.as_of:(c.interpretation||'数据暂不可用，等待有效行情');
   const source=c.source?`来源：${c.source}`:'来源待接入';
   const groupLabel=c.series_definition&&c.series_definition.includes('reference')?'参考':c.id==='copper'&&c.source?.includes('末笔快照')?'快照':c.group;
-  return `<article class="card ${esc(status)}" title="${esc(source)}${c.quote_note?'；'+esc(c.quote_note):''}${c.error?'；'+esc(c.error):''}${c.warning?'；'+esc(c.warning):''}"><div class="card-top"><span>${esc(c.name)}</span><span class="card-group">${esc(groupLabel)}</span></div><div class="card-value">${esc(value(c))}<span class="unit">${esc(c.unit)}</span></div><div class="changes"><span><em>前期</em>${esc(change(c,c.change_1))}</span><span><em>近20期</em>${esc(change(c,c.change_20))}</span></div><p class="interpretation">${esc(interpretation)}</p><div class="card-bottom"><span>${esc(c.as_of?'截至 '+c.as_of:'日期未知')}</span><span class="card-status">${esc(labels[status]||'')}</span></div></article>`;
+  return `<article class="card ${esc(status)}" title="${esc(source)}${c.quote_note?'；'+esc(c.quote_note):''}${c.error?'；'+esc(c.error):''}${c.warning?'；'+esc(c.warning):''}"><div class="card-top"><span>${esc(c.name)}</span><span class="card-group">${esc(groupLabel)}</span></div><div class="card-value">${esc(value(c))}<span class="unit">${esc(c.unit)}</span></div><div class="changes"><span><em>前期</em>${esc(change(c,c.change_1))}</span><span><em>近20期</em>${esc(change(c,c.change_20))}</span></div><p class="interpretation">${esc(interpretation)}</p><div class="card-bottom"><span>${esc(c.as_of?'截至 '+c.as_of:'日期未知')}</span><span class="card-status">${esc(statusLabel)}</span></div></article>`;
 }
 async function load(){
  try{
@@ -55,6 +62,7 @@ async function load(){
   $('signals').innerHTML=(m.signals.length?m.signals:['等待关键数据']).map(s=>`<span>${esc(s)}</span>`).join('');
   $('macro-cards').innerHTML=data.indicators.filter(c=>c.group==='宏观').map(c=>cardHTML(c,data)).join('');
   $('asset-cards').innerHTML=data.indicators.filter(c=>c.group!=='宏观').map(c=>cardHTML(c,data)).join('');
+  for(const id of ['spread10y2y','spread10y3m']){const label=$(id+'-check');if(label)label.textContent=spreadCheckText((data.spread_checks||[]).find(c=>c.id===id));}
   const ctx=(attempt&&attempt.update_context)||data.update_context;
   if(ctx&&ctx.run_url){$('workflow-link').href=ctx.run_url;$('workflow-link').textContent=(ctx.event==='schedule'?'定时':'手动/本地')+'更新记录';$('workflow-link').hidden=false;}
   if(attempt&&attempt.status==='failed') {$('notice').textContent='最近一次更新失败，显示上次有效快照；本页数据截至各卡标注日期';$('notice').parentElement.classList.add('warning');}
