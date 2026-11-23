@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-21T16:27:30.050942+00:00",
+  "checked_at": "2026-11-23T09:57:33.794658+00:00",
   "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
   "scope": "Same static HTML/CSS/JS plus Python and GitHub Pages architecture; exactly 17 indicators",
   "data": {
@@ -9,9 +9,7 @@
     "delayed": [
       "wti"
     ],
-    "update_failed_retained": [
-      "copper"
-    ],
+    "update_failed_retained": [],
     "incomplete_history": [],
     "copper_observations": 100
   },
@@ -61,23 +59,49 @@
   "tests": {
     "python": 66,
     "ui_unit": "passed",
-    "cloud_browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924496332",
-    "cloud_publication_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924393205",
+    "cloud_browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133420434",
+    "cloud_publication_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595",
     "html_errors": 0,
     "browser_trigger": "workflow_run"
   },
   "schedule": {
     "daily_utc_cron": "15 0 * * *",
     "daily_beijing": "08:15",
-    "native_trigger_verification": "NOT VERIFIED: no native event=schedule found after bounded temporary probes and workflow enable refresh",
+    "native_trigger_verification": "VERIFIED: native schedule -> update -> deployment -> public readback -> browser checks succeeded; punctual 08:15 execution NOT achieved in observed runs",
     "natural_daily_first_eligible_utc": "2026-11-22T00:15:00Z",
     "temporary_probe_active": false,
-    "native_schedule_runs_observed": 0,
+    "native_schedule_runs_observed": 2,
     "workflow_state": "active",
     "manual_end_to_end": "success",
     "manual_run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885895078",
-    "exact_daily_first_natural_execution": "pending: next eligible window 2026-11-22 08:15 Asia/Shanghai; GitHub may delay scheduled jobs",
-    "publication_evidence": "Each future update stores actual event/cron/run URL plus public readback in a publication-evidence artifact; an independent browser workflow starts automatically on successful update completion."
+    "exact_daily_first_natural_execution": "Observed 2026-11-22 14:54:51 Beijing; delayed 6h39m51s from target",
+    "publication_evidence": "Each future update stores actual event/cron/run URL plus public readback in a publication-evidence artifact; an independent browser workflow starts automatically on successful update completion.",
+    "actual_run_timing": [
+      {
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44995841393",
+        "event": "schedule",
+        "configured_cron": "15 0 * * *",
+        "target_utc": "2026-11-22T00:15:00+00:00",
+        "run_created_at_utc": "2026-11-22T06:54:51+00:00",
+        "run_created_at_beijing": "2026-11-22T14:54:51+08:00",
+        "delay_seconds": 23991,
+        "conclusion": "success",
+        "proves_punctual_0815_execution": false
+      },
+      {
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595",
+        "event": "schedule",
+        "configured_cron": "15 0 * * *",
+        "target_utc": "2026-11-23T00:15:00+00:00",
+        "run_created_at_utc": "2026-11-23T07:44:21+00:00",
+        "run_created_at_beijing": "2026-11-23T15:44:21+08:00",
+        "delay_seconds": 26961,
+        "conclusion": "success",
+        "proves_punctual_0815_execution": false
+      }
+    ],
+    "punctual_0815_verified": false,
+    "delay_cause": "not established"
   },
   "source_access_evidence": "data/source_access.json",
   "forex_read_access": {
@@ -86,21 +110,21 @@
     "twelve_data": "previous account probe retained, not used by current free integration"
   },
   "publication": {
-    "generated_at": "2026-11-21T16:24:46.459054+00:00",
+    "generated_at": "2026-11-23T07:44:43.513085+00:00",
     "cards": 17,
     "macro": "中性/信号分歧",
     "mode": "full",
     "update_context": {
-      "event": "workflow_dispatch",
-      "schedule": null,
-      "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924393205"
+      "event": "schedule",
+      "schedule": "15 0 * * *",
+      "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595"
     },
-    "attempt_status": "partial",
+    "attempt_status": "ok",
     "data_updated": true,
-    "native_daily_schedule_verified": false,
+    "native_daily_schedule_verified": true,
     "result": "public readback verified",
     "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
-    "checked_at": "2026-11-21T16:25:19.645712+00:00"
+    "checked_at": "2026-11-23T07:45:23.595518+00:00"
   },
   "browser": [
     {
@@ -128,9 +152,9 @@
       "methodology_rows": 17,
       "methodology_no_overflow": true,
       "update_context": {
-        "event": "workflow_dispatch",
-        "schedule": null,
-        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924393205"
+        "event": "schedule",
+        "schedule": "15 0 * * *",
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595"
       }
     },
     {
@@ -138,7 +162,7 @@
       "dimensions": {
         "width": 390,
         "scroll": 390,
-        "cardBottom": 2197.203125
+        "cardBottom": 2182.203125
       },
       "cards": 17,
       "missing": 0,
@@ -158,9 +182,9 @@
       "methodology_rows": 17,
       "methodology_no_overflow": true,
       "update_context": {
-        "event": "workflow_dispatch",
-        "schedule": null,
-        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924393205"
+        "event": "schedule",
+        "schedule": "15 0 * * *",
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595"
       }
     }
   ],
@@ -172,7 +196,9 @@
     "copper_source": "东方财富101.HG00Y，收盘末笔快照非官方结算",
     "copper_history_connected": true,
     "copper_observations": 100,
-    "latest_copper_update_failed_retained": true,
-    "note": "历史接口曾返回100条并入库；最后一轮铜历史及快照网络失败，保留真实历史且卡片标识更新失败，不把部署成功等同所有来源更新成功。"
-  }
+    "latest_copper_update_failed_retained": false,
+    "note": "Latest scheduled run fetched all sources successfully; earlier copper network failures are recorded in prior commits."
+  },
+  "audit_document": "AUDIT.md",
+  "evidence_directory": "verification/audit-2026-11-23"
 }

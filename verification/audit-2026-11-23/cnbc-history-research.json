@@ -1,0 +1,91 @@
+{
+  "checked_at": "2026-11-21T16:46:12.479939+00:00",
+  "purpose": "Read-only assessment; production providers unchanged",
+  "history_probes": [
+    {
+      "symbol": ".DXY",
+      "url": "https://ts-api.cnbc.com/harmony/app/charts/1Y.json?symbol=.DXY",
+      "http": 200,
+      "metadata": {
+        "symbol": "586968",
+        "companyName": "ICE U.S. Dollar Index",
+        "exchange": null
+      },
+      "observations": 538,
+      "unique_dates": 538,
+      "first": {
+        "open": "107.0560",
+        "high": "108.0710",
+        "low": "106.9240",
+        "close": "107.5540",
+        "volume": 0,
+        "tradeTime": "20241122000000",
+        "tradeTimeinMills": 1732251600000
+      },
+      "last_two": [
+        {
+          "open": "103.8070",
+          "high": "103.9740",
+          "low": "103.5880",
+          "close": "103.8950",
+          "volume": 0,
+          "tradeTime": "20261119000000",
+          "tradeTimeinMills": 1795064400000
+        },
+        {
+          "open": "103.8860",
+          "high": "103.9530",
+          "low": "103.5820",
+          "close": "103.8070",
+          "volume": 0,
+          "tradeTime": "20261120000000",
+          "tradeTimeinMills": 1795150800000
+        }
+      ],
+      "future_rows": 0
+    },
+    {
+      "symbol": "@HG.1",
+      "url": "https://ts-api.cnbc.com/harmony/app/charts/1Y.json?symbol=%40HG.1",
+      "http": 200,
+      "metadata": {
+        "symbol": "49031424",
+        "companyName": "Copper (Dec'26)",
+        "exchange": null
+      },
+      "observations": 500,
+      "unique_dates": 500,
+      "first": {
+        "open": "4.1090",
+        "high": "4.1195",
+        "low": "4.0610",
+        "close": "4.0860",
+        "volume": 49185,
+        "tradeTime": "20241122000000",
+        "tradeTimeinMills": 1732251600000
+      },
+      "last_two": [
+        {
+          "open": "5.6510",
+          "high": "5.7160",
+          "low": "5.5775",
+          "close": "5.6335",
+          "volume": 74180,
+          "tradeTime": "20261119000000",
+          "tradeTimeinMills": 1795064400000
+        },
+        {
+          "open": "5.5950",
+          "high": "5.6080",
+          "low": "5.4390",
+          "close": "5.4850",
+          "volume": 0,
+          "tradeTime": "20261120000000",
+          "tradeTimeinMills": 1795150800000
+        }
+      ],
+      "future_rows": 0
+    }
+  ],
+  "caution": "Quote last_time for copper was future-dated and on Saturday; quote last differs from daily historical close; rollover methodology unverified."
+}

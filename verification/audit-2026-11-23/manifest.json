@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-11-23T09:57:33.794658+00:00",
+  "reviewed_snapshot_commit": "5c323605f0c3dddccb410ca9f6ed6f798128a282",
+  "generated_at": "2026-11-23T07:44:43.513085+00:00",
+  "production_cnbc_enabled": false,
+  "scope": "Audit documentation only; no production code/config/workflow changes in this publication",
+  "files": {
+    "config.json": "bf09e96c7be30b14835f89a347a929ed3917ffa11ab73282614695f9d75002e1",
+    "scripts/update_data.py": "680ac5f7c6cdb5a977ef8f6297699bbd5b43b7f4a955d9890eb16e5ff05daa74",
+    "app.js": "34259fedd9fa9d5a983df8e2bb720d7d14f864ccf9a40b5f72f5143f44a0e285",
+    "styles.css": "96ac5b0433858561a301c30ec090a02dea2fd2d86326d93d308a36acbc42587a",
+    "index.html": "e7e3900fa3c14dbaeb99da77e3e448778dc563d3a69568082522663dac0a11d1",
+    ".github/workflows/update.yml": "3cec3eb4be56162460feaecbd7d894e61a7228570d238f35e012f20df9c2d35b",
+    ".github/workflows/verify.yml": "695ef68a89ca824cbb60b67e2136a9761b1d826f87378b1bbbe2022487d89c88",
+    "data/snapshot.json": "0c509f94fac07983e80aefbd09e07674e07435459a604ae716990d8956841e41",
+    "data/history.json": "4860b55609907ce1b8ac35ccc424eb715f869f43c1e6e0515a14c2cf126d6b06"
+  },
+  "tests": {
+    "python": 66,
+    "latest_schedule_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595",
+    "latest_browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133420434"
+  },
+  "coverage": {
+    "total": 17,
+    "values": 17,
+    "source_failures": 0,
+    "delayed": [
+      "wti"
+    ],
+    "macro_mode": "full"
+  }
+}

@@ -2,11 +2,17 @@
 
 中文单页静态金融市场仪表盘。页面读取已生成的 JSON；定时 Python 脚本获取行情、计算变化、识别宏观状态。不会用模拟数据填充缺项。首次仓库内快照来自实际 FRED 和 CoinGecko 请求，生成时间及每项行情日期以页面为准。
 
+## 第三方审计入口
+
+[审计交接说明（AUDIT.md）](AUDIT.md) 汇总已做改动、17项实际来源与日期、测试、最新原生定时工作流及剩余问题；[固定版本证据目录](verification/audit-2026-11-23/) 提供回读、浏览器、HTML、调度时间和研究记录。
+
+2026-11-23核查：17项有值，本轮无来源更新失败，WTI仍延迟；原生定时更新与部署已验证，但运行创建时间比08:15目标晚约7小时29分，准点要求尚未达标。CNBC尚未接入生产。
+
 ## 已部署网址与验证
 
 公开访问：<https://weixb1818-cmyk.github.io/global-market-monitor/>，无需登录。
 
-源码仓库：<https://github.com/weixb1818-cmyk/global-market-monitor>，可见性为 **Public**，任何人均可查看代码、已提交的数据与工作流记录。每日自动更新和部署已启用，时间为 UTC 00:15／北京时间 08:15（东京 09:15）；可在 Actions 手动触发。
+源码仓库：<https://github.com/weixb1818-cmyk/global-market-monitor>，可见性为 **Public**，任何人均可查看代码、已提交的数据与工作流记录。每日自动更新和部署已启用，cron目标为 UTC 00:15／北京时间 08:15（东京 09:15）；实际运行有显著延迟，详见审计说明，不承诺准点。可在 Actions 手动触发。
 
 独立验证包括 W3C Nu HTML Checker（检查 HTML 语法）与 GitHub 云端 Chromium（桌面 1440×900、手机 390×844），后者检查 17 张卡片、缺失提示、JavaScript 异常和横向滚动，并上传实际页面截图。可在 **Actions → Independent public browser verification → Run workflow** 重新验证，下载 `public-browser-verification` 附件查看报告和截图。HTML 语法通过不等于行情数值获得第三方审计，尚缺的行情项目仍以页面提示为准。
 
@@ -210,4 +216,4 @@ WTI 为 EIA 库欣现货，黄金为明确标注的 XAU/USD 合成参考价。20
 - 东方财富HG00Y的换月细则尚未核实，因此名称改为“COMEX 铜（HG00Y）”，不声称严格近月或固定交割月份，不将CFD、LME或沪铜混入历史。
 - 本机首次验证17/17有数值、16项未标过期，当时铜只有1个观测；后续云端已取得铜100个有效日线。WTI仍为11月17日且标延迟。66项Python测试及JavaScript/UI检查通过。最终云端运行及浏览器证据以 Actions 链接为准。
 
-最新验收：[66项测试、更新、部署及公网回读](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924393205)成功；[桌面及手机浏览器验收](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924496332)成功，HTML校验0错误，桌面17卡底部890px。当前17项均有值，DXY保留120个、铜保留100个观测；WTI延迟。最后一轮铜接口再次网络失败，沿用11月20日有效数据并显示“更新失败 · 沿用”；部署成功不等于每个数据源均成功更新。未新增订阅。
+2026-11-22验收记录：[66项测试、更新、部署及公网回读](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924393205)成功；[桌面及手机浏览器验收](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44924496332)成功，HTML校验0错误，桌面17卡底部890px。当前17项均有值，DXY保留120个、铜保留100个观测；WTI延迟。最后一轮铜接口再次网络失败，沿用11月20日有效数据并显示“更新失败 · 沿用”；部署成功不等于每个数据源均成功更新。未新增订阅。

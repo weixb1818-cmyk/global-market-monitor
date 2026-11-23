@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-11-23T09:57:33.794658+00:00",
+  "source": "GitHub Actions API run createdAt, compared with the configured UTC cron; cause of delay not established",
+  "runs": [
+    {
+      "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44995841393",
+      "event": "schedule",
+      "configured_cron": "15 0 * * *",
+      "target_utc": "2026-11-22T00:15:00+00:00",
+      "run_created_at_utc": "2026-11-22T06:54:51+00:00",
+      "run_created_at_beijing": "2026-11-22T14:54:51+08:00",
+      "delay_seconds": 23991,
+      "conclusion": "success",
+      "proves_punctual_0815_execution": false
+    },
+    {
+      "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595",
+      "event": "schedule",
+      "configured_cron": "15 0 * * *",
+      "target_utc": "2026-11-23T00:15:00+00:00",
+      "run_created_at_utc": "2026-11-23T07:44:21+00:00",
+      "run_created_at_beijing": "2026-11-23T15:44:21+08:00",
+      "delay_seconds": 26961,
+      "conclusion": "success",
+      "proves_punctual_0815_execution": false
+    }
+  ]
+}
