@@ -1,235 +1,267 @@
 {
-  "checked_at": "2026-11-23T10:23:02.561881+00:00",
+  "checked_at": "2026-11-23T14:00:34.320821+00:00",
   "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
-  "scope": "Same static HTML/CSS/JS plus Python and GitHub Pages architecture; exactly 17 indicators",
-  "data": {
+  "scope": {
     "indicators": 17,
-    "available": 17,
-    "missing": [],
-    "delayed": [
-      "wti"
-    ],
-    "update_failed_retained": [
-      "copper"
-    ],
-    "incomplete_history": [],
-    "copper_observations": 100
+    "original_config_bytes_unchanged": true,
+    "architecture": "Static HTML/CSS/JS, Python updater, GitHub Pages; no restructuring",
+    "desktop_only_padding_change": "2px less top and bottom; same structure and mobile CSS"
   },
-  "macro": {
-    "complete": true,
-    "mode": "full",
-    "missing": [],
-    "signal_dates": {
-      "dxy": "2026-11-20",
-      "real10y": "2026-11-19",
-      "us2y": "2026-11-19",
-      "hy": "2026-11-19",
-      "vix": "2026-11-19"
-    },
-    "risk_alerts": [
+  "reviewed_commit": "8a7891169cf1ea0b76b5e93fd2b94c535d1201a4",
+  "implementation_commit": "895894bcf59be3c71f41f0fa96e99719fcbf0c13",
+  "audit_document": "docs/DATA_QUALITY_REPORT.md",
+  "evidence_directory": "verification/quality-stage-2026-11-23",
+  "data": {
+    "generated_at": "2026-11-23T13:56:07.944351+00:00",
+    "available": 17,
+    "sources_failed": 1,
+    "states": [
+      {
+        "id": "dxy",
+        "provider": "sina",
+        "symbol": "DXY",
+        "unit": "点",
+        "as_of": "2026-11-20",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "us2y",
+        "provider": "fred",
+        "symbol": "DGS2",
+        "unit": "%",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "us10y",
+        "provider": "fred",
+        "symbol": "DGS10",
+        "unit": "%",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "real10y",
+        "provider": "fred",
+        "symbol": "DFII10",
+        "unit": "%",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "spread10y2y",
+        "provider": "fred",
+        "symbol": "T10Y2Y",
+        "unit": "bp",
+        "as_of": "2026-11-20",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "spread10y3m",
+        "provider": "fred",
+        "symbol": "T10Y3M",
+        "unit": "bp",
+        "as_of": "2026-11-20",
+        "status": "ok",
+        "error": null
+      },
       {
         "id": "vix",
-        "as_of": "2026-11-19",
-        "value": 28.44,
+        "provider": "fred",
+        "symbol": "VIXCLS",
         "unit": "点",
-        "message": "波动率处于较高水平"
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "hy",
+        "provider": "fred",
+        "symbol": "BAMLH0A0HYM2",
+        "unit": "bp",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "sp500",
+        "provider": "fred",
+        "symbol": "SP500",
+        "unit": "点",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "nasdaq100",
+        "provider": "fred",
+        "symbol": "NASDAQ100",
+        "unit": "点",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "gold",
+        "provider": "frankfurter",
+        "symbol": "XAU/USD",
+        "unit": "USD/oz",
+        "as_of": "2026-11-22",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "wti",
+        "provider": "fred",
+        "symbol": "DCOILWTICO",
+        "unit": "USD/bbl",
+        "as_of": "2026-11-17",
+        "status": "stale",
+        "error": null
+      },
+      {
+        "id": "copper",
+        "provider": "eastmoney",
+        "symbol": "HG00Y",
+        "unit": "USD/lb",
+        "as_of": "2026-11-20",
+        "status": "error",
+        "error": "数据源网络请求失败"
+      },
+      {
+        "id": "btc",
+        "provider": "coingecko",
+        "symbol": "bitcoin",
+        "unit": "USD",
+        "as_of": "2026-11-22",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "eth",
+        "provider": "coingecko",
+        "symbol": "ethereum",
+        "unit": "USD",
+        "as_of": "2026-11-22",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "usdjpy",
+        "provider": "ecb",
+        "symbol": "USD/JPY",
+        "unit": "JPY/USD",
+        "as_of": "2026-11-20",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "usdcnh",
+        "provider": "frankfurter",
+        "symbol": "USD/CNH",
+        "unit": "CNH/USD",
+        "as_of": "2026-11-22",
+        "status": "ok",
+        "error": null
+      }
+    ]
+  },
+  "tests": {
+    "python_local_clean_locked_environment": 92,
+    "python_cloud": 92,
+    "javascript_syntax_and_ui": "passed",
+    "chromium_status_boundary_cases": [
+      {
+        "key": "hy",
+        "status": "error",
+        "expected": "insufficient",
+        "passed": true
+      },
+      {
+        "key": "dxy",
+        "status": "error",
+        "expected": "limited",
+        "passed": true
+      },
+      {
+        "key": "vix",
+        "status": "unknown",
+        "expected": "insufficient",
+        "passed": true
+      },
+      {
+        "total": true,
+        "expected": "insufficient",
+        "passed": true
       }
     ],
-    "state": "中性/信号分歧",
-    "reason": "美元走强、实际利率变化有限；信用或波动恶化，信号未形成一致方向",
-    "uncertainty": "信用或波动风险仍处高位",
-    "signals": [
-      "美元 +2.05% · 2026-11-20",
-      "实际利率 +12bp · 2026-11-19",
-      "HY +12bp · 2026-11-19 / VIX +9.4点 · 2026-11-19"
-    ]
+    "desktop_and_mobile": "passed",
+    "html_errors": 0,
+    "pip_check": "passed"
   },
   "spread_checks": [
     {
       "id": "spread10y2y",
       "as_of": "2026-11-20",
       "status": "not_comparable",
-      "reason": "尚未完成同日底层交叉核验：缺少同一日期的长短端收益率，未跨日期相减"
+      "reason": "尚未完成同日底层交叉核验：缺少同一日期的有效长短端收益率，未跨日期相减",
+      "latest_common": {
+        "as_of": "2026-11-19",
+        "official_bp": 28.000000000000004,
+        "long_yield_pct": 5.04,
+        "short_yield_pct": 4.76,
+        "same_date_bp": 28.000000000000025,
+        "signed_difference_bp": -2.1316282072803006e-14,
+        "difference_bp": 2.1316282072803006e-14,
+        "status": "ok"
+      }
     },
     {
       "id": "spread10y3m",
       "as_of": "2026-11-20",
       "status": "not_comparable",
-      "reason": "尚未完成同日底层交叉核验：缺少同一日期的长短端收益率，未跨日期相减"
+      "reason": "尚未完成同日底层交叉核验：缺少同一日期的有效长短端收益率，未跨日期相减",
+      "latest_common": {
+        "as_of": "2026-11-19",
+        "official_bp": 70.0,
+        "long_yield_pct": 5.04,
+        "short_yield_pct": 4.34,
+        "same_date_bp": 70.00000000000001,
+        "signed_difference_bp": -1.4210854715202004e-14,
+        "difference_bp": 1.4210854715202004e-14,
+        "status": "ok"
+      }
     }
   ],
-  "tests": {
-    "python": 77,
-    "ui_unit": "passed",
-    "cloud_browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155370843",
-    "cloud_publication_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607",
-    "html_errors": 0,
-    "browser_trigger": "workflow_run"
-  },
   "schedule": {
-    "daily_utc_cron": "15 0 * * *",
-    "daily_beijing": "08:15",
-    "native_trigger_verification": "VERIFIED: native schedule -> update -> deployment -> public readback -> browser checks succeeded; punctual 08:15 execution NOT achieved in observed runs",
-    "natural_daily_first_eligible_utc": "2026-11-22T00:15:00Z",
-    "temporary_probe_active": false,
-    "native_schedule_runs_observed": 2,
-    "workflow_state": "active",
-    "manual_end_to_end": "success",
-    "manual_run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44885895078",
-    "exact_daily_first_natural_execution": "Observed 2026-11-22 14:54:51 Beijing; delayed 6h39m51s from target",
-    "publication_evidence": "Each future update stores actual event/cron/run URL plus public readback in a publication-evidence artifact; an independent browser workflow starts automatically on successful update completion.",
-    "actual_run_timing": [
-      {
-        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44995841393",
-        "event": "schedule",
-        "configured_cron": "15 0 * * *",
-        "target_utc": "2026-11-22T00:15:00+00:00",
-        "run_created_at_utc": "2026-11-22T06:54:51+00:00",
-        "run_created_at_beijing": "2026-11-22T14:54:51+08:00",
-        "delay_seconds": 23991,
-        "conclusion": "success",
-        "proves_punctual_0815_execution": false
-      },
-      {
-        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595",
-        "event": "schedule",
-        "configured_cron": "15 0 * * *",
-        "target_utc": "2026-11-23T00:15:00+00:00",
-        "run_created_at_utc": "2026-11-23T07:44:21+00:00",
-        "run_created_at_beijing": "2026-11-23T15:44:21+08:00",
-        "delay_seconds": 26961,
-        "conclusion": "success",
-        "proves_punctual_0815_execution": false
-      }
+    "observed_natural_days": 2,
+    "ten_days_verified": false,
+    "backup_crons": [
+      "45 0 * * *",
+      "15 2 * * *"
     ],
-    "punctual_0815_verified": false,
-    "delay_cause": "not established"
+    "backup_gate_unit_test": "passed",
+    "natural_backup_trigger_observed": false,
+    "punctual_0815_verified": false
   },
-  "source_access_evidence": "data/source_access.json",
-  "forex_read_access": {
-    "USD/JPY": "connected ECB reference cross",
-    "USD/CNH": "connected Frankfurter exact offshore blended reference",
-    "twelve_data": "previous account probe retained, not used by current free integration"
+  "macro_evidence": {
+    "strict_archived_days": 3,
+    "mature_forward_windows": 0,
+    "predictive_ability_proven": false,
+    "exploratory_cases_not_PIT": true
   },
-  "publication": {
-    "generated_at": "2026-11-23T10:20:52.801426+00:00",
-    "cards": 17,
-    "macro": "中性/信号分歧",
-    "mode": "full",
-    "update_context": {
-      "event": "workflow_dispatch",
-      "schedule": null,
-      "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607"
-    },
-    "attempt_status": "partial",
-    "data_updated": true,
-    "native_daily_schedule_verified": false,
-    "result": "public readback verified",
-    "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
-    "checked_at": "2026-11-23T10:21:30.270461+00:00"
-  },
-  "browser": [
-    {
-      "viewport": "desktop",
-      "dimensions": {
-        "width": 1440,
-        "scroll": 1440,
-        "cardBottom": 890.109375
-      },
-      "cards": 17,
-      "missing": 0,
-      "console_errors": [],
-      "macro": "中性/信号分歧",
-      "mode": "full",
-      "absolute_alerts": [
-        {
-          "id": "vix",
-          "as_of": "2026-11-19",
-          "value": 28.44,
-          "unit": "点",
-          "message": "波动率处于较高水平"
-        }
-      ],
-      "independent_dates_checked": true,
-      "methodology_rows": 17,
-      "methodology_no_overflow": true,
-      "update_context": {
-        "event": "workflow_dispatch",
-        "schedule": null,
-        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607"
-      }
-    },
-    {
-      "viewport": "mobile",
-      "dimensions": {
-        "width": 390,
-        "scroll": 390,
-        "cardBottom": 2197.203125
-      },
-      "cards": 17,
-      "missing": 0,
-      "console_errors": [],
-      "macro": "中性/信号分歧",
-      "mode": "full",
-      "absolute_alerts": [
-        {
-          "id": "vix",
-          "as_of": "2026-11-19",
-          "value": 28.44,
-          "unit": "点",
-          "message": "波动率处于较高水平"
-        }
-      ],
-      "independent_dates_checked": true,
-      "methodology_rows": 17,
-      "methodology_no_overflow": true,
-      "update_context": {
-        "event": "workflow_dispatch",
-        "schedule": null,
-        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607"
-      }
-    }
+  "known_limits": [
+    "Only two natural schedule days observed; 10-day acceptance pending",
+    "Historical publication vintages absent before Git archival; no mature strict outcomes",
+    "Copper rollover not fully verified; this fetch failed and history was retained",
+    "WTI stale; latest official spread dates have no matching bottom legs",
+    "Restricted original response bodies not comprehensively archived; metadata/hashes are not raw responses"
   ],
-  "source_research": "https://weixb1818-cmyk.github.io/global-market-monitor/data/source_research.json",
-  "portal_integration": {
-    "purpose": "内部学习研究",
-    "test_count": 66,
-    "dxy_source": "新浪DINIW",
-    "copper_source": "东方财富101.HG00Y，收盘末笔快照非官方结算",
-    "copper_history_connected": true,
-    "copper_observations": 100,
-    "latest_copper_update_failed_retained": true,
-    "note": "本轮铜历史接口未返回可用历史；回退报价处于盘中被拒绝，保留原100条已校验历史。"
-  },
-  "audit_document": "AUDIT.md",
-  "evidence_directory": "verification/audit-2026-11-23",
-  "history_checks": [
-    {
-      "id": "copper",
-      "status": "ok",
-      "observations": 100,
-      "unique_dates": 100,
-      "ascending": true,
-      "first_date": "2026-07-06",
-      "last_date": "2026-11-20",
-      "expected_cme_sessions": 100,
-      "missing_sessions": [],
-      "unexpected_dates": [],
-      "rollover_rule_verified": false
-    }
-  ],
-  "final_audit_fixes": {
-    "implementation_commit": "0f789b0",
-    "evidence": "verification/audit-fixes-2026-11-23/acceptance.json",
-    "macro_rules_and_thresholds_unchanged": true,
-    "copper_history_exactly_retained": true,
-    "page_layout_and_17_indicators_unchanged": true
-  },
-  "audit_handoff": {
-    "start_here": "AUDIT_START_HERE.md",
-    "baseline_commit": "66ad918c3235409dffd2fdbc3366c5d7b21e2673",
-    "manifest": "verification/audit-handoff-2026-11-23/manifest.json",
-    "original_spec": "docs/global_macro_dashboard_codex_spec.md",
-    "scope": "Documentation and evidence only; no production code/config/workflow changes"
-  }
+  "publication_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45188732940",
+  "browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45189090376"
 }

@@ -2,7 +2,7 @@
 
 交接日期：2026-11-23。
 
-后续阶段已继续修改代码；本页66ad918为旧轮固定基线。新阶段请先读[数据质量与分析报告](docs/DATA_QUALITY_REPORT.md)，其最新实现和验收提交见README及AUDIT文末。本文件由开发方提供，旨在让未参与前序讨论的团队独立复核，不是第三方审计结论。
+后续阶段已继续修改代码；本页66ad918为旧轮固定基线。新阶段请先读[阶段交付](docs/NEXT_STAGE_DELIVERY.md)、[数据质量与分析报告](docs/DATA_QUALITY_REPORT.md)及[固定版本验收](verification/quality-stage-2026-11-23/acceptance.json)。本文件由开发方提供，旨在让未参与前序讨论的团队独立复核，不是第三方审计结论。
 
 ## 先固定版本
 

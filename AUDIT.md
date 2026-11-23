@@ -4,6 +4,8 @@
 
 **新团队请先读 [AUDIT_START_HERE.md](AUDIT_START_HERE.md)**：最新固定审计基线为 `66ad918`，77项Python测试通过，铜本轮更新失败保留历史、WTI延迟。下文 `5c32360`、66项测试和来源失败0项为较早历史记录；最后四项修正及其验收见文末。新入口提供基线全部已跟踪文件哈希、复核步骤和未关闭问题。
 
+最新阶段请先读[阶段交付](docs/NEXT_STAGE_DELIVERY.md)、[质量报告](docs/DATA_QUALITY_REPORT.md)及[固定版本验收](verification/quality-stage-2026-11-23/acceptance.json)。以下早期固定版本为历史记录。
+
 ## 审计入口与固定版本
 
 - [线上仪表盘](https://weixb1818-cmyk.github.io/global-market-monitor/) · [17项计算与来源说明](https://weixb1818-cmyk.github.io/global-market-monitor/#methodology) · [当前数据快照](https://weixb1818-cmyk.github.io/global-market-monitor/data/snapshot.json)
@@ -127,3 +129,5 @@
 免费商品研究、17项来源与状态、同日利差实际结果、固定阈值历史分析、原始响应留存边界和十日调度进度见[阶段报告](docs/DATA_QUALITY_REPORT.md)。严格可用性样本只有3日且无成熟后续窗口；当前版本长历史的描述性成功/失败对照不能标成无前视偏差回测。原生调度只有2日记录，十日验收和08:15准点均未完成。
 
 Python直接与传递依赖已固定；请求/源日期/状态/哈希/修订和生成记录已加入，免费补偿检查仍依赖GitHub调度，不宣称有商业SLA。
+
+本阶段最终实现895894b，固定验收数据/代码版本8a78911。92项本地锁定环境及云端Python测试通过，4类真实Chromium异常用例和桌面/手机验收通过，HTML零错误。最终桌面17卡底部约890px，仅缩减桌面卡片上下内边距各2px。最新一轮铜更新失败保留历史、WTI延迟，两项利差最新日期仍无法核验；不将部署成功冒充所有源成功。详见上述阶段交付和验收JSON。

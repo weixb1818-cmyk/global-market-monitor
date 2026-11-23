@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-11-23T13:56:07.944351+00:00",
+  "cards": 17,
+  "macro": "中性/信号分歧",
+  "mode": "full",
+  "update_context": {
+    "event": "workflow_dispatch",
+    "schedule": null,
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45188732940"
+  },
+  "attempt_status": "partial",
+  "data_updated": true,
+  "native_daily_schedule_verified": false,
+  "result": "public readback verified",
+  "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
+  "checked_at": "2026-11-23T13:57:24.143783+00:00"
+}

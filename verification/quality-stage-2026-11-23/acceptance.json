@@ -1,0 +1,378 @@
+{
+  "checked_at": "2026-11-23T14:00:34.320821+00:00",
+  "reviewed_commit": "8a7891169cf1ea0b76b5e93fd2b94c535d1201a4",
+  "implementation_commit": "895894bcf59be3c71f41f0fa96e99719fcbf0c13",
+  "public_url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
+  "update_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45188732940",
+  "browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45189090376",
+  "tests": {
+    "python_local_clean_locked_environment": 92,
+    "python_cloud": 92,
+    "javascript_syntax_and_ui": "passed",
+    "chromium_status_boundary_cases": [
+      {
+        "key": "hy",
+        "status": "error",
+        "expected": "insufficient",
+        "passed": true
+      },
+      {
+        "key": "dxy",
+        "status": "error",
+        "expected": "limited",
+        "passed": true
+      },
+      {
+        "key": "vix",
+        "status": "unknown",
+        "expected": "insufficient",
+        "passed": true
+      },
+      {
+        "total": true,
+        "expected": "insufficient",
+        "passed": true
+      }
+    ],
+    "desktop_and_mobile": "passed",
+    "html_errors": 0,
+    "pip_check": "passed"
+  },
+  "scope": {
+    "indicators": 17,
+    "original_config_bytes_unchanged": true,
+    "architecture": "Static HTML/CSS/JS, Python updater, GitHub Pages; no restructuring",
+    "desktop_only_padding_change": "2px less top and bottom; same structure and mobile CSS"
+  },
+  "public_files_byte_matched": [
+    "index.html",
+    "app.js",
+    "styles.css",
+    "data/snapshot.json",
+    "data/source_evidence.json"
+  ],
+  "data": {
+    "generated_at": "2026-11-23T13:56:07.944351+00:00",
+    "available": 17,
+    "sources_failed": 1,
+    "states": [
+      {
+        "id": "dxy",
+        "provider": "sina",
+        "symbol": "DXY",
+        "unit": "点",
+        "as_of": "2026-11-20",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "us2y",
+        "provider": "fred",
+        "symbol": "DGS2",
+        "unit": "%",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "us10y",
+        "provider": "fred",
+        "symbol": "DGS10",
+        "unit": "%",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "real10y",
+        "provider": "fred",
+        "symbol": "DFII10",
+        "unit": "%",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "spread10y2y",
+        "provider": "fred",
+        "symbol": "T10Y2Y",
+        "unit": "bp",
+        "as_of": "2026-11-20",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "spread10y3m",
+        "provider": "fred",
+        "symbol": "T10Y3M",
+        "unit": "bp",
+        "as_of": "2026-11-20",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "vix",
+        "provider": "fred",
+        "symbol": "VIXCLS",
+        "unit": "点",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "hy",
+        "provider": "fred",
+        "symbol": "BAMLH0A0HYM2",
+        "unit": "bp",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "sp500",
+        "provider": "fred",
+        "symbol": "SP500",
+        "unit": "点",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "nasdaq100",
+        "provider": "fred",
+        "symbol": "NASDAQ100",
+        "unit": "点",
+        "as_of": "2026-11-19",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "gold",
+        "provider": "frankfurter",
+        "symbol": "XAU/USD",
+        "unit": "USD/oz",
+        "as_of": "2026-11-22",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "wti",
+        "provider": "fred",
+        "symbol": "DCOILWTICO",
+        "unit": "USD/bbl",
+        "as_of": "2026-11-17",
+        "status": "stale",
+        "error": null
+      },
+      {
+        "id": "copper",
+        "provider": "eastmoney",
+        "symbol": "HG00Y",
+        "unit": "USD/lb",
+        "as_of": "2026-11-20",
+        "status": "error",
+        "error": "数据源网络请求失败"
+      },
+      {
+        "id": "btc",
+        "provider": "coingecko",
+        "symbol": "bitcoin",
+        "unit": "USD",
+        "as_of": "2026-11-22",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "eth",
+        "provider": "coingecko",
+        "symbol": "ethereum",
+        "unit": "USD",
+        "as_of": "2026-11-22",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "usdjpy",
+        "provider": "ecb",
+        "symbol": "USD/JPY",
+        "unit": "JPY/USD",
+        "as_of": "2026-11-20",
+        "status": "ok",
+        "error": null
+      },
+      {
+        "id": "usdcnh",
+        "provider": "frankfurter",
+        "symbol": "USD/CNH",
+        "unit": "CNH/USD",
+        "as_of": "2026-11-22",
+        "status": "ok",
+        "error": null
+      }
+    ]
+  },
+  "spread_latest_checks": [
+    {
+      "id": "spread10y2y",
+      "as_of": "2026-11-20",
+      "status": "not_comparable",
+      "reason": "尚未完成同日底层交叉核验：缺少同一日期的有效长短端收益率，未跨日期相减",
+      "latest_common": {
+        "as_of": "2026-11-19",
+        "official_bp": 28.000000000000004,
+        "long_yield_pct": 5.04,
+        "short_yield_pct": 4.76,
+        "same_date_bp": 28.000000000000025,
+        "signed_difference_bp": -2.1316282072803006e-14,
+        "difference_bp": 2.1316282072803006e-14,
+        "status": "ok"
+      }
+    },
+    {
+      "id": "spread10y3m",
+      "as_of": "2026-11-20",
+      "status": "not_comparable",
+      "reason": "尚未完成同日底层交叉核验：缺少同一日期的有效长短端收益率，未跨日期相减",
+      "latest_common": {
+        "as_of": "2026-11-19",
+        "official_bp": 70.0,
+        "long_yield_pct": 5.04,
+        "short_yield_pct": 4.34,
+        "same_date_bp": 70.00000000000001,
+        "signed_difference_bp": -1.4210854715202004e-14,
+        "difference_bp": 1.4210854715202004e-14,
+        "status": "ok"
+      }
+    }
+  ],
+  "spread_historical_summary": [
+    {
+      "id": "spread10y2y",
+      "tolerance_bp": 2,
+      "observations": 91,
+      "warnings": 0,
+      "latest_common": {
+        "as_of": "2026-11-19",
+        "official_bp": 28.000000000000004,
+        "long_yield_pct": 5.04,
+        "short_yield_pct": 4.76,
+        "same_date_bp": 28.000000000000025,
+        "signed_difference_bp": -2.1316282072803006e-14,
+        "difference_bp": 2.1316282072803006e-14,
+        "status": "ok"
+      }
+    },
+    {
+      "id": "spread10y3m",
+      "tolerance_bp": 2,
+      "observations": 91,
+      "warnings": 0,
+      "latest_common": {
+        "as_of": "2026-11-19",
+        "official_bp": 70.0,
+        "long_yield_pct": 5.04,
+        "short_yield_pct": 4.34,
+        "same_date_bp": 70.00000000000001,
+        "signed_difference_bp": -1.4210854715202004e-14,
+        "difference_bp": 1.4210854715202004e-14,
+        "status": "ok"
+      }
+    }
+  ],
+  "macro_evidence": {
+    "strict_archived_days": 3,
+    "mature_forward_windows": 0,
+    "predictive_ability_proven": false,
+    "exploratory_cases_not_PIT": true
+  },
+  "schedule": {
+    "observed_natural_days": 2,
+    "ten_days_verified": false,
+    "backup_crons": [
+      "45 0 * * *",
+      "15 2 * * *"
+    ],
+    "backup_gate_unit_test": "passed",
+    "natural_backup_trigger_observed": false,
+    "punctual_0815_verified": false
+  },
+  "browser": [
+    {
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1440,
+        "scroll": 1440,
+        "cardBottom": 890.296875
+      },
+      "cards": 17,
+      "missing": 0,
+      "console_errors": [],
+      "macro": "中性/信号分歧",
+      "mode": "full",
+      "absolute_alerts": [
+        {
+          "id": "vix",
+          "as_of": "2026-11-19",
+          "value": 28.44,
+          "unit": "点",
+          "message": "波动率处于较高水平"
+        }
+      ],
+      "independent_dates_checked": true,
+      "methodology_rows": 17,
+      "methodology_no_overflow": true,
+      "update_context": {
+        "event": "workflow_dispatch",
+        "schedule": null,
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45188732940"
+      }
+    },
+    {
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "scroll": 390,
+        "cardBottom": 2213.390625
+      },
+      "cards": 17,
+      "missing": 0,
+      "console_errors": [],
+      "macro": "中性/信号分歧",
+      "mode": "full",
+      "absolute_alerts": [
+        {
+          "id": "vix",
+          "as_of": "2026-11-19",
+          "value": 28.44,
+          "unit": "点",
+          "message": "波动率处于较高水平"
+        }
+      ],
+      "independent_dates_checked": true,
+      "methodology_rows": 17,
+      "methodology_no_overflow": true,
+      "update_context": {
+        "event": "workflow_dispatch",
+        "schedule": null,
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45188732940"
+      }
+    }
+  ],
+  "known_limits": [
+    "Only two natural schedule days observed; 10-day acceptance pending",
+    "Historical publication vintages absent before Git archival; no mature strict outcomes",
+    "Copper rollover not fully verified; this fetch failed and history was retained",
+    "WTI stale; latest official spread dates have no matching bottom legs",
+    "Restricted original response bodies not comprehensively archived; metadata/hashes are not raw responses"
+  ],
+  "intermediate_ci_failures": [
+    {
+      "run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45187369761",
+      "reason": "Pinned Playwright unsupported on ubuntu-latest 26.04; fixed runner to 24.04"
+    },
+    {
+      "run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45187962351",
+      "reason": "Desktop cards reached 906px; reduced desktop-only padding, final 890px"
+    }
+  ]
+}

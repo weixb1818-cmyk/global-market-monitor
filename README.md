@@ -4,6 +4,8 @@
 
 ## 下一阶段质量改进
 
+最终实现：[895894b](https://github.com/weixb1818-cmyk/global-market-monitor/commit/895894bcf59be3c71f41f0fa96e99719fcbf0c13)；[阶段交付与限制](docs/NEXT_STAGE_DELIVERY.md)；[92项测试、浏览器与发布验收](verification/quality-stage-2026-11-23/acceptance.json)。旧轮77项及更早记录保留供追溯。
+
 [数据质量、17项来源核验、商品研究、利差与历史分析报告](docs/DATA_QUALITY_REPORT.md)汇总本阶段真实结果。状态边界已收紧：只有本轮正常且有效的数据可用于宏观分类及VIX/HY高位提示；失败的历史价格仅供展示。原17项与宏观阈值保留。
 
 完整复核建议使用Python **3.12**：`pip install -r requirements.txt`安装固定的直接及传递依赖；云端运行器固定Ubuntu 24.04、浏览器固定Playwright 1.58.2。`python scripts/research_quality.py`进行只读商品来源研究，`python scripts/analyze_macro.py`生成固定阈值分析，`python scripts/schedule_audit.py`归档真实十日调度窗口，`python scripts/build_quality_report.py`由现有证据生成报告。研究脚本不会替换生产指标。
@@ -32,7 +34,7 @@
 
 ## 本地运行
 
-需要 Python 3.10+、联网和 IANA 时区数据库。Windows 请先安装 Python，并在虚拟环境额外安装 `tzdata`。
+当前锁定环境使用 Python 3.12、联网和 IANA 时区数据库；`requirements.txt`已包含`tzdata`。Node.js 22用于运行JS测试及浏览器验证，静态页面不需要Node服务。
 
 ```bash
 cd /home/ubuntu/panel

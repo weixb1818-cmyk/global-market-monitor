@@ -1,0 +1,25 @@
+[
+  {
+    "key": "hy",
+    "status": "error",
+    "expected": "insufficient",
+    "passed": true
+  },
+  {
+    "key": "dxy",
+    "status": "error",
+    "expected": "limited",
+    "passed": true
+  },
+  {
+    "key": "vix",
+    "status": "unknown",
+    "expected": "insufficient",
+    "passed": true
+  },
+  {
+    "total": true,
+    "expected": "insufficient",
+    "passed": true
+  }
+]
