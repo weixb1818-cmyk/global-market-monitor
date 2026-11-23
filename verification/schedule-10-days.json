@@ -1,9 +1,10 @@
 {
-  "checked_at": "2026-11-23T13:49:26.461696+00:00",
+  "checked_at": "2026-11-23T13:52:54.070986+00:00",
   "planned_beijing": "08:15",
   "window_days": 10,
   "observed_days": 2,
   "ten_days_observed": false,
+  "ten_days_update_deploy_success": false,
   "records": [
     {
       "date": "2026-11-14",
@@ -67,8 +68,14 @@
           "started_at": "2026-11-22T06:54:51Z",
           "completed_at": "2026-11-22T06:55:47Z",
           "conclusion": "success",
+          "job_conclusions": {
+            "update": "success",
+            "deploy": "success"
+          },
+          "source_all_success": null,
+          "matched_cron": null,
           "delay_seconds": 23991.0,
-          "timing_note": "created_at measures arrival; started_at includes queue; completed_at from last job, never inferred from updated_at"
+          "timing_note": "Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
         }
       ]
     },
@@ -86,8 +93,14 @@
           "started_at": "2026-11-23T07:44:21Z",
           "completed_at": "2026-11-23T07:45:27Z",
           "conclusion": "success",
+          "job_conclusions": {
+            "update": "success",
+            "deploy": "success"
+          },
+          "source_all_success": null,
+          "matched_cron": null,
           "delay_seconds": 26961.0,
-          "timing_note": "created_at measures arrival; started_at includes queue; completed_at from last job, never inferred from updated_at"
+          "timing_note": "Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
         }
       ]
     }
