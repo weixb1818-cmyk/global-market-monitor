@@ -40,10 +40,10 @@ def main():
     names={'warning_and_drawdown':'预警后回撤','warning_without_drawdown':'预警后未达回撤标签（误报对照）','missed_drawdown':'未预警但发生回撤（漏报对照）','no_warning_no_drawdown':'未预警且未达回撤标签'}
     for scenario in analysis['descriptive_current_vintage']['lag_scenarios']:
         for kind,r in scenario['first_cases'].items():lines.append(f"| {scenario['assumed_calendar_day_lag']}天 | {names[kind]} | {r['signal_at'][:10]} | {r['state']} | {r['outcomes']['sp500']['20']['max_close_drawdown_pct']:.2f}% |")
-    lines+=['','完整每日信号、独立输入日期、曲线变化、三项资产5/20期收益/入场后不利变化/峰谷回撤、阈值及历史哈希见[分析JSON](../verification/macro-analysis.json)，复核命令为`python scripts/analyze_macro.py`。计量采用信号后的第一个完整资产日收盘为参考，再观察5/20个有效观测间隔；不是日内回撤，不假设能在信号前收盘价成交。当前证据支持解释型风险整理，尚不足以宣称可预测涨跌或有可交易优势。', '',
+    lines+=['','完整每日信号、独立输入日期、曲线变化、三项资产5/20期收益/入场后不利变化/峰谷回撤、阈值及历史哈希见[分析JSON](../verification/macro-analysis.json)，复核命令为`python scripts/analyze_macro.py`。计量采用信号后的第一个完整资产日收盘为参考，再观察5/20个有效观测间隔；不是日内回撤，不假设能在信号前收盘价成交；窗口有缺失预期交易日则拒绝计量，股票按NYSE交易日、BTC按UTC自然日。当前证据支持解释型风险整理，尚不足以宣称可预测涨跌或有可交易优势。', '',
             '## 调度与审计复现','',
             f"计划仍为北京时间08:15；新增08:45和10:15免费补偿检查，若当天已有状态ok的更新则跳过，部分/全失败可重试。不承诺消除GitHub相关性延迟。当前10自然日窗口只有{schedule['observed_days']}天实际原生schedule记录，十日验收尚未完成；上线前、待运行、漏跑明确区分。实际创建/启动/最后作业完成时间和链接见[十日记录](../verification/schedule-10-days.json)。备份与主任务分开标识；未部署的跳过任务不会伪造公网回读或浏览器验收。页面超过计划2小时仍没有当日更新记录会提示延迟/漏跑，该提示宽限不是宏观阈值。", '',
-            f"Python直接及传递依赖已固定，Playwright固定1.58.2；每次取数记录请求起止、HTTP状态、响应SHA-256、来源日期、修订和生成文件哈希。本轮记录{len(evidence['requests'])}次HTTP请求、{len(evidence['revisions'])}条同日价格修订。默认只保存允许复用的ECB统计XML受限响应，其余保留元数据/哈希，不把哈希冒充原始行情已归档。记录见[data/source_evidence.json](../data/source_evidence.json)，历次版本可通过Git查看，云端另保存artifact。依据：[ECB复用说明](https://www.ecb.europa.eu/services/disclaimer/html/index.en.html)。", '',
+            f"Python直接及传递依赖已固定，运行器固定Ubuntu 24.04、Playwright固定1.58.2；每次取数记录请求起止、HTTP状态、响应SHA-256、来源日期、修订和生成文件哈希。本轮记录{len(evidence['requests'])}次HTTP请求、{len(evidence['revisions'])}条同日价格修订。默认只保存允许复用的ECB统计XML受限响应，其余保留元数据/哈希，不把哈希冒充原始行情已归档。记录见[data/source_evidence.json](../data/source_evidence.json)，历次版本可通过Git查看，云端另保存artifact。依据：[ECB复用说明](https://www.ecb.europa.eu/services/disclaimer/html/index.en.html)。", '',
             '未来仍需：真实连续10日运行；更多成熟的前瞻样本或具备全部输入历史发布版本的资料；核实HG00Y换月规则；最新日期底层美债补齐；长期观察合成参考价修订及免费接口可用性。没有用付费数据、虚构样本或调参填补这些缺口。']
     (ROOT/'docs/DATA_QUALITY_REPORT.md').write_text('\n'.join(lines)+'\n')
 

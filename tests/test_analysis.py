@@ -35,3 +35,9 @@ class ReviewTests(unittest.TestCase):
         r=report([],now);self.assertFalse(r['ten_days_observed']);self.assertEqual(len(r['records']),10)
         self.assertEqual(r['records'][-1]['status'],'no_observed_run')
         self.assertTrue(any(x['status']=='not_in_operation' for x in r['records']))
+
+    def test_missing_expected_close_is_invalid_not_a_longer_horizon(self):
+        rows=[{'date':'2026-11-02','value':100},{'date':'2026-11-04','value':95}]
+        result=outcome(rows,datetime(2026,11,2,tzinfo=timezone.utc),'sp500',1)
+        self.assertEqual(result['status'],'invalid')
+        self.assertIn('missing expected',result['reason'])

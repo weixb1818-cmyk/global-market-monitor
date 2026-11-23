@@ -28,7 +28,7 @@ class Evidence:
         parts=urlsplit(url)
         entry={'indicator':getattr(self.local,'item',None),'requested_at':started,
                'completed_at':datetime.now(timezone.utc).isoformat(),
-               'endpoint':parts.scheme+'://'+parts.netloc+(parts.path if parts.hostname in KNOWN_HOSTS else '/[redacted]'),
+               'endpoint':parts.scheme+'://'+(parts.hostname or '[invalid-host]')+(parts.path if parts.hostname in KNOWN_HOSTS else '/[redacted]'),
                'params':{k:v for k,v in (params or {}).items() if k in SAFE_PARAMS},
                'status':None,'response_sha256':None,'error_type':type(error).__name__ if error else None}
         if response is not None:

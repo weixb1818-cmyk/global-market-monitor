@@ -80,7 +80,7 @@ class EvidenceTests(unittest.TestCase):
             e.record('https://api.stlouisfed.org/fred/series/observations?api_key=secret',{'api_key':'secret','series_id':'HY'},response,'now')
             self.assertNotIn('secret',json.dumps(e.requests));self.assertNotIn('raw_path',e.requests[0])
             self.assertEqual(len(e.requests[0]['response_sha256']),64)
-            e.record('https://private.example/secret/token',{},None,'now',ValueError('secret'))
+            e.record('https://user:secret@private.example/secret/token',{},None,'now',ValueError('secret'))
             self.assertNotIn('token',json.dumps(e.requests));self.assertEqual(e.requests[-1]['error_type'],'ValueError')
 
     def test_revisions_keep_old_and_new_values(self):

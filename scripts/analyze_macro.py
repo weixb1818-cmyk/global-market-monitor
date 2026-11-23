@@ -5,6 +5,7 @@ import hashlib
 import json
 import statistics
 import subprocess
+from functools import lru_cache
 from datetime import date,datetime,timedelta,timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -28,10 +29,19 @@ def endpoint(p):
             else datetime.combine(d,datetime.min.time(),ZoneInfo('America/New_York')).replace(hour=16))
 
 
+@lru_cache(maxsize=1024)
+def expected_dates(first, last, asset):
+    if asset=='btc':return [(first+timedelta(days=i)).isoformat() for i in range((last-first).days+1)]
+    return [d.isoformat() for d in u.session_dates(first,last,'nyse')]
+
+
 def outcome(series, signal_time, asset, horizon):
     future=[p for p in series if endpoint({**p,'asset':asset})>signal_time]
     if len(future)<horizon+1:return {'status':'pending','available_closes':len(future),'needed_closes':horizon+1}
     window=future[:horizon+1];values=[p['value'] for p in window]
+    dates=[p['date'] for p in window]
+    if dates!=expected_dates(date.fromisoformat(dates[0]),date.fromisoformat(dates[-1]),asset):
+        return {'status':'invalid','reason':'duplicate, unsorted or missing expected asset close; do not turn missing days into a longer horizon'}
     if any(v<=0 for v in values):return {'status':'invalid'}
     peak=values[0];dd=0
     for v in values:peak=max(peak,v);dd=min(dd,(v/peak-1)*100)

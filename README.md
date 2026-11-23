@@ -6,7 +6,7 @@
 
 [数据质量、17项来源核验、商品研究、利差与历史分析报告](docs/DATA_QUALITY_REPORT.md)汇总本阶段真实结果。状态边界已收紧：只有本轮正常且有效的数据可用于宏观分类及VIX/HY高位提示；失败的历史价格仅供展示。原17项与宏观阈值保留。
 
-完整复核建议使用Python **3.12**：`pip install -r requirements.txt`安装固定的直接及传递依赖；云端浏览器固定Playwright 1.58.2。`python scripts/research_quality.py`进行只读商品来源研究，`python scripts/analyze_macro.py`生成固定阈值分析，`python scripts/schedule_audit.py`归档真实十日调度窗口，`python scripts/build_quality_report.py`由现有证据生成报告。研究脚本不会替换生产指标。
+完整复核建议使用Python **3.12**：`pip install -r requirements.txt`安装固定的直接及传递依赖；云端运行器固定Ubuntu 24.04、浏览器固定Playwright 1.58.2。`python scripts/research_quality.py`进行只读商品来源研究，`python scripts/analyze_macro.py`生成固定阈值分析，`python scripts/schedule_audit.py`归档真实十日调度窗口，`python scripts/build_quality_report.py`由现有证据生成报告。研究脚本不会替换生产指标。
 
 定时主目标08:15北京；08:45、10:15为免费补偿检查，当天健康更新后跳过。计划后的2小时仍没有当日尝试记录会在原全局提示中说明延迟或漏跑。十日记录尚待积累；GitHub免费定时无法保证准点。
 
