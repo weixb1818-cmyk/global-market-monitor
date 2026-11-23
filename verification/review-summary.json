@@ -224,5 +224,12 @@
     "macro_rules_and_thresholds_unchanged": true,
     "copper_history_exactly_retained": true,
     "page_layout_and_17_indicators_unchanged": true
+  },
+  "audit_handoff": {
+    "start_here": "AUDIT_START_HERE.md",
+    "baseline_commit": "66ad918c3235409dffd2fdbc3366c5d7b21e2673",
+    "manifest": "verification/audit-handoff-2026-11-23/manifest.json",
+    "original_spec": "docs/global_macro_dashboard_codex_spec.md",
+    "scope": "Documentation and evidence only; no production code/config/workflow changes"
   }
 }

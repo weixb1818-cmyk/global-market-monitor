@@ -2,6 +2,8 @@
 
 核查日期：2026-11-23。此文记录已实现内容、实测证据和剩余问题，不是审计通过结论。页面与仓库仍公开，按用户明确的内部学习用途使用数据，未新增付费订阅。
 
+**新团队请先读 [AUDIT_START_HERE.md](AUDIT_START_HERE.md)**：最新固定审计基线为 `66ad918`，77项Python测试通过，铜本轮更新失败保留历史、WTI延迟。下文 `5c32360`、66项测试和来源失败0项为较早历史记录；最后四项修正及其验收见文末。新入口提供基线全部已跟踪文件哈希、复核步骤和未关闭问题。
+
 ## 审计入口与固定版本
 
 - [线上仪表盘](https://weixb1818-cmyk.github.io/global-market-monitor/) · [17项计算与来源说明](https://weixb1818-cmyk.github.io/global-market-monitor/#methodology) · [当前数据快照](https://weixb1818-cmyk.github.io/global-market-monitor/data/snapshot.json)

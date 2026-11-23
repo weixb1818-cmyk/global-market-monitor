@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-11-23T12:19:44.262832+00:00",
+  "baseline_commit": "66ad918c3235409dffd2fdbc3366c5d7b21e2673",
+  "baseline_files_verified_in_detached_worktree": 35,
+  "local_markdown_link_targets_checked": 22,
+  "spec_byte_identical_to_workspace": true,
+  "json_valid": true,
+  "production_files_unchanged": [
+    "config.json",
+    "scripts/update_data.py",
+    "scripts/verify_public.py",
+    "app.js",
+    "index.html",
+    "styles.css",
+    "requirements.txt",
+    ".github/workflows/update.yml",
+    ".github/workflows/verify.yml",
+    "data/history.json",
+    "data/snapshot.json",
+    "data/last_attempt.json"
+  ],
+  "test_execution": "Documentation-only change: production tests not rerun; 77-pass evidence belongs to linked prior acceptance"
+}

@@ -1,0 +1,67 @@
+{
+  "created_at": "2026-11-23T12:19:21.139153+00:00",
+  "baseline_commit": "66ad918c3235409dffd2fdbc3366c5d7b21e2673",
+  "scope": "All tracked files in the fixed audit baseline; handoff documentation is a later additive publication",
+  "files": {
+    ".github/workflows/update.yml": "3cec3eb4be56162460feaecbd7d894e61a7228570d238f35e012f20df9c2d35b",
+    ".github/workflows/verify.yml": "695ef68a89ca824cbb60b67e2136a9761b1d826f87378b1bbbe2022487d89c88",
+    ".gitignore": "a9da9766a2210c6c687a432525ae9d753313ef358525c31ad073eea83c930960",
+    "AUDIT.md": "9f50511ce88712590051d28d30405716c1b37224fd9770f9cf990a40314db07d",
+    "README.md": "e54043a43892c8a9ea9490b7d5a1f970b762cdb2c372f72c6362d60217f928c1",
+    "app.js": "e25f12100cbaf47a514febbc5e0881d40fbc370505b46d0d650670ec6ad65cc9",
+    "config.json": "bf09e96c7be30b14835f89a347a929ed3917ffa11ab73282614695f9d75002e1",
+    "data/history.json": "4860b55609907ce1b8ac35ccc424eb715f869f43c1e6e0515a14c2cf126d6b06",
+    "data/last_attempt.json": "ead5fccde40fbfe3bdd6e6411d452b13d0d8fe66aefcfc553cffc3731808f673",
+    "data/snapshot.json": "b77c6fb98844d70b7630c3fc5f2c613daf11093620b99d3fbe27487a68e1a9b6",
+    "data/source_access.json": "bbe8e485f33240c44b4d4b714eadc93be62c35c8e0f2442a162932b1936f33b7",
+    "data/source_research.json": "9ed1ef3e9e2a371370ae6629c273d4e5c3f7d529bfc809d606dc0ed81a2e88f6",
+    "index.html": "a0b99ced335c1caa43a05f2b7e73fca082e18d037ce23c4dd6ca0c81b01d2f89",
+    "requirements.txt": "e5afcdc3ace7d018a67817bac82ebd64ab0663186ada2ddf84d14863e463bb1c",
+    "scripts/update_data.py": "936f11f031debce93703b8c600a64d260bb648b724a727dfc5abfeecbf48ec62",
+    "scripts/verify_public.py": "d143ef712a8d898de0c66f105c10417496172bae5eaab8cb87b1dca41e2437d4",
+    "styles.css": "96ac5b0433858561a301c30ec090a02dea2fd2d86326d93d308a36acbc42587a",
+    "tests/test_dashboard.py": "490f476b57e49a163fb2f5d8fa5274c314c062bba3ae1574bebfb3f35fdfe2a2",
+    "tests/test_free_sources.py": "0c6463ff31db17a757182ebe334f6030f99c1ee369a53b17e908e9ded14ed9bb",
+    "tests/test_portal_sources.py": "1ef59356111c54ac59f595154735ff4daefa2ff1ebd5621b9d6884c4a4d9427b",
+    "tests/test_publication.py": "15402ecb17c851d68d3b57f665fb3dd1d619294a4c924df65efdb1513dc4e21c",
+    "tests/test_ui.cjs": "0bce9d7b701270d16faf42388ca030e5fb892c545d800663d6c35b04a4fe4006",
+    "tests/verify_live.cjs": "0c85a05883db89c80015fcb252346b0ae0dd508b262e28f31475cdf149585438",
+    "verification/audit-2026-11-23/browser-report.json": "7e88b348cea45d40160289e5d2cf7d5f8f732faf4c26c64d9bc3818fd4a5a62d",
+    "verification/audit-2026-11-23/cnbc-history-research.json": "20485e26151110df648fa968a1c2ca10485815fcb4c2d287e4517958063f0689",
+    "verification/audit-2026-11-23/html-validation.json": "2953b2af2bf6407b925b959fbb82618cadd0729fd16801e9543a080f400f9479",
+    "verification/audit-2026-11-23/manifest.json": "c7c561db7292fc2f96156baeabfd7902e40eae6c6f226ee328eb8a7264c40209",
+    "verification/audit-2026-11-23/publication.json": "8d2df86bc5ede8a5344684a4eb02cd2f1cf1dab7064561edc8021cb07de892c9",
+    "verification/audit-2026-11-23/schedule-timing.json": "0e96b585230f5c1c2c0a6b6b92fd08194e2d5f5d269aa270b5013e851e874cc5",
+    "verification/audit-fixes-2026-11-23/acceptance.json": "3dce88850627929ce883cef30b4253499852cedba26e5e73014b5c6861a87b30",
+    "verification/audit-fixes-2026-11-23/browser-report.json": "3ddeb7fb5eb1cfe71e6d39d2e0b60697624bf392fba37d605127c2f86a9f7736",
+    "verification/audit-fixes-2026-11-23/html-validation.json": "2953b2af2bf6407b925b959fbb82618cadd0729fd16801e9543a080f400f9479",
+    "verification/audit-fixes-2026-11-23/local-checks.json": "5386b66e5043dd51f6b8197d664ebac92198753fc8fed6091badfd186c7f79c5",
+    "verification/audit-fixes-2026-11-23/publication.json": "75848213841a1c190a0f00f05f96e6a33b854d13e40696b16434285ed7ebd3ec",
+    "verification/review-summary.json": "5225d89414778366daee302b8e85e25c10951732b639b8ab24dd414ec537707f"
+  },
+  "supplemental_spec": {
+    "path": "docs/global_macro_dashboard_codex_spec.md",
+    "sha256": "3b5c7ba7479dade6b5100aa0d10272160029ac8e686c66c8e258f449f8a8d030",
+    "origin": "Byte-for-byte copy of existing workspace global_macro_dashboard_codex_spec.md, archived during handoff; absent from baseline commit"
+  },
+  "claims": {
+    "python_tests": 77,
+    "indicators_with_values": 17,
+    "sources_failed": 1,
+    "delayed": [
+      "wti"
+    ],
+    "failed_retained": [
+      "copper"
+    ],
+    "punctual_0815_verified": false,
+    "copper_rollover_verified": false,
+    "cnbc_in_production": false
+  },
+  "evidence": {
+    "implementation_commit": "0f789b042add00d859678bdf99f31c5f96efd2e9",
+    "update_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607",
+    "browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155370843",
+    "acceptance": "verification/audit-fixes-2026-11-23/acceptance.json"
+  }
+}
