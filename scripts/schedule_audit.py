@@ -25,11 +25,11 @@ def report(runs, now, days=10):
         rows.append({'date':d.isoformat(),'planned_at':target.isoformat(),'status':state,'runs':[{
           'run_id':r['id'],'url':r['html_url'],'event':r['event'],'head_sha':r['head_sha'],
           'created_at':r['created_at'],'started_at':r.get('run_started_at'),'completed_at':r.get('completed_at'),
-          'conclusion':r['conclusion'],'delay_seconds':(datetime.fromisoformat(r['created_at'].replace('Z','+00:00'))-target).total_seconds(),
-          'timing_note':'created_at measures arrival; started_at includes queue; completed_at from last job, never inferred from updated_at'} for r in matches]})
+          'conclusion':r['conclusion'],'job_conclusions':r.get('job_conclusions',{}),'source_all_success':None,'matched_cron':None,'delay_seconds':(datetime.fromisoformat(r['created_at'].replace('Z','+00:00'))-target).total_seconds(),
+          'timing_note':'Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence.'} for r in matches]})
     observed=sum(r['status']=='observed' for r in rows)
     return {'checked_at':now.isoformat(),'planned_beijing':'08:15','window_days':days,'observed_days':observed,
-            'ten_days_observed':observed==days,'records':rows,'limitation':'GitHub schedule has no punctuality SLA; pre-operation/missing/pending days are not successful runs.'}
+            'ten_days_observed':observed==days,'ten_days_update_deploy_success':all(any(x['job_conclusions'].get('update')=='success' and x['job_conclusions'].get('deploy')=='success' for x in r['runs']) for r in rows),'records':rows,'limitation':'GitHub schedule has no punctuality SLA; pre-operation/missing/pending days are not successful runs.'}
 
 
 def get_json(url):
@@ -60,6 +60,7 @@ def main():
     for r in runs:
         jobs=get_json(r['jobs_url'])['jobs'];ends=[j['completed_at'] for j in jobs if j.get('completed_at')]
         r['completed_at']=max(ends) if ends else None
+        r['job_conclusions']={j['name']:j['conclusion'] for j in jobs}
     result=report(runs,now);out=Path('verification/schedule-10-days.json');out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n');print(json.dumps({k:v for k,v in result.items() if k!='records'}))
 

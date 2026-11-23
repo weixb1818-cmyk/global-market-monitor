@@ -42,9 +42,9 @@ class StatusBoundary(unittest.TestCase):
         realroot=Path(u.__file__).resolve().parents[1]
         # Real stored observations exercise the whole updater, with no fixture
         # quotes written into production. A frozen clock keeps them fresh.
-        history=json.loads((realroot/'data/history.json').read_text())
-        old=json.loads((realroot/'data/snapshot.json').read_text())
-        clock=datetime(2026,11,23,10,tzinfo=timezone.utc)
+        fixture=json.loads((realroot/'tests/fixtures/retained_observations.json').read_text())
+        history=fixture['history'];old=fixture['old_snapshot']
+        clock=datetime.fromisoformat(fixture['captured_at'])
         for failed in ['dxy','hy','vix','real10y','us2y']:
             with self.subTest(failed=failed),tempfile.TemporaryDirectory() as directory:
                 root=Path(directory);(root/'data').mkdir()
@@ -62,12 +62,12 @@ class StatusBoundary(unittest.TestCase):
                 script="""
 const fs=require('fs'),vm=require('vm');let snap=JSON.parse(fs.readFileSync(process.argv[1]));
 const doc={getElementById(){return {parentElement:{classList:{add(){}}}}}};
-const ctx={console,document:doc,fetch:async()=>({ok:true,json:async()=>snap}),snap};
+const ctx={console,document:doc,fetch:async()=>({ok:true,json:async()=>snap}),snap,clock:process.argv[2]};
 vm.createContext(ctx);vm.runInContext(fs.readFileSync('app.js','utf8').replace(/load\(\);\s*$/,''),ctx);
-const result=vm.runInContext("({macro:currentMacro(snap,new Date('2026-11-23T10:00:00Z')),alerts:currentAlerts(snap,new Date('2026-11-23T10:00:00Z'))})",ctx);
+const result=vm.runInContext("({macro:currentMacro(snap,new Date(clock)),alerts:currentAlerts(snap,new Date(clock))})",ctx);
 console.log(JSON.stringify(result));
 """
-                result=json.loads(subprocess.check_output(['node','-e',script,str(root/'data/snapshot.json')],cwd=realroot,text=True))
+                result=json.loads(subprocess.check_output(['node','-e',script,str(root/'data/snapshot.json'),clock.isoformat()],cwd=realroot,text=True))
                 self.assertEqual(result['macro']['mode'],snapshot['macro']['mode'])
                 self.assertNotIn(failed,[a['id'] for a in result['alerts']])
 

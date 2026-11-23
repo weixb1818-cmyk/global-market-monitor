@@ -1,0 +1,121 @@
+{
+  "observed_at": "2026-11-23T13:40:11.440167+00:00",
+  "method": "Comparison between retained old snapshot and a fresh same-provider retrieval. This does not establish the exact upstream revision timestamp.",
+  "archived_evidence_commit": "f4e080e6ab1a907701442f4db6874dc6d7eaadea",
+  "revisions": [
+    {
+      "id": "gold",
+      "date": "2026-11-22",
+      "old_value": 3638.52,
+      "new_value": 3623.25,
+      "old_components": [
+        {
+          "provider": "BCBO",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BCP",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BNR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BOM",
+          "date": "2026-11-22"
+        },
+        {
+          "provider": "CBA",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBAR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBO",
+          "date": "2026-11-22"
+        },
+        {
+          "provider": "CBR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBSL",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBM",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBP",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBU",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "PMA",
+          "date": "2026-11-19"
+        }
+      ],
+      "new_components": [
+        {
+          "provider": "BCBO",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BCP",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BNR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "BOM",
+          "date": "2026-11-22"
+        },
+        {
+          "provider": "CBA",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBAR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBO",
+          "date": "2026-11-22"
+        },
+        {
+          "provider": "CBR",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "CBSL",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBM",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBP",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "NBU",
+          "date": "2026-11-20"
+        },
+        {
+          "provider": "PMA",
+          "date": "2026-11-22"
+        }
+      ]
+    }
+  ]
+}

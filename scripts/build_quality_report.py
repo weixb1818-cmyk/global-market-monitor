@@ -16,7 +16,7 @@ def main():
             '## P0：异常状态边界','',
             '宏观与绝对高位提示只接受 status=ok、无error且有限数值；方向分类还要求有效20期变化。DXY单独异常时保留原有限风险提示，其他关键输入异常时停止分类。未知状态不放行。失败价格可展示，但小字只说明沿用历史。全源失败保留原快照，前端依据最后尝试记录阻断旧快照的正常结论。异常响应、脚本到JSON到前端以及真实Chromium失败路径均有测试。', '',
             '## 商品口径与适用性','',
-            '黄金：XAU为金衡盎司，报价USD/oz。Frankfurter多源合成参考价并非COMEX成交价、LBMA定盘或统一现货收盘。保留每个未排除来源的日期，标记混合日期，记录同日历史修订；不在本轮更换定义或重新缩放历史。']
+            '黄金：XAU为金衡盎司，报价USD/oz。Frankfurter多源合成参考价并非COMEX成交价、LBMA定盘或统一现货收盘。保留每个未排除来源的日期，标记混合日期，记录同日历史修订；不在本轮更换定义或重新缩放历史。一次真实重取检测到11月22日参考价从3638.52修订为3623.25，旧值和新值均有[归档证据](../verification/gold-revision-example.json)，并不声称知道源端准确修订时刻。']
     g=research.get('gold',{})
     lines +=[f"本次14日研究窗口有{g.get('n',0)}个同日NBP交叉参考样本：NBP黄金PLN/克 × 31.1034768 ÷ 同日USDPLN。合成值相对该参考的绝对偏差中位数{g.get('median_abs_difference_pct',0):.3f}%，最大{g.get('max_abs_difference_pct',0):.3f}%；有{g.get('blend_rows_with_mixed_dates',0)}个研究行混合不同来源日期。NBP也是合成源之一，该比较并非完全独立，不证明可交易价准确性。",'',
               '依据：[Frankfurter方法](https://frankfurter.dev/methodology/)、[其历史缓存/修订说明](https://frankfurter.dev/python/)、[NBP官方API](https://api.nbp.pl/en.html)。逐日值、来源机构及哈希见[商品研究JSON](../verification/commodity-research.json)。本轮[接口探测记录](../verification/reference-probes-2026-11-23.json)显示旧FRED黄金系列404、CNBC黄金历史403；没有绕过限制或用其替换生产。', '',
