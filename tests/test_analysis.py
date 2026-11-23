@@ -1,4 +1,7 @@
 import unittest
+import json
+from unittest.mock import patch
+from scripts import analyze_macro as analysis
 from datetime import datetime,timezone,timedelta
 from scripts.analyze_macro import outcome
 from scripts.schedule_audit import gate,report
@@ -41,3 +44,16 @@ class ReviewTests(unittest.TestCase):
         result=outcome(rows,datetime(2026,11,2,tzinfo=timezone.utc),'sp500',1)
         self.assertEqual(result['status'],'invalid')
         self.assertIn('missing expected',result['reason'])
+
+    def test_archived_failed_attempt_on_next_day_blocks_old_ok_snapshot(self):
+        snap={'generated_at':'2026-11-20T23:00:00+00:00','indicators':[{'id':k,'name':k,'value':1,'change_20':0,'status':'ok','as_of':'2026-11-20','calendar':'bond'} for k in ['dxy','real10y','us2y','hy','vix']]}
+        def git(args,**kwargs):
+            if args[1]=='log':
+                self.assertIn('data/last_attempt.json',args);return 'a\nb\n'
+            if '--format=%cI' in args:return '2026-11-20T23:10:00+00:00' if 'a' in args else '2026-11-21T23:10:00+00:00'
+            if args[-1].endswith(':data/snapshot.json'):return json.dumps(snap).encode()
+            return json.dumps({'status':'failed' if args[-1].startswith('b:') else 'ok','at':'2026-11-21T23:00:00+00:00'}).encode()
+        with patch.object(analysis.subprocess,'check_output',side_effect=git):r=analysis.archived()
+        self.assertEqual(len(r),2)
+        self.assertEqual(r[1]['macro']['mode'],'insufficient')
+        self.assertTrue(all(s=='error' for s in r[1]['input_statuses'].values()))

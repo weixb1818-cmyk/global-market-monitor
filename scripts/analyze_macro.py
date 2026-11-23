@@ -55,7 +55,7 @@ def evaluate(cards, histories, available):
 
 
 def archived():
-    commits=subprocess.check_output(['git','log','--reverse','--format=%H','--','data/snapshot.json'],cwd=ROOT,text=True).splitlines()
+    commits=subprocess.check_output(['git','log','--reverse','--format=%H','--','data/snapshot.json','data/last_attempt.json'],cwd=ROOT,text=True).splitlines()
     daily={}
     for sha in commits:
         try:
