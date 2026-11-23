@@ -1,0 +1,85 @@
+{
+  "checked_at": "2026-11-23T10:20:25.824285+00:00",
+  "base_commit": "10bdf8424ccf622b5f8b3ac8287021a5474e47f3",
+  "python_tests": 77,
+  "javascript_syntax_and_ui": "passed",
+  "macro_functions_unchanged": [
+    "classify",
+    "risk_levels",
+    "interpret",
+    "calculate",
+    "is_stale",
+    "curve_drivers"
+  ],
+  "config_sha256_unchanged": "bf09e96c7be30b14835f89a347a929ed3917ffa11ab73282614695f9d75002e1",
+  "existing_history_sha256_unchanged": "4860b55609907ce1b8ac35ccc424eb715f869f43c1e6e0515a14c2cf126d6b06",
+  "existing_copper_check": {
+    "id": "copper",
+    "status": "ok",
+    "observations": 100,
+    "unique_dates": 100,
+    "ascending": true,
+    "first_date": "2026-07-06",
+    "last_date": "2026-11-20",
+    "expected_cme_sessions": 100,
+    "missing_sessions": [],
+    "unexpected_dates": [],
+    "rollover_rule_verified": false
+  },
+  "current_curve_checks": [
+    {
+      "id": "spread10y2y",
+      "as_of": "2026-11-20",
+      "status": "not_comparable",
+      "reason": "缺少同一日期的长短端收益率，未跨日期相减"
+    },
+    {
+      "id": "spread10y3m",
+      "as_of": "2026-11-20",
+      "status": "not_comparable",
+      "reason": "缺少同一日期的长短端收益率，未跨日期相减"
+    }
+  ],
+  "metadata_field_mapping": {
+    "bjdw": "报价单位：美元和美分/磅",
+    "zxbddw": "最小变动价位：0.0005美元/磅"
+  },
+  "copper_prices_rescaled": false,
+  "production_indicator_count": 17,
+  "implementation_commit": "0f789b0",
+  "cloud_update_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607",
+  "cloud_browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155370843",
+  "cloud_python_tests": 77,
+  "html_errors": 0,
+  "current_history_checks": [
+    {
+      "id": "copper",
+      "status": "ok",
+      "observations": 100,
+      "unique_dates": 100,
+      "ascending": true,
+      "first_date": "2026-07-06",
+      "last_date": "2026-11-20",
+      "expected_cme_sessions": 100,
+      "missing_sessions": [],
+      "unexpected_dates": [],
+      "rollover_rule_verified": false
+    }
+  ],
+  "current_spread_checks": [
+    {
+      "id": "spread10y2y",
+      "as_of": "2026-11-20",
+      "status": "not_comparable",
+      "reason": "尚未完成同日底层交叉核验：缺少同一日期的长短端收益率，未跨日期相减"
+    },
+    {
+      "id": "spread10y3m",
+      "as_of": "2026-11-20",
+      "status": "not_comparable",
+      "reason": "尚未完成同日底层交叉核验：缺少同一日期的长短端收益率，未跨日期相减"
+    }
+  ],
+  "current_copper_error": "铜快照不是已完成交易时段，拒绝把盘中价格当收盘",
+  "copper_history_exactly_retained": true
+}

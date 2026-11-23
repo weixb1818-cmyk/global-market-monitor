@@ -115,3 +115,5 @@
 铜异常日期/缺口不会被 `observations()` 的去重/排序掩盖；入库前发现异常则保留旧历史并标注错误。快照新增 `history_checks` 记录保留序列的实际检查结果，不表示源端更新一定成功，源端失败仍看该指标 `error` 和 `last_attempt.json`。缺口检查范围为已保留历史的首末日期；尾部时效继续按原交易日机制判断。报价单位和最小价位校验不改变既有 USD/lb 价格，也不会清空或重新缩放历史。
 
 收益率曲线继续保留FRED直接发布值；方法说明动态显示 `not_comparable` 对应的“尚未完成同日底层交叉核验”，不存在跨日期相减。数据同时延迟且失败时，卡片并列显示两个状态并注明沿用历史。
+
+本轮修正验收：[实现提交 0f789b0](https://github.com/weixb1818-cmyk/global-market-monitor/commit/0f789b0)；[77项测试、更新、部署及公网回读](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607)成功；[桌面及手机浏览器验收](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155370843)成功；HTML校验0错误。[完整验收记录](verification/audit-fixes-2026-11-23/acceptance.json)与[证据目录](verification/audit-fixes-2026-11-23/)已归档。现有铜100条历史逐值未变、100个唯一升序日期、预期CME交易日100个、缺口0；本轮源端更新失败时回退报价处于盘中而被拒绝，保留历史并提示失败。两项曲线仍明确标为尚未完成同日底层交叉核验，FRED官方主值保留。宏观函数与阈值、17项配置、页面布局保持不变。

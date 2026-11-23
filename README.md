@@ -226,3 +226,5 @@ WTI 为 EIA 库欣现货，黄金为明确标注的 XAU/USD 合成参考价。20
 - 同一指标同时过期且更新失败时显示“数据延迟 · 更新失败，沿用历史”。保留原有全源失败、单项失败沿用历史、独立日期和全局提示。
 
 以上修改保持17项指标、配置与宏观识别规则/阈值不变，页面布局与结构不变，仅在原方法说明单元格内补充核验状态文本。
+
+本轮修正验收：[实现提交 0f789b0](https://github.com/weixb1818-cmyk/global-market-monitor/commit/0f789b0)；[77项测试、更新、部署及公网回读](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607)成功；[桌面及手机浏览器验收](https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155370843)成功；HTML校验0错误。[完整验收记录](verification/audit-fixes-2026-11-23/acceptance.json)与[证据目录](verification/audit-fixes-2026-11-23/)已归档。现有铜100条历史逐值未变、100个唯一升序日期、预期CME交易日100个、缺口0；本轮源端更新失败时回退报价处于盘中而被拒绝，保留历史并提示失败。两项曲线仍明确标为尚未完成同日底层交叉核验，FRED官方主值保留。宏观函数与阈值、17项配置、页面布局保持不变。

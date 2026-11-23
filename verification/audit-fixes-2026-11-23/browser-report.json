@@ -1,0 +1,66 @@
+{
+  "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
+  "checked_at": "2026-11-23T10:22:05.662Z",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1440,
+        "scroll": 1440,
+        "cardBottom": 890.109375
+      },
+      "cards": 17,
+      "missing": 0,
+      "console_errors": [],
+      "macro": "中性/信号分歧",
+      "mode": "full",
+      "absolute_alerts": [
+        {
+          "id": "vix",
+          "as_of": "2026-11-19",
+          "value": 28.44,
+          "unit": "点",
+          "message": "波动率处于较高水平"
+        }
+      ],
+      "independent_dates_checked": true,
+      "methodology_rows": 17,
+      "methodology_no_overflow": true,
+      "update_context": {
+        "event": "workflow_dispatch",
+        "schedule": null,
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607"
+      }
+    },
+    {
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "scroll": 390,
+        "cardBottom": 2197.203125
+      },
+      "cards": 17,
+      "missing": 0,
+      "console_errors": [],
+      "macro": "中性/信号分歧",
+      "mode": "full",
+      "absolute_alerts": [
+        {
+          "id": "vix",
+          "as_of": "2026-11-19",
+          "value": 28.44,
+          "unit": "点",
+          "message": "波动率处于较高水平"
+        }
+      ],
+      "independent_dates_checked": true,
+      "methodology_rows": 17,
+      "methodology_no_overflow": true,
+      "update_context": {
+        "event": "workflow_dispatch",
+        "schedule": null,
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45155204607"
+      }
+    }
+  ]
+}
