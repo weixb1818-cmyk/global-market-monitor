@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-23T13:39:54.848642+00:00",
+  "generated_at": "2026-11-23T13:46:08.447088+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -320,10 +320,10 @@
       "as_of": "2026-11-20",
       "observation_count": 100,
       "source": "东方财富 / 101.HG00Y / COMEX铜日线；供数方换月序列",
-      "status": "error",
-      "error": "数据源网络请求失败",
+      "status": "ok",
+      "error": null,
       "warning": "换月口径未完全核实；跨换月历史变化谨慎解读",
-      "interpretation": "本轮获取失败或状态未核实；仅保留历史，截至2026-11-20"
+      "interpretation": "近20期下跌，换月口径未完全核实，跨期变化谨慎解读"
     },
     {
       "id": "btc",
@@ -5538,10 +5538,10 @@
       "2027-11-11"
     ]
   },
-  "sources_failed": 1,
+  "sources_failed": 0,
   "update_context": {
-    "event": "local",
+    "event": "workflow_dispatch",
     "schedule": null,
-    "run_url": null
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45187082967"
   }
 }
