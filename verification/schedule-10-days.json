@@ -1,17 +1,11 @@
 {
-  "checked_at": "2026-11-23T13:56:21.320758+00:00",
+  "checked_at": "2026-11-24T09:59:04.118499+00:00",
   "planned_beijing": "08:15",
   "window_days": 10,
-  "observed_days": 2,
+  "observed_days": 3,
   "ten_days_observed": false,
   "ten_days_update_deploy_success": false,
   "records": [
-    {
-      "date": "2026-11-14",
-      "planned_at": "2026-11-14T08:15:00+08:00",
-      "status": "not_in_operation",
-      "runs": []
-    },
     {
       "date": "2026-11-15",
       "planned_at": "2026-11-15T08:15:00+08:00",
@@ -100,6 +94,31 @@
           "source_all_success": null,
           "matched_cron": null,
           "delay_seconds": 26961.0,
+          "timing_note": "Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-24",
+      "planned_at": "2026-11-24T08:15:00+08:00",
+      "status": "observed",
+      "runs": [
+        {
+          "run_id": 45370170972,
+          "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45370170972",
+          "event": "schedule",
+          "head_sha": "6b6ae06a4a30912376cbbcb10192e709cd962f05",
+          "created_at": "2026-11-24T09:57:59Z",
+          "started_at": "2026-11-24T09:57:59Z",
+          "completed_at": "2026-11-24T09:58:14Z",
+          "conclusion": null,
+          "job_conclusions": {
+            "gate": "success",
+            "update": null
+          },
+          "source_all_success": null,
+          "matched_cron": null,
+          "delay_seconds": 34979.0,
           "timing_note": "Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
         }
       ]
