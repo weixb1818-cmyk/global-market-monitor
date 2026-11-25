@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T09:15:12.759516+00:00",
+  "generated_at": "2026-11-25T11:13:03.797098+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -209,9 +209,9 @@
       "source_url": "https://frankfurter.dev/",
       "source_label": null,
       "quote_note": "多源合成参考价，非现货收盘或COMEX期货；上游可能不同日。",
-      "value": 3612.61,
-      "change_1": 0.21915771310314636,
-      "change_20": -8.880391657355302,
+      "value": 3612.67,
+      "change_1": 0.22082220206340875,
+      "change_20": -8.878878298177161,
       "as_of": "2026-11-24",
       "observation_count": 120,
       "source": "Frankfurter / XAU/USD / 多源合成参考价，非收盘",
@@ -268,7 +268,7 @@
         },
         {
           "provider": "PMA",
-          "date": "2026-11-23"
+          "date": "2026-11-24"
         }
       ],
       "component_dates": [
@@ -5583,8 +5583,8 @@
   "sources_failed": 1,
   "update_context": {
     "event": "schedule",
-    "schedule": "45 0 * * *",
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45583495014",
+    "schedule": "15 2 * * *",
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45602243425",
     "origin": "github_schedule",
     "planned_at": null,
     "requested_at": null,
