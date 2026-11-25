@@ -1,10 +1,30 @@
 name: Update daily market snapshot
+run-name: ${{ inputs.origin || github.event_name }} | ${{ inputs.dispatch_id || github.event.schedule || 'manual' }}
 on:
   schedule:
     - cron: '15 0 * * *'
     - cron: '45 0 * * *'
     - cron: '15 2 * * *'
   workflow_dispatch:
+    inputs:
+      origin:
+        description: Trigger source (never changes the actual GitHub event)
+        type: choice
+        options: [manual, host_cron, host_timer_test]
+        default: manual
+      planned_at:
+        description: Original planned time with timezone
+        type: string
+      requested_at:
+        description: Host invocation time with timezone
+        type: string
+      dispatch_id:
+        description: Host audit correlation identifier
+        type: string
+      force:
+        description: Explicit verification bypass of daily health guard
+        type: boolean
+        default: false
 permissions:
   contents: write
   actions: read
@@ -20,12 +40,17 @@ jobs:
       run: ${{ steps.gate.outputs.run }}
     steps:
       - uses: actions/checkout@v4
-      - name: Skip backup after a healthy current-day update
+        with:
+          ref: main
+      - name: Deduplicate all automatic routes after a healthy publication
         id: gate
         run: python3 scripts/schedule_audit.py --gate
         env:
           TRIGGER_EVENT: ${{ github.event_name }}
           TRIGGER_SCHEDULE: ${{ github.event.schedule }}
+          TRIGGER_ORIGIN: ${{ inputs.origin || (github.event_name == 'schedule' && 'github_schedule') || 'manual' }}
+          TRIGGER_FORCE: ${{ inputs.force }}
+          GH_TOKEN: ${{ github.token }}
   update:
     needs: gate
     if: needs.gate.outputs.run == 'true'
@@ -56,6 +81,10 @@ jobs:
         env:
           TRIGGER_EVENT: ${{ github.event_name }}
           TRIGGER_SCHEDULE: ${{ github.event.schedule }}
+          TRIGGER_ORIGIN: ${{ inputs.origin || (github.event_name == 'schedule' && 'github_schedule') || 'manual' }}
+          TRIGGER_PLANNED_AT: ${{ inputs.planned_at }}
+          TRIGGER_REQUESTED_AT: ${{ inputs.requested_at }}
+          TRIGGER_DISPATCH_ID: ${{ inputs.dispatch_id }}
           WORKFLOW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           BARCHART_API_KEY: ${{ secrets.BARCHART_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
@@ -132,6 +161,9 @@ jobs:
           EXPECTED_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           EXPECTED_EVENT: ${{ github.event_name }}
           EXPECTED_SCHEDULE: ${{ github.event.schedule }}
+          EXPECTED_ORIGIN: ${{ inputs.origin || (github.event_name == 'schedule' && 'github_schedule') || 'manual' }}
+          EXPECTED_DISPATCH_ID: ${{ inputs.dispatch_id }}
+          EXPECTED_PLANNED_AT: ${{ inputs.planned_at }}
           EXPECTED_DATA_OUTCOME: ${{ needs.update.outputs.data_outcome }}
       - name: Retain publication and trigger evidence
         uses: actions/upload-artifact@v4

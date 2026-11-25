@@ -534,7 +534,13 @@ def spread_history_checks(series, t):
 
 
 def update_context():
-    return {'event':os.getenv('TRIGGER_EVENT','local'),'schedule':os.getenv('TRIGGER_SCHEDULE') or None,'run_url':os.getenv('WORKFLOW_RUN_URL') or None}
+    event = os.getenv('TRIGGER_EVENT', 'local')
+    return {'event': event, 'schedule': os.getenv('TRIGGER_SCHEDULE') or None,
+            'run_url': os.getenv('WORKFLOW_RUN_URL') or None,
+            'origin': os.getenv('TRIGGER_ORIGIN') or ('github_schedule' if event == 'schedule' else 'manual' if event == 'workflow_dispatch' else 'local'),
+            'planned_at': os.getenv('TRIGGER_PLANNED_AT') or None,
+            'requested_at': os.getenv('TRIGGER_REQUESTED_AT') or None,
+            'dispatch_id': os.getenv('TRIGGER_DISPATCH_ID') or None}
 
 
 def atomic(path, obj):

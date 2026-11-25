@@ -4,7 +4,7 @@
 
 ## 下一阶段质量改进
 
-运行排查补充：[11月25日定时延迟诊断](docs/SCHEDULE_DIAGNOSIS_2026-11-25.md)。已定位到原生定时事件创建前延迟，同日手动对照两分多钟完成；GitHub内部具体原因尚未确认，独立触发器尚未安装。
+运行排查补充：[11月25日定时延迟诊断](docs/SCHEDULE_DIAGNOSIS_2026-11-25.md)。已定位到原生定时事件创建前延迟，同日手动对照两分多钟完成；GitHub内部具体原因尚未确认，已增加[本机独立定时触发器](docs/HOST_TIMER.md)，主机只派发GitHub工作流；安装与实测状态以验收记录为准。
 
 最终实现：[895894b](https://github.com/weixb1818-cmyk/global-market-monitor/commit/895894bcf59be3c71f41f0fa96e99719fcbf0c13)；[阶段交付与限制](docs/NEXT_STAGE_DELIVERY.md)；[92项测试、浏览器与发布验收](verification/quality-stage-2026-11-23/acceptance.json)。旧轮77项及更早记录保留供追溯。
 
@@ -12,7 +12,7 @@
 
 完整复核建议使用Python **3.12**：`pip install -r requirements.txt`安装固定的直接及传递依赖；云端运行器固定Ubuntu 24.04、浏览器固定Playwright 1.58.2。`python scripts/research_quality.py`进行只读商品来源研究，`python scripts/analyze_macro.py`生成固定阈值分析，`python scripts/schedule_audit.py`归档真实十日调度窗口，`python scripts/build_quality_report.py`由现有证据生成报告。研究脚本不会替换生产指标。
 
-定时主目标08:15北京；08:45、10:15为免费补偿检查，当天健康更新后跳过。计划后的2小时仍没有当日尝试记录会在原全局提示中说明延迟或漏跑。十日记录尚待积累；GitHub免费定时无法保证准点。
+本机定时主目标08:15北京；08:45、10:15为免费补偿检查，当天健康发布后跳过。GitHub原有cron保留为备用，并与本机路线共享去重。计划后的2小时仍没有当日尝试记录会在原全局提示中说明延迟或漏跑。十日记录尚待积累；GitHub免费定时无法保证准点。
 
 严格历史复盘仅使用当时已归档快照；当前只有3天、没有成熟5/20期后续窗口。更长历史的延迟假设对照明确标为描述性研究，不能证明无未来信息泄漏或预测能力。成功、误报与漏报对照均保留。
 

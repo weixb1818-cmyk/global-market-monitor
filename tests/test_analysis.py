@@ -31,7 +31,7 @@ class ReviewTests(unittest.TestCase):
         self.assertFalse(gate('schedule','15 2 * * *',{'status':'ok','at':'2026-11-23T00:20:00+00:00'},now))
         for a in [{},{'status':'partial','at':now.isoformat()},{'status':'failed','at':now.isoformat()},{'status':'ok','at':'2026-11-22T00:20:00+00:00'}]:
             self.assertTrue(gate('schedule','45 0 * * *',a,now))
-        self.assertTrue(gate('schedule','15 0 * * *',{'status':'ok','at':now.isoformat()},now))
+        self.assertFalse(gate('schedule','15 0 * * *',{'status':'ok','at':now.isoformat()},now))
 
     def test_ten_day_report_does_not_fabricate_operating_days(self):
         now=datetime(2026,11,23,12,tzinfo=timezone.utc)

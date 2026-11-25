@@ -75,7 +75,7 @@ async function load(){
   $('asset-cards').innerHTML=data.indicators.filter(c=>c.group!=='宏观').map(c=>cardHTML(c,data)).join('');
   for(const id of ['spread10y2y','spread10y3m']){const label=$(id+'-check');if(label)label.textContent=spreadCheckText((data.spread_checks||[]).find(c=>c.id===id));}
   const ctx=(attempt&&attempt.update_context)||data.update_context;
-  if(ctx&&ctx.run_url){$('workflow-link').href=ctx.run_url;$('workflow-link').textContent=(ctx.event==='schedule'?'定时':'手动/本地')+'更新记录';$('workflow-link').hidden=false;}
+  if(ctx&&ctx.run_url){$('workflow-link').href=ctx.run_url;$('workflow-link').textContent=(ctx.origin==='host_cron'?'本机定时':ctx.origin==='host_timer_test'?'本机验证':ctx.event==='schedule'?'GitHub定时':'手动/本地')+'更新记录';$('workflow-link').hidden=false;}
   if(attempt&&attempt.status==='failed') {$('notice').textContent='最近一次更新失败，显示上次有效快照；本页数据截至各卡标注日期';$('notice').parentElement.classList.add('warning');}
   else if(updateOverdue(attempt)){ $('notice').textContent='计划08:15更新尚未取得今日有效记录，可能延迟或漏跑；本页数据截至各卡标注日期';$('notice').parentElement.classList.add('warning');}
   else if(data.sources_failed) {$('notice').textContent=`${data.sources_failed} 项来源更新失败或未配置；本页数据截至各卡标注日期`;$('notice').parentElement.classList.add('warning');}

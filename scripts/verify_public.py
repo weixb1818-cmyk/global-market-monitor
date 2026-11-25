@@ -9,7 +9,7 @@ from urllib.request import Request, urlopen
 
 
 def validate_publication(data, attempt, *, expected_at=None, run_url=None,
-                         event=None, schedule=None, data_outcome='success'):
+                         event=None, schedule=None, data_outcome='success', origin=None, dispatch_id=None, planned_at=None):
     if len(data['indicators']) != 17:
         raise ValueError('wrong indicator count')
     if expected_at and data['generated_at'] != expected_at:
@@ -21,6 +21,9 @@ def validate_publication(data, attempt, *, expected_at=None, run_url=None,
         raise ValueError('published trigger differs from the actual GitHub event')
     if ctx.get('event') == 'schedule' and ctx.get('schedule') != schedule:
         raise ValueError('published cron differs from the actual GitHub schedule')
+    for key, expected in [('origin', origin), ('dispatch_id', dispatch_id), ('planned_at', planned_at)]:
+        if expected and ctx.get(key) != expected:
+            raise ValueError('published trigger metadata mismatch: ' + key)
     if data_outcome == 'success':
         if data.get('update_context') != ctx:
             raise ValueError('snapshot and update record belong to different runs')
@@ -59,7 +62,9 @@ def main():
                 json.loads(get('data/snapshot.json')), json.loads(get('data/last_attempt.json')),
                 expected_at=os.getenv('EXPECTED_GENERATED_AT'), run_url=os.getenv('EXPECTED_RUN_URL'),
                 event=os.getenv('EXPECTED_EVENT'), schedule=os.getenv('EXPECTED_SCHEDULE') or None,
-                data_outcome=os.getenv('EXPECTED_DATA_OUTCOME', 'success'))
+                data_outcome=os.getenv('EXPECTED_DATA_OUTCOME', 'success'),
+                origin=os.getenv('EXPECTED_ORIGIN'), dispatch_id=os.getenv('EXPECTED_DISPATCH_ID'),
+                planned_at=os.getenv('EXPECTED_PLANNED_AT'))
             result.update(url=base, checked_at=datetime.now(timezone.utc).isoformat())
             output = Path('verification/publication.json')
             output.parent.mkdir(exist_ok=True)
