@@ -122,3 +122,23 @@ class CronInstallationTests(unittest.TestCase):
     def test_broken_markers_fail_without_replacing_crontab(self):
         from scripts.install_local_timer import without_block, BEGIN
         with self.assertRaises(ValueError): without_block(BEGIN+'\n')
+
+class CloudGateReadbackTests(unittest.TestCase):
+    def test_cloud_gate_requires_successful_matching_workflow(self):
+        from scripts import schedule_audit as audit
+        attempt={'update_context':{'run_url':f'https://github.com/{audit.REPO}/actions/runs/123'}}
+        with patch.object(audit,'get_json',return_value={'conclusion':'success'}):
+            self.assertTrue(audit.published_workflow_succeeded(attempt))
+        for response in ({'conclusion':'failure'}, {'conclusion':None}):
+            with patch.object(audit,'get_json',return_value=response):
+                self.assertFalse(audit.published_workflow_succeeded(attempt))
+        with patch.object(audit,'get_json',side_effect=TimeoutError()):
+            self.assertFalse(audit.published_workflow_succeeded(attempt))
+        self.assertFalse(audit.published_workflow_succeeded({'update_context':{'run_url':'https://other.example/123'}}))
+
+    def test_cloud_gate_bypasses_cached_public_record(self):
+        from scripts import schedule_audit as audit
+        with patch('sys.argv',['schedule_audit.py','--gate']), \
+             patch.object(audit,'get_json',return_value={}) as get:
+            audit.main()
+        self.assertIn('last_attempt.json?gate=',get.call_args[0][0])

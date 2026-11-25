@@ -33,7 +33,7 @@ def report(runs, now, days=10):
 
 
 def get_json(url):
-    headers={'Accept':'application/vnd.github+json','User-Agent':'MarketMonitor-Audit'}
+    headers={'Accept':'application/vnd.github+json','User-Agent':'MarketMonitor-Audit','Cache-Control':'no-cache'}
     if os.getenv('GH_TOKEN'):headers['Authorization']='Bearer '+os.environ['GH_TOKEN']
     with urlopen(Request(url,headers=headers),timeout=20) as r:return json.load(r)
 
@@ -66,7 +66,7 @@ def published_workflow_succeeded(attempt):
 def main():
     p=argparse.ArgumentParser();p.add_argument('--gate',action='store_true');args=p.parse_args();now=datetime.now(timezone.utc)
     if args.gate:
-        try:attempt=get_json('https://weixb1818-cmyk.github.io/global-market-monitor/data/last_attempt.json')
+        try:attempt=get_json('https://weixb1818-cmyk.github.io/global-market-monitor/data/last_attempt.json?gate='+str(now.timestamp()))
         except Exception:attempt={}
         run=gate(os.getenv('TRIGGER_EVENT'),os.getenv('TRIGGER_SCHEDULE'),attempt,now,
                  origin=os.getenv('TRIGGER_ORIGIN'),force=os.getenv('TRIGGER_FORCE')=='true')
