@@ -1,11 +1,11 @@
 {
-  "at": "2026-11-25T08:42:26.205357+00:00",
+  "at": "2026-11-25T09:15:12.759516+00:00",
   "status": "partial",
   "message": "1 项来源未更新",
   "update_context": {
     "event": "schedule",
-    "schedule": "15 0 * * *",
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45578515178",
+    "schedule": "45 0 * * *",
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45583495014",
     "origin": "github_schedule",
     "planned_at": null,
     "requested_at": null,
