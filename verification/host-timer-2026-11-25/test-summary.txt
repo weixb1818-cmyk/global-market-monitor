@@ -1,0 +1,6 @@
+Final local source: 105 Python tests passed; node --check app.js and node tests/test_ui.cjs passed.
+Cloud full-chain source 96c4b0d: 103 Python tests passed.
+The two additional tests cover cached cloud-gate readback and workflow success validation.
+
+update	Validate calculation and rendering	2026-11-25T04:49:40.6357775Z Ran 103 tests in 9.655s
+update	Validate calculation and rendering	2026-11-25T04:49:40.8299186Z UI: 17卡、宏观提示、日期/bp、曲线核验状态及延迟与失败组合提示通过

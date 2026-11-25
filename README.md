@@ -4,7 +4,7 @@
 
 ## 下一阶段质量改进
 
-运行排查补充：[11月25日定时延迟诊断](docs/SCHEDULE_DIAGNOSIS_2026-11-25.md)。已定位到原生定时事件创建前延迟，同日手动对照两分多钟完成；GitHub内部具体原因尚未确认，已增加[本机独立定时触发器](docs/HOST_TIMER.md)，主机只派发GitHub工作流；安装与实测状态以验收记录为准。
+运行排查补充：[11月25日定时延迟诊断](docs/SCHEDULE_DIAGNOSIS_2026-11-25.md)。已定位到原生定时事件创建前延迟，同日手动对照两分多钟完成；GitHub内部具体原因尚未确认，已增加[本机独立定时触发器](docs/HOST_TIMER.md)，主机只派发GitHub工作流；已安装并完成真实取数、部署、公网回读和独立浏览器验证；[验收记录](verification/host-timer-2026-11-25/acceptance.json)保留全部关联时间。首个自然时段为11月26日08:15，尚无连续十日证据。
 
 最终实现：[895894b](https://github.com/weixb1818-cmyk/global-market-monitor/commit/895894bcf59be3c71f41f0fa96e99719fcbf0c13)；[阶段交付与限制](docs/NEXT_STAGE_DELIVERY.md)；[92项测试、浏览器与发布验收](verification/quality-stage-2026-11-23/acceptance.json)。旧轮77项及更早记录保留供追溯。
 

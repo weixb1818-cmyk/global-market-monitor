@@ -1,5 +1,7 @@
 # 新审计团队起读说明
 
+2026-11-25运行补充：新增[本机定时触发与去重](docs/HOST_TIMER.md)，实现固定提交[96c4b0d](https://github.com/weixb1818-cmyk/global-market-monitor/commit/96c4b0d9ff092a8d4f1ad536d4d5342690f9f420)。仅调整运行触发和溯源，17项与宏观阈值不变；[最新安装和全链路验收](verification/host-timer-2026-11-25/acceptance.json)单独记录，不能用本机诊断替代08:15自然运行证明。下文为此前阶段记录。
+
 交接日期：2026-11-23。
 
 后续阶段已继续修改代码；本页66ad918为旧轮固定基线。新阶段请先读[阶段交付](docs/NEXT_STAGE_DELIVERY.md)、[数据质量与分析报告](docs/DATA_QUALITY_REPORT.md)及[固定版本验收](verification/quality-stage-2026-11-23/acceptance.json)。本文件由开发方提供，旨在让未参与前序讨论的团队独立复核，不是第三方审计结论。

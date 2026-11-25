@@ -1,0 +1,12 @@
+{
+  "acceptance.json": "3da8b92170a5cb2f7b8ccec32b98c9b29fa0ec2399da634d0f6ac36324c276f6",
+  "browser-report.json": "d9997e40ff99c1074c0d688cc88c9ed6e52ce0decf38d9fd6ca0dcdbcf61f500",
+  "cloud-publication/publication.json": "5ed0be6c4bd062b145e797cace41d1ec96347fd0dccefe9ecaa88d066c787262",
+  "desktop.png": "9221b184753ef15c03600b097b407b24bbd4f0249a25a60b2aec5dc6866ccbf8",
+  "last_attempt.json": "dde432110651394bcb3257cf5448fcd40f62751f58cce7e12f12fda6a35742e3",
+  "local-trigger-events.jsonl": "677a6de735be1b7f9b82895c39f273ac18a2cf477168b504283799b44cbebc66",
+  "managed-crontab.txt": "19bf86b93b1d610b19438165de24db0aed6dc29624fa2c6f3bf68757f15cca62",
+  "mobile.png": "d4472d0876b1e85dada18d81fa738c134314fe413520b3f23ad4d40394330010",
+  "snapshot.json": "6aa0d81e075a7128395885f5d5c2f3d28e941a70b606b38e704a8a16baf4a3cd",
+  "test-summary.txt": "8e9f59a3d6daf0bfef6b829d3f3064e315211f164bcd2dad13dfa083000f8568"
+}

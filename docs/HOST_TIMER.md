@@ -51,4 +51,4 @@
 /usr/bin/python3 scripts/install_local_timer.py --root /home/ubuntu/panel --remove
 ```
 
-主机需在线、账号授权需有效、网络需能访问GitHub。独立调用避开原生cron创建事件前的延迟，但GitHub接收、runner排队及行情源仍可能延迟，不能承诺08:15整页面完成，也不声称已经取得连续10日准点证据。真实验证及首次自然运行日期见[验收记录](../verification/host-timer-2026-11-25/acceptance.json)。
+主机需在线、账号授权需有效、网络需能访问GitHub。独立调用避开原生cron创建事件前的延迟，但GitHub接收、runner排队及行情源仍可能延迟，不能承诺08:15整页面完成，也不声称已经取得连续10日准点证据。11月25日12:48:53本机诊断派发、12:51:17部署完成，独立浏览器检查通过；最终本地105项测试通过，实际云端链路103项通过（最后两项为缓存防护核验）。铜来源部分失败与WTI延迟继续明示。真实验证及首次自然运行日期见[验收记录](../verification/host-timer-2026-11-25/acceptance.json)。

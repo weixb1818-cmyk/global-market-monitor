@@ -1,0 +1,120 @@
+{
+  "checked_at": "2026-11-25T04:53:08.847409+00:00",
+  "site": "https://weixb1818-cmyk.github.io/global-market-monitor/",
+  "implementation_commit": "96c4b0d9ff092a8d4f1ad536d4d5342690f9f420",
+  "final_code_commit": "606e22ac3ad192f08d97a61e660baf213bd43b63",
+  "installed": true,
+  "host_timezone": "Asia/Shanghai",
+  "cron_service": "active",
+  "slots_beijing": [
+    "08:15",
+    "08:45",
+    "10:15"
+  ],
+  "host_role": "Dispatch existing GitHub update workflow only; no local market fetching or deployment",
+  "unrelated_cron_jobs_byte_preserved": true,
+  "prior_crontab_sha256": "2fd3ddcff1c71f2024d100885d8921d15e55c2e7adb404b0d156abff571236c2",
+  "runtime_directory_mode": "0o700",
+  "dispatch": {
+    "event": "workflow_dispatch",
+    "schedule": null,
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45549326271",
+    "origin": "host_timer_test",
+    "planned_at": "2026-11-25T08:15:00+08:00",
+    "requested_at": "2026-11-25T04:48:53.857381+00:00",
+    "dispatch_id": "2026-11-25_0815-c0b6f76be4c3"
+  },
+  "update_workflow": {
+    "id": 45549326271,
+    "html_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45549326271",
+    "event": "workflow_dispatch",
+    "display_title": "host_timer_test | 2026-11-25_0815-c0b6f76be4c3",
+    "head_sha": "96c4b0d9ff092a8d4f1ad536d4d5342690f9f420",
+    "created_at": "2026-11-25T04:48:55Z",
+    "run_started_at": "2026-11-25T04:48:55Z",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "jobs": [
+    {
+      "name": "gate",
+      "started_at": "2026-11-25T04:48:59Z",
+      "completed_at": "2026-11-25T04:49:05Z",
+      "conclusion": "success"
+    },
+    {
+      "name": "update",
+      "started_at": "2026-11-25T04:49:07Z",
+      "completed_at": "2026-11-25T04:50:53Z",
+      "conclusion": "success"
+    },
+    {
+      "name": "deploy",
+      "started_at": "2026-11-25T04:50:57Z",
+      "completed_at": "2026-11-25T04:51:17Z",
+      "conclusion": "success"
+    }
+  ],
+  "browser_workflow": {
+    "id": 45549594158,
+    "html_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45549594158",
+    "event": "workflow_run",
+    "display_title": "Independent public browser verification",
+    "head_sha": "de596a75b581303ee58c5def8ed07acc4889efe5",
+    "created_at": "2026-11-25T04:51:21Z",
+    "run_started_at": "2026-11-25T04:51:21Z",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "request_to_workflow_created_seconds": 1.142619,
+  "public_snapshot_generated_at": "2026-11-25T04:49:41.163078+00:00",
+  "source_attempt_status": "partial",
+  "indicators_with_values": 17,
+  "non_ok_data": [
+    {
+      "id": "wti",
+      "status": "stale",
+      "as_of": "2026-11-17",
+      "error": null
+    },
+    {
+      "id": "copper",
+      "status": "error",
+      "as_of": "2026-11-23",
+      "error": "数据源网络请求失败"
+    }
+  ],
+  "verification": {
+    "local_python_tests": 105,
+    "cloud_python_tests": 103,
+    "cloud_source_commit": "96c4b0d9ff092a8d4f1ad536d4d5342690f9f420",
+    "local_javascript_syntax": "passed",
+    "local_ui": "passed",
+    "public_readback": "passed",
+    "desktop_mobile_browser": "passed",
+    "actual_inflight_duplicate_call": "skip_workflow_active",
+    "native_schedule_proof": false
+  },
+  "unchanged_files_sha256": {
+    "config.json": "bf09e96c7be30b14835f89a347a929ed3917ffa11ab73282614695f9d75002e1",
+    "index.html": "48a405b48781315769cab449e90a9282955e4a8e04418145780f964a74ee6ce5",
+    "styles.css": "1ab4e5719c6f5edb3e1b03dcbb73e867191ab7d23956c4d64255ca549931ae37",
+    "requirements.txt": "0e6edf8e5c0cd16d40b69e2773bdb7aade90e0602f3ff0183a1c5764159df93a"
+  },
+  "unchanged_financial_functions_sha256": {
+    "classify": "9ef4a22a536088fe2f65f4584f70455d04098dbe737b0789979c9e191c7d23b0",
+    "calculate": "54185e47bd0a3092a51ec6820f20959aa91fe82793fcb104885bf1f3eb500189",
+    "risk_levels": "7c959b2bc27b6b67d415bd07fb175d5372c3ea4c07cb98a3f72b81c0b426de71",
+    "compare_spreads": "eb1fe9c57ad6c75a39e1481b90c56ab56a8f7eb22f8c50374fcd8b6265845efb"
+  },
+  "first_future_natural_host_run_beijing": "2026-11-26T08:15:00+08:00",
+  "natural_host_schedule_observed": false,
+  "continuous_ten_days_verified": false,
+  "limitations": [
+    "Diagnostic invocation was at 12:48 Beijing, not a natural 08:15 run.",
+    "Host must remain online with working gh authorization and network. No paid monitoring or new secrets.",
+    "GitHub native scheduler, runner queue, market sources and deployment can still delay or fail.",
+    "Source partial failure is not all-source success; backups remain allowed.",
+    "Final cache guard hardening and two tests are locally verified; the recorded cloud chain ran implementation commit 96c4b0d."
+  ]
+}

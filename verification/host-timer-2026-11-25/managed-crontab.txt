@@ -1,0 +1,6 @@
+# BEGIN global-market-monitor host timer
+# Host timezone must be Asia/Shanghai (checked by installer).
+15 8 * * * /usr/bin/python3 /home/ubuntu/panel/scripts/local_trigger.py --slot 08:15 >> /home/ubuntu/panel/.runtime/market-timer/cron.log 2>&1
+45 8 * * * /usr/bin/python3 /home/ubuntu/panel/scripts/local_trigger.py --slot 08:45 >> /home/ubuntu/panel/.runtime/market-timer/cron.log 2>&1
+15 10 * * * /usr/bin/python3 /home/ubuntu/panel/scripts/local_trigger.py --slot 10:15 >> /home/ubuntu/panel/.runtime/market-timer/cron.log 2>&1
+# END global-market-monitor host timer

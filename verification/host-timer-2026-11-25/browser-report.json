@@ -1,0 +1,74 @@
+{
+  "url": "https://weixb1818-cmyk.github.io/global-market-monitor/",
+  "checked_at": "2026-11-25T04:52:03.636Z",
+  "checks": [
+    {
+      "viewport": "desktop",
+      "dimensions": {
+        "width": 1440,
+        "scroll": 1440,
+        "cardBottom": 877.109375
+      },
+      "cards": 17,
+      "missing": 0,
+      "console_errors": [],
+      "macro": "金融压力扩散",
+      "mode": "full",
+      "absolute_alerts": [
+        {
+          "id": "vix",
+          "as_of": "2026-11-23",
+          "value": 26.62,
+          "unit": "点",
+          "message": "波动率处于较高水平"
+        }
+      ],
+      "independent_dates_checked": true,
+      "methodology_rows": 17,
+      "methodology_no_overflow": true,
+      "update_context": {
+        "event": "workflow_dispatch",
+        "schedule": null,
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45549326271",
+        "origin": "host_timer_test",
+        "planned_at": "2026-11-25T08:15:00+08:00",
+        "requested_at": "2026-11-25T04:48:53.857381+00:00",
+        "dispatch_id": "2026-11-25_0815-c0b6f76be4c3"
+      }
+    },
+    {
+      "viewport": "mobile",
+      "dimensions": {
+        "width": 390,
+        "scroll": 390,
+        "cardBottom": 2179.203125
+      },
+      "cards": 17,
+      "missing": 0,
+      "console_errors": [],
+      "macro": "金融压力扩散",
+      "mode": "full",
+      "absolute_alerts": [
+        {
+          "id": "vix",
+          "as_of": "2026-11-23",
+          "value": 26.62,
+          "unit": "点",
+          "message": "波动率处于较高水平"
+        }
+      ],
+      "independent_dates_checked": true,
+      "methodology_rows": 17,
+      "methodology_no_overflow": true,
+      "update_context": {
+        "event": "workflow_dispatch",
+        "schedule": null,
+        "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45549326271",
+        "origin": "host_timer_test",
+        "planned_at": "2026-11-25T08:15:00+08:00",
+        "requested_at": "2026-11-25T04:48:53.857381+00:00",
+        "dispatch_id": "2026-11-25_0815-c0b6f76be4c3"
+      }
+    }
+  ]
+}
