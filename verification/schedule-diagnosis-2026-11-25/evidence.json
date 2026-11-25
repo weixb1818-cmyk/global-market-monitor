@@ -1,0 +1,240 @@
+{
+  "checked_at": "2026-11-25T04:31:32.489801+00:00",
+  "scope": "Read-only configuration/timing diagnosis plus one explicitly manual diagnostic refresh; no production code or cron changes",
+  "workflow": {
+    "state": "active",
+    "path": ".github/workflows/update.yml",
+    "default_branch": "main",
+    "repository_disabled": false,
+    "repository_archived": false
+  },
+  "config_blob_sha": "062de72cd947837c56e9ff62814167c40a4bf951",
+  "scheduled_runs": [
+    {
+      "run_id": 44995841393,
+      "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/44995841393",
+      "event": "schedule",
+      "matched_cron_from_log": "15 0 * * *",
+      "created_at": "2026-11-22T06:54:51Z",
+      "started_at": "2026-11-22T06:54:51Z",
+      "conclusion": "success",
+      "created_at_beijing": "2026-11-22T14:54:51+08:00",
+      "nominal_target_assumed_same_UTC_date": "2026-11-22T00:15:00+00:00",
+      "trigger_delay_seconds": 23991.0,
+      "jobs": [
+        {
+          "name": "update",
+          "started_at": "2026-11-22T06:54:53Z",
+          "completed_at": "2026-11-22T06:55:27Z",
+          "conclusion": "success"
+        },
+        {
+          "name": "deploy",
+          "started_at": "2026-11-22T06:55:32Z",
+          "completed_at": "2026-11-22T06:55:47Z",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 45133283595,
+      "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45133283595",
+      "event": "schedule",
+      "matched_cron_from_log": "15 0 * * *",
+      "created_at": "2026-11-23T07:44:21Z",
+      "started_at": "2026-11-23T07:44:21Z",
+      "conclusion": "success",
+      "created_at_beijing": "2026-11-23T15:44:21+08:00",
+      "nominal_target_assumed_same_UTC_date": "2026-11-23T00:15:00+00:00",
+      "trigger_delay_seconds": 26961.0,
+      "jobs": [
+        {
+          "name": "update",
+          "started_at": "2026-11-23T07:44:24Z",
+          "completed_at": "2026-11-23T07:45:08Z",
+          "conclusion": "success"
+        },
+        {
+          "name": "deploy",
+          "started_at": "2026-11-23T07:45:13Z",
+          "completed_at": "2026-11-23T07:45:27Z",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 45370170972,
+      "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45370170972",
+      "event": "schedule",
+      "matched_cron_from_log": "15 0 * * *",
+      "created_at": "2026-11-24T09:57:59Z",
+      "started_at": "2026-11-24T09:57:59Z",
+      "conclusion": "success",
+      "created_at_beijing": "2026-11-24T17:57:59+08:00",
+      "nominal_target_assumed_same_UTC_date": "2026-11-24T00:15:00+00:00",
+      "trigger_delay_seconds": 34979.0,
+      "jobs": [
+        {
+          "name": "gate",
+          "started_at": "2026-11-24T09:58:02Z",
+          "completed_at": "2026-11-24T09:58:14Z",
+          "conclusion": "success"
+        },
+        {
+          "name": "update",
+          "started_at": "2026-11-24T09:58:17Z",
+          "completed_at": "2026-11-24T09:59:54Z",
+          "conclusion": "success"
+        },
+        {
+          "name": "deploy",
+          "started_at": "2026-11-24T09:59:59Z",
+          "completed_at": "2026-11-24T10:00:23Z",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "run_id": 45374948510,
+      "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45374948510",
+      "event": "schedule",
+      "matched_cron_from_log": "45 0 * * *",
+      "created_at": "2026-11-24T10:27:20Z",
+      "started_at": "2026-11-24T10:27:20Z",
+      "conclusion": "success",
+      "created_at_beijing": "2026-11-24T18:27:20+08:00",
+      "nominal_target_assumed_same_UTC_date": "2026-11-24T00:45:00+00:00",
+      "trigger_delay_seconds": 34940.0,
+      "jobs": [
+        {
+          "name": "gate",
+          "started_at": "2026-11-24T10:27:23Z",
+          "completed_at": "2026-11-24T10:27:28Z",
+          "conclusion": "success"
+        },
+        {
+          "name": "update",
+          "started_at": "2026-11-24T10:27:29Z",
+          "completed_at": "2026-11-24T10:27:28Z",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "deploy",
+          "started_at": "2026-11-24T10:27:29Z",
+          "completed_at": "2026-11-24T10:27:28Z",
+          "conclusion": "skipped"
+        }
+      ]
+    },
+    {
+      "run_id": 45393169021,
+      "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45393169021",
+      "event": "schedule",
+      "matched_cron_from_log": "15 2 * * *",
+      "created_at": "2026-11-24T12:24:16Z",
+      "started_at": "2026-11-24T12:24:16Z",
+      "conclusion": "success",
+      "created_at_beijing": "2026-11-24T20:24:16+08:00",
+      "nominal_target_assumed_same_UTC_date": "2026-11-24T02:15:00+00:00",
+      "trigger_delay_seconds": 36556.0,
+      "jobs": [
+        {
+          "name": "gate",
+          "started_at": "2026-11-24T12:24:20Z",
+          "completed_at": "2026-11-24T12:24:30Z",
+          "conclusion": "success"
+        },
+        {
+          "name": "update",
+          "started_at": "2026-11-24T12:24:30Z",
+          "completed_at": "2026-11-24T12:24:30Z",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "deploy",
+          "started_at": "2026-11-24T12:24:30Z",
+          "completed_at": "2026-11-24T12:24:30Z",
+          "conclusion": "skipped"
+        }
+      ]
+    }
+  ],
+  "manual_comparison": {
+    "run_id": 45547068820,
+    "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45547068820",
+    "event": "workflow_dispatch",
+    "created_at": "2026-11-25T04:28:58Z",
+    "started_at": "2026-11-25T04:28:58Z",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "gate",
+        "started_at": "2026-11-25T04:29:02Z",
+        "completed_at": "2026-11-25T04:29:08Z",
+        "conclusion": "success"
+      },
+      {
+        "name": "update",
+        "started_at": "2026-11-25T04:29:10Z",
+        "completed_at": "2026-11-25T04:30:41Z",
+        "conclusion": "success"
+      },
+      {
+        "name": "deploy",
+        "started_at": "2026-11-25T04:30:45Z",
+        "completed_at": "2026-11-25T04:31:07Z",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "checks": {
+    "cron_UTC_conversion_correct": true,
+    "workflow_enabled": true,
+    "remote_matches_local_workflow_blob": true,
+    "local_timezone": "Asia/Shanghai",
+    "local_NTP_synchronized": true,
+    "queued_waiting_and_in_progress_runs_before_diagnostic_dispatch": 0
+  },
+  "official_status": {
+    "checked_at": "2026-11-25T04:28:00+00:00",
+    "actions_status": "operational",
+    "active_incidents": 0,
+    "Nov24_Nov25_reported_incidents": "Copilot/code-completion incidents; no matching Actions incident reported",
+    "source": "https://www.githubstatus.com/"
+  },
+  "finding": "Delay is before GitHub creates/starts scheduled runs. Once created, jobs start within seconds and finish in minutes. Both backups share the native schedule trigger dependency.",
+  "root_cause_limit": "GitHub-internal reason for multi-hour delay is not exposed by repository logs/API. Platform load is a documented possibility, not a verified root cause for this repository.",
+  "docs": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule",
+  "public_refresh": {
+    "generated_at": "2026-11-25T04:29:38.656417+00:00",
+    "update_context": {
+      "event": "workflow_dispatch",
+      "schedule": null,
+      "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45547068820"
+    },
+    "sources_failed": 1,
+    "abnormal": [
+      {
+        "id": "nasdaq100",
+        "as_of": "2026-11-19",
+        "status": "stale",
+        "error": null
+      },
+      {
+        "id": "wti",
+        "as_of": "2026-11-17",
+        "status": "stale",
+        "error": null
+      },
+      {
+        "id": "copper",
+        "as_of": "2026-11-23",
+        "status": "error",
+        "error": "铜快照不是已完成交易时段，拒绝把盘中价格当收盘"
+      }
+    ],
+    "browser_run": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45547326968",
+    "browser_result": "success"
+  }
+}
