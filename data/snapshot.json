@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T04:29:38.656417+00:00",
+  "generated_at": "2026-11-25T04:49:41.163078+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -186,15 +186,15 @@
       "unit": "点",
       "kind": "price",
       "calendar": "nyse",
-      "value": 26517.05,
-      "change_1": -2.2097811423846814,
-      "change_20": -8.431458743472165,
-      "as_of": "2026-11-19",
-      "observation_count": 93,
+      "value": 26214.17,
+      "change_1": -1.988813322316152,
+      "change_20": -11.592253192425062,
+      "as_of": "2026-11-24",
+      "observation_count": 96,
       "source": "FRED / NASDAQ100",
-      "status": "stale",
+      "status": "ok",
       "error": null,
-      "interpretation": "数据暂未更新，截至2026-11-19"
+      "interpretation": "近20期下跌，成长及科技权重较高"
     },
     {
       "id": "gold",
@@ -322,7 +322,7 @@
       "observation_count": 101,
       "source": "东方财富 / 101.HG00Y / COMEX铜日线；供数方换月序列",
       "status": "error",
-      "error": "铜快照不是已完成交易时段，拒绝把盘中价格当收盘",
+      "error": "数据源网络请求失败",
       "warning": "换月口径未完全核实；跨换月历史变化谨慎解读",
       "interpretation": "本轮获取失败或状态未核实；仅保留历史，截至2026-11-23"
     },
@@ -5584,6 +5584,10 @@
   "update_context": {
     "event": "workflow_dispatch",
     "schedule": null,
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45547068820"
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45549326271",
+    "origin": "host_timer_test",
+    "planned_at": "2026-11-25T08:15:00+08:00",
+    "requested_at": "2026-11-25T04:48:53.857381+00:00",
+    "dispatch_id": "2026-11-25_0815-c0b6f76be4c3"
   }
 }

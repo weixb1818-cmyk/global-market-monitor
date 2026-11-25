@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T04:29:59.512613+00:00",
+  "generated_at": "2026-11-25T04:50:11.704661+00:00",
   "thresholds": {
     "dxy_pct": 1.0,
     "real_bp": 15,
@@ -18,7 +18,7 @@
     "macro_date_gap_days": 3
   },
   "thresholds_sha256": "fbe8f2bd1bb11b5f5e92701c4c4613ebd51cb2acbed114d50f3c686c5a84bd1c",
-  "history_sha256": "ed193413dace534a16b8b96751417f4e6ddeba5ae07d5c8bba4a4309ee5ecd6e",
+  "history_sha256": "ad6b04e5aad249d76f4b221b89498777882a257859dc5a68a3baaeffc5eac001",
   "strict_archived_availability": {
     "method": "Earliest archived snapshot each Beijing day; available=max(generated_at, Git commit time). New status boundary applied to then-archived inputs. No backfilled historical series used to create old signals.",
     "signals": [
@@ -85,12 +85,12 @@
           "nasdaq100": {
             "5": {
               "status": "pending",
-              "available_closes": 0,
+              "available_closes": 2,
               "needed_closes": 6
             },
             "20": {
               "status": "pending",
-              "available_closes": 0,
+              "available_closes": 2,
               "needed_closes": 21
             }
           },
@@ -170,12 +170,12 @@
           "nasdaq100": {
             "5": {
               "status": "pending",
-              "available_closes": 0,
+              "available_closes": 2,
               "needed_closes": 6
             },
             "20": {
               "status": "pending",
-              "available_closes": 0,
+              "available_closes": 2,
               "needed_closes": 21
             }
           },
@@ -255,12 +255,12 @@
           "nasdaq100": {
             "5": {
               "status": "pending",
-              "available_closes": 0,
+              "available_closes": 2,
               "needed_closes": 6
             },
             "20": {
               "status": "pending",
-              "available_closes": 0,
+              "available_closes": 2,
               "needed_closes": 21
             }
           },
@@ -340,12 +340,12 @@
           "nasdaq100": {
             "5": {
               "status": "pending",
-              "available_closes": 0,
+              "available_closes": 1,
               "needed_closes": 6
             },
             "20": {
               "status": "pending",
-              "available_closes": 0,
+              "available_closes": 1,
               "needed_closes": 21
             }
           },
@@ -358,6 +358,91 @@
             "20": {
               "status": "pending",
               "available_closes": 1,
+              "needed_closes": 21
+            }
+          }
+        }
+      },
+      {
+        "commit": "2df0b1871a9345f76ee66f1fa0b32ade96ec5e82",
+        "available_at": "2026-11-25T04:30:37+00:00",
+        "macro": {
+          "complete": true,
+          "mode": "full",
+          "missing": [],
+          "signal_dates": {
+            "dxy": "2026-11-23",
+            "real10y": "2026-11-23",
+            "us2y": "2026-11-23",
+            "hy": "2026-11-23",
+            "vix": "2026-11-23"
+          },
+          "risk_alerts": [
+            {
+              "id": "vix",
+              "as_of": "2026-11-23",
+              "value": 26.62,
+              "unit": "点",
+              "message": "波动率处于较高水平"
+            }
+          ],
+          "state": "金融压力扩散",
+          "reason": "信用利差与波动率共同上升，市场防御需求增强",
+          "uncertainty": "信用或波动风险仍处高位",
+          "signals": [
+            "美元 +2.28% · 2026-11-23",
+            "实际利率 +13bp · 2026-11-23",
+            "HY +33bp · 2026-11-23 / VIX +8.2点 · 2026-11-23"
+          ]
+        },
+        "input_dates": {
+          "dxy": "2026-11-23",
+          "us2y": "2026-11-23",
+          "real10y": "2026-11-23",
+          "vix": "2026-11-23",
+          "hy": "2026-11-23"
+        },
+        "input_statuses": {
+          "dxy": "ok",
+          "us2y": "ok",
+          "real10y": "ok",
+          "vix": "ok",
+          "hy": "ok"
+        },
+        "outcomes": {
+          "sp500": {
+            "5": {
+              "status": "pending",
+              "available_closes": 0,
+              "needed_closes": 6
+            },
+            "20": {
+              "status": "pending",
+              "available_closes": 0,
+              "needed_closes": 21
+            }
+          },
+          "nasdaq100": {
+            "5": {
+              "status": "pending",
+              "available_closes": 0,
+              "needed_closes": 6
+            },
+            "20": {
+              "status": "pending",
+              "available_closes": 0,
+              "needed_closes": 21
+            }
+          },
+          "btc": {
+            "5": {
+              "status": "pending",
+              "available_closes": 0,
+              "needed_closes": 6
+            },
+            "20": {
+              "status": "pending",
+              "available_closes": 0,
               "needed_closes": 21
             }
           }
@@ -467,12 +552,12 @@
             "asset": "nasdaq100",
             "horizon": 5,
             "state": "中性/信号分歧",
-            "n_daily_overlapping": 33,
+            "n_daily_overlapping": 36,
             "n_state_transitions": 5,
-            "mean_max_drawdown_pct": -2.3654375851961125,
-            "median_max_drawdown_pct": -1.5172559627126603,
+            "mean_max_drawdown_pct": -2.893328505372057,
+            "median_max_drawdown_pct": -1.6151240022668267,
             "label_drawdown_threshold_pct": -3.0,
-            "risk_event_count": 7
+            "risk_event_count": 10
           },
           {
             "asset": "nasdaq100",
@@ -511,12 +596,12 @@
             "asset": "nasdaq100",
             "horizon": 20,
             "state": "中性/信号分歧",
-            "n_daily_overlapping": 26,
-            "n_state_transitions": 1,
-            "mean_max_drawdown_pct": -2.4678018418717826,
+            "n_daily_overlapping": 27,
+            "n_state_transitions": 2,
+            "mean_max_drawdown_pct": -2.970742835963209,
             "median_max_drawdown_pct": -2.3740990690098718,
             "label_drawdown_threshold_pct": -5.0,
-            "risk_event_count": 0
+            "risk_event_count": 1
           },
           {
             "asset": "nasdaq100",
@@ -533,12 +618,12 @@
             "asset": "nasdaq100",
             "horizon": 20,
             "state": "金融压力扩散",
-            "n_daily_overlapping": 4,
-            "n_state_transitions": 1,
-            "mean_max_drawdown_pct": -10.793248551136035,
-            "median_max_drawdown_pct": -10.705701597316386,
+            "n_daily_overlapping": 6,
+            "n_state_transitions": 2,
+            "mean_max_drawdown_pct": -12.544568594870785,
+            "median_max_drawdown_pct": -10.880795504955682,
             "label_drawdown_threshold_pct": -5.0,
-            "risk_event_count": 4
+            "risk_event_count": 6
           },
           {
             "asset": "nasdaq100",
@@ -979,9 +1064,14 @@
                   "max_close_drawdown_pct": -4.790870877156273
                 },
                 "20": {
-                  "status": "pending",
-                  "available_closes": 20,
-                  "needed_closes": 21
+                  "status": "mature",
+                  "entry_date": "2026-10-23",
+                  "end_date": "2026-11-20",
+                  "entry_value": 28957.53,
+                  "end_value": 25028.98,
+                  "return_pct": -13.566592178269342,
+                  "max_adverse_from_entry_pct": -13.566592178269342,
+                  "max_close_drawdown_pct": -16.047208682340287
                 }
               },
               "btc": {
@@ -5990,9 +6080,14 @@
                   "max_close_drawdown_pct": -4.790870877156273
                 },
                 "20": {
-                  "status": "pending",
-                  "available_closes": 20,
-                  "needed_closes": 21
+                  "status": "mature",
+                  "entry_date": "2026-10-23",
+                  "end_date": "2026-11-20",
+                  "entry_value": 28957.53,
+                  "end_value": 25028.98,
+                  "return_pct": -13.566592178269342,
+                  "max_adverse_from_entry_pct": -13.566592178269342,
+                  "max_close_drawdown_pct": -16.047208682340287
                 }
               },
               "btc": {
@@ -6078,9 +6173,14 @@
                   "max_close_drawdown_pct": -6.115889761434213
                 },
                 "20": {
-                  "status": "pending",
-                  "available_closes": 19,
-                  "needed_closes": 21
+                  "status": "mature",
+                  "entry_date": "2026-10-26",
+                  "end_date": "2026-11-23",
+                  "entry_value": 29273.4,
+                  "end_value": 26746.1,
+                  "return_pct": -8.6334351322361,
+                  "max_adverse_from_entry_pct": -14.499238216264597,
+                  "max_close_drawdown_pct": -16.047208682340287
                 }
               },
               "btc": {
@@ -6161,9 +6261,14 @@
                   "max_close_drawdown_pct": -6.115889761434213
                 },
                 "20": {
-                  "status": "pending",
-                  "available_closes": 18,
-                  "needed_closes": 21
+                  "status": "mature",
+                  "entry_date": "2026-10-27",
+                  "end_date": "2026-11-24",
+                  "entry_value": 29651.44,
+                  "end_value": 26214.17,
+                  "return_pct": -11.592253192425062,
+                  "max_adverse_from_entry_pct": -15.589327196250835,
+                  "max_close_drawdown_pct": -16.047208682340287
                 }
               },
               "btc": {
@@ -6245,7 +6350,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 17,
+                  "available_closes": 20,
                   "needed_closes": 21
                 }
               },
@@ -6328,7 +6433,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 16,
+                  "available_closes": 19,
                   "needed_closes": 21
                 }
               },
@@ -6411,7 +6516,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 15,
+                  "available_closes": 18,
                   "needed_closes": 21
                 }
               },
@@ -6494,7 +6599,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 14,
+                  "available_closes": 17,
                   "needed_closes": 21
                 }
               },
@@ -6577,7 +6682,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 13,
+                  "available_closes": 16,
                   "needed_closes": 21
                 }
               },
@@ -6660,7 +6765,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 12,
+                  "available_closes": 15,
                   "needed_closes": 21
                 }
               },
@@ -6743,7 +6848,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 11,
+                  "available_closes": 14,
                   "needed_closes": 21
                 }
               },
@@ -6821,7 +6926,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 10,
+                  "available_closes": 13,
                   "needed_closes": 21
                 }
               },
@@ -6899,7 +7004,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 9,
+                  "available_closes": 12,
                   "needed_closes": 21
                 }
               },
@@ -6977,7 +7082,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 8,
+                  "available_closes": 11,
                   "needed_closes": 21
                 }
               },
@@ -7055,7 +7160,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 7,
+                  "available_closes": 10,
                   "needed_closes": 21
                 }
               },
@@ -7133,7 +7238,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 6,
+                  "available_closes": 9,
                   "needed_closes": 21
                 }
               },
@@ -7200,13 +7305,18 @@
               },
               "nasdaq100": {
                 "5": {
-                  "status": "pending",
-                  "available_closes": 5,
-                  "needed_closes": 6
+                  "status": "mature",
+                  "entry_date": "2026-11-13",
+                  "end_date": "2026-11-20",
+                  "entry_value": 27943.74,
+                  "end_value": 25028.98,
+                  "return_pct": -10.430815631694257,
+                  "max_adverse_from_entry_pct": -10.430815631694257,
+                  "max_close_drawdown_pct": -10.430815631694257
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 5,
+                  "available_closes": 8,
                   "needed_closes": 21
                 }
               },
@@ -7273,13 +7383,18 @@
               },
               "nasdaq100": {
                 "5": {
-                  "status": "pending",
-                  "available_closes": 4,
-                  "needed_closes": 6
+                  "status": "mature",
+                  "entry_date": "2026-11-16",
+                  "end_date": "2026-11-23",
+                  "entry_value": 27197.15,
+                  "end_value": 26746.1,
+                  "return_pct": -1.6584458298020355,
+                  "max_adverse_from_entry_pct": -7.972048541850896,
+                  "max_close_drawdown_pct": -7.972048541850896
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 4,
+                  "available_closes": 7,
                   "needed_closes": 21
                 }
               },
@@ -7341,13 +7456,18 @@
               },
               "nasdaq100": {
                 "5": {
-                  "status": "pending",
-                  "available_closes": 3,
-                  "needed_closes": 6
+                  "status": "mature",
+                  "entry_date": "2026-11-17",
+                  "end_date": "2026-11-24",
+                  "entry_value": 27001.78,
+                  "end_value": 26214.17,
+                  "return_pct": -2.9168817759421817,
+                  "max_adverse_from_entry_pct": -7.306184999655574,
+                  "max_close_drawdown_pct": -7.697521708377186
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 3,
+                  "available_closes": 6,
                   "needed_closes": 21
                 }
               },
@@ -7410,12 +7530,12 @@
               "nasdaq100": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 2,
+                  "available_closes": 5,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 2,
+                  "available_closes": 5,
                   "needed_closes": 21
                 }
               },
@@ -7478,12 +7598,12 @@
               "nasdaq100": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 1,
+                  "available_closes": 4,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 1,
+                  "available_closes": 4,
                   "needed_closes": 21
                 }
               },
@@ -7546,12 +7666,12 @@
               "nasdaq100": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 0,
+                  "available_closes": 3,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 0,
+                  "available_closes": 3,
                   "needed_closes": 21
                 }
               },
@@ -7609,12 +7729,12 @@
               "nasdaq100": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 0,
+                  "available_closes": 2,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 0,
+                  "available_closes": 2,
                   "needed_closes": 21
                 }
               },
@@ -7751,23 +7871,23 @@
             "asset": "nasdaq100",
             "horizon": 5,
             "state": "中性/信号分歧",
-            "n_daily_overlapping": 16,
-            "n_state_transitions": 7,
-            "mean_max_drawdown_pct": -1.7647599924627007,
-            "median_max_drawdown_pct": -1.5388385526688808,
+            "n_daily_overlapping": 18,
+            "n_state_transitions": 8,
+            "mean_max_drawdown_pct": -2.439207229423961,
+            "median_max_drawdown_pct": -1.6151240022668267,
             "label_drawdown_threshold_pct": -3.0,
-            "risk_event_count": 2
+            "risk_event_count": 4
           },
           {
             "asset": "nasdaq100",
             "horizon": 5,
             "state": "数据不足：暂不判断",
-            "n_daily_overlapping": 29,
+            "n_daily_overlapping": 30,
             "n_state_transitions": 14,
-            "mean_max_drawdown_pct": -2.478245689874435,
+            "mean_max_drawdown_pct": -2.7433313546017626,
             "median_max_drawdown_pct": -1.5977100172972047,
             "label_drawdown_threshold_pct": -3.0,
-            "risk_event_count": 7
+            "risk_event_count": 8
           },
           {
             "asset": "nasdaq100",
@@ -7817,12 +7937,12 @@
             "asset": "nasdaq100",
             "horizon": 20,
             "state": "数据不足：暂不判断",
-            "n_daily_overlapping": 23,
+            "n_daily_overlapping": 24,
             "n_state_transitions": 11,
-            "mean_max_drawdown_pct": -5.8377383918493555,
-            "median_max_drawdown_pct": -3.527796705944919,
+            "mean_max_drawdown_pct": -6.263132987286478,
+            "median_max_drawdown_pct": -3.8281302156426724,
             "label_drawdown_threshold_pct": -5.0,
-            "risk_event_count": 10
+            "risk_event_count": 11
           },
           {
             "asset": "nasdaq100",
@@ -7839,12 +7959,12 @@
             "asset": "nasdaq100",
             "horizon": 20,
             "state": "金融压力扩散",
-            "n_daily_overlapping": 2,
-            "n_state_transitions": 1,
-            "mean_max_drawdown_pct": -10.705701597316386,
-            "median_max_drawdown_pct": -10.705701597316386,
+            "n_daily_overlapping": 4,
+            "n_state_transitions": 2,
+            "mean_max_drawdown_pct": -13.376455139828337,
+            "median_max_drawdown_pct": -13.376455139828337,
             "label_drawdown_threshold_pct": -5.0,
-            "risk_event_count": 2
+            "risk_event_count": 4
           },
           {
             "asset": "nasdaq100",
@@ -13235,9 +13355,14 @@
                   "max_close_drawdown_pct": -4.790870877156273
                 },
                 "20": {
-                  "status": "pending",
-                  "available_closes": 20,
-                  "needed_closes": 21
+                  "status": "mature",
+                  "entry_date": "2026-10-23",
+                  "end_date": "2026-11-20",
+                  "entry_value": 28957.53,
+                  "end_value": 25028.98,
+                  "return_pct": -13.566592178269342,
+                  "max_adverse_from_entry_pct": -13.566592178269342,
+                  "max_close_drawdown_pct": -16.047208682340287
                 }
               },
               "btc": {
@@ -13323,9 +13448,14 @@
                   "max_close_drawdown_pct": -6.115889761434213
                 },
                 "20": {
-                  "status": "pending",
-                  "available_closes": 19,
-                  "needed_closes": 21
+                  "status": "mature",
+                  "entry_date": "2026-10-26",
+                  "end_date": "2026-11-23",
+                  "entry_value": 29273.4,
+                  "end_value": 26746.1,
+                  "return_pct": -8.6334351322361,
+                  "max_adverse_from_entry_pct": -14.499238216264597,
+                  "max_close_drawdown_pct": -16.047208682340287
                 }
               },
               "btc": {
@@ -13406,9 +13536,14 @@
                   "max_close_drawdown_pct": -6.115889761434213
                 },
                 "20": {
-                  "status": "pending",
-                  "available_closes": 18,
-                  "needed_closes": 21
+                  "status": "mature",
+                  "entry_date": "2026-10-27",
+                  "end_date": "2026-11-24",
+                  "entry_value": 29651.44,
+                  "end_value": 26214.17,
+                  "return_pct": -11.592253192425062,
+                  "max_adverse_from_entry_pct": -15.589327196250835,
+                  "max_close_drawdown_pct": -16.047208682340287
                 }
               },
               "btc": {
@@ -13490,7 +13625,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 17,
+                  "available_closes": 20,
                   "needed_closes": 21
                 }
               },
@@ -13569,7 +13704,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 16,
+                  "available_closes": 19,
                   "needed_closes": 21
                 }
               },
@@ -13648,7 +13783,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 15,
+                  "available_closes": 18,
                   "needed_closes": 21
                 }
               },
@@ -13731,7 +13866,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 14,
+                  "available_closes": 17,
                   "needed_closes": 21
                 }
               },
@@ -13814,7 +13949,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 13,
+                  "available_closes": 16,
                   "needed_closes": 21
                 }
               },
@@ -13897,7 +14032,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 12,
+                  "available_closes": 15,
                   "needed_closes": 21
                 }
               },
@@ -13976,7 +14111,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 11,
+                  "available_closes": 14,
                   "needed_closes": 21
                 }
               },
@@ -14050,7 +14185,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 10,
+                  "available_closes": 13,
                   "needed_closes": 21
                 }
               },
@@ -14128,7 +14263,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 9,
+                  "available_closes": 12,
                   "needed_closes": 21
                 }
               },
@@ -14206,7 +14341,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 8,
+                  "available_closes": 11,
                   "needed_closes": 21
                 }
               },
@@ -14284,7 +14419,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 7,
+                  "available_closes": 10,
                   "needed_closes": 21
                 }
               },
@@ -14358,7 +14493,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 6,
+                  "available_closes": 9,
                   "needed_closes": 21
                 }
               },
@@ -14421,13 +14556,18 @@
               },
               "nasdaq100": {
                 "5": {
-                  "status": "pending",
-                  "available_closes": 5,
-                  "needed_closes": 6
+                  "status": "mature",
+                  "entry_date": "2026-11-13",
+                  "end_date": "2026-11-20",
+                  "entry_value": 27943.74,
+                  "end_value": 25028.98,
+                  "return_pct": -10.430815631694257,
+                  "max_adverse_from_entry_pct": -10.430815631694257,
+                  "max_close_drawdown_pct": -10.430815631694257
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 5,
+                  "available_closes": 8,
                   "needed_closes": 21
                 }
               },
@@ -14494,13 +14634,18 @@
               },
               "nasdaq100": {
                 "5": {
-                  "status": "pending",
-                  "available_closes": 4,
-                  "needed_closes": 6
+                  "status": "mature",
+                  "entry_date": "2026-11-16",
+                  "end_date": "2026-11-23",
+                  "entry_value": 27197.15,
+                  "end_value": 26746.1,
+                  "return_pct": -1.6584458298020355,
+                  "max_adverse_from_entry_pct": -7.972048541850896,
+                  "max_close_drawdown_pct": -7.972048541850896
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 4,
+                  "available_closes": 7,
                   "needed_closes": 21
                 }
               },
@@ -14562,13 +14707,18 @@
               },
               "nasdaq100": {
                 "5": {
-                  "status": "pending",
-                  "available_closes": 3,
-                  "needed_closes": 6
+                  "status": "mature",
+                  "entry_date": "2026-11-17",
+                  "end_date": "2026-11-24",
+                  "entry_value": 27001.78,
+                  "end_value": 26214.17,
+                  "return_pct": -2.9168817759421817,
+                  "max_adverse_from_entry_pct": -7.306184999655574,
+                  "max_close_drawdown_pct": -7.697521708377186
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 3,
+                  "available_closes": 6,
                   "needed_closes": 21
                 }
               },
@@ -14631,12 +14781,12 @@
               "nasdaq100": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 2,
+                  "available_closes": 5,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 2,
+                  "available_closes": 5,
                   "needed_closes": 21
                 }
               },
@@ -14695,12 +14845,12 @@
               "nasdaq100": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 1,
+                  "available_closes": 4,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 1,
+                  "available_closes": 4,
                   "needed_closes": 21
                 }
               },
@@ -14759,12 +14909,12 @@
               "nasdaq100": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 0,
+                  "available_closes": 3,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 0,
+                  "available_closes": 3,
                   "needed_closes": 21
                 }
               },
@@ -14822,12 +14972,12 @@
               "nasdaq100": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 0,
+                  "available_closes": 2,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 0,
+                  "available_closes": 2,
                   "needed_closes": 21
                 }
               },
