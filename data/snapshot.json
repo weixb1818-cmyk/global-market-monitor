@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T04:49:41.163078+00:00",
+  "generated_at": "2026-11-25T08:42:26.205357+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -15,10 +15,10 @@
       "series_definition": "sina-diniw-dxy-daily-v1",
       "source_url": "https://finance.sina.com.cn/money/forex/hq/DINIW.shtml",
       "quote_note": "新浪DINIW美元指数日线；非DX期货、非其他美元指数。保守排除纽约当日未确认日线。",
-      "value": 104.3248,
-      "change_1": 0.46648510598956694,
-      "change_20": 2.2805192615199976,
-      "as_of": "2026-11-23",
+      "value": 103.825,
+      "change_1": -0.4790807171449085,
+      "change_20": 1.4442059310052269,
+      "as_of": "2026-11-24",
       "observation_count": 120,
       "source": "新浪财经 / DINIW / 美元指数日线，非DX期货",
       "status": "ok",
@@ -322,7 +322,7 @@
       "observation_count": 101,
       "source": "东方财富 / 101.HG00Y / COMEX铜日线；供数方换月序列",
       "status": "error",
-      "error": "数据源网络请求失败",
+      "error": "铜快照不是已完成交易时段，拒绝把盘中价格当收盘",
       "warning": "换月口径未完全核实；跨换月历史变化谨慎解读",
       "interpretation": "本轮获取失败或状态未核实；仅保留历史，截至2026-11-23"
     },
@@ -455,7 +455,7 @@
     "mode": "full",
     "missing": [],
     "signal_dates": {
-      "dxy": "2026-11-23",
+      "dxy": "2026-11-24",
       "real10y": "2026-11-23",
       "us2y": "2026-11-23",
       "hy": "2026-11-23",
@@ -474,7 +474,7 @@
     "reason": "信用利差与波动率共同上升，市场防御需求增强",
     "uncertainty": "信用或波动风险仍处高位",
     "signals": [
-      "美元 +2.28% · 2026-11-23",
+      "美元 +1.44% · 2026-11-24",
       "实际利率 +13bp · 2026-11-23",
       "HY +33bp · 2026-11-23 / VIX +8.2点 · 2026-11-23"
     ]
@@ -5582,12 +5582,12 @@
   },
   "sources_failed": 1,
   "update_context": {
-    "event": "workflow_dispatch",
-    "schedule": null,
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45549326271",
-    "origin": "host_timer_test",
-    "planned_at": "2026-11-25T08:15:00+08:00",
-    "requested_at": "2026-11-25T04:48:53.857381+00:00",
-    "dispatch_id": "2026-11-25_0815-c0b6f76be4c3"
+    "event": "schedule",
+    "schedule": "15 0 * * *",
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45578515178",
+    "origin": "github_schedule",
+    "planned_at": null,
+    "requested_at": null,
+    "dispatch_id": null
   }
 }

@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-25T04:49:54.087063+00:00",
+  "checked_at": "2026-11-25T08:42:38.968219+00:00",
   "planned_beijing": "08:15",
   "window_days": 10,
-  "observed_days": 3,
+  "observed_days": 4,
   "ten_days_observed": false,
   "ten_days_update_deploy_success": false,
   "records": [
@@ -169,8 +169,28 @@
     {
       "date": "2026-11-25",
       "planned_at": "2026-11-25T08:15:00+08:00",
-      "status": "diagnostic_only",
+      "status": "observed",
       "runs": [
+        {
+          "run_id": 45578515178,
+          "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45578515178",
+          "event": "schedule",
+          "head_sha": "a524bcfb5463c7b00d97a29239e2357df8e2898d",
+          "trigger_origin": "github_schedule",
+          "display_title": "schedule | 15 0 * * *",
+          "created_at": "2026-11-25T08:41:35Z",
+          "started_at": "2026-11-25T08:41:35Z",
+          "completed_at": "2026-11-25T08:41:49Z",
+          "conclusion": null,
+          "job_conclusions": {
+            "gate": "success",
+            "update": null
+          },
+          "source_all_success": null,
+          "matched_cron": null,
+          "delay_seconds": 30395.0,
+          "timing_note": "Includes native schedule, host cron and separately labelled diagnostic dispatches. Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
+        },
         {
           "run_id": 45549326271,
           "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45549326271",
@@ -180,11 +200,12 @@
           "display_title": "host_timer_test | 2026-11-25_0815-c0b6f76be4c3",
           "created_at": "2026-11-25T04:48:55Z",
           "started_at": "2026-11-25T04:48:55Z",
-          "completed_at": "2026-11-25T04:49:05Z",
-          "conclusion": null,
+          "completed_at": "2026-11-25T04:51:17Z",
+          "conclusion": "success",
           "job_conclusions": {
             "gate": "success",
-            "update": null
+            "update": "success",
+            "deploy": "success"
           },
           "source_all_success": null,
           "matched_cron": null,
