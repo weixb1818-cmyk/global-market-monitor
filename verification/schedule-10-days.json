@@ -1,17 +1,11 @@
 {
-  "checked_at": "2026-11-25T11:13:17.576850+00:00",
+  "checked_at": "2026-11-26T00:15:53.874218+00:00",
   "planned_beijing": "08:15",
   "window_days": 10,
-  "observed_days": 4,
+  "observed_days": 5,
   "ten_days_observed": false,
   "ten_days_update_deploy_success": false,
   "records": [
-    {
-      "date": "2026-11-16",
-      "planned_at": "2026-11-16T08:15:00+08:00",
-      "status": "not_in_operation",
-      "runs": []
-    },
     {
       "date": "2026-11-17",
       "planned_at": "2026-11-17T08:15:00+08:00",
@@ -180,11 +174,12 @@
           "display_title": "schedule | 15 2 * * *",
           "created_at": "2026-11-25T11:12:21Z",
           "started_at": "2026-11-25T11:12:21Z",
-          "completed_at": "2026-11-25T11:12:28Z",
-          "conclusion": null,
+          "completed_at": "2026-11-25T11:14:42Z",
+          "conclusion": "success",
           "job_conclusions": {
             "gate": "success",
-            "update": null
+            "update": "success",
+            "deploy": "success"
           },
           "source_all_success": null,
           "matched_cron": null,
@@ -252,6 +247,33 @@
           "source_all_success": null,
           "matched_cron": null,
           "delay_seconds": 16435.0,
+          "timing_note": "Includes native schedule, host cron and separately labelled diagnostic dispatches. Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "planned_at": "2026-11-26T08:15:00+08:00",
+      "status": "observed",
+      "runs": [
+        {
+          "run_id": 45727380733,
+          "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45727380733",
+          "event": "workflow_dispatch",
+          "head_sha": "10500c958b17e8038bd6f11746e7c662f85e6b6c",
+          "trigger_origin": "host_cron",
+          "display_title": "host_cron | 2026-11-26_0815-ce98462a45c2",
+          "created_at": "2026-11-26T00:15:05Z",
+          "started_at": "2026-11-26T00:15:05Z",
+          "completed_at": "2026-11-26T00:15:16Z",
+          "conclusion": null,
+          "job_conclusions": {
+            "gate": "success",
+            "update": null
+          },
+          "source_all_success": null,
+          "matched_cron": null,
+          "delay_seconds": 5.0,
           "timing_note": "Includes native schedule, host cron and separately labelled diagnostic dispatches. Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
         }
       ]

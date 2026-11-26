@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T11:13:38.723597+00:00",
+  "generated_at": "2026-11-26T00:16:19.170873+00:00",
   "thresholds": {
     "dxy_pct": 1.0,
     "real_bp": 15,
@@ -18,7 +18,7 @@
     "macro_date_gap_days": 3
   },
   "thresholds_sha256": "fbe8f2bd1bb11b5f5e92701c4c4613ebd51cb2acbed114d50f3c686c5a84bd1c",
-  "history_sha256": "3c802b2ab8c2a156ca755ac61d6f1066746a75fbe7c03e62ebfae406d9d73871",
+  "history_sha256": "4cb5333577f69522765a12391d88aef9bb0d18458b34d45af3c4d361f0d42c03",
   "strict_archived_availability": {
     "method": "Earliest archived snapshot each Beijing day; available=max(generated_at, Git commit time). New status boundary applied to then-archived inputs. No backfilled historical series used to create old signals.",
     "signals": [
@@ -73,12 +73,12 @@
           "sp500": {
             "5": {
               "status": "pending",
-              "available_closes": 1,
+              "available_closes": 2,
               "needed_closes": 6
             },
             "20": {
               "status": "pending",
-              "available_closes": 1,
+              "available_closes": 2,
               "needed_closes": 21
             }
           },
@@ -158,12 +158,12 @@
           "sp500": {
             "5": {
               "status": "pending",
-              "available_closes": 1,
+              "available_closes": 2,
               "needed_closes": 6
             },
             "20": {
               "status": "pending",
-              "available_closes": 1,
+              "available_closes": 2,
               "needed_closes": 21
             }
           },
@@ -243,12 +243,12 @@
           "sp500": {
             "5": {
               "status": "pending",
-              "available_closes": 1,
+              "available_closes": 2,
               "needed_closes": 6
             },
             "20": {
               "status": "pending",
-              "available_closes": 1,
+              "available_closes": 2,
               "needed_closes": 21
             }
           },
@@ -328,12 +328,12 @@
           "sp500": {
             "5": {
               "status": "pending",
-              "available_closes": 0,
+              "available_closes": 1,
               "needed_closes": 6
             },
             "20": {
               "status": "pending",
-              "available_closes": 0,
+              "available_closes": 1,
               "needed_closes": 21
             }
           },
@@ -464,12 +464,12 @@
             "asset": "sp500",
             "horizon": 5,
             "state": "中性/信号分歧",
-            "n_daily_overlapping": 35,
+            "n_daily_overlapping": 36,
             "n_state_transitions": 5,
-            "mean_max_drawdown_pct": -1.9995513993583844,
+            "mean_max_drawdown_pct": -2.1067803845136637,
             "median_max_drawdown_pct": -1.3735180188533702,
             "label_drawdown_threshold_pct": -3.0,
-            "risk_event_count": 6
+            "risk_event_count": 7
           },
           {
             "asset": "sp500",
@@ -530,12 +530,12 @@
             "asset": "sp500",
             "horizon": 20,
             "state": "金融压力扩散",
-            "n_daily_overlapping": 5,
+            "n_daily_overlapping": 6,
             "n_state_transitions": 2,
-            "mean_max_drawdown_pct": -6.852363750216752,
-            "median_max_drawdown_pct": -5.588893887848279,
+            "mean_max_drawdown_pct": -7.504363371548342,
+            "median_max_drawdown_pct": -6.462780281561892,
             "label_drawdown_threshold_pct": -5.0,
-            "risk_event_count": 5
+            "risk_event_count": 6
           },
           {
             "asset": "sp500",
@@ -6244,9 +6244,14 @@
                   "max_close_drawdown_pct": -2.615967499916061
                 },
                 "20": {
-                  "status": "pending",
-                  "available_closes": 20,
-                  "needed_closes": 21
+                  "status": "mature",
+                  "entry_date": "2026-10-27",
+                  "end_date": "2026-11-24",
+                  "entry_value": 7722.6,
+                  "end_value": 7201.09,
+                  "return_pct": -6.753036542097224,
+                  "max_adverse_from_entry_pct": -10.51731282210654,
+                  "max_close_drawdown_pct": -10.764361478206286
                 }
               },
               "nasdaq100": {
@@ -6333,7 +6338,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 19,
+                  "available_closes": 20,
                   "needed_closes": 21
                 }
               },
@@ -6416,7 +6421,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 18,
+                  "available_closes": 19,
                   "needed_closes": 21
                 }
               },
@@ -6499,7 +6504,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 17,
+                  "available_closes": 18,
                   "needed_closes": 21
                 }
               },
@@ -6582,7 +6587,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 16,
+                  "available_closes": 17,
                   "needed_closes": 21
                 }
               },
@@ -6665,7 +6670,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 15,
+                  "available_closes": 16,
                   "needed_closes": 21
                 }
               },
@@ -6748,7 +6753,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 14,
+                  "available_closes": 15,
                   "needed_closes": 21
                 }
               },
@@ -6831,7 +6836,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 13,
+                  "available_closes": 14,
                   "needed_closes": 21
                 }
               },
@@ -6909,7 +6914,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 12,
+                  "available_closes": 13,
                   "needed_closes": 21
                 }
               },
@@ -6987,7 +6992,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 11,
+                  "available_closes": 12,
                   "needed_closes": 21
                 }
               },
@@ -7065,7 +7070,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 10,
+                  "available_closes": 11,
                   "needed_closes": 21
                 }
               },
@@ -7143,7 +7148,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 9,
+                  "available_closes": 10,
                   "needed_closes": 21
                 }
               },
@@ -7221,7 +7226,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 8,
+                  "available_closes": 9,
                   "needed_closes": 21
                 }
               },
@@ -7299,7 +7304,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 7,
+                  "available_closes": 8,
                   "needed_closes": 21
                 }
               },
@@ -7377,7 +7382,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 6,
+                  "available_closes": 7,
                   "needed_closes": 21
                 }
               },
@@ -7444,13 +7449,18 @@
             "outcomes": {
               "sp500": {
                 "5": {
-                  "status": "pending",
-                  "available_closes": 5,
-                  "needed_closes": 6
+                  "status": "mature",
+                  "entry_date": "2026-11-17",
+                  "end_date": "2026-11-24",
+                  "entry_value": 7340.53,
+                  "end_value": 7201.09,
+                  "return_pct": -1.8995903565546257,
+                  "max_adverse_from_entry_pct": -5.859794864948431,
+                  "max_close_drawdown_pct": -5.859794864948431
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 5,
+                  "available_closes": 6,
                   "needed_closes": 21
                 }
               },
@@ -7518,12 +7528,12 @@
               "sp500": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 4,
+                  "available_closes": 5,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 4,
+                  "available_closes": 5,
                   "needed_closes": 21
                 }
               },
@@ -7586,12 +7596,12 @@
               "sp500": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 3,
+                  "available_closes": 4,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 3,
+                  "available_closes": 4,
                   "needed_closes": 21
                 }
               },
@@ -7654,12 +7664,12 @@
               "sp500": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 2,
+                  "available_closes": 3,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 2,
+                  "available_closes": 3,
                   "needed_closes": 21
                 }
               },
@@ -7717,12 +7727,12 @@
               "sp500": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 1,
+                  "available_closes": 2,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 1,
+                  "available_closes": 2,
                   "needed_closes": 21
                 }
               },
@@ -7751,6 +7761,69 @@
                 }
               }
             }
+          },
+          {
+            "signal_at": "2026-11-24T08:15:00+08:00",
+            "state": "金融压力扩散",
+            "mode": "full",
+            "state_transition": false,
+            "signals": [
+              "美元 +2.05% · 2026-11-20",
+              "实际利率 +13bp · 2026-11-20",
+              "HY +38bp · 2026-11-20 / VIX +16.4点 · 2026-11-20"
+            ],
+            "uncertainty": "信用或波动风险仍处高位",
+            "input_dates": {
+              "dxy": "2026-11-20",
+              "real10y": "2026-11-20",
+              "hy": "2026-11-20",
+              "vix": "2026-11-20",
+              "us2y": "2026-11-20",
+              "spread10y2y": "2026-11-20",
+              "spread10y3m": "2026-11-20"
+            },
+            "curve_changes_bp": {
+              "spread10y2y": -2.0000000000000018,
+              "spread10y3m": -14.000000000000002
+            },
+            "outcomes": {
+              "sp500": {
+                "5": {
+                  "status": "pending",
+                  "available_closes": 1,
+                  "needed_closes": 6
+                },
+                "20": {
+                  "status": "pending",
+                  "available_closes": 1,
+                  "needed_closes": 21
+                }
+              },
+              "nasdaq100": {
+                "5": {
+                  "status": "pending",
+                  "available_closes": 1,
+                  "needed_closes": 6
+                },
+                "20": {
+                  "status": "pending",
+                  "available_closes": 1,
+                  "needed_closes": 21
+                }
+              },
+              "btc": {
+                "5": {
+                  "status": "pending",
+                  "available_closes": 1,
+                  "needed_closes": 6
+                },
+                "20": {
+                  "status": "pending",
+                  "available_closes": 1,
+                  "needed_closes": 21
+                }
+              }
+            }
           }
         ]
       },
@@ -7761,12 +7834,12 @@
             "asset": "sp500",
             "horizon": 5,
             "state": "中性/信号分歧",
-            "n_daily_overlapping": 17,
+            "n_daily_overlapping": 18,
             "n_state_transitions": 8,
-            "mean_max_drawdown_pct": -1.6561828460650019,
+            "mean_max_drawdown_pct": -1.8897168471140813,
             "median_max_drawdown_pct": -1.2872866217651269,
             "label_drawdown_threshold_pct": -3.0,
-            "risk_event_count": 2
+            "risk_event_count": 3
           },
           {
             "asset": "sp500",
@@ -7849,12 +7922,12 @@
             "asset": "sp500",
             "horizon": 20,
             "state": "金融压力扩散",
-            "n_daily_overlapping": 3,
+            "n_daily_overlapping": 4,
             "n_state_transitions": 2,
-            "mean_max_drawdown_pct": -7.241428765382974,
-            "median_max_drawdown_pct": -5.588893887848279,
+            "mean_max_drawdown_pct": -8.122161943588802,
+            "median_max_drawdown_pct": -8.176627683027283,
             "label_drawdown_threshold_pct": -5.0,
-            "risk_event_count": 3
+            "risk_event_count": 4
           },
           {
             "asset": "sp500",
@@ -13519,9 +13592,14 @@
                   "max_close_drawdown_pct": -2.615967499916061
                 },
                 "20": {
-                  "status": "pending",
-                  "available_closes": 20,
-                  "needed_closes": 21
+                  "status": "mature",
+                  "entry_date": "2026-10-27",
+                  "end_date": "2026-11-24",
+                  "entry_value": 7722.6,
+                  "end_value": 7201.09,
+                  "return_pct": -6.753036542097224,
+                  "max_adverse_from_entry_pct": -10.51731282210654,
+                  "max_close_drawdown_pct": -10.764361478206286
                 }
               },
               "nasdaq100": {
@@ -13608,7 +13686,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 19,
+                  "available_closes": 20,
                   "needed_closes": 21
                 }
               },
@@ -13687,7 +13765,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 18,
+                  "available_closes": 19,
                   "needed_closes": 21
                 }
               },
@@ -13766,7 +13844,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 17,
+                  "available_closes": 18,
                   "needed_closes": 21
                 }
               },
@@ -13849,7 +13927,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 16,
+                  "available_closes": 17,
                   "needed_closes": 21
                 }
               },
@@ -13932,7 +14010,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 15,
+                  "available_closes": 16,
                   "needed_closes": 21
                 }
               },
@@ -14015,7 +14093,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 14,
+                  "available_closes": 15,
                   "needed_closes": 21
                 }
               },
@@ -14094,7 +14172,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 13,
+                  "available_closes": 14,
                   "needed_closes": 21
                 }
               },
@@ -14168,7 +14246,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 12,
+                  "available_closes": 13,
                   "needed_closes": 21
                 }
               },
@@ -14246,7 +14324,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 11,
+                  "available_closes": 12,
                   "needed_closes": 21
                 }
               },
@@ -14324,7 +14402,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 10,
+                  "available_closes": 11,
                   "needed_closes": 21
                 }
               },
@@ -14402,7 +14480,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 9,
+                  "available_closes": 10,
                   "needed_closes": 21
                 }
               },
@@ -14476,7 +14554,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 8,
+                  "available_closes": 9,
                   "needed_closes": 21
                 }
               },
@@ -14550,7 +14628,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 7,
+                  "available_closes": 8,
                   "needed_closes": 21
                 }
               },
@@ -14628,7 +14706,7 @@
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 6,
+                  "available_closes": 7,
                   "needed_closes": 21
                 }
               },
@@ -14695,13 +14773,18 @@
             "outcomes": {
               "sp500": {
                 "5": {
-                  "status": "pending",
-                  "available_closes": 5,
-                  "needed_closes": 6
+                  "status": "mature",
+                  "entry_date": "2026-11-17",
+                  "end_date": "2026-11-24",
+                  "entry_value": 7340.53,
+                  "end_value": 7201.09,
+                  "return_pct": -1.8995903565546257,
+                  "max_adverse_from_entry_pct": -5.859794864948431,
+                  "max_close_drawdown_pct": -5.859794864948431
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 5,
+                  "available_closes": 6,
                   "needed_closes": 21
                 }
               },
@@ -14769,12 +14852,12 @@
               "sp500": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 4,
+                  "available_closes": 5,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 4,
+                  "available_closes": 5,
                   "needed_closes": 21
                 }
               },
@@ -14833,12 +14916,12 @@
               "sp500": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 3,
+                  "available_closes": 4,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 3,
+                  "available_closes": 4,
                   "needed_closes": 21
                 }
               },
@@ -14897,12 +14980,12 @@
               "sp500": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 2,
+                  "available_closes": 3,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 2,
+                  "available_closes": 3,
                   "needed_closes": 21
                 }
               },
@@ -14960,12 +15043,12 @@
               "sp500": {
                 "5": {
                   "status": "pending",
-                  "available_closes": 1,
+                  "available_closes": 2,
                   "needed_closes": 6
                 },
                 "20": {
                   "status": "pending",
-                  "available_closes": 1,
+                  "available_closes": 2,
                   "needed_closes": 21
                 }
               },
@@ -14990,6 +15073,69 @@
                 "20": {
                   "status": "pending",
                   "available_closes": 2,
+                  "needed_closes": 21
+                }
+              }
+            }
+          },
+          {
+            "signal_at": "2026-11-24T08:15:00+08:00",
+            "state": "金融压力扩散",
+            "mode": "full",
+            "state_transition": true,
+            "signals": [
+              "美元 +2.05% · 2026-11-20",
+              "实际利率 +13bp · 2026-11-20",
+              "HY +38bp · 2026-11-20 / VIX +16.4点 · 2026-11-20"
+            ],
+            "uncertainty": "信用或波动风险仍处高位",
+            "input_dates": {
+              "dxy": "2026-11-20",
+              "real10y": "2026-11-20",
+              "hy": "2026-11-20",
+              "vix": "2026-11-20",
+              "us2y": "2026-11-20",
+              "spread10y2y": "2026-11-20",
+              "spread10y3m": "2026-11-20"
+            },
+            "curve_changes_bp": {
+              "spread10y2y": -2.0000000000000018,
+              "spread10y3m": -14.000000000000002
+            },
+            "outcomes": {
+              "sp500": {
+                "5": {
+                  "status": "pending",
+                  "available_closes": 1,
+                  "needed_closes": 6
+                },
+                "20": {
+                  "status": "pending",
+                  "available_closes": 1,
+                  "needed_closes": 21
+                }
+              },
+              "nasdaq100": {
+                "5": {
+                  "status": "pending",
+                  "available_closes": 1,
+                  "needed_closes": 6
+                },
+                "20": {
+                  "status": "pending",
+                  "available_closes": 1,
+                  "needed_closes": 21
+                }
+              },
+              "btc": {
+                "5": {
+                  "status": "pending",
+                  "available_closes": 1,
+                  "needed_closes": 6
+                },
+                "20": {
+                  "status": "pending",
+                  "available_closes": 1,
                   "needed_closes": 21
                 }
               }
