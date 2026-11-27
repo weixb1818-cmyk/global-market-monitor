@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T02:15:58.012876+00:00",
+  "generated_at": "2026-11-27T08:41:19.818060+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -15,10 +15,10 @@
       "series_definition": "sina-diniw-dxy-daily-v1",
       "source_url": "https://finance.sina.com.cn/money/forex/hq/DINIW.shtml",
       "quote_note": "新浪DINIW美元指数日线；非DX期货、非其他美元指数。保守排除纽约当日未确认日线。",
-      "value": 103.701,
-      "change_1": -0.11943173609439972,
-      "change_20": 1.5439028713048586,
-      "as_of": "2026-11-25",
+      "value": 103.7834,
+      "change_1": 0.07945921447238824,
+      "change_20": 1.8409868576637622,
+      "as_of": "2026-11-26",
       "observation_count": 120,
       "source": "新浪财经 / DINIW / 美元指数日线，非DX期货",
       "status": "ok",
@@ -316,16 +316,16 @@
       "series_definition": "em-hg00y-completed-session-v1",
       "source_url": "https://quote.eastmoney.com/globalfuture/HG00Y.html",
       "quote_note": "东方财富HG00Y期货序列，换月规则由供数方维护、尚未核实；历史失败时仅累积纽约17:00末笔快照，非官方结算；不足21期不判断趋势。",
-      "value": 5.402,
-      "change_1": -3.7419814682822516,
-      "change_20": -18.901065906020108,
-      "as_of": "2026-11-24",
-      "observation_count": 102,
+      "value": 5.4335,
+      "change_1": -0.8756727173218848,
+      "change_20": -17.54306093026785,
+      "as_of": "2026-11-26",
+      "observation_count": 104,
       "source": "东方财富 / 101.HG00Y / COMEX铜日线；供数方换月序列",
-      "status": "error",
-      "error": "数据源网络请求失败",
+      "status": "ok",
+      "error": null,
       "warning": "换月口径未完全核实；跨换月历史变化谨慎解读",
-      "interpretation": "本轮获取失败或状态未核实；仅保留历史，截至2026-11-24"
+      "interpretation": "近20期下跌，换月口径未完全核实，跨期变化谨慎解读"
     },
     {
       "id": "btc",
@@ -455,7 +455,7 @@
     "mode": "full",
     "missing": [],
     "signal_dates": {
-      "dxy": "2026-11-25",
+      "dxy": "2026-11-26",
       "real10y": "2026-11-24",
       "us2y": "2026-11-24",
       "hy": "2026-11-24",
@@ -474,7 +474,7 @@
     "reason": "信用利差与波动率共同上升，市场防御需求增强",
     "uncertainty": "信用或波动风险仍处高位",
     "signals": [
-      "美元 +1.54% · 2026-11-25",
+      "美元 +1.84% · 2026-11-26",
       "实际利率 +13bp · 2026-11-24",
       "HY +54bp · 2026-11-24 / VIX +8.8点 · 2026-11-24"
     ]
@@ -2474,12 +2474,12 @@
     {
       "id": "copper",
       "status": "ok",
-      "observations": 102,
-      "unique_dates": 102,
+      "observations": 104,
+      "unique_dates": 104,
       "ascending": true,
       "first_date": "2026-07-06",
-      "last_date": "2026-11-24",
-      "expected_cme_sessions": 102,
+      "last_date": "2026-11-26",
+      "expected_cme_sessions": 104,
       "missing_sessions": [],
       "unexpected_dates": [],
       "rollover_rule_verified": false
@@ -5600,14 +5600,14 @@
       "2027-11-11"
     ]
   },
-  "sources_failed": 1,
+  "sources_failed": 0,
   "update_context": {
-    "event": "workflow_dispatch",
-    "schedule": null,
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45927208552",
-    "origin": "host_cron",
-    "planned_at": "2026-11-27T10:15:00+08:00",
-    "requested_at": "2026-11-27T02:15:01.592705+00:00",
-    "dispatch_id": "2026-11-27_1015-344a6ced1763"
+    "event": "schedule",
+    "schedule": "15 0 * * *",
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45967511300",
+    "origin": "github_schedule",
+    "planned_at": null,
+    "requested_at": null,
+    "dispatch_id": null
   }
 }

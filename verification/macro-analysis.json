@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T02:16:42.077481+00:00",
+  "generated_at": "2026-11-27T08:42:08.249895+00:00",
   "thresholds": {
     "dxy_pct": 1.0,
     "real_bp": 15,
@@ -18,7 +18,7 @@
     "macro_date_gap_days": 3
   },
   "thresholds_sha256": "fbe8f2bd1bb11b5f5e92701c4c4613ebd51cb2acbed114d50f3c686c5a84bd1c",
-  "history_sha256": "888942b66b48176b5b8e9af79d9993ae206cc7b2b5aed04c2edcb26d9a4f86c0",
+  "history_sha256": "6f56ef7f0894aebc8b43adfdeec82ab5ddc7ba6fe15bde99d5c29fce28b3acf6",
   "strict_archived_availability": {
     "method": "Earliest archived snapshot each Beijing day; available=max(generated_at, Git commit time). New status boundary applied to then-archived inputs. No backfilled historical series used to create old signals.",
     "signals": [
