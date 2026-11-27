@@ -1,14 +1,14 @@
 {
-  "at": "2026-11-27T00:15:52.360810+00:00",
+  "at": "2026-11-27T00:45:54.309232+00:00",
   "status": "partial",
   "message": "1 项来源未更新",
   "update_context": {
     "event": "workflow_dispatch",
     "schedule": null,
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45915631383",
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45918548558",
     "origin": "host_cron",
-    "planned_at": "2026-11-27T08:15:00+08:00",
-    "requested_at": "2026-11-27T00:15:01.321436+00:00",
-    "dispatch_id": "2026-11-27_0815-ef71200a8f7f"
+    "planned_at": "2026-11-27T08:45:00+08:00",
+    "requested_at": "2026-11-27T00:45:01.344730+00:00",
+    "dispatch_id": "2026-11-27_0845-2439b9da40d6"
   }
 }

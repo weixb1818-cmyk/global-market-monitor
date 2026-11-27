@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-27T00:16:06.444799+00:00",
+  "checked_at": "2026-11-27T00:46:08.690280+00:00",
   "planned_beijing": "08:15",
   "window_days": 10,
   "observed_days": 6,
@@ -342,6 +342,26 @@
       "status": "observed",
       "runs": [
         {
+          "run_id": 45918548558,
+          "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45918548558",
+          "event": "workflow_dispatch",
+          "head_sha": "9a180c0603155d44a9b3635419adc5bbbb098254",
+          "trigger_origin": "host_cron",
+          "display_title": "host_cron | 2026-11-27_0845-2439b9da40d6",
+          "created_at": "2026-11-27T00:45:04Z",
+          "started_at": "2026-11-27T00:45:04Z",
+          "completed_at": "2026-11-27T00:45:18Z",
+          "conclusion": null,
+          "job_conclusions": {
+            "gate": "success",
+            "update": null
+          },
+          "source_all_success": null,
+          "matched_cron": null,
+          "delay_seconds": 1804.0,
+          "timing_note": "Includes native schedule, host cron and separately labelled diagnostic dispatches. Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
+        },
+        {
           "run_id": 45915631383,
           "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45915631383",
           "event": "workflow_dispatch",
@@ -350,11 +370,12 @@
           "display_title": "host_cron | 2026-11-27_0815-ef71200a8f7f",
           "created_at": "2026-11-27T00:15:05Z",
           "started_at": "2026-11-27T00:15:05Z",
-          "completed_at": "2026-11-27T00:15:19Z",
-          "conclusion": null,
+          "completed_at": "2026-11-27T00:17:30Z",
+          "conclusion": "success",
           "job_conclusions": {
             "gate": "success",
-            "update": null
+            "update": "success",
+            "deploy": "success"
           },
           "source_all_success": null,
           "matched_cron": null,

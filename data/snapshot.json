@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T00:15:52.360810+00:00",
+  "generated_at": "2026-11-27T00:45:54.309232+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -336,11 +336,11 @@
       "unit": "USD",
       "kind": "price",
       "calendar": "crypto",
-      "value": 60374.147782582884,
-      "change_1": 1.0295153250741595,
-      "change_20": -20.566089943575573,
-      "as_of": "2026-11-25",
-      "observation_count": 96,
+      "value": 60510.39794228515,
+      "change_1": 0.22567632787617864,
+      "change_20": -20.144938092588795,
+      "as_of": "2026-11-26",
+      "observation_count": 97,
       "source": "CoinGecko / UTC 00:00",
       "status": "ok",
       "error": null,
@@ -5604,10 +5604,10 @@
   "update_context": {
     "event": "workflow_dispatch",
     "schedule": null,
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45915631383",
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45918548558",
     "origin": "host_cron",
-    "planned_at": "2026-11-27T08:15:00+08:00",
-    "requested_at": "2026-11-27T00:15:01.321436+00:00",
-    "dispatch_id": "2026-11-27_0815-ef71200a8f7f"
+    "planned_at": "2026-11-27T08:45:00+08:00",
+    "requested_at": "2026-11-27T00:45:01.344730+00:00",
+    "dispatch_id": "2026-11-27_0845-2439b9da40d6"
   }
 }
