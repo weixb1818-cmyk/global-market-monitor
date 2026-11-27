@@ -1,17 +1,11 @@
 {
-  "checked_at": "2026-11-26T00:15:53.874218+00:00",
+  "checked_at": "2026-11-27T00:16:06.444799+00:00",
   "planned_beijing": "08:15",
   "window_days": 10,
-  "observed_days": 5,
+  "observed_days": 6,
   "ten_days_observed": false,
   "ten_days_update_deploy_success": false,
   "records": [
-    {
-      "date": "2026-11-17",
-      "planned_at": "2026-11-17T08:15:00+08:00",
-      "status": "not_in_operation",
-      "runs": []
-    },
     {
       "date": "2026-11-18",
       "planned_at": "2026-11-18T08:15:00+08:00",
@@ -257,6 +251,69 @@
       "status": "observed",
       "runs": [
         {
+          "run_id": 45804681595,
+          "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45804681595",
+          "event": "schedule",
+          "head_sha": "ee520a8ba90bb97cccfb919f07f0c18b4b7f2c2b",
+          "trigger_origin": "github_schedule",
+          "display_title": "schedule | 15 2 * * *",
+          "created_at": "2026-11-26T10:48:06Z",
+          "started_at": "2026-11-26T10:48:06Z",
+          "completed_at": "2026-11-26T10:48:22Z",
+          "conclusion": "success",
+          "job_conclusions": {
+            "gate": "success",
+            "update": "skipped",
+            "deploy": "skipped"
+          },
+          "source_all_success": null,
+          "matched_cron": null,
+          "delay_seconds": 37986.0,
+          "timing_note": "Includes native schedule, host cron and separately labelled diagnostic dispatches. Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
+        },
+        {
+          "run_id": 45787312499,
+          "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45787312499",
+          "event": "schedule",
+          "head_sha": "ee520a8ba90bb97cccfb919f07f0c18b4b7f2c2b",
+          "trigger_origin": "github_schedule",
+          "display_title": "schedule | 45 0 * * *",
+          "created_at": "2026-11-26T08:55:37Z",
+          "started_at": "2026-11-26T08:55:37Z",
+          "completed_at": "2026-11-26T08:55:50Z",
+          "conclusion": "success",
+          "job_conclusions": {
+            "gate": "success",
+            "update": "skipped",
+            "deploy": "skipped"
+          },
+          "source_all_success": null,
+          "matched_cron": null,
+          "delay_seconds": 31237.0,
+          "timing_note": "Includes native schedule, host cron and separately labelled diagnostic dispatches. Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
+        },
+        {
+          "run_id": 45783052553,
+          "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45783052553",
+          "event": "schedule",
+          "head_sha": "ee520a8ba90bb97cccfb919f07f0c18b4b7f2c2b",
+          "trigger_origin": "github_schedule",
+          "display_title": "schedule | 15 0 * * *",
+          "created_at": "2026-11-26T08:25:37Z",
+          "started_at": "2026-11-26T08:25:37Z",
+          "completed_at": "2026-11-26T08:25:46Z",
+          "conclusion": "success",
+          "job_conclusions": {
+            "gate": "success",
+            "deploy": "skipped",
+            "update": "skipped"
+          },
+          "source_all_success": null,
+          "matched_cron": null,
+          "delay_seconds": 29437.0,
+          "timing_note": "Includes native schedule, host cron and separately labelled diagnostic dispatches. Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
+        },
+        {
           "run_id": 45727380733,
           "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45727380733",
           "event": "workflow_dispatch",
@@ -265,7 +322,35 @@
           "display_title": "host_cron | 2026-11-26_0815-ce98462a45c2",
           "created_at": "2026-11-26T00:15:05Z",
           "started_at": "2026-11-26T00:15:05Z",
-          "completed_at": "2026-11-26T00:15:16Z",
+          "completed_at": "2026-11-26T00:17:33Z",
+          "conclusion": "success",
+          "job_conclusions": {
+            "gate": "success",
+            "update": "success",
+            "deploy": "success"
+          },
+          "source_all_success": null,
+          "matched_cron": null,
+          "delay_seconds": 5.0,
+          "timing_note": "Includes native schedule, host cron and separately labelled diagnostic dispatches. Arrival grouped by actual Beijing date; delay relative to that date primary 08:15 target, not proof of nominal schedule date or backup cron. Completed time from last job, not updated_at. Source success unknown unless read against per-run evidence."
+        }
+      ]
+    },
+    {
+      "date": "2026-11-27",
+      "planned_at": "2026-11-27T08:15:00+08:00",
+      "status": "observed",
+      "runs": [
+        {
+          "run_id": 45915631383,
+          "url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45915631383",
+          "event": "workflow_dispatch",
+          "head_sha": "ee520a8ba90bb97cccfb919f07f0c18b4b7f2c2b",
+          "trigger_origin": "host_cron",
+          "display_title": "host_cron | 2026-11-27_0815-ef71200a8f7f",
+          "created_at": "2026-11-27T00:15:05Z",
+          "started_at": "2026-11-27T00:15:05Z",
+          "completed_at": "2026-11-27T00:15:19Z",
           "conclusion": null,
           "job_conclusions": {
             "gate": "success",

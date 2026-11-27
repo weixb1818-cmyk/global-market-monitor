@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T00:15:39.745855+00:00",
+  "generated_at": "2026-11-27T00:15:52.360810+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -15,10 +15,10 @@
       "series_definition": "sina-diniw-dxy-daily-v1",
       "source_url": "https://finance.sina.com.cn/money/forex/hq/DINIW.shtml",
       "quote_note": "新浪DINIW美元指数日线；非DX期货、非其他美元指数。保守排除纽约当日未确认日线。",
-      "value": 103.825,
-      "change_1": -0.4790807171449085,
-      "change_20": 1.4442059310052269,
-      "as_of": "2026-11-24",
+      "value": 103.701,
+      "change_1": -0.11943173609439972,
+      "change_20": 1.5439028713048586,
+      "as_of": "2026-11-25",
       "observation_count": 120,
       "source": "新浪财经 / DINIW / 美元指数日线，非DX期货",
       "status": "ok",
@@ -186,11 +186,11 @@
       "unit": "点",
       "kind": "price",
       "calendar": "nyse",
-      "value": 26214.17,
-      "change_1": -1.988813322316152,
-      "change_20": -11.592253192425062,
-      "as_of": "2026-11-24",
-      "observation_count": 96,
+      "value": 26046.9,
+      "change_1": -0.6380900100975806,
+      "change_20": -12.632877561452727,
+      "as_of": "2026-11-25",
+      "observation_count": 97,
       "source": "FRED / NASDAQ100",
       "status": "ok",
       "error": null,
@@ -209,10 +209,10 @@
       "source_url": "https://frankfurter.dev/",
       "source_label": null,
       "quote_note": "多源合成参考价，非现货收盘或COMEX期货；上游可能不同日。",
-      "value": 3584.68,
-      "change_1": -0.7747732286646825,
-      "change_20": -12.16861211568807,
-      "as_of": "2026-11-25",
+      "value": 3556.27,
+      "change_1": -0.582871136556784,
+      "change_20": -13.040703446319668,
+      "as_of": "2026-11-26",
       "observation_count": 120,
       "source": "Frankfurter / XAU/USD / 多源合成参考价，非收盘",
       "status": "ok",
@@ -220,15 +220,15 @@
       "source_components": [
         {
           "provider": "BCBO",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "BCP",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "BNR",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "BOM",
@@ -236,11 +236,11 @@
         },
         {
           "provider": "CBA",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "CBAR",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "CBO",
@@ -248,36 +248,37 @@
         },
         {
           "provider": "CBR",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "CBSL",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "NBM",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "NBP",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "NBU",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "PMA",
-          "date": "2026-11-24"
+          "date": "2026-11-25"
         }
       ],
       "component_dates": [
         "2026-11-22",
         "2026-11-24",
-        "2026-11-25"
+        "2026-11-25",
+        "2026-11-26"
       ],
       "mixed_component_dates": true,
-      "warning": "合成参考价混合不同来源日期：2026-11-22,2026-11-24,2026-11-25；历史可能修订",
+      "warning": "合成参考价混合不同来源日期：2026-11-22,2026-11-24,2026-11-25,2026-11-26；历史可能修订",
       "interpretation": "合成参考近20期下跌；成分日期混合，历史可能修订"
     },
     {
@@ -321,10 +322,10 @@
       "as_of": "2026-11-24",
       "observation_count": 102,
       "source": "东方财富 / 101.HG00Y / COMEX铜日线；供数方换月序列",
-      "status": "ok",
-      "error": null,
+      "status": "error",
+      "error": "数据源网络请求失败",
       "warning": "换月口径未完全核实；跨换月历史变化谨慎解读",
-      "interpretation": "近20期下跌，换月口径未完全核实，跨期变化谨慎解读"
+      "interpretation": "本轮获取失败或状态未核实；仅保留历史，截至2026-11-24"
     },
     {
       "id": "btc",
@@ -335,11 +336,11 @@
       "unit": "USD",
       "kind": "price",
       "calendar": "crypto",
-      "value": 59758.920537549915,
-      "change_1": -2.3986373846431652,
-      "change_20": -25.71244934129244,
-      "as_of": "2026-11-24",
-      "observation_count": 95,
+      "value": 60374.147782582884,
+      "change_1": 1.0295153250741595,
+      "change_20": -20.566089943575573,
+      "as_of": "2026-11-25",
+      "observation_count": 96,
       "source": "CoinGecko / UTC 00:00",
       "status": "ok",
       "error": null,
@@ -354,11 +355,11 @@
       "unit": "USD",
       "kind": "price",
       "calendar": "crypto",
-      "value": 1690.5178687972486,
-      "change_1": 0.748855741236798,
-      "change_20": -24.387821199308636,
-      "as_of": "2026-11-25",
-      "observation_count": 96,
+      "value": 1687.9229473582186,
+      "change_1": -0.1534986105101721,
+      "change_20": -24.520999566573355,
+      "as_of": "2026-11-26",
+      "observation_count": 97,
       "source": "CoinGecko / UTC 00:00",
       "status": "ok",
       "error": null,
@@ -376,11 +377,11 @@
       "series_definition": "ecb-reference-cross-v1",
       "source_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
       "quote_note": "ECB同日EURJPY÷EURUSD，日参考汇率，非纽约收盘。",
-      "value": 159.32327389117515,
-      "change_1": 0.15832626119349769,
-      "change_20": 0.8612537376579521,
-      "as_of": "2026-11-25",
-      "observation_count": 68,
+      "value": 159.2619589977221,
+      "change_1": -0.0384845804103473,
+      "change_20": 0.7608915214101231,
+      "as_of": "2026-11-26",
+      "observation_count": 69,
       "source": "ECB / 同日EURJPY÷EURUSD / 日参考汇率，非收盘",
       "status": "ok",
       "error": null,
@@ -398,55 +399,54 @@
       "series_definition": "cnh-blended-reference-v1",
       "source_url": "https://frankfurter.dev/currencies/cnh/",
       "quote_note": "准确CNH离岸人民币，多源合成参考汇率，非纽约收盘；上游可能不同日。",
-      "value": 6.6637,
-      "change_1": -0.019504876219045286,
-      "change_20": 0.2512411614262078,
-      "as_of": "2026-11-25",
-      "observation_count": 117,
+      "value": 6.6633,
+      "change_1": -0.009003736550672325,
+      "change_20": 0.1849345963013116,
+      "as_of": "2026-11-26",
+      "observation_count": 118,
       "source": "Frankfurter / USD/CNH / 多源合成参考价，非收盘",
       "status": "ok",
       "error": null,
       "source_components": [
         {
           "provider": "BB",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "BCBO",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "BCRA",
-          "date": "2026-11-24"
+          "date": "2026-11-25"
         },
         {
           "provider": "BI",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "BM",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "CBS",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "CBSL",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "NBC",
-          "date": "2026-11-20"
+          "date": "2026-11-26"
         }
       ],
       "component_dates": [
-        "2026-11-20",
-        "2026-11-24",
-        "2026-11-25"
+        "2026-11-25",
+        "2026-11-26"
       ],
       "mixed_component_dates": true,
-      "warning": "合成参考价混合不同来源日期：2026-11-20,2026-11-24,2026-11-25；历史可能修订",
+      "warning": "合成参考价混合不同来源日期：2026-11-25,2026-11-26；历史可能修订",
       "interpretation": "美元相对离岸人民币升值，关注汇率波动"
     }
   ],
@@ -455,7 +455,7 @@
     "mode": "full",
     "missing": [],
     "signal_dates": {
-      "dxy": "2026-11-24",
+      "dxy": "2026-11-25",
       "real10y": "2026-11-24",
       "us2y": "2026-11-24",
       "hy": "2026-11-24",
@@ -474,7 +474,7 @@
     "reason": "信用利差与波动率共同上升，市场防御需求增强",
     "uncertainty": "信用或波动风险仍处高位",
     "signals": [
-      "美元 +1.44% · 2026-11-24",
+      "美元 +1.54% · 2026-11-25",
       "实际利率 +13bp · 2026-11-24",
       "HY +54bp · 2026-11-24 / VIX +8.8点 · 2026-11-24"
     ]
@@ -5600,14 +5600,14 @@
       "2027-11-11"
     ]
   },
-  "sources_failed": 0,
+  "sources_failed": 1,
   "update_context": {
     "event": "workflow_dispatch",
     "schedule": null,
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45727380733",
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45915631383",
     "origin": "host_cron",
-    "planned_at": "2026-11-26T08:15:00+08:00",
-    "requested_at": "2026-11-26T00:15:01.652009+00:00",
-    "dispatch_id": "2026-11-26_0815-ce98462a45c2"
+    "planned_at": "2026-11-27T08:15:00+08:00",
+    "requested_at": "2026-11-27T00:15:01.321436+00:00",
+    "dispatch_id": "2026-11-27_0815-ef71200a8f7f"
   }
 }
