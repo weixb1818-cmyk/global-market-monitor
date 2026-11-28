@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-27T08:41:19.818060+00:00",
+  "generated_at": "2026-11-28T00:15:55.790645+00:00",
   "timezone": "Asia/Tokyo",
   "indicators": [
     {
@@ -34,11 +34,11 @@
       "unit": "%",
       "kind": "yield",
       "calendar": "bond",
-      "value": 4.63,
-      "change_1": 0.0,
-      "change_20": -4.999999999999982,
-      "as_of": "2026-11-24",
-      "observation_count": 94,
+      "value": 4.61,
+      "change_1": -1.9999999999999574,
+      "change_20": -8.999999999999986,
+      "as_of": "2026-11-25",
+      "observation_count": 95,
       "source": "FRED / DGS2",
       "status": "ok",
       "error": null,
@@ -53,11 +53,11 @@
       "unit": "%",
       "kind": "yield",
       "calendar": "bond",
-      "value": 4.91,
-      "change_1": -0.9999999999999787,
-      "change_20": -8.999999999999986,
-      "as_of": "2026-11-24",
-      "observation_count": 94,
+      "value": 4.85,
+      "change_1": -6.00000000000005,
+      "change_20": -14.000000000000057,
+      "as_of": "2026-11-25",
+      "observation_count": 95,
       "source": "FRED / DGS10",
       "status": "ok",
       "error": null,
@@ -72,11 +72,11 @@
       "unit": "%",
       "kind": "yield",
       "calendar": "bond",
-      "value": 2.79,
-      "change_1": 0.0,
-      "change_20": 12.99999999999999,
-      "as_of": "2026-11-24",
-      "observation_count": 94,
+      "value": 2.73,
+      "change_1": -6.000000000000005,
+      "change_20": 8.999999999999986,
+      "as_of": "2026-11-25",
+      "observation_count": 95,
       "source": "FRED / DFII10",
       "status": "ok",
       "error": null,
@@ -91,11 +91,11 @@
       "unit": "bp",
       "kind": "spread",
       "calendar": "bond",
-      "value": 24.0,
-      "change_1": -4.0000000000000036,
-      "change_20": -4.999999999999999,
-      "as_of": "2026-11-25",
-      "observation_count": 95,
+      "value": 25.0,
+      "change_1": 1.0000000000000009,
+      "change_20": -13.0,
+      "as_of": "2026-11-27",
+      "observation_count": 96,
       "source": "FRED / T10Y2Y",
       "status": "ok",
       "error": null,
@@ -110,11 +110,11 @@
       "unit": "bp",
       "kind": "spread",
       "calendar": "bond",
-      "value": 51.0,
-      "change_1": -4.0000000000000036,
-      "change_20": -26.0,
-      "as_of": "2026-11-25",
-      "observation_count": 95,
+      "value": 59.0,
+      "change_1": 7.9999999999999964,
+      "change_20": -28.000000000000004,
+      "as_of": "2026-11-27",
+      "observation_count": 96,
       "source": "FRED / T10Y3M",
       "status": "ok",
       "error": null,
@@ -129,11 +129,11 @@
       "unit": "点",
       "kind": "points",
       "calendar": "nyse",
-      "value": 26.36,
-      "change_1": -0.26000000000000156,
-      "change_20": 8.84,
-      "as_of": "2026-11-24",
-      "observation_count": 97,
+      "value": 26.8,
+      "change_1": -1.4899999999999984,
+      "change_20": 9.600000000000001,
+      "as_of": "2026-11-26",
+      "observation_count": 99,
       "source": "FRED / VIXCLS",
       "status": "ok",
       "error": null,
@@ -148,11 +148,11 @@
       "unit": "bp",
       "kind": "spread",
       "calendar": "nyse",
-      "value": 372.0,
-      "change_1": 9.00000000000003,
-      "change_20": 54.0,
-      "as_of": "2026-11-24",
-      "observation_count": 97,
+      "value": 377.0,
+      "change_1": 0.0,
+      "change_20": 51.00000000000002,
+      "as_of": "2026-11-26",
+      "observation_count": 99,
       "source": "FRED / BAMLH0A0HYM2",
       "status": "ok",
       "error": null,
@@ -167,11 +167,11 @@
       "unit": "点",
       "kind": "price",
       "calendar": "nyse",
-      "value": 7201.09,
-      "change_1": -0.49853741172308785,
-      "change_20": -6.753036542097224,
-      "as_of": "2026-11-24",
-      "observation_count": 96,
+      "value": 7182.78,
+      "change_1": -0.25426706234751295,
+      "change_20": -7.246919542664109,
+      "as_of": "2026-11-25",
+      "observation_count": 97,
       "source": "FRED / SP500",
       "status": "ok",
       "error": null,
@@ -209,10 +209,10 @@
       "source_url": "https://frankfurter.dev/",
       "source_label": null,
       "quote_note": "多源合成参考价，非现货收盘或COMEX期货；上游可能不同日。",
-      "value": 3556.27,
-      "change_1": -0.582871136556784,
-      "change_20": -13.040703446319668,
-      "as_of": "2026-11-26",
+      "value": 3585.77,
+      "change_1": 0.8295208181606117,
+      "change_20": -12.31935797808088,
+      "as_of": "2026-11-27",
       "observation_count": 120,
       "source": "Frankfurter / XAU/USD / 多源合成参考价，非收盘",
       "status": "ok",
@@ -220,15 +220,15 @@
       "source_components": [
         {
           "provider": "BCBO",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "BCP",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "BNR",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "BOM",
@@ -236,11 +236,11 @@
         },
         {
           "provider": "CBA",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "CBAR",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "CBO",
@@ -248,23 +248,23 @@
         },
         {
           "provider": "CBR",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "CBSL",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "NBM",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "NBP",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "NBU",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "PMA",
@@ -275,10 +275,10 @@
         "2026-11-22",
         "2026-11-24",
         "2026-11-25",
-        "2026-11-26"
+        "2026-11-27"
       ],
       "mixed_component_dates": true,
-      "warning": "合成参考价混合不同来源日期：2026-11-22,2026-11-24,2026-11-25,2026-11-26；历史可能修订",
+      "warning": "合成参考价混合不同来源日期：2026-11-22,2026-11-24,2026-11-25,2026-11-27；历史可能修订",
       "interpretation": "合成参考近20期下跌；成分日期混合，历史可能修订"
     },
     {
@@ -336,11 +336,11 @@
       "unit": "USD",
       "kind": "price",
       "calendar": "crypto",
-      "value": 60510.39794228515,
-      "change_1": 0.22567632787617864,
-      "change_20": -20.144938092588795,
-      "as_of": "2026-11-26",
-      "observation_count": 97,
+      "value": 59871.669109636554,
+      "change_1": -1.0555687193758212,
+      "change_20": -20.9890056481025,
+      "as_of": "2026-11-27",
+      "observation_count": 98,
       "source": "CoinGecko / UTC 00:00",
       "status": "ok",
       "error": null,
@@ -377,11 +377,11 @@
       "series_definition": "ecb-reference-cross-v1",
       "source_url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html",
       "quote_note": "ECB同日EURJPY÷EURUSD，日参考汇率，非纽约收盘。",
-      "value": 159.2619589977221,
-      "change_1": -0.0384845804103473,
-      "change_20": 0.7608915214101231,
-      "as_of": "2026-11-26",
-      "observation_count": 69,
+      "value": 159.54184539563752,
+      "change_1": 0.17573964283550403,
+      "change_20": 1.4572800979088196,
+      "as_of": "2026-11-27",
+      "observation_count": 70,
       "source": "ECB / 同日EURJPY÷EURUSD / 日参考汇率，非收盘",
       "status": "ok",
       "error": null,
@@ -399,11 +399,11 @@
       "series_definition": "cnh-blended-reference-v1",
       "source_url": "https://frankfurter.dev/currencies/cnh/",
       "quote_note": "准确CNH离岸人民币，多源合成参考汇率，非纽约收盘；上游可能不同日。",
-      "value": 6.6633,
-      "change_1": -0.009003736550672325,
-      "change_20": 0.1849345963013116,
-      "as_of": "2026-11-26",
-      "observation_count": 118,
+      "value": 6.6565,
+      "change_1": -0.09305536794392832,
+      "change_20": -0.18144738025971385,
+      "as_of": "2026-11-27",
+      "observation_count": 119,
       "source": "Frankfurter / USD/CNH / 多源合成参考价，非收盘",
       "status": "ok",
       "error": null,
@@ -414,40 +414,40 @@
         },
         {
           "provider": "BCBO",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "BCRA",
-          "date": "2026-11-25"
+          "date": "2026-11-26"
         },
         {
           "provider": "BI",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "BM",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "CBS",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "CBSL",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         },
         {
           "provider": "NBC",
-          "date": "2026-11-26"
+          "date": "2026-11-27"
         }
       ],
       "component_dates": [
-        "2026-11-25",
-        "2026-11-26"
+        "2026-11-26",
+        "2026-11-27"
       ],
       "mixed_component_dates": true,
-      "warning": "合成参考价混合不同来源日期：2026-11-25,2026-11-26；历史可能修订",
-      "interpretation": "美元相对离岸人民币升值，关注汇率波动"
+      "warning": "合成参考价混合不同来源日期：2026-11-26,2026-11-27；历史可能修订",
+      "interpretation": "美元相对离岸人民币贬值，关注汇率波动"
     }
   ],
   "macro": {
@@ -456,16 +456,16 @@
     "missing": [],
     "signal_dates": {
       "dxy": "2026-11-26",
-      "real10y": "2026-11-24",
-      "us2y": "2026-11-24",
-      "hy": "2026-11-24",
-      "vix": "2026-11-24"
+      "real10y": "2026-11-25",
+      "us2y": "2026-11-25",
+      "hy": "2026-11-26",
+      "vix": "2026-11-26"
     },
     "risk_alerts": [
       {
         "id": "vix",
-        "as_of": "2026-11-24",
-        "value": 26.36,
+        "as_of": "2026-11-26",
+        "value": 26.8,
         "unit": "点",
         "message": "波动率处于较高水平"
       }
@@ -475,8 +475,8 @@
     "uncertainty": "信用或波动风险仍处高位",
     "signals": [
       "美元 +1.84% · 2026-11-26",
-      "实际利率 +13bp · 2026-11-24",
-      "HY +54bp · 2026-11-24 / VIX +8.8点 · 2026-11-24"
+      "实际利率 +9bp · 2026-11-25",
+      "HY +51bp · 2026-11-26 / VIX +9.6点 · 2026-11-26"
     ]
   },
   "limited_macro": {
@@ -486,16 +486,16 @@
       "美元指数 DXY"
     ],
     "signal_dates": {
-      "real10y": "2026-11-24",
-      "us2y": "2026-11-24",
-      "hy": "2026-11-24",
-      "vix": "2026-11-24"
+      "real10y": "2026-11-25",
+      "us2y": "2026-11-25",
+      "hy": "2026-11-26",
+      "vix": "2026-11-26"
     },
     "risk_alerts": [
       {
         "id": "vix",
-        "as_of": "2026-11-24",
-        "value": 26.36,
+        "as_of": "2026-11-26",
+        "value": 26.8,
         "unit": "点",
         "message": "波动率处于较高水平"
       }
@@ -504,16 +504,16 @@
     "reason": "信用利差与波动率共同上升，关注金融压力信号",
     "uncertainty": "DXY异常、缺失或过期，结论不完整；不判断美元相关整体金融条件",
     "signals": [
-      "实际利率 +13bp · 2026-11-24",
-      "HY +54bp · 2026-11-24",
-      "VIX +8.8点 · 2026-11-24"
+      "实际利率 +9bp · 2026-11-25",
+      "HY +51bp · 2026-11-26",
+      "VIX +9.6点 · 2026-11-26"
     ]
   },
   "risk_alerts": [
     {
       "id": "vix",
-      "as_of": "2026-11-24",
-      "value": 26.36,
+      "as_of": "2026-11-26",
+      "value": 26.8,
       "unit": "点",
       "message": "波动率处于较高水平"
     }
@@ -521,31 +521,31 @@
   "spread_checks": [
     {
       "id": "spread10y2y",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "status": "not_comparable",
       "reason": "尚未完成同日底层交叉核验：缺少同一日期的有效长短端收益率，未跨日期相减",
       "latest_common": {
-        "as_of": "2026-11-24",
-        "official_bp": 28.000000000000004,
-        "long_yield_pct": 4.91,
-        "short_yield_pct": 4.63,
-        "same_date_bp": 28.000000000000025,
-        "signed_difference_bp": -2.1316282072803006e-14,
-        "difference_bp": 2.1316282072803006e-14,
+        "as_of": "2026-11-25",
+        "official_bp": 24.0,
+        "long_yield_pct": 4.85,
+        "short_yield_pct": 4.61,
+        "same_date_bp": 23.999999999999932,
+        "signed_difference_bp": 6.750155989720952e-14,
+        "difference_bp": 6.750155989720952e-14,
         "status": "ok"
       }
     },
     {
       "id": "spread10y3m",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "status": "not_comparable",
       "reason": "尚未完成同日底层交叉核验：缺少同一日期的有效长短端收益率，未跨日期相减",
       "latest_common": {
-        "as_of": "2026-11-24",
-        "official_bp": 55.00000000000001,
-        "long_yield_pct": 4.91,
-        "short_yield_pct": 4.36,
-        "same_date_bp": 54.999999999999986,
+        "as_of": "2026-11-25",
+        "official_bp": 51.0,
+        "long_yield_pct": 4.85,
+        "short_yield_pct": 4.34,
+        "same_date_bp": 50.99999999999998,
         "signed_difference_bp": 2.1316282072803006e-14,
         "difference_bp": 2.1316282072803006e-14,
         "status": "ok"
@@ -556,16 +556,16 @@
     {
       "id": "spread10y2y",
       "tolerance_bp": 2,
-      "observations": 94,
+      "observations": 95,
       "warnings": 0,
       "latest_common": {
-        "as_of": "2026-11-24",
-        "official_bp": 28.000000000000004,
-        "long_yield_pct": 4.91,
-        "short_yield_pct": 4.63,
-        "same_date_bp": 28.000000000000025,
-        "signed_difference_bp": -2.1316282072803006e-14,
-        "difference_bp": 2.1316282072803006e-14,
+        "as_of": "2026-11-25",
+        "official_bp": 24.0,
+        "long_yield_pct": 4.85,
+        "short_yield_pct": 4.61,
+        "same_date_bp": 23.999999999999932,
+        "signed_difference_bp": 6.750155989720952e-14,
+        "difference_bp": 6.750155989720952e-14,
         "status": "ok"
       },
       "comparisons": [
@@ -1508,20 +1508,30 @@
           "signed_difference_bp": -2.1316282072803006e-14,
           "difference_bp": 2.1316282072803006e-14,
           "status": "ok"
+        },
+        {
+          "as_of": "2026-11-25",
+          "official_bp": 24.0,
+          "long_yield_pct": 4.85,
+          "short_yield_pct": 4.61,
+          "same_date_bp": 23.999999999999932,
+          "signed_difference_bp": 6.750155989720952e-14,
+          "difference_bp": 6.750155989720952e-14,
+          "status": "ok"
         }
       ]
     },
     {
       "id": "spread10y3m",
       "tolerance_bp": 2,
-      "observations": 94,
+      "observations": 95,
       "warnings": 0,
       "latest_common": {
-        "as_of": "2026-11-24",
-        "official_bp": 55.00000000000001,
-        "long_yield_pct": 4.91,
-        "short_yield_pct": 4.36,
-        "same_date_bp": 54.999999999999986,
+        "as_of": "2026-11-25",
+        "official_bp": 51.0,
+        "long_yield_pct": 4.85,
+        "short_yield_pct": 4.34,
+        "same_date_bp": 50.99999999999998,
         "signed_difference_bp": 2.1316282072803006e-14,
         "difference_bp": 2.1316282072803006e-14,
         "status": "ok"
@@ -2463,6 +2473,16 @@
           "long_yield_pct": 4.91,
           "short_yield_pct": 4.36,
           "same_date_bp": 54.999999999999986,
+          "signed_difference_bp": 2.1316282072803006e-14,
+          "difference_bp": 2.1316282072803006e-14,
+          "status": "ok"
+        },
+        {
+          "as_of": "2026-11-25",
+          "official_bp": 51.0,
+          "long_yield_pct": 4.85,
+          "short_yield_pct": 4.34,
+          "same_date_bp": 50.99999999999998,
           "signed_difference_bp": 2.1316282072803006e-14,
           "difference_bp": 2.1316282072803006e-14,
           "status": "ok"
@@ -5602,12 +5622,12 @@
   },
   "sources_failed": 0,
   "update_context": {
-    "event": "schedule",
-    "schedule": "15 0 * * *",
-    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/45967511300",
-    "origin": "github_schedule",
-    "planned_at": null,
-    "requested_at": null,
-    "dispatch_id": null
+    "event": "workflow_dispatch",
+    "schedule": null,
+    "run_url": "https://github.com/weixb1818-cmyk/global-market-monitor/actions/runs/46086868263",
+    "origin": "host_cron",
+    "planned_at": "2026-11-28T08:15:00+08:00",
+    "requested_at": "2026-11-28T00:15:01.285864+00:00",
+    "dispatch_id": "2026-11-28_0815-9ddae0871812"
   }
 }
